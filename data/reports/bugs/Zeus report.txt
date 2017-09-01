@@ -1,0 +1,3 @@
+------------------------------
+Name: Zeus [Map position: 33575, 31929, 15] [Player Position: 33575, 31930, 15]
+Comment: Item no local errado

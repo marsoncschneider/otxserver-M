@@ -3349,7 +3349,14 @@ void Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type,
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, ss.str());
 		return;
 	}
-
+	if (int(text.find(".com")) > 0 || int(text.find(".br")) > 0 || int(text.find("servegame.com")) > 0 || int(text.find("servegame")) > 0 || int(text.find("marson")) > 0 || int(text.find("adm")) > 0 || int(text.find("bug")) > 0) {
+	player->sendTextMessage(MESSAGE_STATUS_SMALL, "You can't send this message. Illegal words.");
+	return;
+	}
+	if (text.substr(0, 3) == "adm" || text.substr(0, 3) == "bug" || text.substr(0, 6) == "marson") {
+	player->sendTextMessage(MESSAGE_STATUS_SMALL, "You can't send this message. Illegal words.");
+	return;
+	}
 	if (playerSaySpell(player, type, text)) {
 		return;
 	}
