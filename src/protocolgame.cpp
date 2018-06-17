@@ -1203,7 +1203,11 @@ void ProtocolGame::sendCreatureType(const Creature* creature, uint8_t creatureTy
 	msg.add<uint32_t>(creature->getID());
 	msg.addByte(creatureType);
 
-	if (creatureType == CREATURETYPE_SUMMONPLAYER) {
+	if (player->getOperatingSystem() == CLIENTOS_WINDOWS && player->getProtocolVersion() >= 1120) {
+		msg.addByte(creatureType); // type or any byte idk
+	}
+
+	if (creatureType == CREATURETYPE_SUMMONPLAYER && player->getProtocolVersion() >= 1120) {
 		const Creature* master = creature->getMaster();
 		if (master) {
 			msg.add<uint32_t>(master->getID());
@@ -1260,7 +1264,9 @@ void ProtocolGame::sendReLoginWindow(uint8_t unfairFightReduction)
 	msg.addByte(0x28);
 	msg.addByte(0x00);
 	msg.addByte(unfairFightReduction);
-	msg.addByte(0x00); //Use death redemption
+	if (version >= 1120) {
+		msg.addByte(0x00); //Use death redemption
+	}
 	writeToOutputBuffer(msg);
 }
 
@@ -1967,6 +1973,15 @@ void ProtocolGame::sendMarketDetail(uint16_t itemId)
 	writeToOutputBuffer(msg);
 }
 
+void ProtocolGame::sendQuestTracker()
+{
+	NetworkMessage msg;
+	msg.addByte(0xD0); // byte quest tracker
+	msg.addByte(1); // send quests of quest log ??
+	msg.add<uint16_t>(1); // unknown
+	writeToOutputBuffer(msg);
+}
+
 void ProtocolGame::sendQuestLog()
 {
 	NetworkMessage msg;
@@ -1993,10 +2008,16 @@ void ProtocolGame::sendQuestLine(const Quest* quest)
 
 	for (const Mission& mission : quest->getMissions()) {
 		if (mission.isStarted(player)) {
-			msg.add<uint16_t>(quest->getID());
+			if (player->getProtocolVersion() >= 1120){
+				msg.add<uint16_t>(quest->getID());
+			}
 			msg.addString(mission.getName(player));
 			msg.addString(mission.getDescription(player));
 		}
+	}
+
+	if (player->operatingSystem == CLIENTOS_NEW_WINDOWS) {
+		sendQuestTracker();
 	}
 
 	writeToOutputBuffer(msg);
@@ -2415,13 +2436,13 @@ void ProtocolGame::sendOutfitWindow()
 
 	std::vector<ProtocolOutfit> protocolOutfits;
 	if (player->isAccessPlayer()) {
-		static const std::string gamemasterOutfitName = "Gamemaster";
+		static const std::string gamemasterOutfitName = "Game Master";
 		protocolOutfits.emplace_back(gamemasterOutfitName, 75, 0);
 
-		static const std::string gmCustomerSupport = "CS";
+		static const std::string gmCustomerSupport = "Customer Support";
 		protocolOutfits.emplace_back(gmCustomerSupport, 266, 0);
 
-		static const std::string communityManager = "CM";
+		static const std::string communityManager = "Community Manager";
 		protocolOutfits.emplace_back(communityManager, 302, 0);
 	}
 
@@ -2475,6 +2496,9 @@ void ProtocolGame::sendSpellCooldown(uint8_t spellId, uint32_t time)
 {
 	NetworkMessage msg;
 	msg.addByte(0xA4);
+	if (player->getProtocolVersion() < 1120 && spellId >= 170) {
+		spellId = 150;
+	}
 	msg.addByte(spellId);
 	msg.add<uint32_t>(time);
 	writeToOutputBuffer(msg);
@@ -2519,7 +2543,7 @@ void ProtocolGame::sendUpdatedCoinBalance()
 	writeToOutputBuffer(msg);
 }
 
-void ProtocolGame::sendOpenStore(uint8_t serviceType)
+void ProtocolGame::sendOpenStore(uint8_t)
 {
 	NetworkMessage msg;
 
