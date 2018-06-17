@@ -241,12 +241,6 @@ void Monster::onCreatureMove(Creature* creature, const Tile* newTile, const Posi
 		if (canSeeNewPos && isSummon() && getMaster() == creature) {
 			isMasterInRange = true; //Follow master again
 		}
-		if ((!canSeeNewPos && isSummon() && getMaster() == creature) || (creature->getPosition().z != this->getPosition().z && isSummon() && getMaster() == creature)) { //creature->getPosition().z != getPosition().z
-			Player* player = creature->getPlayer();
-            if (player) {
-			g_game.internalTeleport(this, player->getPosition());
-			}
-		}
 
 		updateIdleStatus();
 
@@ -470,19 +464,13 @@ void Monster::onCreatureLeave(Creature* creature)
 	// std::cout << "onCreatureLeave - " << creature->getName() << std::endl;
 
 	if (getMaster() == creature) {
-		Player* player = creature->getPlayer();
-            if (player) {
-                g_game.internalTeleport(this, player->getPosition());
-            }
-        } else {
-            //Take random steps and only use defense abilities (e.g. heal) until its master comes back
-            isMasterInRange = false;
-        }
-	
+		//Take random steps and only use defense abilities (e.g. heal) until its master comes back
+		isMasterInRange = false;
+	}
 
 	//update friendList
 	if (isFriend(creature)) {
-		//@removeFriend(creature);
+		removeFriend(creature);
 	}
 
 	//update targetList

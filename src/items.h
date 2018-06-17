@@ -153,7 +153,13 @@ class ItemType
 			return (type == ITEM_TYPE_BED);
 		}
 		bool isRune() const {
-			return type == ITEM_TYPE_RUNE;
+			return (type == ITEM_TYPE_RUNE);
+		}
+		bool isPickupable() const {
+			return (allowPickupable || pickupable);
+		}
+		bool isUseable() const {
+			return (useable);
 		}
 		bool hasSubType() const {
 			return (isFluidContainer() || isSplash() || stackable || charges != 0);

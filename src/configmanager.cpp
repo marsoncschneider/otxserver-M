@@ -131,8 +131,6 @@ bool ConfigManager::load()
 
 		integer[VERSION_MIN] = getGlobalNumber(L, "clientVersionMin", CLIENT_VERSION_MIN);
 		integer[VERSION_MAX] = getGlobalNumber(L, "clientVersionMax", CLIENT_VERSION_MAX);
-		integer[FREE_DEPOT_LIMIT] = getGlobalNumber(L, "freeDepotLimit", 2000);
-		integer[PREMIUM_DEPOT_LIMIT] = getGlobalNumber(L, "premiumDepotLimit", 10000);
 		integer[DEPOT_BOXES] = getGlobalNumber(L, "depotBoxes", 17);
 	}
 
@@ -144,8 +142,6 @@ bool ConfigManager::load()
 	boolean[FREE_PREMIUM] = getGlobalBoolean(L, "freePremium", false);
 	boolean[REPLACE_KICK_ON_LOGIN] = getGlobalBoolean(L, "replaceKickOnLogin", true);
 	boolean[ALLOW_CLONES] = getGlobalBoolean(L, "allowClones", false);
-	boolean[TELEPORT_PLAYER_SUMMONS] = getGlobalBoolean(L, "teleportPlayerSummons", false);
-	boolean[TELEPORT_ALL_SUMMONS] = getGlobalBoolean(L, "teleportAllSummons", false);
 	boolean[MARKET_PREMIUM] = getGlobalBoolean(L, "premiumToCreateMarketOffer", true);
 	boolean[EMOTE_SPELLS] = getGlobalBoolean(L, "emoteSpells", false);
 	boolean[STAMINA_SYSTEM] = getGlobalBoolean(L, "staminaSystem", true);

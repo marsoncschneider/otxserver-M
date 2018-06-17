@@ -1163,6 +1163,11 @@ class LuaScriptInterface
 		static int luaItemTypeIsStackable(lua_State* L);
 		static int luaItemTypeIsReadable(lua_State* L);
 		static int luaItemTypeIsWritable(lua_State* L);
+		static int luaItemTypeIsBlocking(lua_State* L);
+		static int luaItemTypeIsGroundTile(lua_State* L);
+		static int luaItemTypeIsMagicField(lua_State* L);
+		static int luaItemTypeIsUseable(lua_State* L);
+		static int luaItemTypeIsPickupable(lua_State* L);
 
 		static int luaItemTypeGetType(lua_State* L);
 		static int luaItemTypeGetId(lua_State* L);
@@ -1195,6 +1200,8 @@ class LuaScriptInterface
 		static int luaItemTypeGetDestroyId(lua_State* L);
 		static int luaItemTypeGetDecayId(lua_State* L);
 		static int luaItemTypeGetRequiredLevel(lua_State* L);
+		static int luaItemTypeGetAmmoType(lua_State* L);
+		static int luaItemTypeGetCorpseType(lua_State* L);
 
 		static int luaItemTypeGetSpeed(lua_State* L);
 		static int luaItemTypeGetBaseSpeed(lua_State* L);
@@ -1248,6 +1255,7 @@ class LuaScriptInterface
 		static int luaMonsterTypeIsPushable(lua_State* L);
 		static int luaMonsterTypeIsHealthShown(lua_State* L);
 
+		static int luaMonsterTypeIsPet(lua_State* L);
 		static int luaMonsterTypeIsPassive(lua_State* L);
 		static int luaMonsterTypeIsRewardBoss(lua_State* L);
 
@@ -1279,6 +1287,7 @@ class LuaScriptInterface
 		static int luaMonsterTypeGetArmor(lua_State* L);
 		static int luaMonsterTypeGetDefense(lua_State* L);
 		static int luaMonsterTypeGetOutfit(lua_State* L);
+		static int luaSetMonsterOutfit(lua_State* L);
 		static int luaMonsterTypeGetRace(lua_State* L);
 		static int luaMonsterTypeGetCorpseId(lua_State* L);
 		static int luaMonsterTypeGetManaCost(lua_State* L);

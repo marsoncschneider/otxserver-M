@@ -193,6 +193,8 @@ void Game::saveGameState()
 
 	Map::save();
 
+	g_databaseTasks.flush();
+
 	if (gameState == GAME_STATE_MAINTAIN) {
 		setGameState(GAME_STATE_NORMAL);
 	}
@@ -785,10 +787,12 @@ ReturnValue Game::internalMoveCreature(Creature* creature, Direction direction, 
 					}
 				}
 			}
-		} else {
-			//try go down
+		}
+		
+		//try go down
+		if (currentPos.z != 7 && currentPos.z == destPos.z) {
 			Tile* tmpTile = map.getTile(destPos.x, destPos.y, destPos.z);
-			if (currentPos.z != 7 && (tmpTile == nullptr || (tmpTile->getGround() == nullptr && !tmpTile->hasFlag(TILESTATE_BLOCKSOLID)))) {
+			if (tmpTile == nullptr || (tmpTile->getGround() == nullptr && !tmpTile->hasFlag(TILESTATE_BLOCKSOLID))) {
 				tmpTile = map.getTile(destPos.x, destPos.y, destPos.z + 1);
 				if (tmpTile && tmpTile->hasHeight(3)) {
 					flags |= FLAG_IGNOREBLOCKITEM | FLAG_IGNOREBLOCKCREATURE;
@@ -854,6 +858,10 @@ ReturnValue Game::internalMoveCreature(Creature& creature, Tile& toTile, uint32_
 				internalCreatureTurn(&creature, dir);
 			}
 		}
+	}
+
+	if (creature.getPlayer()) {
+		g_events->eventPlayerOnMove(creature.getPlayer());
 	}
 
 	return RETURNVALUE_NOERROR;
@@ -2188,7 +2196,7 @@ void Game::playerMoveUpContainer(uint32_t playerId, uint8_t cid)
 		}
 	}
 
-	if (parentContainer->hasPagination()) {
+	if (parentContainer->hasPagination() && parentContainer->hasParent()) {
 		uint16_t indexContainer = std::floor(parentContainer->getThingIndex(container) / parentContainer->capacity()) * parentContainer->capacity();
 		player->addContainer(cid, parentContainer);
 
@@ -2304,7 +2312,7 @@ void Game::playerWrapableItem(uint32_t playerId, const Position& pos, uint8_t st
 	std::string itemName = item->getName();
 
 	// FOR ITEMS THAT DO NOT LOSE ACTIONID TO TRANSFORM
-	if (!iiType.wrapContainer) {
+	if (!iiType.wrapContainer && item->getActionId() != 8000) {
 		if (newWrapId != 0 && item->getID() != TRANSFORM_BOX_ID) {
 			uint16_t hiddenCharges = 0;
 			if (isCaskItem(item->getID())) {
@@ -3349,14 +3357,7 @@ void Game::playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type,
 		player->sendTextMessage(MESSAGE_STATUS_SMALL, ss.str());
 		return;
 	}
-	if (int(text.find(".com")) > 0 || int(text.find(".br")) > 0 || int(text.find("servegame.com")) > 0 || int(text.find("servegame")) > 0 || int(text.find("marson")) > 0 || int(text.find("adm")) > 0 || int(text.find("bug")) > 0) {
-	player->sendTextMessage(MESSAGE_STATUS_SMALL, "You can't send this message. Illegal words.");
-	return;
-	}
-	if (text.substr(0, 3) == "adm" || text.substr(0, 3) == "bug" || text.substr(0, 6) == "marson") {
-	player->sendTextMessage(MESSAGE_STATUS_SMALL, "You can't send this message. Illegal words.");
-	return;
-	}
+
 	if (playerSaySpell(player, type, text)) {
 		return;
 	}
@@ -3889,7 +3890,7 @@ void Game::combatGetTypeInfo(CombatType_t combatType, Creature* target, TextColo
 	}
 }
 
-bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage)
+bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage, bool isEvent)
 {
 	const Position& targetPos = target->getPosition();
 	if (damage.primary.value > 0) {
@@ -3935,7 +3936,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			TextMessage message;
 			message.position = targetPos;
 			message.primary.value = realHealthChange;
-			message.primary.color = TEXTCOLOR_MAYABLUE;
+			message.primary.color = TEXTCOLOR_MAYARED;
 
 			SpectatorHashSet spectators;
 			map.getSpectators(spectators, targetPos, false, true);
@@ -4025,6 +4026,13 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			}
 		}
 
+		TextMessage message;
+		message.position = targetPos;
+
+		if (!isEvent) {
+			g_events->eventCreatureOnDrainHealth(target, attacker, damage.primary.type, damage.primary.value, damage.secondary.type, damage.secondary.value, message.primary.color, message.secondary.color);
+		}
+
 		int32_t healthChange = damage.primary.value + damage.secondary.value;
 		if (healthChange == 0) {
 			return true;
@@ -4036,9 +4044,6 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		if (damage.critical) {
 			addMagicEffect(spectators, targetPos, CONST_ME_CRITICAL_DAMAGE);
 		}
-
-		TextMessage message;
-		message.position = targetPos;
 
 		if (target->hasCondition(CONDITION_MANASHIELD) && damage.primary.type != COMBAT_UNDEFINEDDAMAGE) {
 			int32_t manaDamage = std::min<int32_t>(target->getMana(), healthChange);
@@ -4164,6 +4169,10 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 					targetMonster->updateMapCache();
 				}
 			}
+		}
+
+		if (spectators.empty()) {
+			map.getSpectators(spectators, targetPos, true, true);
 		}
 
 		addCreatureHealth(spectators, target);
@@ -4498,6 +4507,41 @@ void Game::internalDecayItem(Item* item)
 {
 	const ItemType& it = Item::items[item->getID()];
 	if (it.decayTo != 0) {
+		Player* player = item->getHoldingPlayer();
+		if (player) {
+			bool needUpdateSkills = false;
+			for (int32_t i = SKILL_FIRST; i <= SKILL_LAST; ++i) {
+				if (it.abilities && it.abilities->skills[i] != 0) {
+					needUpdateSkills = true;
+					player->setVarSkill(static_cast<skills_t>(i), -it.abilities->skills[i]);
+				}
+			}
+
+			if (needUpdateSkills) {
+				player->sendSkills();
+			}
+
+			bool needUpdateStats = false;
+			for (int32_t s = STAT_FIRST; s <= STAT_LAST; ++s) {
+				if (it.abilities && it.abilities->stats[s] != 0) {
+					needUpdateStats = true;
+					needUpdateSkills = true;
+					player->setVarStats(static_cast<stats_t>(s), -it.abilities->stats[s]);
+				}
+				if (it.abilities && it.abilities->statsPercent[s] != 0) {
+					needUpdateStats = true;
+					player->setVarStats(static_cast<stats_t>(s), -static_cast<int32_t>(player->getDefaultStats(static_cast<stats_t>(s)) * ((it.abilities->statsPercent[s] - 100) / 100.f)));
+				}
+			}
+
+			if (needUpdateStats) {
+				player->sendStats();
+			}
+
+			if (needUpdateSkills) {
+				player->sendSkills();
+			}
+		}
 		Item* newItem = transformItem(item, it.decayTo);
 		startDecay(newItem);
 	} else {
@@ -5028,7 +5072,8 @@ void Game::playerEnableSharedPartyExperience(uint32_t playerId, bool sharedExpAc
 	}
 
 	Party* party = player->getParty();
-	if (!party || player->hasCondition(CONDITION_INFIGHT)) {
+	Tile* playerTile = player->getTile();
+	if (!party || (player->hasCondition(CONDITION_INFIGHT) && playerTile && !playerTile->hasFlag(TILESTATE_PROTECTIONZONE))) {
 		return;
 	}
 

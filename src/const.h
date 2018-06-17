@@ -201,8 +201,6 @@ enum SpeakClasses : uint8_t {
 };
 
 enum MessageClasses : uint8_t {
-	MESSAGE_STATUS_CONSOLE_BLUE = 4, /*FIXME Blue message in the console*/
-
 	MESSAGE_STATUS_CONSOLE_RED = 13, /*Red message in the console*/
 
 	MESSAGE_STATUS_DEFAULT = 17, /*White message at the bottom of the game window and in the console*/
@@ -226,6 +224,8 @@ enum MessageClasses : uint8_t {
 	MESSAGE_PARTY = 35, /*White message in channel (+ channelId)*/
 	MESSAGE_EVENT_ORANGE = 36, /*Orange message in the console*/
 	MESSAGE_STATUS_CONSOLE_ORANGE = 37,  /*Orange message in the console*/
+
+	MESSAGE_STATUS_CONSOLE_BLUE = MESSAGE_EVENT_ADVANCE,
 };
 
 enum FluidColors_t : uint8_t {
@@ -439,7 +439,7 @@ enum item_t : uint16_t {
 	ITEM_BROWSEFIELD = 460, // for internal use
 
 	ITEM_DEPOT_NULL = 25452, // for internal use
-
+	ITEM_GOLD_POUCH = 26377,
 	TRANSFORM_BOX_ID = 26054, // for internal use
 
 	ITEM_DEPOT_I = 25453,
@@ -515,17 +515,17 @@ enum item_t : uint16_t {
 	ITEM_TIBIA_COIN = 24774,
 
 	/** Casks and Kegs **/
-	ITEM_HEALTH_CASK_START = 28553,
-	ITEM_HEALTH_CASK_END = 28557,
+	ITEM_HEALTH_CASK_START = 28555,
+	ITEM_HEALTH_CASK_END = 28559,
 
-	ITEM_MANA_CASK_START = 28563,
-	ITEM_MANA_CASK_END = 28567,
+	ITEM_MANA_CASK_START = 28565,
+	ITEM_MANA_CASK_END = 28569,
 
-	ITEM_SPIRIT_CASK_START = 28573,
-	ITEM_SPIRIT_CASK_END = 28574,
+	ITEM_SPIRIT_CASK_START = 28575,
+	ITEM_SPIRIT_CASK_END = 28578,
 
-	ITEM_KEG_START = 28577, //kegs ids are contiguous in item.otb
-	ITEM_KEG_END = 28588,
+	ITEM_KEG_START = 28579, //kegs ids are contiguous in item.otb
+	ITEM_KEG_END = 28590,
 
 	ITEM_DOCUMENT_RO = 1968, //read-only
 };
