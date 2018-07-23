@@ -95,6 +95,10 @@ BedItem* BedItem::getNextBedItem() const
 
 bool BedItem::canUse(Player* player)
 {
+	if (player->getAccountType() >= ACCOUNT_TYPE_GAMEMASTER) {
+		
+		return false;
+	}
 	if (!player || !house || !player->isPremium()) {
 		return false;
 	}
@@ -102,7 +106,7 @@ bool BedItem::canUse(Player* player)
 	if (sleeperGUID == 0) {
 		return true;
 	}
-
+	
 	if (house->getHouseAccessLevel(player) == HOUSE_OWNER) {
 		return true;
 	}
@@ -144,6 +148,8 @@ bool BedItem::sleep(Player* player)
 	if (sleeperGUID != 0) {
 		return false;
 	}
+	
+	
 
 	BedItem* nextBedItem = getNextBedItem();
 
