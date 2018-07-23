@@ -24,6 +24,7 @@
 
 class House;
 class Player;
+class Position;
 
 class BedItem final : public Item
 {
