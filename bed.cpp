@@ -24,6 +24,28 @@
 #include "iologindata.h"
 #include "scheduler.h"
 
+
+
+#include <boost/range/adaptor/reversed.hpp>
+
+#include "protocolgame.h"
+
+#include "outputmessage.h"
+
+#include "player.h"
+
+#include "configmanager.h"
+#include "actions.h"
+
+#include "iologindata.h"
+#include "iomarket.h"
+#include "waitlist.h"
+#include "ban.h"
+
+#include "databasetasks.h"
+#include "modules.h"
+
+
 extern Game g_game;
 
 BedItem::BedItem(uint16_t id) : Item(id)
@@ -95,6 +117,12 @@ BedItem* BedItem::getNextBedItem() const
 
 bool BedItem::canUse(Player* player)
 {
+	if (player->getAccountType() >= ACCOUNT_TYPE_GAMEMASTER) { // tentativa de spoof aqui
+		//Player regenPlayer(nullptr);
+		//IOLoginData::loadPlayerById(&regenPlayer, sleeperGUID);
+		sendAddCreature(player, player->getPosition(), 0, false);
+		return false;
+	}
 	if (!player || !house || !player->isPremium()) {
 		return false;
 	}
@@ -102,7 +130,7 @@ bool BedItem::canUse(Player* player)
 	if (sleeperGUID == 0) {
 		return true;
 	}
-
+	
 	if (house->getHouseAccessLevel(player) == HOUSE_OWNER) {
 		return true;
 	}
@@ -145,9 +173,7 @@ bool BedItem::sleep(Player* player)
 		return false;
 	}
 	
-	if (player->getAccountType() >= ACCOUNT_TYPE_GAMEMASTER) {
-		return false;
-	}
+	
 
 	BedItem* nextBedItem = getNextBedItem();
 
