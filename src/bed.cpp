@@ -102,8 +102,8 @@ bool BedItem::canUse(Player* player)
 	if (player->getAccountType() >= ACCOUNT_TYPE_GAMEMASTER) { // tentativa de spoof aqui
 		//Player regenPlayer(nullptr);
 		//IOLoginData::loadPlayerById(&regenPlayer, sleeperGUID);
-		sendAddCreature(player, player->getPosition(), 0, false);
-		return false;
+		//sendAddCreature(player, player->getPosition(), 0, false);
+		//return false;
 	}
 	if (!player || !house || !player->isPremium()) {
 		return false;

@@ -24,7 +24,6 @@
 
 class House;
 class Player;
-class Position;
 
 class BedItem final : public Item
 {
@@ -58,7 +57,6 @@ class BedItem final : public Item
 		bool trySleep(Player* player);
 		bool sleep(Player* player);
 		void wakeUp(Player* player);
-		void sendAddCreature(const Player* player, const Position& pos, int32_t stackpos, bool isLogin);
 
 		BedItem* getNextBedItem() const;
 
