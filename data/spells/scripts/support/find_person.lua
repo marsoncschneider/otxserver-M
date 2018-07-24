@@ -34,12 +34,10 @@ local messages = {
 }
 
 function onCastSpell(creature, variant)
-	local aux = 0
+	
 	local targetPlayer = Player(variant:getString())
 	if not targetPlayer then
-		targetPlayer = Player(creature:getString())
-		--return false
-		aux = 1
+		return false
 	end
 
 	if targetPlayer:getGroup():getAccess() and not creature:getGroup():getAccess() then
@@ -49,22 +47,12 @@ function onCastSpell(creature, variant)
 	end
 
 	local playerPosition = creature:getPosition()
-	
 	local targetPosition = targetPlayer:getPosition()
-	
-	if aux == 0 then
 	local offset = {
 		x = playerPosition.x - targetPosition.x,
 		y = playerPosition.y - targetPosition.y,
 		z = playerPosition.z - targetPosition.z
 	}
-	elseif aux == 1 then
-	local offset = {
-		x = playerPosition.x - targetPosition.x + math.random(0, 32000),
-		y = playerPosition.y - targetPosition.y + math.random(0, 32000),
-		z = playerPosition.z - targetPosition.z + math.random(7, -7)
-	}
-	end
 
 	local level = LEVEL_SAME
 	if offset.z > 0 then
