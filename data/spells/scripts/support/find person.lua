@@ -27,7 +27,7 @@ local messages = {
 	[DISTANCE_VERYFAR] =  " is very far to the "
 }
 
-local spoofids = {10, 11, 12}
+local spoofnames = {'tester', 'spoof', 'joaozinho'}
 local locais = {
 	Position(32375, 31895, 7), --pos1
 	Position(32378, 31895, 7), --pos2 ...
@@ -40,9 +40,9 @@ function onCastSpell(creature, variant)
 	local checkspoofid = db.storeQuery("SELECT `player_id` FROM `players_online` WHERE `player_id` = " .. playerId .. ";")
 	targetPlayer = Player(variant:getString())
 			
-	for i = 1, #spoofids do
+	for i = 1, #spoofnames do
 		if not targetPlayer and checkspoofid then
-			if getPlayerGUIDByName(variant:getString()) == spoofids[i] then
+			if variant:getString():lower() == spoofnames[i] then
 				spoof = checkspoofid
 				targetPosition = locais[i]
 			end
