@@ -6,11 +6,14 @@
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="
 			stone skin amulet,2197,5000,5;
-			removerskull,11144,12000000;
 			rusty,9930,50;
 			brown,2789,6" />
 		<parameter key="shop_sellable" value="		
-		
+		yellow gem,2154,1000;
+		violet gem,2153,10000;
+		red gem, 2156,1000;
+		green gem,2155,5000;
+		blue gem,2158,5000;
 		zaoanrobe,11356,12000;
 		jadehat,11368,9000;
 		Obsidian Knife,5908,8000;

@@ -37,17 +37,8 @@ local function greetCallback(cid)
 		npcHandler:setMessage(MESSAGE_GREET, "Hey, I want to give you a weapon for free! You should not refuse that, in fact you should say '{yes}'!")
 		storeTalkCid[cid] = 2
 	elseif player:getStorageValue(Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage) == 5 then
-		if player:removeItem(8710, 3) then
-			npcHandler:setMessage(MESSAGE_GREET, "Good job! For that, I'll grant you 100 experience points! Oh - what was that? I think you advanced a level, {right}?")
-			player:addExperience(100, true)
-			player:getPosition():sendMagicEffect(CONST_ME_GIFT_WRAPS)
-			player:setStorageValue(Storage.RookgaardTutorialIsland.SantiagoQuestLog, 5)
-			player:setStorageValue(Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage, 7)
-			storeTalkCid[cid] = 4
-		else
-			npcHandler:say("I've forgotten to tell you something. Of course I need proof that you killed cockroaches. Please bring me at least 3 of their legs. Good luck!", cid)
-			return false
-		end
+		npcHandler:say("I've forgotten to tell you something. Of course I need proof that you killed cockroaches. Please bring me at least 3 of their legs. Good luck!", cid)
+		return false
 	elseif player:getStorageValue(Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage) == 6 then
 		if player:removeItem(8710, 3) then
 			npcHandler:setMessage(MESSAGE_GREET, "Good job! For that, I'll grant you 100 experience points! Oh - what was that? I think you advanced a level, {right}?")
@@ -64,7 +55,7 @@ local function greetCallback(cid)
 		npcHandler:setMessage(MESSAGE_GREET, "Welcome back! Where were we... ? Ah, right, I asked you if you saw your 'level up'! You did, {right}?")
 		storeTalkCid[cid] = 4
 	elseif player:getStorageValue(Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage) == 8 then
-		npcHandler:setMessage(MESSAGE_GREET, "Welcome back! Where were we... ? Ah, right, I asked you if those nasty cockroaches {hurt} you! Did they? say {yes}.")
+		npcHandler:setMessage(MESSAGE_GREET, "Welcome back! Where were we... ? Ah, right, I asked you if those nasty cockroaches {hurt} you! Did they?")
 		storeTalkCid[cid] = 5
 	elseif player:getStorageValue(Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage) == 9 then
 		npcHandler:setMessage(MESSAGE_GREET, "Welcome back! Where were we... ? Ah, right, I asked you if I should demonstrate some damage on you. Let's do it, {okay}?")

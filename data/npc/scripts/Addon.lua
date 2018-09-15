@@ -33,6 +33,7 @@ yalaharian = 22041
 glooth = 22042
 rift = 22043
 elementalist = 22044
+warmaster = 22045
 
 newaddon    = 'Here you are, enjoy your brand new addon!' 
 noitems        = 'You do not have all the required items.' 
@@ -337,6 +338,62 @@ function PumpkinSecond(cid, message, keywords, parameters, node)
 end 
 -- HALLOWEN END -- 
 
+-- WARMASTER START -- 
+function WarmasterFirst(cid, message, keywords, parameters, node) 
+
+    if(not npcHandler:isFocused(cid)) then 
+        return false 
+    end 
+
+    if isPremium(cid) then 
+    addon = getPlayerStorageValue(cid,warmaster) 
+    if addon == -1 then 
+        if getPlayerItemCount(cid,11116) > 0 then 
+        if doPlayerRemoveItem(cid,11116, 1) then 
+            selfSay(newaddon, cid) 
+              
+            doSendMagicEffect(getCreaturePosition(cid), 13) 
+            doPlayerAddOutfit(cid, 335, 1) 
+            doPlayerAddOutfit(cid, 336, 1) 
+            setPlayerStorageValue(cid,warmaster,1) 
+        end 
+        else 
+            selfSay(noitems, cid) 
+        end 
+    else 
+        selfSay(already, cid) 
+    end 
+    end 
+
+end 
+
+function WarmasterSecond(cid, message, keywords, parameters, node) 
+
+    if(not npcHandler:isFocused(cid)) then 
+        return false 
+    end 
+
+    if isPremium(cid) then 
+    addon = getPlayerStorageValue(cid,warmaster+1) 
+    if addon == -1 then 
+        if getPlayerItemCount(cid,11115) > 0 then 
+        if doPlayerRemoveItem(cid,11115,1) then 
+            selfSay(newaddon, cid) 
+              
+            doSendMagicEffect(getCreaturePosition(cid), 13) 
+            doPlayerAddOutfit(cid, 335, 2) 
+            doPlayerAddOutfit(cid, 336, 2) 
+            setPlayerStorageValue(cid,warmaster+1,1) 
+        end 
+        else 
+            selfSay(noitems, cid) 
+        end 
+    else 
+        selfSay(already, cid) 
+    end 
+    end 
+
+end 
 
 -- CITIZEN START -- 
 function CitizenFirst(cid, message, keywords, parameters, node) 
@@ -1232,7 +1289,7 @@ function ShamanSecond(cid, message, keywords, parameters, node)
     end 
 
     if isPremium(cid) then 
-    addon = getPlayerStorageValue(cid,shaman) 
+    addon = getPlayerStorageValue(cid,shaman+6) 
     if addon == -1 then 
         if getPlayerItemCount(cid,3955) >= 5 and getPlayerItemCount(cid,5015) >= 1 then 
         if doPlayerRemoveItem(cid,3955,5) and doPlayerRemoveItem(cid,5015,1) then 
@@ -1260,7 +1317,7 @@ function ShamanFirst(cid, message, keywords, parameters, node)
     end 
 
     if isPremium(cid) then 
-    addon = getPlayerStorageValue(cid,shaman+1) 
+    addon = getPlayerStorageValue(cid,shaman+4) 
     if addon == -1 then 
         if getPlayerItemCount(cid,3966) >= 5 and getPlayerItemCount(cid,3967) >= 5 then 
         if doPlayerRemoveItem(cid,3966,5) and doPlayerRemoveItem(cid,3967,5) then 
@@ -1690,11 +1747,11 @@ keywordHandler:addKeyword({'help'}, StdModule.say, {npcHandler = npcHandler, onl
     node28:addChildKeyword({'yes'}, BeggarSecond, {}) 
     node28:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
 
- node29 = keywordHandler:addKeyword({'second shaman addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the first shaman addon you need to give me 5 dworf voodoo dolls and a mandrake. Do you have them with you?'}) 
+ node29 = keywordHandler:addKeyword({'second shaman addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the second shaman addon you need to give me 5 dworf voodoo dolls and a mandrake. Do you have them with you?'}) 
     node29:addChildKeyword({'yes'}, ShamanSecond, {}) 
     node29:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
 
- node30 = keywordHandler:addKeyword({'first shaman addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the second shaman addon you need to give me 5 banana staffs and 5 tribal masks. Do you have them with you?'}) 
+ node30 = keywordHandler:addKeyword({'first shaman addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the first shaman addon you need to give me 5 banana staffs and 5 tribal masks. Do you have them with you?'}) 
     node30:addChildKeyword({'yes'}, ShamanFirst, {}) 
     node30:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
 
@@ -1781,5 +1838,14 @@ keywordHandler:addKeyword({'help'}, StdModule.say, {npcHandler = npcHandler, onl
     node50:addChildKeyword({'yes'}, elementalistSecond, {}) 
     node50:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
 -- elementalist end
+-- warmaster
+    node49 = keywordHandler:addKeyword({'first warmaster addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the first Warmaster addon you need to give me 1 Serpent Crest. Do you have them with you?'}) 
+    node49:addChildKeyword({'yes'}, WarmasterFirst, {}) 
+    node49:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
+
+    node50 = keywordHandler:addKeyword({'second warmaster addon'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'To achieve the second Warmaster addon you need to give me 1 Tribal Crest. Do you have them with you?'}) 
+    node50:addChildKeyword({'yes'}, WarmasterSecond, {}) 
+    node50:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then. Come back when you got all neccessary items.', reset = true}) 
+-- warmaster end
 
  npcHandler:addModule(FocusModule:new()) 

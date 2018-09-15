@@ -4,6 +4,7 @@
 	<look type="12" head="0" body="98" legs="86" feet="94" corpse="6068" />
 	<targetchange interval="10000" chance="20" />
 	<flags>
+		<flag boss="1" />
 		<flag summonable="0" />
 		<flag attackable="1" />
 		<flag hostile="1" />
@@ -82,6 +83,6 @@
 		<item name="bright sword" chance="20000" />
 		<item name="warlord sword" chance="6000" />
 		<item name="patched boots" chance="7000" />
-		<item id="6530" chance="16000" /> <!-- Worn Soft Boots -->
+		<item id="6530" chance="16000" /><!-- Worn Soft Boots -->
 	</loot>
 </monster>

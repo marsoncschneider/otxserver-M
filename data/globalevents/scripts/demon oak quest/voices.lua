@@ -15,13 +15,14 @@ local sounds = {
 
 function onThink(interval, lastExecution)
 	local spectators, spectator = Game.getSpectators(DEMON_OAK_POSITION, false, true, 0, 15, 0, 15)
+	local sound = sounds[math.random(#sounds)]
 	for i = 1, #spectators do
 		spectator = spectators[i]
 		if isInRange(spectator:getPosition(), questArea[1], questArea[2]) then
 			return true
 		end
 
-		spectator:say(sounds[math.random(#sounds)], TALKTYPE_MONSTER_YELL, false, 0, DEMON_OAK_POSITION)
+		spectator:say(sound, TALKTYPE_MONSTER_YELL, false, 0, DEMON_OAK_POSITION)
 	end
 	return true
 end

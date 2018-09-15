@@ -13,18 +13,18 @@ npcHandler:addModule(VoiceModule:new(voices))
 -- Travel
 local function addTravelKeyword(keyword, text, cost, discount, destination)
 	local travelKeyword = keywordHandler:addKeyword({keyword}, StdModule.say, {npcHandler = npcHandler, text = text[1], cost = cost, discount = discount})
-		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, text = text[2], cost = cost, discount = discount, destination = destination})
+		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, text = text[2], cost = cost, discount = discount, destination = destination})
 		travelKeyword:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, text = text[3], reset = true})
 end
 
 addTravelKeyword('farmine', {'Do you seek a ride to Farmine for |TRAVELCOST|?', 'Hold on!', 'You shouldn\'t miss the experience.'}, 110, {'postman', 'new frontier'},
 	function(player)
 		local destination = Position(33025, 31553, 14)
-		--if player:getStorageValue(Storage.TheNewFrontier.Mission05) == 7 then --if The New Frontier Quest 'Mission 05: Getting Things Busy' complete then Stage 3
-			destination.z = 10
-		--elseif player:getStorageValue(Storage.TheNewFrontier.Mission03) == 3 then --if The New Frontier Quest 'Mission 03: Strangers in the Night' complete then Stage 2
-		--	destination.z = 12
-		--end
+		if player:getStorageValue(Storage.TheNewFrontier.Mission05) == 7 then --if The New Frontier Quest 'Mission 05: Getting Things Busy' complete then Stage 3
+			destination.z = 10			
+		elseif player:getStorageValue(Storage.TheNewFrontier.Mission03) >= 2 then --if The New Frontier Quest 'Mission 03: Strangers in the Night' complete then Stage 2
+			destination.z = 12
+		end
 
 		return destination
 	end

@@ -25,10 +25,9 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	player:say('The ghost charm is charging.', TALKTYPE_MONSTER_SAY)
 
 	if target.itemid == 9773 then
-		if player:removeItem(9737, 1) then
-			player:setStorageValue(Storage.InServiceofYalahar.Questline, 37)
-			player:setStorageValue(Storage.InServiceofYalahar.Mission06, 3) -- StorageValue for Questlog "Mission 06: Frightening Fuel"
-		end
+		player:setStorageValue(Storage.InServiceofYalahar.Questline, 37)
+		player:setStorageValue(Storage.InServiceofYalahar.Mission06, 3) -- StorageValue for Questlog "Mission 06: Frightening Fuel"
+		player:removeItem(9737, 1)
 	end
 	return true
 end

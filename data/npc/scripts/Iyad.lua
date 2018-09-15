@@ -1,4 +1,4 @@
-local keywordHandler = KeywordHandler:new()
+ local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
 
@@ -21,13 +21,13 @@ local function addTravelKeyword(keyword, text, cost, destination)
 	end
 
 	local travelKeyword = keywordHandler:addKeyword({keyword}, StdModule.say, {npcHandler = npcHandler, text = 'Do you seek a ride to ' .. text .. ' for |TRAVELCOST|?', cost = cost, discount = 'postman'})
-		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, text = 'Hold on!', cost = cost, discount = 'postman', destination = destination})
+		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, text = 'Hold on!', cost = cost, discount = 'postman', destination = destination})
 		travelKeyword:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, text = 'You shouldn\'t miss the experience.', reset = true})
 end
 
 addTravelKeyword('farmine', 'Farmine', 60, Position(32983, 31539, 1))
 addTravelKeyword('darashia', 'Darashia on Darama', 40, Position(33270, 32441, 6))
-addTravelKeyword('kazordoon', 'Kazordoon', 60, Position(33193, 31784, 3))
+addTravelKeyword('kazordoon', 'Kazordoon', 60, Position(32588, 31941, 0))
 addTravelKeyword('femor hills', 'the Femor Hills', 40, Position(32536, 31837, 4))
 addTravelKeyword('edron', 'Edron', 60, Position(33193, 31784, 3))
 

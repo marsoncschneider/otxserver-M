@@ -1,9 +1,7 @@
 local effects = {
-{position = Position(32360, 32239, 7), text = 'EVENTS ROOM!', effect = CONST_ME_GROUNDSHAKER},
-{position = Position(32055, 31886, 6), text = 'SORCERERS!', effect = CONST_ME_GROUNDSHAKER},
-{position = Position(32073, 31886, 6), text = 'DRUIDS!', effect = CONST_ME_GROUNDSHAKER},
-{position = Position(32069, 31886, 6), text = 'KNIGHTS!', effect = CONST_ME_GROUNDSHAKER},
-{position = Position(32059, 31886, 6), text = 'PALADINS!', effect = CONST_ME_GROUNDSHAKER},
+
+{position = Position(32350, 32223, 7), text = 'EVENTS ROOM!', effect = CONST_ME_GROUNDSHAKER},
+{position = Position(32353, 32226, 8), text = 'CASSINO!', effect = CONST_ME_GROUNDSHAKER},
 {position = Position(32365, 32236, 7), text = 'TRAINING ISLAND!', effect = CONST_ME_GROUNDSHAKER},
 {position = Position(33559, 31280, 11), text = 'TIME OF BOSSES!', effect = CONST_ME_GROUNDSHAKER},
 {position = Position(33646, 31261, 11), text = 'TIME OF BOSSES!', effect = CONST_ME_GROUNDSHAKER},

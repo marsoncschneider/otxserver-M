@@ -201,27 +201,6 @@ void House::setAccessList(uint32_t listId, const std::string& textlist)
 bool House::transferToDepot() const
 {
 	if (townId == 0 || owner == 0) {
-		ItemList moveItemList;
-	for (HouseTile* tile : houseTiles) {
-		if (const TileItemVector* items = tile->getItemList()) {
-			for (Item* item : *items) {
-				if (item->isPickupable()) {
-					moveItemList.push_back(item);
-				} else {
-					Container* container = item->getContainer();
-					if (container) {
-						for (Item* containerItem : container->getItemList()) {
-							moveItemList.push_back(containerItem);
-						}
-					}
-				}
-			}
-		}
-	}
-	for (Item* item : moveItemList) {
-		g_game.internalRemoveItem(item, 1);
-		//g_game.internalMoveItem(item->getParent(), player->getInbox(), INDEX_WHEREEVER, item, item->getItemCount(), nullptr, FLAG_NOLIMIT);
-	}
 		return false;
 	}
 
@@ -243,27 +222,6 @@ bool House::transferToDepot() const
 bool House::transferToDepot(Player* player) const
 {
 	if (townId == 0 || owner == 0) {
-		ItemList moveItemList;
-	for (HouseTile* tile : houseTiles) {
-		if (const TileItemVector* items = tile->getItemList()) {
-			for (Item* item : *items) {
-				if (item->isPickupable()) {
-					moveItemList.push_back(item);
-				} else {
-					Container* container = item->getContainer();
-					if (container) {
-						for (Item* containerItem : container->getItemList()) {
-							moveItemList.push_back(containerItem);
-						}
-					}
-				}
-			}
-		}
-	}
-	for (Item* item : moveItemList) {
-		g_game.internalRemoveItem(item, 1);
-		//g_game.internalMoveItem(item->getParent(), player->getInbox(), INDEX_WHEREEVER, item, item->getItemCount(), nullptr, FLAG_NOLIMIT);
-	}
 		return false;
 	}
 
@@ -271,9 +229,20 @@ bool House::transferToDepot(Player* player) const
 	for (HouseTile* tile : houseTiles) {
 		if (const TileItemVector* items = tile->getItemList()) {
 			for (Item* item : *items) {
-				if (item->isPickupable()) {
+				if (item->isWrapable()) {
+					std::string itemName = item->getName();
+					uint16_t itemID = item->getID();
+					Item* newItem = g_game.transformItem(item, 26054);
+					newItem->setIntAttr(ITEM_ATTRIBUTE_ACTIONID, itemID);
+					std::ostringstream ss;
+					ss << "Unwrap it in your own house to create a <" << itemName << ">.";
+					newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, ss.str());
+					moveItemList.push_back(newItem);
+				}
+				else if (item->isPickupable()) {
 					moveItemList.push_back(item);
-				} else {
+				}
+				else {
 					Container* container = item->getContainer();
 					if (container) {
 						for (Item* containerItem : container->getItemList()) {

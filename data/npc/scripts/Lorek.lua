@@ -10,14 +10,14 @@ function onThink()				npcHandler:onThink()					end
 -- Travel
 local function addTravelKeyword(keyword, text, cost, destination, condition)
 	local travelKeyword = keywordHandler:addKeyword({keyword}, StdModule.say, {npcHandler = npcHandler, text = 'Do you seek a passage to ' .. (text or keyword:titleCase()) .. ' for |TRAVELCOST|?', cost = cost}, condition and function(player) return player:getPawAndFurRank() >= 3 end or nil)
-		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, cost = cost, destination = destination})
+		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, cost = cost, destination = destination})
 		travelKeyword:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, text = 'Maybe another time.', reset = true})
 end
 
 addTravelKeyword('west', 'the west end of Port Hope', 7, Position(32558, 32780, 7))
 addTravelKeyword('centre', 'the centre of Port Hope', 7, Position(32628, 32771, 7))
 addTravelKeyword('darama', nil, 30, Position(32987, 32729, 7))
-addTravelKeyword('center', 'the centre of Port Hope', 7, Position(32628, 32771, 7))
+addTravelKeyword('center', 'the centre of Port Hope', 0, Position(32628, 32771, 7))
 addTravelKeyword('chor', nil, 30, Position(32968, 32799, 7))
 addTravelKeyword('banuta', nil, 30, Position(32826, 32631, 7))
 

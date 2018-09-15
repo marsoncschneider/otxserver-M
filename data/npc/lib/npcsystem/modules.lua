@@ -86,32 +86,32 @@ if Modules == nil then
 		return true
 	end
 
-	--Usage:
-		-- local node1 = keywordHandler:addKeyword({"promot"}, StdModule.say, {npcHandler = npcHandler, text = "I can promote you for 20000 gold coins. Do you want me to promote you?"})
-		-- 		node1:addChildKeyword({"yes"}, StdModule.promotePlayer, {npcHandler = npcHandler, cost = 20000, level = 20}, text = "Congratulations! You are now promoted.")
-		-- 		node1:addChildKeyword({"no"}, StdModule.say, {npcHandler = npcHandler, text = "Allright then. Come back when you are ready."}, reset = true)
+	-- local node1 = keywordHandler:addKeyword({"promot"}, StdModule.say, {npcHandler = npcHandler, text = "I can promote you for 20000 gold coins. Do you want me to promote you?"})
+		-- node1:addChildKeyword({"yes"}, StdModule.promotePlayer, {npcHandler = npcHandler, cost = 20000, level = 20}, text = "Congratulations! You are now promoted.")
+		-- node1:addChildKeyword({"no"}, StdModule.say, {npcHandler = npcHandler, text = "Allright then. Come back when you are ready."}, reset = true)
 	function StdModule.promotePlayer(cid, message, keywords, parameters, node)
 		local npcHandler = parameters.npcHandler
 		if npcHandler == nil then
 			error("StdModule.promotePlayer called without any npcHandler instance.")
 		end
+
 		if not npcHandler:isFocused(cid) then
 			return false
 		end
 
 		local player = Player(cid)
-		if player:isPremium() then
-			if player:getStorageValue(Storage.Promotion) == 1 then
+		if not player:isPremium(cid) or player:isPremium(cid) then
+			local promotion = player:getVocation():getPromotion()
+			if player:getStorageValue(STORAGEVALUE_PROMOTION) == 1 then
 				npcHandler:say("You are already promoted!", cid)
 			elseif player:getLevel() < parameters.level then
 				npcHandler:say("I am sorry, but I can only promote you once you have reached level " .. parameters.level .. ".", cid)
 			elseif not player:removeMoneyNpc(parameters.cost) then
 				npcHandler:say("You do not have enough money!", cid)
 			else
-				player:setStorageValue(Storage.Promotion, 1)
-				player:setVocation(player:getVocation():getPromotion())
-				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
-				npcHandler:say(parameters.text or "Congratulations! You are now promoted.", cid)
+				npcHandler:say(parameters.text, cid)
+				player:setVocation(promotion)
+				player:setStorageValue(STORAGEVALUE_PROMOTION, 1)
 			end
 		else
 			npcHandler:say("You need a premium account in order to get promoted.", cid)
@@ -161,18 +161,18 @@ if Modules == nil then
 		local parseInfo = {[TAG_BLESSCOST] = getBlessingsCost(player:getLevel()), [TAG_PVPBLESSCOST] = getPvpBlessingCost(player:getLevel())}
 		if player:hasBlessing(parameters.bless) then
 			npcHandler:say("You already possess this blessing.", cid)
-		elseif parameters.bless == 4 and player:getStorageValue(Storage.KawillBlessing) ~= 1 then
+		elseif parameters.bless == 7 and player:getStorageValue(Storage.KawillBlessing) ~= 1 then
 			npcHandler:say("You need the blessing of the great geomancer first.", cid)
-		elseif parameters.bless == 6 and player:getBlessings() == 0 and not player:getItemById(2173, true) then
+		elseif parameters.bless == 1 and player:getBlessings() == 0 and not player:getItemById(2173, true) then
 			npcHandler:say("You don't have any of the other blessings nor an amulet of loss, so it wouldn't make sense to bestow this protection on you now. Remember that it can only protect you from the loss of those!", cid)
 		elseif not player:removeMoneyNpc(type(parameters.cost) == "string" and npcHandler:parseMessage(parameters.cost, parseInfo) or parameters.cost) then
 			npcHandler:say("Oh. You do not have enough money.", cid)
 		else
-			npcHandler:say(parameters.text or "You have been blessed by one of the five gods!", cid)
-			if parameters.bless == 4 then
+			npcHandler:say(parameters.text or "You have been blessed by one of the seven gods!", cid)
+			if parameters.bless == 7 then
 				player:setStorageValue(Storage.KawillBlessing, 0)
 			end
-			player:addBlessing(parameters.bless)
+			player:addBlessing(parameters.bless, 1)
 			player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
 		end
 
@@ -720,8 +720,12 @@ if Modules == nil then
 				end
 			else
 				if name ~= nil and itemid ~= nil and cost ~= nil then
+				local VIAL = 2006
 					if subType == nil and ItemType(itemid):isFluidContainer() then
 						print("[Warning : " .. Npc():getName() .. "] NpcSystem:", "SubType missing for parameter item:", item)
+					elseif itemid == VIAL then
+						local vials = {"vial of water","vial of blood", nil, "vial of slime", nil, nil, nil, nil, nil, nil, "vial of oil", nil, "vial of urine", nil, "vial of oil"}
+						self:addBuyableItem(nil, itemid, cost, subType, vials[subType])
 					else
 						local names = {}
 						names[#names + 1] = name

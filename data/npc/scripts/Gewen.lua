@@ -1,4 +1,4 @@
-local keywordHandler = KeywordHandler:new()
+ local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
 
@@ -26,7 +26,7 @@ local function creatureSayCallback(cid, type, msg)
 		npcHandler.topic[cid] = 1
 	elseif npcHandler.topic[cid] == 1 then
 		if msgcontains(msg, 'yes') then
-			if not player:removeMoney(250) then
+			if not player:removeMoneyNpc(250) then
 				npcHandler:say('You don\'t have enough money.', cid)
 				return true
 			end
@@ -48,15 +48,15 @@ local function addTravelKeyword(keyword, text, cost, destination)
 	end
 
 	local travelKeyword = keywordHandler:addKeyword({keyword}, StdModule.say, {npcHandler = npcHandler, text = 'Do you seek a ride to ' .. text .. ' for |TRAVELCOST|?', cost = cost, discount = 'postman'})
-		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, text = 'Hold on!', cost = cost, discount = 'postman', destination = destination})
+		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, text = 'Hold on!', cost = cost, discount = 'postman', destination = destination})
 		travelKeyword:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, text = 'You shouldn\'t miss the experience.', reset = true})
 end
 
 addTravelKeyword('farmine', 'Farmine', 60, Position(32983, 31539, 1))
 addTravelKeyword('darashia', 'Darashia on Darama', 40, Position(33270, 32441, 6))
 addTravelKeyword('svargrond', 'Svargrond', 60, Position(32253, 31097, 4))
-addTravelKeyword('femor hills', 'the Femor Hills', 40, Position(32536, 31837, 4))
-addTravelKeyword('edron', 'Edron', 60, Position(33193, 31784, 3))
+addTravelKeyword('femor hills', 'the Femor Hills', 60, Position(32536, 31837, 4))
+addTravelKeyword('edron', 'Edron', 40, Position(33193, 31784, 3))
 
 npcHandler:setMessage(MESSAGE_GREET, "Greetings, traveller |PLAYERNAME|. Where do you want me to {fly} you? Or do you need a weekly ticket for the Kazordoon public lorry transport?")
 npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye!")

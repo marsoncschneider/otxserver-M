@@ -10,18 +10,7 @@ local config = {
 	towns = {
 		["venore"] = 1,
 		["thais"] = 2,
-		["kazordoon"] = 3,
-		["carlin"] = 4,
-		["ab dendriel"] = 5,
-		["abdendriel"] = 5,
-		["ab'dendriel"] = 5,
-		["liberty bay"] = 7,
-		["port hope"] = 8,
-		["ankrahmun"] = 9,
-		["darashia"] = 10,
-		["edron"] = 11,
-		["svargrond"] = 12,
-		["yalahar"] = 13
+		["carlin"] = 4
 	},
 
 	vocations = {
@@ -79,6 +68,10 @@ local function greetCallback(cid)
 		npcHandler:say(player:getName() ..", I CAN'T LET YOU LEAVE - YOU ARE TOO STRONG ALREADY! YOU CAN ONLY LEAVE WITH LEVEL 9 OR LOWER.", cid)
 		npcHandler:resetNpc(cid)
 		return false
+	elseif player:getVocation():getId() > 0 then
+		npcHandler:say("YOU ALREADY HAVE A VOCATION!", cid)
+		npcHandler:resetNpc(cid)
+		return false
 	else
 		npcHandler:setMessage(MESSAGE_GREET, player:getName() ..", ARE YOU PREPARED TO FACE YOUR DESTINY?")
 	end
@@ -93,7 +86,7 @@ local function creatureSayCallback(cid, type, msg)
 	local player = Player(cid)
 	if npcHandler.topic[cid] == 0 then
 		if msgcontains(msg, "yes") then
-			npcHandler:say("IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {THAIS}, {VENORE}, {KAZORDOON}, {AB'DENDRIEL}, {LIBERTY BAY}, {PORT HOPE}, {ANKRAHMUN}, {DARASHIA}, {EDRON}, {SVARGROND} OR {YALAHAR}?", cid)
+			npcHandler:say("IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {THAIS}, OR {VENORE}?", cid)
 			npcHandler.topic[cid] = 1
 		end
 	elseif npcHandler.topic[cid] == 1 then
@@ -103,7 +96,7 @@ local function creatureSayCallback(cid, type, msg)
 			npcHandler:say("IN ".. string.upper(msg) .."! AND WHAT PROFESSION HAVE YOU CHOSEN: {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 			npcHandler.topic[cid] = 2
 		else
-			npcHandler:say("IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {THAIS}, {VENORE}, {KAZORDOON}, {AB'DENDRIEL}, {LIBERTY BAY}, {PORT HOPE}, {ANKRAHMUN}, {DARASHIA}, {EDRON}, {SVARGROND} OR {YALAHAR}?", cid)
+			npcHandler:say("IN WHICH TOWN DO YOU WANT TO LIVE: {CARLIN}, {THAIS}, OR {VENORE}?", cid)
 		end
 	elseif npcHandler.topic[cid] == 2 then
 		local vocationTable = config.vocations[msg:lower()]
@@ -117,13 +110,11 @@ local function creatureSayCallback(cid, type, msg)
 	elseif npcHandler.topic[cid] == 3 then
 		if msgcontains(msg, "yes") then
 			npcHandler:say("SO BE IT!", cid)
-			if Vocation(vocation[cid]) ~= player:getVocation() then
 			player:setVocation(Vocation(vocation[cid]))
-			player:setMaxHealth(130 + (player:getVocation():getHealthGain() * player:getLevel()))
-			player:addHealth(player:getMaxHealth())
-			player:setMaxMana(0 + (player:getVocation():getManaGain() * player:getLevel()))
-			player:addMana(player:getMaxMana())
-			player:setCapacity(40000 + (player:getVocation():getCapacityGain() * player:getLevel()))
+			player:setTown(Town(town[cid]))
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+			player:teleportTo(Town(town[cid]):getTemplePosition())
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You have received a backpack with starting items for reaching the mainlands.")
 			local targetVocation = config.vocations[Vocation(vocation[cid]):getName():lower()]
 			for i = 1, #targetVocation[1] do
@@ -133,18 +124,6 @@ local function creatureSayCallback(cid, type, msg)
 			for i = 1, #targetVocation[2] do
 				backpack:addItem(targetVocation[2][i][1], targetVocation[2][i][2])
 			end
-			player:setTown(Town(town[cid]))
-			player:teleportTo(Town(town[cid]):getTemplePosition())
-			local resultId = db.storeQuery("SELECT `id` FROM `players` WHERE `name` = " .. db.escapeString(player:getName():lower()))
-			local accountId = result.getDataInt(resultId, "id")
-			player:remove()
-			db.query("UPDATE `players` SET `maglevel` = '0', `manaspent` = '0', `skill_fist` = '10', `skill_fist_tries` = '0', `skill_club` = '10', `skill_club_tries` = '0', `skill_sword` = '10', `skill_sword_tries` = '0', `skill_axe` = '10', `skill_axe_tries` = '0', `skill_dist` = '10', `skill_dist_tries` = '0', `skill_shielding` = '10', `skill_shielding_tries` = '0', `skill_fishing` = '10', `skill_fishing_tries` = '0' WHERE `players`.`id` = " .. accountId)
-			return
-			end
-			player:setVocation(Vocation(vocation[cid]))
-			player:setTown(Town(town[cid]))
-			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
-			player:teleportTo(Town(town[cid]):getTemplePosition())			
 		else
 			npcHandler:say("THEN WHAT? {KNIGHT}, {PALADIN}, {SORCERER}, OR {DRUID}?", cid)
 			npcHandler.topic[cid] = 2

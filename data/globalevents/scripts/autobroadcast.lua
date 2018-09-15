@@ -1,13 +1,16 @@
 -- 
 
 function onThink(interval, lastExecution)
-    local MESSAGE = {
-        "[COMMANDS] !buyhouse - !sellhouse - !serverinfo - !online - !uptime - !outfit .",
-        "[TIBIA CLIENTS COMPATIVEIS]  10.00 e 11.40",
-        "[FEATURES] NPCS VIA BANK, CRITICAL, NEW POTS, PREY, IMBUEMENT, CASKS AND KEGS.",
-		"[FEATURES] NEW BLESSING SYSTEM, FULL GLOBAL MAP WITH HALLS OF ROPE.",
-		"[FEATURES] BATTLEFIELD, CAPTURE THE FLAG, LAST STANDING MAN AND ZOOMBIE EVENT.",
-	}
-    Game.broadcastMessage(MESSAGE[math.random(1, #MESSAGE)], MESSAGE_EVENT_ADVANCE) 
+	local messages = {
+	"[TICKETS]: Utilize nosso atendimento por tickets para falar com um membro superior.",
+	"[TEAMSPEAK3]: Servidor de teamSpeak 3 com 1000 slots disponiveis, liberado para criar salas particulares e com senha.",
+	"[REGRAS]: Evite ser punido, não viole nossas regras.",
+	"[SISTEMA]: O global save do servidor ocorre todos os dias às 06:00hrs.",
+	"[SEGURANÇA]: Nunca use a mesma senha de outros servidores, pois você estará facilitando a vida dos hackers.",
+	"[SEGURANÇA]: Proteja sua senha. Use-a apenas em nosso website oficial."
+}
+
+    Game.broadcastMessage(messages[math.random(#messages)], MESSAGE_EVENT_ADVANCE) 
     return true
 end
+

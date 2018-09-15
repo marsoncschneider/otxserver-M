@@ -145,6 +145,12 @@ local function creatureSayCallback(cid, type, msg)
 ---------------------------- deposit ---------------------
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'guild deposit') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try deposit.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+
         if not player:getGuild() then
             npcHandler:say('You are not a member of a guild.', cid)
             npcHandler.topic[cid] = 0
@@ -200,7 +206,8 @@ local function creatureSayCallback(cid, type, msg)
                 info.message = 'We are happy to inform you that your transfer request was successfully carried out.'
                 info.success = true
                 guild:setBankBalance(guild:getBankBalance() + tonumber(count[cid]))
-                player:setBankBalance(playerBalance - tonumber(count[cid]))                        
+                player:setBankBalance(playerBalance - tonumber(count[cid]))
+                player:setStorageValue(494934, 2)
             end
  
             local inbox = player:getInbox()
@@ -213,6 +220,12 @@ local function creatureSayCallback(cid, type, msg)
         return true
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'deposit') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try deposit.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+
         count[cid] = player:getMoney()
         if count[cid] < 1 then
             npcHandler:say('You do not have enough gold.', cid)
@@ -259,9 +272,10 @@ local function creatureSayCallback(cid, type, msg)
         end
     elseif npcHandler.topic[cid] == 2 then
         if msgcontains(msg, 'yes') then
-            if player:getMoney() >= tonumber(count[cid]) then
+            if player:getMoney() + player:getBankBalance() >= tonumber(count[cid]) then
                 player:depositMoney(count[cid])
                 npcHandler:say('Alright, we have added the amount of ' .. count[cid] .. ' gold to your {balance}. You can {withdraw} your money anytime you want to.', cid)
+                Player.setExhaustion(player, 494934, 2)
             else
                 npcHandler:say('You do not have enough gold.', cid)
             end
@@ -273,6 +287,12 @@ local function creatureSayCallback(cid, type, msg)
 ---------------------------- withdraw --------------------
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'guild withdraw') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try withdraw.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+
         if not player:getGuild() then
             npcHandler:say('I am sorry but it seems you are currently not in any guild.', cid)
             npcHandler.topic[cid] = 0
@@ -327,7 +347,8 @@ local function creatureSayCallback(cid, type, msg)
                 info.success = true
                 guild:setBankBalance(balance - tonumber(count[cid]))
                 local playerBalance = player:getBankBalance()
-                player:setBankBalance(playerBalance + tonumber(count[cid]))                        
+                player:setBankBalance(playerBalance + tonumber(count[cid]))
+                Player.setExhaustion(player, 494934, 2)
             end
  
             local inbox = player:getInbox()
@@ -341,6 +362,12 @@ local function creatureSayCallback(cid, type, msg)
         return true
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'withdraw') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try withdraw.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+
         if string.match(msg,'%d+') then
             count[cid] = getMoneyCount(msg)
             if isValidMoney(count[cid]) then
@@ -373,6 +400,7 @@ local function creatureSayCallback(cid, type, msg)
                     npcHandler:say('There is not enough gold on your account.', cid)
                 else
                     npcHandler:say('Here you are, ' .. count[cid] .. ' gold. Please let me know if there is something else I can do for you.', cid)
+                    Player.setExhaustion(player, 494934, 2)
                 end
             else
                 npcHandler:say('Whoah, hold on, you have no room in your inventory to carry all those coins. I don\'t want you to drop it on the floor, maybe come back with a cart!', cid)
@@ -386,6 +414,12 @@ local function creatureSayCallback(cid, type, msg)
 ---------------------------- transfer --------------------
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'guild transfer') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try transfer.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+
         if not player:getGuild() then
             npcHandler:say('I am sorry but it seems you are currently not in any guild.', cid)
             npcHandler.topic[cid] = 0
@@ -459,7 +493,8 @@ local function creatureSayCallback(cid, type, msg)
                 local receipt = getReceipt(info)
                 inbox:addItemEx(receipt, INDEX_WHEREEVER, FLAG_NOLIMIT)
             else
-                getGuildIdByName(transfer[cid], transferFactory(player:getName(), tonumber(count[cid]), guild:getId(), info))                  
+                getGuildIdByName(transfer[cid], transferFactory(player:getName(), tonumber(count[cid]), guild:getId(), info))
+                Player.setExhaustion(player, 494934, 2)                  
             end
             npcHandler.topic[cid] = 0
         elseif msgcontains(msg, 'no') then
@@ -468,6 +503,12 @@ local function creatureSayCallback(cid, type, msg)
         npcHandler.topic[cid] = 0
 --------------------------------guild bank-----------------------------------------------
     elseif msgcontains(msg, 'transfer') then
+        if (Player.getExhaustion(player, 494934) > 0) then
+            npcHandler:say('You need to wait a time before try transfer.', cid)
+            npcHandler.topic[cid] = 0
+            return false
+        end
+        
         npcHandler:say('Please tell me the amount of gold you would like to transfer.', cid)
         npcHandler.topic[cid] = 11
     elseif npcHandler.topic[cid] == 11 then
@@ -510,6 +551,7 @@ local function creatureSayCallback(cid, type, msg)
                 npcHandler:say('You cannot transfer money to this account.', cid)
             else
                 npcHandler:say('Very well. You have transferred ' .. count[cid] .. ' gold to ' .. transfer[cid] ..'.', cid)
+                Player.setExhaustion(player, 494934, 2)
                 transfer[cid] = nil
             end
         elseif msgcontains(msg, 'no') then

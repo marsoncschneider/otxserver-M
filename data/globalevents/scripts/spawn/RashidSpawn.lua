@@ -12,6 +12,7 @@ local config = {
 local spawnByDay = true
 
 function onStartup()
+
 	if spawnByDay then
 		local npc = Game.createNpc('Rashid', config[os.date('%A')], false, true)
 		if npc then

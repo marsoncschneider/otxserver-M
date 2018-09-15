@@ -1,20 +1,11 @@
-ITEM_TIBIA_COIN = 24774
-ITEM_PREMIUM_SCROLL = 16101
+local function doPlayerAddPremiumPoints(cid, count)
+		db.query('UPDATE accounts SET premium_points = premium_points+'.. count ..' WHERE id = ' .. getAccountNumberByPlayerName(getCreatureName(cid)))
+end
 
-function onUse(player, item, fromPosition, target, toPosition, isHotkey)
-	if player:isPlayer() then
-		if item:getId() == ITEM_PREMIUM_SCROLL then
-			local coins = 30
-			player:addTibiaCoins(coins)
-			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You have received " .. coins .. " tibia coins.")
-			item:remove(1)
-		elseif item:getId() == ITEM_TIBIA_COIN then
-			local coins = item:getCount()
-			player:addTibiaCoins(coins)
-			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You have received " .. coins .. " tibia coins.")
-			item:remove(coins)
-		end
-		
-	end
+function onUse(cid, item, fromPosition, itemEx, toPosition) 
+	doPlayerAddPremiumPoints(cid, 30)
+	doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE, "You have recived 30 Tibia Coins to your account.")
+	doSendMagicEffect(getCreaturePosition(cid), 28)
+	doRemoveItem(item.uid,1)
 	return true
 end

@@ -4,7 +4,7 @@ local config = {
 	[50072] = {storageKey = Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage, storageValue = 2, text = 'This is Santiago\'s room. Maybe you should talk to him before sniffing around in his house.'},
 	[50073] = {storageKey = Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage, storageValue = 5, text = 'This is Santiago\'s cellar. You have no business there yet.', storageValue2 = 6, text2 = 'This is Santiago\'s cellar - and you wouldn\'t want to go back to this nasty place.'},
 	[50074] = {storageKey = Storage.RookgaardTutorialIsland.SantiagoNpcGreetStorage, storageValue = 14, text = 'You don\'t have any business there anymore. Continue to the east!'},
-	[50080] = {storageKey = Storage.RookgaardTutorialIsland.ZirellaNpcGreetStorage, storageValue = 8, text = 'Zirella really needs help, go talk to her.', storageValue3 = 7, text3 = 'This is not the way to the forest. You should head southwest first.'},
+	[50080] = {storageKey = Storage.RookgaardTutorialIsland.ZirellaNpcGreetStorage, storageValue = 1, text = 'Zirella really needs help, go talk to her.', storageValue3 = 7, text3 = 'This is not the way to the forest. You should head southwest first.'},
 	[50088] = {storageKey = Storage.RookgaardTutorialIsland.tutorialHintsStorage, storageValue = 20, text = 'Before you head to the village, dig open that hole with your shovel and climb down. You will find something useful down there.'},
 	[50089] = {storageKey = Storage.RookgaardTutorialIsland.CarlosQuestLog, storageValue = 7, text = 'You are not ready to enter the village of Rookgaard yet. You should talk to Carlos some more.', storageValue2 = 7, text2 = 'You have no business anymore on the other side of Rookgaard.'}
 }
@@ -42,7 +42,7 @@ function onStepIn(creature, item, position, fromPosition)
 	end
 
 	if player:getStorageValue(targetTableAid.storageKey) < targetTableAid.storageValue then
-		player:teleportTo(fromPosition, false)
+		player:teleportTo(fromPosition, true)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, targetTableAid.text)
 		return
 	end

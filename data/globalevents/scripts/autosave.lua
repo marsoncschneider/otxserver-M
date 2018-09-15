@@ -1,4 +1,4 @@
-local cleanMapAtSave = false
+local cleanMapAtSave = true
 
 local function serverSave(interval)
 	if cleanMapAtSave then

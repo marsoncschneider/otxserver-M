@@ -2,6 +2,20 @@ if not globalStorageTable then
 	globalStorageTable = {}
 end
 
+function getGlobalStorageValueDB(key)
+    local resultId = db.storeQuery("SELECT `value` FROM `global_storage` WHERE `key` = " .. key)
+    if resultId ~= false then
+        local val = result.getString(resultId, "value")
+        result.free(resultId)
+        return val
+    end
+    return -1
+end
+ 
+function setGlobalStorageValueDB(key, value)
+    db.query("INSERT INTO `global_storage` (`key`, `value`) VALUES (".. key ..", ".. value ..") ON DUPLICATE KEY UPDATE `value` = ".. value)
+end
+
 function Game.broadcastMessage(message, messageType)
 	if messageType == nil then
 		messageType = MESSAGE_STATUS_WARNING
@@ -9,11 +23,7 @@ function Game.broadcastMessage(message, messageType)
 
 	local players = Game.getPlayers()
 	for i = 1, #players do
-		if messageType == MESSAGE_STATUS_WARNING then
-			players[i]:sendPrivateMessage(nil, message, TALKTYPE_BROADCAST)
-		else
-			players[i]:sendTextMessage(messageType, message)
-		end
+		players[i]:sendTextMessage(messageType, message)
 	end
 end
 

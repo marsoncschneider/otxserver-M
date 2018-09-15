@@ -1,6 +1,6 @@
 local destination = {
-	[4121] = {position = Position(32801, 31766, 9), storageValue = 1, needCrystal = false},
-	[3220] = {position = Position(32627, 31863, 11), storageValue = 1, needCrystal = false},
+	[4121] = {position = Position(32801, 31766, 9), storageValue = 1, needCrystal = true},
+	[3220] = {position = Position(32627, 31863, 11), storageValue = 1, needCrystal = true},
 	[3128] = {position = Position(33000, 31870, 13), storageValue = 14},
 	[3129] = {position = Position(32795, 31762, 10), storageValue = 14},
 	[3130] = {position = Position(32864, 31844, 11), storageValue = 15},
@@ -12,11 +12,11 @@ local destination = {
 	[3136] = {position = Position(32904, 31894, 13), storageValue = 16},
 	[3137] = {position = Position(32979, 31907, 9), storageValue = 16},
 	[35669] = {position = Position(32986, 31864, 9), storageValue = 1}, -- leave warzone 3
-	[3215] = {position = Position(32369, 32241, 7), storageValue = 1, needCrystal = false},
-	[3216] = {position = Position(32212, 31133, 7), storageValue = 1, needCrystal = false},
-	[3217] = {position = Position(32317, 32825, 7), storageValue = 1, needCrystal = false},
-	[3218] = {position = Position(33213, 32454, 1), storageValue = 1, needCrystal = false},
-	[3219] = {position = Position(33217, 31814, 8), storageValue = 1, needCrystal = false}
+	[3215] = {position = Position(32369, 32241, 7), storageValue = 1, needCrystal = true},
+	[3216] = {position = Position(32212, 31133, 7), storageValue = 1, needCrystal = true},
+	[3217] = {position = Position(32317, 32825, 7), storageValue = 1, needCrystal = true},
+	[3218] = {position = Position(33213, 32454, 1), storageValue = 1, needCrystal = true},
+	[3219] = {position = Position(33217, 31814, 8), storageValue = 1, needCrystal = true}
 }
 
 function onStepIn(creature, item, position, fromPosition)
@@ -41,20 +41,21 @@ function onStepIn(creature, item, position, fromPosition)
 			player:teleportTo(teleportCrystal.position)
 			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 		else
-			player:teleportTo(fromPosition)
-			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
-			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'You need a teleport crystal to use this device.')
+			player:getPosition():sendMagicEffect(CONST_ME_POFF)
+			player:sendTextMessage(MESSAGE_STATUS_SMALL, 'You need at least one Teleport Crystal!')
 		end
 		return true
 	end
 
 	-- There is no destination with storageValue == 2, should this check for storage?
 	if teleportCrystal.storageValue == 2 then
-		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'You have no idea on how to use this device. Xelvar in Kazordoon might tell you more about it.')
-	else
-		player:teleportTo(fromPosition)
 		player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
-		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'Sorry, you don\'t have access to use this teleport!')
+			player:teleportTo(teleportCrystal.position)
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+	else
+		player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+			player:teleportTo(teleportCrystal.position)
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 	end
 	return true
 end

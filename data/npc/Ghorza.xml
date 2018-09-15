@@ -12,7 +12,7 @@
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="
 			animate dead rune,2316,375;
-			avalanche rune,2274,45;
+			avalanche rune,2274,25;
 			blank rune,2260,10;
 			Chameleon Rune,2291,210;
 			Convince Creature Rune,2290,80;
@@ -23,7 +23,7 @@
 			Energy Field Rune,2277,38;
 			Energy Wall Rune,2279,85;
 			Explosion Rune,2313,31;			
-			Fire Bomb Rune,2305,117;
+			fire bomb rune,2305,55;
 			Fire Field Rune,2301,28;
 			Fire Wall Rune,2303,61;			
 			fireball rune,2302,30;			
@@ -37,9 +37,9 @@
 			icicle rune,2271,30;
 			Intense Healing Rune,2265,95;
 			Light Magic Missile Rune,2287,4;			
-			magic wall rune,2293,116;
+			magic wall rune,2293,55;
 			Mana Potion,7620,50;		
-			paralyze rune,2278,700;
+			paralyze rune,2278,500;
 			poison bomb rune,2286,85;
 			Poison Field Rune,2285,21;
 			Poison Wall Rune, 2289,52;
@@ -48,7 +48,7 @@
 			stone shower rune,2288,37;
 			Strong Health Potion,7588,100;
 			Strong Mana Potion,7589,80;
-			Sudden Death Rune,2268,108;
+			Sudden Death Rune,2268,50;
 			thunderstorm rune,2315,37;
 			Ultimate Healing Rune,2273,175;
 			Ultimate Health Potion,8473,310;			

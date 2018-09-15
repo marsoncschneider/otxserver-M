@@ -15,68 +15,70 @@ local grizzlyAdamsConfig = {
 	ranks = {
 		--NOTE: The variable 'name' is not necessary to be declared. I let it so people who wants to change the script will now wich item is each one.
 		huntsMan_rank = {
-			{id=5907, buy=34000, sell=0, name='Slingshot'},
-			{id=11214, buy=0, sell=50, name='Antlers'},
-			{id=10550, buy=0, sell=100, name='Bloody Pincers'},
-			{id=13303, buy=0, sell=550, name='Cavebear Skull'},
-			{id=20098, buy=0, sell=150, name='Cheesy Figurine'},
-			{id=12470, buy=0, sell=110, name='Colourful Feather'},
-			{id=11189, buy=0, sell=35, name='Crab Pincers'},
-			{id=10574, buy=0, sell=55, name='Cyclops Toe'},
-			{id=7398, buy=0, sell=500, name='Cyclops Trophy'},
-			{id=11315, buy=0, sell=15000, name='Draken Trophy'},
-			{id=13296, buy=0, sell=800, name='Draptor Scales'},
-			{id=21311, buy=0, sell=115, name='Elven Hoof'},
-			{id=10565, buy=0, sell=30, name='Frosty Ear of a Troll'},
-			{id=13304, buy=0, sell=950, name='Giant Crab Pincer'},
-			{id=12495, buy=0, sell=20, name='Goblin Ear'},
-			{id=13301, buy=0, sell=400, name='Hollow Stampor Hoof'},
-			{id=11199, buy=0, sell=600, name='Hydra Head'},
-			{id=11372, buy=0, sell=80, name='Lancer Beetle Shell'},
-			{id=11336, buy=0, sell=8000, name='Lizard Trophy'},
-			{id=12445, buy=0, sell=280, name='Mantassin Tail'},
-			{id=19741, buy=0, sell=65, name='Marsh Stalker Beak'},
-			{id=19742, buy=0, sell=50, name='Marsh Stalker Feather'},
-			{id=13302, buy=0, sell=250, name='Maxilla'},
-			{id=7401, buy=0, sell=500, name='Minotaur Trophy'},
-			{id=10579, buy=0, sell=420, name='Mutated Bat Ear'},
-			{id=13026, buy=0, sell=750, name='Panther Head'},
-			{id=13027, buy=0, sell=300, name='Panther Paw'},
-			{id=12447, buy=0, sell=500, name='Quara Bone'},
-			{id=12444, buy=0, sell=350, name='Quara Eye'},
-			{id=12446, buy=0, sell=410, name='Quara Pincers'},
-			{id=12443, buy=0, sell=140, name='Quara Tentacle'},
-			{id=13159, buy=0, sell=50, name='Rabbits Foot'},
-			{id=21310, buy=0, sell=70, name='Rorc Feather'},
-			{id=11228, buy=0, sell=400, name='Sabretooth'},
-			{id=11373, buy=0, sell=20, name='Sandcrawler Shell'},
-			{id=10548, buy=0, sell=280, name='Scarab Pincers'},
-			{id=13299, buy=0, sell=280, name='Stampor Horn'},
-			{id=13300, buy=0, sell=150, name='Stampor Talons'},
-			{id=11371, buy=0, sell=60, name='Terramite Legs'},
-			{id=11369, buy=0, sell=170, name='Terramite Shell'},
-			{id=11190, buy=0, sell=95, name='Terrorbird Beak'},
+			-- SELL OFFERS
+			{id=11214, buy=0, sell=50, name='antlers'},
+			{id=10550, buy=0, sell=100, name='bloody pincers'},
+			{id=11189, buy=0, sell=35, name='crab pincers'},
+			{id=10574, buy=0, sell=55, name='cyclops toe'},
+			{id=13303, buy=0, sell=550, name="cavebear skull"},
+			{id=20098, buy=0, sell=150, name="cheesy figurine"},
+			{id=12470, buy=0, sell=110, name="colourful feather"},
+			{id=7398, buy=0, sell=500, name='cyclops trophy'},
+			{id=11315, buy=0, sell=15000, name='draken trophy'},
+			{id=13296, buy=0, sell=800, name='draptor scales'},
+			{id=21311, buy=0, sell=115, name='elven hoof'},
+			{id=10565, buy=0, sell=30, name='frosty ear of a troll'},
+			{id=13304, buy=0, sell=950, name='giant crab pincer'},
+			{id=12495, buy=0, sell=20, name='goblin ear'},
+			{id=13301, buy=0, sell=400, name='hollow stampor hoof'},
+			{id=11199, buy=0, sell=600, name='hydra head'},
+			{id=11372, buy=0, sell=80, name='lancer beetle shell'},
+			{id=11336, buy=0, sell=8000, name='lizard trophy'},
+			{id=12445, buy=0, sell=280, name='mantassin tail'},
+			{id=19741, buy=0, sell=65, name='marsh stalker beak'},
+			{id=19742, buy=0, sell=50, name='marsh stalker feather'},
+			{id=13302, buy=0, sell=250, name='maxilla'},
+			{id=7401, buy=0, sell=500, name='minotaur trophy'},
+			{id=10579, buy=0, sell=420, name='mutated bat ear'},
+			{id=13026, buy=0, sell=750, name='panther head'},
+			{id=13027, buy=0, sell=300, name='panther paw'},
+			{id=12447, buy=0, sell=500, name='quara bone'},
+			{id=12447, buy=0, sell=350, name='quara eye'},
+			{id=12446, buy=0, sell=410, name='quara pincers'},
+			{id=12443, buy=0, sell=140, name='quara tentacle'},
+			{id=13159, buy=0, sell=50, name='rabbit\'s foot'},
+			{id=21310, buy=0, sell=70, name='rorc feather'},
+			{id=11228, buy=0, sell=400, name='sabretooth'},
+			{id=11373, buy=0, sell=20, name='sandcrawler shell'},
+			{id=10548, buy=0, sell=280, name='scarab pincers'},
+			{id=13299, buy=0, sell=280, name='stampor horn'},
+			{id=13300, buy=0, sell=150, name='stampor talons'},
+			{id=11371, buy=0, sell=60, name='terramite legs'},
+			{id=11369, buy=0, sell=170, name='terramite shell'},
+			{id=11190, buy=0, sell=95, name='terrorbird beak'},
+			-- BUY OFFERS
+			{id=5907, buy=35000, sell=0, name='slingshot'}
 		},
 
 		bigGameHunter_rank = {
-			{id=11161, buy=0, sell=6000, name='Bonebeast Trophy'},
-			{id=7397, buy=0, sell=3000, name='Deer Trophy'},
-			{id=7400, buy=0, sell=3000, name='Lion Trophy'},
-			{id=7395, buy=0, sell=1000, name='Orc Trophy'},
-			{id=7394, buy=0, sell=3000, name='Wolf Trophy'}
+			{id=11161, buy=0, sell=6000, name='bonebeast trophy'},
+			{id=7397, buy=0, sell=3000, name='deer trophy'},
+			{id=7400, buy=0, sell=3000, name='lion trophy'},
+			{id=7395, buy=0, sell=1000, name='orc trophy'},
+			{id=7394, buy=0, sell=3000, name='wolf trophy'}
 		},
 
 		trophyHunter_rank = {
-			{id=10518, buy=1000, sell=0, name='Demon Backpack'},
-			{id=7396, buy=0, sell=20000, name='Behemoth Trophy'},
-			{id=7393, buy=0, sell=40000, name='Demon Trophy'},
-			{id=7399, buy=0, sell=10000, name='Dragon Lord Trophy'},
-			{id=11338, buy=0, sell=3000, name='Disgusting Trophy'},
-			{id=24757, buy=0, sell=9000, name='Werebadger Trophy'},
-			{id=24759, buy=0, sell=11000, name='Werebear Trophy'},
+			-- SELL OFFERS
+			{id=7396, buy=0, sell=20000, name='behemoth trophy'},
+			{id=7393, buy=0, sell=40000, name='demon trophy'},
+			{id=7399, buy=0, sell=10000, name='dragon lord trophy'},
+			-- BUY OFFERS
+			{id=10518, buy=1000, sell=0, name='demon backpack'},
 		},
 	}
 }
+
 local items, data = {}
 for i = 1, #grizzlyAdamsConfig.ranks.huntsMan_rank do
 	data = grizzlyAdamsConfig.ranks.huntsMan_rank[i]
@@ -112,15 +114,39 @@ end
 
 local function joinTables(old, new)
 	for k, v in pairs(new) do
-		old[k] = v
+		old[#old+1] = v
 	end
 	return old
+end
+
+local function onBuy(cid, item, subType, amount, ignoreCap, inBackpacks)
+	local player = Player(cid)
+	if not ignoreCap and player:getFreeCapacity() < ItemType(items[item].id):getWeight(amount) then
+		return player:sendTextMessage(MESSAGE_INFO_DESCR, 'You don\'t have enough cap.')
+	end
+	if items[item].buy then
+		player:removeMoneyNpc(amount * items[item].buy)
+		player:addItem(items[item].id, amount)
+		return player:sendTextMessage(MESSAGE_INFO_DESCR, 'Bought '..amount..'x '..items[item].name..' for '..items[item].buy * amount..' gold coins.')
+	end
+	return true
+end
+
+local function onSell(cid, item, subType, amount, ignoreCap, inBackpacks)
+	local player = Player(cid)
+	if items[item].sell then
+		player:addMoney(items[item].sell * amount)
+		player:removeItem(items[item].id, amount)
+		return player:sendTextMessage(MESSAGE_INFO_DESCR, 'Sold '..amount..'x '..items[item].name..' for '..items[item].sell * amount..' gold coins.')
+	end
+	return true
 end
 
 local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then return false end
 
 	local player = Player(cid)
+	msg = msg:gsub("(%l)(%w*)", function(a,b) return string.upper(a)..b end)
 	if msgcontains('trade', msg) then
 		local tradeItems = {}
 		if player:getPawAndFurRank() >= 2 then
@@ -354,9 +380,11 @@ local function creatureSayCallback(cid, type, msg)
 		end
 		npcHandler.topic[cid] = 0
 	elseif isInArray({'special task'}, msg:lower()) then
-		if player:getPawAndFurPoints() >= 69 then -- Tiquandas Revenge 90 points
+		if player:getPawAndFurPoints() >= 70 then -- Tiquandas Revenge 70 points
 			if player:getStorageValue(Storage.KillingInTheNameOf.MissionTiquandasRevenge) == 1 then  -- Check if he has already started the task.
-				npcHandler:say('You have already started the task. Go find Tiquandas Revenge and take revenge yourself!', cid)
+				if (player:getStorageValue(Storage.KillingInTheNameOf.TiquandasRevengeTeleport) ~= 0) then
+					npcHandler:say('You have already started the task. Go find Tiquandas Revenge and take revenge yourself!', cid)
+				end
 			else
 				npcHandler:say({
 					'Have you heard about Tiquandas Revenge? It is said that the jungle itself is alive and takes revenge for all the bad things people have done to it. ...',
@@ -365,14 +393,22 @@ local function creatureSayCallback(cid, type, msg)
 				player:setStorageValue(Storage.KillingInTheNameOf.TiquandasRevengeTeleport, 1) -- Task needed to enter Tiquandas Revenge TP
 				player:setStorageValue(Storage.KillingInTheNameOf.MissionTiquandasRevenge, 1) -- Won't give this task again.
 			end
-		end
-		if player:getPawAndFurPoints() >= 70 then -- Demodras 100 points
+
 			if player:getStorageValue(Storage.KillingInTheNameOf.MissionDemodras) == 1 then  -- Check if he has already started the task.
-				npcHandler:say('You have already started the special task. Find Demodras and kill it.', cid)
+				if (player:getStorageValue(Storage.KillingInTheNameOf.DemodrasTeleport) ~= 0) then
+					npcHandler:say('You have already started the special task. Find Demodras and kill it.', cid)
+				end
 			else
 				npcHandler:say('This task is a very dangerous one. I want you to look for Demodras\' hideout. It might be somewhere under the Plains of Havoc. Good luck, old chap.', cid)
 				player:setStorageValue(Storage.KillingInTheNameOf.DemodrasTeleport, 1) -- Task needed to enter Demodras TP
 				player:setStorageValue(Storage.KillingInTheNameOf.MissionDemodras, 1) -- Won't give this task again.
+			end
+
+			if (player:getStorageValue(Storage.KillingInTheNameOf.MissionDemodras) == 1 and 
+				player:getStorageValue(Storage.KillingInTheNameOf.DemodrasTeleport) == 0 and
+				player:getStorageValue(Storage.KillingInTheNameOf.MissionTiquandasRevenge) == 1 and 
+				player:getStorageValue(Storage.KillingInTheNameOf.TiquandasRevengeTeleport) == 0) then
+				npcHandler:say('You have already finished all special tasks.', cid)
 			end
 		end
 		npcHandler.topic[cid] = 0

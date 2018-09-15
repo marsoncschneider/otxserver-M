@@ -1,12 +1,12 @@
 local config = {
-    swampId = {20230, 18589, 18584, 18141}, -- Swamp tiles ids that can be used to shovel
-    itemGain = {{itemId = 2818, quantGain = 1}, -- Itemid winning, and msm maximum amount.
+    swampId = {20230, 18589, 18584, 18141}, -- ids dos tiles de swamp que pode ser usado a shovel
+    itemGain = {{itemId = 2818, quantGain = 1}, -- itemid que ganha, e quantidade maxima do msm.
                 {itemId = 2145, quantGain = 3},
                 {itemId = 20138, quantGain = 1}
                 }
 }
 
-local exhausth = 3600 -- In how many seconds can you use it again
+local exhausth = 3600 --em quantos segundos podera usar denovo
 
 
 
@@ -14,6 +14,9 @@ local exhausth = 3600 -- In how many seconds can you use it again
 local holes = {468, 481, 483, 7932, 23712}
 local pools = {2016, 2017, 2018, 2019, 2020, 2021, 2025, 2026, 2027, 2028, 2029, 2030}
 function onUse(cid, item, fromPosition, itemEx, toPosition)
+if isInArray(pools, itemEx.itemid) then
+        itemEx = Tile(toPosition):getGround()
+    end
     if(isInArray(config.swampId, itemEx.itemid)) then
         if (getPlayerStorageValue(cid, 32901) <= os.time()) then
         if math.random(0,500) > 255 then
@@ -56,7 +59,7 @@ local target = itemEx
         else
             return false
         end   
-    elseif itemEx.itemid == 231 or itemEx.itemid == 9059 then
+    elseif itemEx.itemid == 231 or itemEx.itemid == 9059 or itemEx.itemid == 22672 then
         local rand = math.random(1, 100)
         if(itemEx.actionid  == 100 and rand <= 20) then
         iEx:transform(489)

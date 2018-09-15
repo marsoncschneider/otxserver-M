@@ -18,7 +18,11 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		player:addItem(rewards[item.uid], 1)
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You have found " .. ItemType(rewards[item.uid]):getName() .. ".")
 		player:addAchievement('Master of the Nexus')
-	else
+		player:addOutfitAddon(288, 2)
+		player:addOutfitAddon(288, 1)
+		player:addOutfitAddon(289, 1)
+		player:addOutfitAddon(289, 2)
+	else		
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "The chest is empty.")
 	end
 	return true

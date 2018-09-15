@@ -1,4 +1,4 @@
-local keywordHandler = KeywordHandler:new()
+ local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
 NpcSystem.parseParameters(npcHandler)
 
@@ -38,13 +38,9 @@ local function creatureSayCallback(cid, type, msg)
 			npcHandler:say("Me can do unbroken but Big Ben want gold 5000 and Big Ben need a lil' time to make it unbroken. Yes or no??", cid)
 			npcHandler.topic[cid] = 9
 		elseif player:getStorageValue(Storage.SweetyCyclops.AmuletStatus) == 1 then
-			if player:getStorageValue(Storage.SweetyCyclops.AmuletTimer) + 24 * 60 * 60 < os.time() then
-				npcHandler:say("Ahh, lil' one wants amulet. Here! Have it! Mighty, mighty amulet lil' one has. Don't know what but mighty, mighty it is!!!", cid)
-				player:addItem(8266, 1)
-				player:setStorageValue(Storage.SweetyCyclops.AmuletStatus, 2)
-			else
-				npcHandler:say("Me need more time!!!", cid)
-			end
+			npcHandler:say("Ahh, lil' one wants amulet. Here! Have it! Mighty, mighty amulet lil' one has. Don't know what but mighty, mighty it is!!!", cid)
+			player:addItem(8266, 1)
+			player:setStorageValue(Storage.SweetyCyclops.AmuletStatus, 2)
 			npcHandler.topic[cid] = 0
 		end
 	elseif msgcontains(msg, "yes") then
@@ -110,13 +106,16 @@ local function creatureSayCallback(cid, type, msg)
 				npcHandler.topic[cid] = 0
 			end
 		elseif npcHandler.topic[cid] == 9 then
-			if player:getItemCount(8262) > 0 and player:getItemCount(8263) > 0 and player:getItemCount(8264) > 0 and player:getItemCount(8265) > 0 and player:getMoney() >= 5000 then
-				if player:removeItem(8262, 1) and player:removeItem(8263, 1) and player:removeItem(8264, 1) and player:removeItem(8265, 1) and player:removeMoney(5000) then
-					player:setStorageValue(Storage.SweetyCyclops.AmuletTimer, os.time())
-					player:setStorageValue(Storage.SweetyCyclops.AmuletStatus, 1)
-					npcHandler:say("Well, well, I do that! Big Ben makes lil' amulet unbroken with big hammer in big hands! No worry! Come back after sun hits the horizon 24 times and ask me for amulet.", cid)
-					npcHandler.topic[cid] = 0
-				end
+			if player:getItemCount(8262) > 0 and player:getItemCount(8263) > 0 and player:getItemCount(8264) > 0 and player:getItemCount(8265) > 0 and player:getMoney() + player:getBankBalance() >= 5000 then
+				player:removeItem(8262, 1)
+				player:removeItem(8263, 1)
+				player:removeItem(8264, 1)
+				player:removeItem(8265, 1)
+				player:removeMoneyNpc(5000)
+				player:setStorageValue(Storage.SweetyCyclops.AmuletTimer, os.time())
+				player:setStorageValue(Storage.SweetyCyclops.AmuletStatus, 1)
+				npcHandler:say("Well, well, I do that! Big Ben makes lil' amulet unbroken with big hammer in big hands! No worry! Come back after sun hits the horizon 24 times and ask me for amulet.", cid)
+				npcHandler.topic[cid] = 0
 			end
 		elseif npcHandler.topic[cid] == 11 then
 			if player:removeItem(5880, 1) then

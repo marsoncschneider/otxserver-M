@@ -1,6 +1,5 @@
 local foods = {
 	[2328] = {6, 'Gulp.'}, -- egg
-	[5678] = {6, 'Gulp.'}, -- egg
 	[2362] = {5, 'Crunch.'}, -- carrot
 	[2666] = {15, 'Munch.'}, -- meat	
 	[23516] = {15, 'Burp.'}, -- Bottle of Glooth Wine
@@ -116,6 +115,8 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	if not food then
 		return false
 	end
+
+	--player:removeCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT)
 
 	local condition = player:getCondition(CONDITION_REGENERATION, CONDITIONID_DEFAULT)
 	if condition and math.floor(condition:getTicks() / 1000 + (food[1] * 12)) >= 1200 then

@@ -10,7 +10,7 @@ function onThink()				npcHandler:onThink()					end
 -- Travel
 local function addTravelKeyword(keyword, text, cost, destination)
 	local travelKeyword = keywordHandler:addKeyword({keyword}, StdModule.say, {npcHandler = npcHandler, text = 'Do you want go to ' .. text .. ' for |TRAVELCOST|?', cost = cost})
-		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = true, cost = cost, destination = destination})
+		travelKeyword:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, cost = cost, destination = destination})
 		travelKeyword:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, text = 'Alright then!', reset = true})
 end
 
@@ -18,7 +18,7 @@ addTravelKeyword('yalahar', 'back to Yalahar', 100, Position(32649, 31292, 6))
 addTravelKeyword('mistrock', 'to the Mistrock', 50, Position(32640, 31439, 7))
 
 -- Kick
-keywordHandler:addKeyword({'kick'}, StdModule.kick, {npcHandler = npcHandler, destination = Position(32561, 31312, 7)})
+--keywordHandler:addKeyword({'kick'}, StdModule.kick, {npcHandler = npcHandler, destination = Position(32561, 31312, 7)})
 
 -- Basic
 keywordHandler:addKeyword({'offer'}, StdModule.say, {npcHandler = npcHandler, text = 'I can take you to {Yalahar} or {Mistrock}!'})

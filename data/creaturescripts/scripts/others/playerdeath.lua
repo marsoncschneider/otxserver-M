@@ -1,5 +1,4 @@
 local deathListEnabled = true
-local maxDeathRecords = 5
 
 function onDeath(player, corpse, killer, mostDamageKiller, unjustified, mostDamageUnjustified)
 	local playerId = player:getId()
@@ -15,7 +14,7 @@ function onDeath(player, corpse, killer, mostDamageKiller, unjustified, mostDama
 	if not deathListEnabled then
 		return
 	end
-	
+
 	local byPlayer = 0
 	local killerName
 	if killer ~= nil then
@@ -63,11 +62,6 @@ function onDeath(player, corpse, killer, mostDamageKiller, unjustified, mostDama
 
 	if resultId ~= false then
 		result.free(resultId)
-	end
-
-	local limit = deathRecords - maxDeathRecords
-	if limit > 0 then
-		db.asyncQuery("DELETE FROM `player_deaths` WHERE `player_id` = " .. playerGuid .. " ORDER BY `time` LIMIT " .. limit)
 	end
 
 	if byPlayer == 1 then

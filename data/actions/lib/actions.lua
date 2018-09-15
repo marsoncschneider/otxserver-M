@@ -85,8 +85,43 @@ local function revertCask(position)
 	end
 end
 
-function destroyItem(player, item, fromPosition, target, toPosition, isHotkey)
-	if type(target) ~= "userdata" or not target:isItem() then
+local cutItems = {  
+    [3794] = 3959, [3795] = 3959, [3796] = 3958, [3797] = 3958, [3798] = 3958, [3799] = 3958, 
+    [1614] = 2251, [1615] = 2251, [1616] = 2251, [1619] = 2251, [1650] = 2253, [1651] = 2253, 
+    [1652] = 2253, [1653] = 2253, [1658] = 2252, [1659] = 2252, [1660] = 2252, [1661] = 2252, 
+    [1666] = 2252, [1667] = 2252, [1668] = 2252, [1669] = 2252, [1670] = 2252, [1671] = 2252, 
+    [1672] = 2252, [1673] = 2252, [1674] = 2253, [1676] = 2252, [1677] = 2253, [1714] = 2251, 
+    [1715] = 2251, [1716] = 2251, [1724] = 2252, [1725] = 2252, [1726] = 2252, [1727] = 2252, 
+    [1728] = 2254, [1729] = 2254, [1730] = 2254, [1731] = 2254, [1732] = 2254, [1733] = 2254, 
+    [1735] = 2254, [1775] = 2250, [2034] = 2252, [4996] = 2252, [2116] = 2254, [2116] = 2254, 
+    [2117] = 2254, [2118] = 2254, [2119] = 2254, [6123] = 2254, [2080] = 2254, [2081] = 2254, 
+    [2082] = 2254, [2083] = 2254, [2084] = 2254, [2085] = 2254, [2093] = 2250, [2094] = 2250, 
+    [2095] = 2250, [2098] = 2250, [2099] = 2250, [2101] = 2250, [2106] = 2250, [2105] = 2250, 
+    [2562] = 2257, [2581] = 2258, [2582] = 2258, [2582] = 2258, [2583] = 2258, [3805] = 6267, 
+    [3806] = 6267, [3807] = 2252, [3808] = 2252, [3809] = 2252, [3810] = 2252, [3811] = 2255, 
+    [3812] = 6267, [3813] = 2252, [3814] = 2252, [3815] = 2252, [3816] = 2252, [3817] = 2252, 
+    [3818] = 2252, [3819] = 2252, [3820] = 2252, [3821] = 2255, [3832] = 2255, [3833] = 2255, 
+    [3834] = 2255, [3835] = 2255, [6356] = 2257, [6357] = 2257, [6358] = 2257, [6359] = 2257, 
+    [6360] = 2257, [6361] = 2257, [6363] = 2257, [6368] = 2250, [6369] = 2250, [6370] = 2250, 
+    [6371] = 2250, [1738] = 2250, [1739] = 2251, [1740] = 2250, [1741] = 2255, [1747] = 2250, 
+    [1748] = 2250, [1749] = 1750, [1750] = 2254, [1751] = 2254, [1752] = 2254, [1753] = 2254, 
+    [1770] = 2251, [1774] = 2250, [6085] = 2254, [7481] = 2251, [7482] = 2251, [7483] = 2251, 
+    [7484] = 2250, [7706] = 2251, [7707] = 2251, [1738] = 2250, [1739] = 2251, [6109] = 2254, 
+    [6110] = 2254, [6111] = 2254, [6112] = 2254, [7538] = 7544, [7539] = 7545, [7585] = 7586
+}
+
+local function containsId(table, id)
+	for i, v in pairs(table) do
+		if (i == id) then
+			return true
+		end
+	end
+
+	return false
+end
+
+function onDestroyItem(player, item, fromPosition, target, toPosition, isHotkey)
+	if not target or type(target) ~= "userdata" or not target:isItem() then
 		return false
 	end
 
@@ -100,7 +135,7 @@ function destroyItem(player, item, fromPosition, target, toPosition, isHotkey)
 	end
 
 	local targetId = target.itemid
-	local destroyId = ItemType(targetId):getDestroyId()
+	local destroyId = cutItems[targetId] or ItemType(targetId):getDestroyId()
 	if destroyId == 0 then
 		return false
 	end
@@ -147,7 +182,7 @@ function onUseRope(player, item, fromPosition, target, toPosition, isHotkey)
 
 	local tile = Tile(toPosition)
 	local ground = tile:getGround()
-	if ground and table.contains(ropeSpots, ground.itemid) or tile:getItemById(14435) then
+	if ground and isInArray(ropeSpots, ground.itemid) or tile:getItemById(14435) then
 		player:teleportTo(toPosition:moveUpstairs())
 		if targetId == 8592 then
 			if player:getStorageValue(Storage.RookgaardTutorialIsland.tutorialHintsStorage) < 22 then
@@ -155,7 +190,7 @@ function onUseRope(player, item, fromPosition, target, toPosition, isHotkey)
 			end
 		end
 		return true
-	elseif table.contains(holeId, targetId) then
+	elseif isInArray(holeId, targetId) then
 		toPosition.z = toPosition.z + 1
 		tile = Tile(toPosition)
 		if tile then
@@ -176,11 +211,11 @@ end
 
 function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 	local targetId, targetActionId = target.itemid, target.actionid
-	if table.contains(holes, targetId) then
+	if isInArray(holes, targetId) then
 		target:transform(targetId + 1)
 		target:decay()
 
-	elseif table.contains({231, 9059}, targetId) then
+	elseif isInArray({231, 9059}, targetId) then
 		local rand = math.random(100)
 		if target.actionid == 100 and rand <= 20 then
 			target:transform(489)
@@ -230,7 +265,7 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 	elseif targetId == 8749 then
 		local coalItem = Tile(Position(32699, 31492, 11)):getItemById(8749)
 		if coalItem then
-			coalItem:remove()
+			coalItem:remove(1)
 			toPosition:sendMagicEffect(CONST_ME_POFF)
 
 			local crucibleItem = Tile(Position(32699, 31494, 11)):getItemById(8642)
@@ -239,7 +274,7 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 			end
 		end
 
-	elseif table.contains({9632, 20230, 17672, 18586, 18580}, targetId) then
+	elseif isInArray({9632, 20230, 17672, 18586, 18580}, targetId) then
 		if player:getStorageValue(Storage.SwampDiggingTimeout) >= os.time() then
 			toPosition:sendMagicEffect(CONST_ME_POFF)
 			return false
@@ -287,32 +322,51 @@ function onUseShovel(player, item, fromPosition, target, toPosition, isHotkey)
 end
 
 function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
+	local stonePos = Position(32648, 32134, 10)
+	if (toPosition == stonePos) then
+		local tile = Tile(stonePos)
+		local stone = tile:getItemById(1285)
+		if (stone) then
+			stone:remove(1)
+			toPosition:sendMagicEffect(CONST_ME_POFF)
+			addEvent(function() Game.createItem(1285, 1, stonePos) end, 20000)
+
+			return true
+		end
+	end
+
 	local targetId, targetActionId = target.itemid, target.actionid
-	if table.contains({354, 355}, targetId) and (target:hasAttribute(ITEM_ATTRIBUTE_UNIQUEID) or target:hasAttribute(ITEM_ATTRIBUTE_ACTIONID)) then
+	if isInArray({354, 355}, targetId) and (target:hasAttribute(ITEM_ATTRIBUTE_UNIQUEID) or target:hasAttribute(ITEM_ATTRIBUTE_ACTIONID)) then
 		target:transform(392)
 		target:decay()
 		toPosition:sendMagicEffect(CONST_ME_POFF)
 
-		--elseif targetId == 23759 then
-		--target:remove()
-		--toPosition:sendMagicEffect(CONST_ME_POFF)
-		--player:addItem(23760, 1)
-		--player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You picked a beautiful lion's mane flower.")
+		elseif targetId == 23759 then
+		target:remove()
+		toPosition:sendMagicEffect(CONST_ME_POFF)
+		player:addItem(23760, 1)
+		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You picked a beautiful lion's mane flower.")
 		
-		-- FIZ ESSE LIXO AQUI
-		elseif target.itemid == 11227 then
-			target:remove(1)
-			toPosition:sendMagicEffect(CONST_ME_POFF)
-			local n = math.random(0,1000)
-			if n <= 7 then
-				player:addItem(2160, 1)
-			elseif n <= 50 then
-				player:addItem(2148, 1)
-			elseif n <= 500 then
-				player:addItem(2152, 1)
-			else 
-				player:addItem(2145, 1)
-			end
+	-- shiny stone refining
+		elseif target.itemid == 11227 then 
+		local chance = math.random(1,100)
+
+		if chance == 1 then
+			player:addItem(2160, 1) -- 1% chance of getting crystal coin
+		elseif chance <= 6 then
+			player:addItem(2148, 1) -- 5% chance of getting gold coin
+		elseif chance <= 51 then
+			player:addItem(2152, 1) -- 45% chance of getting platinum coin
+		else
+			player:addItem(2145, 1) -- 49% chance of getting small diamond
+		end
+		target:getPosition():sendMagicEffect(CONST_ME_BLOCKHIT)
+		target:remove(1)
+
+		elseif targetId == 11227 then
+		target:remove(1)
+		toPosition:sendMagicEffect(CONST_ME_POFF)
+		player:addItem(2152, 10)
 	
 		elseif targetId == 7200 then
 		target:transform(7236)
@@ -384,7 +438,7 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 			if stoneStorage ~= 5 then
 				Game.setStorageValue(GlobalStorage.NaginataStone, math.max(0, stoneStorage) + 1)
 			elseif stoneStorage == 5 then
-				target:remove()
+				target:remove(1)
 				Game.setStorageValue(GlobalStorage.NaginataStone)
 			end
 
@@ -408,7 +462,7 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 		if Tile(Position(32617, 31513, 9)):getItemById(1027) and Tile(Position(32617, 31514, 9)):getItemById(1205) then
 			local rubbleItem = Tile(Position(32619, 31514, 9)):getItemById(5709)
 			if rubbleItem then
-				rubbleItem:remove()
+				rubbleItem:remove(1)
 			end
 		else
 			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You can't remove this pile since it's currently holding up the tunnel.")
@@ -420,11 +474,11 @@ function onUsePick(player, item, fromPosition, target, toPosition, isHotkey)
 			return false
 		end
 
-		target:remove()
+		target:remove(1)
 
 		local stoneItem = Tile(toPosition):getItemById(1304)
 		if stoneItem then
-			stoneItem:remove()
+			stoneItem:remove(1)
 		end
 
 		iterateArea(
@@ -479,23 +533,23 @@ end
 	
 function onUseMachete(player, item, fromPosition, target, toPosition, isHotkey)
 	local targetId = target.itemid
-	if table.contains(JUNGLE_GRASS, targetId) then
+	if isInArray(JUNGLE_GRASS, targetId) then
 		target:transform(targetId == 19433 and 19431 or targetId - 1)
 		target:decay()
 		return true
 	end
 
-	if table.contains(WILD_GROWTH, targetId) then
+	if isInArray(WILD_GROWTH, targetId) then
 		toPosition:sendMagicEffect(CONST_ME_POFF)
 		target:remove()
 		return true
 	end
 
-	return destroyItem(player, item, fromPosition, target, toPosition, isHotkey)
+	return onDestroyItem(player, item, fromPosition, target, toPosition, isHotkey)
 end
 
 function onUseCrowbar(player, item, fromPosition, target, toPosition, isHotkey)
-	if not table.contains({2416, 10515}, item.itemid) then
+	if not isInArray({2416, 10515}, item.itemid) then
 		return false
 	end
 
@@ -504,7 +558,7 @@ function onUseCrowbar(player, item, fromPosition, target, toPosition, isHotkey)
 	-- In Service Of Yalahar Quest
 	if targetUniqueId == 3071 then
 		if player:getStorageValue(Storage.InServiceofYalahar.SewerPipe01) < 1 then
-			doSetMonsterOutfit(player, 'skeleton', 3 * 1000)
+--			doSetMonsterOutfit(player, 'skeleton', 3 * 1000)
 			fromPosition:sendMagicEffect(CONST_ME_ENERGYHIT)
 			player:setStorageValue(Storage.InServiceofYalahar.SewerPipe01, 1)
 			player:setStorageValue(Storage.InServiceofYalahar.Mission01, player:getStorageValue(Storage.InServiceofYalahar.Mission01) + 1) -- StorageValue for Questlog 'Mission 01: Something Rotten'
@@ -542,7 +596,7 @@ function onUseCrowbar(player, item, fromPosition, target, toPosition, isHotkey)
 
 	elseif targetUniqueId == 3074 then
 		if player:getStorageValue(Storage.InServiceofYalahar.SewerPipe04) < 1 then
-			doSetMonsterOutfit(player, 'bog raider', 5 * 1000)
+--			doSetMonsterOutfit(player, 'bog raider', 5 * 1000)
 			player:say('You have used the crowbar on a knot.', TALKTYPE_MONSTER_SAY)
 			player:setStorageValue(Storage.InServiceofYalahar.SewerPipe04, 1)
 			player:setStorageValue(Storage.InServiceofYalahar.Mission01, player:getStorageValue(Storage.InServiceofYalahar.Mission01) + 1) -- StorageValue for Questlog 'Mission 01: Something Rotten'
@@ -588,23 +642,18 @@ end
 
 function onUseSpoon(player, item, fromPosition, target, toPosition, isHotkey)
 	local targetId = target.itemid
-	--The Ice Islands Quest and What a foolish Quest - Mission 8 (Sulphur)
-	if targetId == 388 or target.actionid == 14031 then
+
+	--The Ice Islands Quest
+	if targetId == 388 then
 		if player:getStorageValue(Storage.TheIceIslands.Questline) >= 21 then
 			if player:getStorageValue(Storage.TheIceIslands.SulphurLava) < 1 then
-				player:addItem(8301, 1)
+				player:addItem(7247, 1) -- fine sulphur
 				player:setStorageValue(Storage.TheIceIslands.SulphurLava, 1)
 				toPosition:sendMagicEffect(CONST_ME_MAGIC_RED)
 				player:say('You retrive a fine sulphur from a lava hole.', TALKTYPE_MONSTER_SAY)
 			end
-		elseif player:getStorageValue(Storage.WhatAFoolishQuest.Questline) ~= 21
-				or player:getStorageValue(Storage.WhatAFoolishQuest.InflammableSulphur) == 1 then
-			return false
 		end
-		player:setStorageValue(Storage.WhatAFoolishQuest.InflammableSulphur, 1)
-		player:addItem(8204, 1)
-		toPosition:sendMagicEffect(CONST_ME_YELLOW_RINGS)
-		
+
 	elseif targetId == 4184 then
 		if player:getStorageValue(Storage.TheIceIslands.Questline) >= 21 then
 			if player:getStorageValue(Storage.TheIceIslands.SporesMushroom) < 1 then
@@ -614,19 +663,31 @@ function onUseSpoon(player, item, fromPosition, target, toPosition, isHotkey)
 				player:say('You retrive spores from a mushroom.', TALKTYPE_MONSTER_SAY)
 			end
 		end
+
+	-- What a foolish Quest - Mission 8 (Sulphur)
+	elseif targetId == 8573 or targetId == 388 then
+		if player:getStorageValue(Storage.WhatAFoolishQuest.Questline) ~= 21
+				or player:getStorageValue(Storage.WhatAFoolishQuest.InflammableSulphur) == 1 then
+			return false
+		end
+
+		player:setStorageValue(Storage.WhatAFoolishQuest.InflammableSulphur, 1)
+		player:addItem(8204, 1) -- easily inflammable sulphur
+		toPosition:sendMagicEffect(CONST_ME_YELLOW_RINGS)
 	else
 		return false
 	end
+
 	return true
 end
 
 function onUseScythe(player, item, fromPosition, target, toPosition, isHotkey)
-	if not table.contains({2550, 10513}, item.itemid) then
+	if not isInArray({2550, 10513}, item.itemid) then
 		return false
 	end
 	
-	if target.itemid == 5464 then	
-		target:transform(5463)	
+	if target.itemid == 5465 then
+		target:transform(5464)
 		target:decay()
 		Game.createItem(5467, 1, toPosition)
 		return true
@@ -639,11 +700,11 @@ function onUseScythe(player, item, fromPosition, target, toPosition, isHotkey)
 		return true
 	end
 
-	return destroyItem(player, item, fromPosition, target, toPosition, isHotkey)
+	return onDestroyItem(player, item, fromPosition, target, toPosition, isHotkey)
 end
 
 function onUseKitchenKnife(player, item, fromPosition, target, toPosition, isHotkey)
-	if not table.contains({2566, 10511, 10515}, item.itemid) then
+	if not isInArray({2566, 10511, 10515}, item.itemid) then
 		return false
 	end
 
@@ -701,7 +762,7 @@ function onUseKitchenKnife(player, item, fromPosition, target, toPosition, isHot
 		if toPosition.x == 32349 and toPosition.y == 32361 and toPosition.z == 7 then
 			player:addItem(7476, 1)
 			player:say('The stubborn flower has ruined your knife but at least you got it.', TALKTYPE_MONSTER_SAY, false, player, toPosition)
-			item:remove()
+			item:remove(1)
 		else
 			player:say('This flower is too pathetic.', TALKTYPE_MONSTER_SAY, false, player, toPosition)
 		end
@@ -729,7 +790,7 @@ function onUseKitchenKnife(player, item, fromPosition, target, toPosition, isHot
 		player:addItem(8109, 1)
 		toPosition:sendMagicEffect(CONST_ME_BLOCKHIT)
 
-	elseif table.contains(fruits, targetId) and player:removeItem(6278, 1) then
+	elseif isInArray(fruits, targetId) and player:removeItem(6278, 1) then
 		target:remove(1)
 		player:addItem(6279, 1)
 		player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)

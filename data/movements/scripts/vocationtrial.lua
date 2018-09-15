@@ -224,7 +224,7 @@ local centerPosition = Position(32065, 31891, 5)
 function onStepIn(creature, item, position, fromPosition)
     if creature:isPlayer() then
         local player = Player(creature)
-        local toVocation = Tile(position):getGround():getActionId() - 2000
+        local toVocation = Tile(position):getGround():getActionId() - 20000
         local fromVocation = player:getVocation():getId()
         if fromVocation ~= toVocation and (centerPosition:getDistance(fromPosition) < centerPosition:getDistance(position)) then
             getFirstItems(player)

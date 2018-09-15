@@ -20,7 +20,7 @@ local function creatureSayCallback(cid, type, msg)
 	elseif msgcontains(msg, 'mission') then
 		if player:getStorageValue(Storage.TibiaTales.TheExterminator) == -1 then
 			npcHandler:say({
-				'Oh, |PLAYERNAME|, thank god you came to me. Last night, I had a vision about an upcoming plague here in Carlin. ...',
+				'Oh |PLAYERNAME|, thank god you came to me. Last night, I had a vision about an upcoming plague here in Carlin. ...',
 				'It will originate from slimes that will swarm out of the sewers and infect every citizen with a deadly disease. Are you willing to help me save Carlin?'
 			}, cid)
 			npcHandler.topic[cid] = 2
@@ -38,7 +38,7 @@ local function creatureSayCallback(cid, type, msg)
 		end
 	elseif msgcontains(msg, "yes") then
 		if npcHandler.topic[cid] == 1 then
-			if not player:removeMoney(50) then
+			if not player:removeMoneyNpc(50) then
 				npcHandler:say("You don't have enough money.", cid)
 				return true
 			end

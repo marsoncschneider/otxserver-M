@@ -5,7 +5,6 @@
 	<parameters>
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="
-			skull remover,11144,8000000;
 			rusty,9930,100;
 			ham,2671,50" />
 		<parameter key="shop_sellable" value="		

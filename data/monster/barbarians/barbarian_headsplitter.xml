@@ -45,10 +45,10 @@
 		<voice sentence="Die! Die! Die!" />
 	</voices>
 	<loot>
-		<item id="2050" chance="61500" /> <!-- torch -->
+		<item id="2050" chance="61500" /><!-- torch -->
 		<item name="gold coin" countmax="30" chance="60000" />
 		<item name="life ring" chance="230" />
-		<item name="skull of Ratha" chance="3270" />
+
 		<item name="knife" chance="15500" />
 		<item name="brass helmet" chance="20360" />
 		<item name="viking helmet" chance="5080" />

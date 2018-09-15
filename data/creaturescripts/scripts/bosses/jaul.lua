@@ -19,7 +19,7 @@ function onKill(cid, target)
     return true
 end
 
--- REMOVE THE PLAYER IF YOU EXCEED THE TIME
+-- REMOVE O JOGADOR SE EXCEDER O TEMPO
 function removePlayerJaul()
 
 for x = room.fromx, room.tox do
@@ -40,7 +40,7 @@ end
 return TRUE
 end
 
--- TURN THE STORAGE TO NORMAL
+-- VOLTA O STORAGE AO NORMAL
 function storageJaulDelay()
     setGlobalStorageValue(BOSS_GLOBAL_STORAGE + 1000, -1)
     doSetItemActionId(UID_TELEPORT, 8000)

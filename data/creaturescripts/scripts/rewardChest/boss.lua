@@ -1,11 +1,3 @@
-function onCreatureAppear(self, creature)
-	if self == creature then
-		if self:getType():isRewardBoss() then
-			self:setReward(true)
-		end
-	end
-end
-
 local function pushSeparated(buffer, sep, ...)
 	local argv = {...}
 	local argc = #argv
@@ -23,15 +15,14 @@ local function insertItems(buffer, info, parent, items)
 		if _ ~= 1 or parent > 100 then
 			table.insert(buffer, ",")
 		end
-
 		info.running = info.running + 1
-		table.insert(buffer, "(")
+		table.insert(buffer, "(")        
 		pushSeparated(buffer, ",", info.playerGuid, parent, info.running, item:getId(), item:getSubType(), db.escapeBlob(item:serializeAttributes()))
 		table.insert(buffer, ")")
 
 		if item:isContainer() then
 			local size = item:getSize()
-			if size > 0 then
+			if size > 0 then              
 				local subItems = {}
 				for i = 1, size do
 					table.insert(subItems, item:getItem(i - 1))
@@ -48,8 +39,8 @@ local function insertRewardItems(playerGuid, timestamp, itemList)
 	db.asyncStoreQuery('SELECT `pid`, `sid` FROM `player_rewards` WHERE player_id = ' .. playerGuid .. ' ORDER BY `sid` ASC;', 
 		function(query)
 			local lastReward = 0
-			local lastStoreId
-			if (query) then
+			local lastStoreId   
+			if(query) then             
 				repeat
 					local sid = result.getDataInt(query, 'sid')
 					local pid = result.getDataInt(query, 'pid')
@@ -101,6 +92,24 @@ local function getPlayerStats(bossId, playerGuid, autocreate)
 	return ret
 end
 
+local function tableContains(table, value)
+	for i = 1, #table do
+		if (table[i] == value) then
+			return true
+		end
+	end
+
+	return nil
+end
+
+local uniqueDrops = {
+	[5903] = 1,
+	[2522] = 1,
+	[15434] = 1,
+	[15436] = 1,
+	[15435] = 1
+}
+
 function onDeath(creature, corpse, killer, mostDamageKiller, lastHitUnjustified, mostDamageUnjustified)
 	local monsterType = creature:getType()
 	if monsterType:isRewardBoss() then -- Make sure it is a boss
@@ -128,7 +137,7 @@ function onDeath(creature, corpse, killer, mostDamageKiller, lastHitUnjustified,
 				damageOut = damageOut, 
 				damageIn = damageIn,
 				healing = healing,
-			})
+			})            
 		end
 
 		local participants = 0
@@ -142,7 +151,8 @@ function onDeath(creature, corpse, killer, mostDamageKiller, lastHitUnjustified,
 		table.sort(scores, function(a, b) return a.score > b.score end)
 
 		local expectedScore = 1 / participants
-
+		local removeReward = {}
+		local playerLoot = nil
 		for _, con in ipairs(scores) do
 			local reward, stamina -- ignoring stamina for now because I heard you receive rewards even when it's depleted   
 			if con.player then   
@@ -152,16 +162,28 @@ function onDeath(creature, corpse, killer, mostDamageKiller, lastHitUnjustified,
 				stamina = con.stamina or 0
 			end
 
-			local playerLoot
 			if --[[stamina > 840 and]] con.score ~= 0 then
-				local lootFactor = 1.000
+				local lootFactor = 1
 				lootFactor = lootFactor / participants ^ (1 / 3) -- tone down the loot a notch if there are many participants
 				lootFactor = lootFactor * (1 + lootFactor) ^ (con.score / expectedScore) -- increase the loot multiplicatively by how many times the player surpassed the expected score
-				playerLoot = monsterType:getBossReward(lootFactor, _ == 1)
+				playerLoot = monsterType:getBossReward(lootFactor, true)
 
 				if con.player then
 					for _, p in ipairs(playerLoot) do
-						reward:addItem(p[1], p[2])
+						if (uniqueDrops[p[1]]) then
+							if (not tableContains(removeReward, p[1])) then
+								reward:addItem(p[1], uniqueDrops[p[1]])
+								removeReward[#removeReward+1] = p[1]
+							end
+						else
+							reward:addItem(p[1], p[2])
+						end
+					end
+				else
+					for _, p in ipairs(playerLoot) do
+						if (tableContains(removeReward, p[1])) then
+							playerLoot[_] = nil
+						end
 					end
 				end
 			end
@@ -193,14 +215,13 @@ function onThink(creature, interval)
 	for _, player in pairs(info) do
 		player.active = false
 	end
-
 	-- Set all players in boss' target list as active in the fight
 	local targets = creature:getTargetList()
 	for _, target in ipairs(targets) do
 		if target:isPlayer() then
 			local stats = getPlayerStats(bossId, target:getGuid(), true)
 			stats.playerId = target:getId() -- Update player id
-			stats.active = true
+			stats.active = true            
 		end
 	end
 end

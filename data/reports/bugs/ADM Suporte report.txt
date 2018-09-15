@@ -1,6 +1,0 @@
-------------------------------
-Name: ADM Suporte [Player Position: 32349, 32208, 7]
-Comment: /r
-------------------------------
-Name: ADM Suporte [Map position: 32348, 32207, 7] [Player Position: 32348, 32208, 7]
-Comment: /r

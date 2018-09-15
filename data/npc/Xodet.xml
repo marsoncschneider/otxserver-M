@@ -13,11 +13,11 @@
 			disintegrate rune,2310,26;
 			holy missile rune,2295,16;
 			icicle rune,2271,30;
-			paralyze rune,2278,700;
+			paralyze rune,2278,500;
 			wild growth rune,2269,160;			
 		    avalanche rune,2308,46;
-			avalanche rune,2293,116;
-			avalanche rune,2274,45;
+			avalanche rune,2293,55;
+			avalanche rune,2274,25;
 			blank rune,2260,10;
 			chameleon rune,2291,210;
 			convince creature rune,2290,80;
@@ -26,7 +26,7 @@
 			energy field rune,2277,38;
 			energy wall rune,2279,85;
 			explosion rune,2313,31;
-			fire bomb rune,2305,117;
+			fire bomb rune,2305,55;
 			fire field rune,2301,28;
 			fire wall rune,2303,61;
 			great fireball rune,2304,45;

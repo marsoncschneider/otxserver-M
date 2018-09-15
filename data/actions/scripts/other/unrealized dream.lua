@@ -1,6 +1,6 @@
 function onUse(cid, item, frompos, item2, topos)
 
-presente = math.random(1,20)
+presente = math.random(1,22)
 pos = getPlayerPosition(cid)
 
 --surpriese bag--
@@ -97,6 +97,16 @@ doRemoveItem(item.uid,1)
 elseif presente == 20 then
 doSendMagicEffect(pos,26)
 doPlayerAddItem(cid,22607,1) -- Golden Prison Key
+doRemoveItem(item.uid,1)
+
+elseif presente == 21 then
+doSendMagicEffect(pos,26)
+doPlayerAddItem(cid,22396,1) -- Cluster of Solace
+doRemoveItem(item.uid,1)
+
+elseif presente == 22 then
+doSendMagicEffect(pos,26)
+doPlayerAddItem(cid,7735,1) -- Spellwand
 doRemoveItem(item.uid,1)
 end
 

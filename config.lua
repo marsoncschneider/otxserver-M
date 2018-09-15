@@ -22,26 +22,28 @@ orangeSkullDuration = 7
 
 -- Connection Config
 -- NOTE: maxPlayers set to 0 means no limit
-ip = "hellbra.com"
+ip = "127.0.0.1"
 bindOnlyGlobalAddress = false
 loginProtocolPort = 7171
 gameProtocolPort = 7172
 statusProtocolPort = 7171
 maxPlayers = 0
-motd = "Bem-vindo ao HellBRA!"
-onePlayerOnlinePerAccount = false
+motd = "Welcome to The OTXServer Global!"
+onePlayerOnlinePerAccount = true
 allowClones = false
-serverName = "HellBRA"
+serverName = "OTXServer-Global"
 statusTimeout = 5 * 1000
 replaceKickOnLogin = true
 maxPacketsPerSecond = 25
 
 -- Version Manual
-clientVersionMin = 1145
-clientVersionMax = 1148
-clientVersionStr = "11.49"
+clientVersionMin = 1100
+clientVersionMax = 1157
+clientVersionStr = "11.57"
 
 -- Depot Limit
+freeDepotLimit = 2000
+premiumDepotLimit = 10000
 depotBoxes = 17
 
 -- GameStore
@@ -63,7 +65,7 @@ deathLosePercent = -1
 -- Houses
 -- NOTE: set housePriceEachSQM to -1 to disable the ingame buy house functionality
 housePriceEachSQM = 1000
-houseRentPeriod = "weekly"
+houseRentPeriod = "daily"
 
 -- Item Usage
 timeBetweenActions = 200
@@ -82,8 +84,8 @@ maxMarketOffersAtATimePerPlayer = 100
 
 -- MySQL
 mysqlHost = "127.0.0.1"
-mysqlUser = "%y3ez87j9%"
-mysqlPass = "%3488%#4889"
+mysqlUser = "root"
+mysqlPass = ""
 mysqlDatabase = "global"
 mysqlPort = 3306
 mysqlSock = ""
@@ -92,23 +94,23 @@ passwordType = "sha1"
 -- Misc.
 allowChangeOutfit = true
 freePremium = true
-kickIdlePlayerAfterMinutes = 150
-idleWarningTime = 100 * 60 * 1000
-idleKickTime = 150 * 60 * 1000
+kickIdlePlayerAfterMinutes = 15
+idleWarningTime = 10 * 60 * 1000
+idleKickTime = 15 * 60 * 1000
 maxMessageBuffer = 4
-emoteSpells = true
+emoteSpells = false
 classicEquipmentSlots = false
 allowWalkthrough = true
 coinPacketSize = 1
-coinImagesURL = "http://hellbra.com/store/"
+coinImagesURL = "http://localhost/images/store/"
 classicAttackSpeed = false
 
 -- Rates
 -- NOTE: rateExp is not used if you have enabled stages in data/XML/stages.xml
 rateExp = 1
-rateSkill = 12
-rateLoot = 5
-rateMagic = 4
+rateSkill = 50
+rateLoot = 3
+rateMagic = 25
 rateSpawn = 1
 
 -- Monster rates
@@ -134,7 +136,7 @@ defaultPriority = "high"
 startupDatabaseOptimization = true
 
 -- Status server information
-ownerName = "Hellbra.com"
-ownerEmail = "marson_sn@hotmail.com"
-url = ""
+ownerName = "Malucooo"
+ownerEmail = "e_nunes@live.com"
+url = "http://www.facebook.com/erick.nunes.75"
 location = "Brazil"

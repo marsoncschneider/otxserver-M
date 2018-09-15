@@ -1,7 +1,7 @@
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 if Player(cid) then
 Item(item.uid):remove(1)
-		 doPlayerSendTextMessage(cid, MESSAGE_EVENT_ADVANCE ,"Re-Login to activate your outfit or mount.")
+		 doPlayerSendTextMessage(cid,19,"Relogue para ativar seu outfit ou montaria.")
 		 end
 		return true
 end

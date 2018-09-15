@@ -10,7 +10,7 @@
 		<parameter key="message_walkaway" value="See you, |PLAYERNAME|." />
 	 <parameter key="shop_buyable" value="
 		animate dead rune,2316,375;
-		avalanche rune,2274,45;
+		avalanche rune,2274,25;
 		chameleon rune,2291,210;
 		convince creature rune,2290,80;
 		cure poison rune,2266,65;
@@ -20,25 +20,25 @@
 		energy field rune,2277,38;
 		energy wall rune,2279,85;
 		explosion rune,2313,31;
-		fire bomb rune,2305,117;
+		fire bomb rune,2305,55;
 		fire field rune,2301,28;
 		fire wall rune,2303,61;
 		great fireball rune,2304,45;
 		Hailstorm Rod,2183,15000;
 		holy missile rune,2295,16;
 		icicle rune,2271,30;
-		magic wall rune,2293,116;
+		magic wall rune,2293,55;
 		moonlight rod,2186,1000;
 		necrotic rod,2185,5000;
 		northwind rod,8911,7500;
-		paralyze rune,2278,700;
+		paralyze rune,2278,500;
 		poison field rune,2285,21;
 		poison wall rune,2289,52;
 		snakebite rod,2182,500;
 		soulfire rune,2308,46;
 		springsprout rod,8912,18000;
 		Stone Shower Rune,2288,37;
-		sudden death rune,2268,108;
+		sudden death rune,2268,50;
 		terra rod,2181,10000;
 		Thunderstorm Rune,2315,37;
 		Ultimate Healing Rune,2273,175;

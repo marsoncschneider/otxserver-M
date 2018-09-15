@@ -1,6 +1,6 @@
 local config = {
         executeInterval = 48,
-        minimumLevel = 150,
+        minimumLevel = 100,
         membersNeeded = 10,
         minimumDifferentIps = 10,
         pointAmount = 15
@@ -21,9 +21,15 @@ local function getValidAccounts(guild)
         return accounts
 end
 
-function onSay(cid, words, param)
-        local player = Player(cid)
-        local guild = player:getGuild()
+function onSay(player, words, param)
+        
+		local guild = player:getGuild()	
+		if (player:getVocation():getId() == 0) then 		
+			player:getPosition():sendMagicEffect(CONST_ME_POFF)
+            player:sendTextMessage(MESSAGE_STATUS_CONSOLE_ORANGE, 'You cant use this command on Rookgaard.')
+			return false
+		end
+	
         if not guild or player:getGuildLevel() < 3 then
                 player:getPosition():sendMagicEffect(CONST_ME_POFF)
                 player:sendTextMessage(MESSAGE_STATUS_CONSOLE_ORANGE, 'Only guild leader can request points.')
@@ -80,7 +86,7 @@ function onSay(cid, words, param)
                 db.query('UPDATE `accounts` SET `guild_points` = `guild_points` + ' .. config.pointAmount .. ', `guild_points_stats` = ' .. os.time() .. ' WHERE `id` IN (' .. table.concat(validAccounts, ',') .. ');')
                 for i = 1, #members do
                         local member = members[i]
-                        if table.contains(validAccounts, member:getAccountId()) then
+                        if isInArray(validAccounts, member:getAccountId()) then
                                 member:sendTextMessage(MESSAGE_INFO_DESCR, 'You received ' .. config.pointAmount .. ' guild points.')
                         end
                 end

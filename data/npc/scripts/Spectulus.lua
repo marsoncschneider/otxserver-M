@@ -29,9 +29,30 @@ local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	end
-
+ 
 	local player = Player(cid)
-	if msgcontains(msg, 'mission') then
+	
+	if msgcontains(msg, 'research') then
+		local qStorage = player:getStorageValue(Storage.spiritHuntersQuest.missionUm)
+		local tombsStorage = player:getStorageValue(Storage.spiritHuntersQuest.tombsUse)
+		if qStorage == -1 then 
+			if npcHandler.topic[cid] == 17 then
+				npcHandler:say({"Alright. Let\'s go. At first we need to find out more about ghosts in general. ...", "I still need more information and values to properly calibrate the magical orientation of orange and turquoise sparkle attractors which we will need to actually contain ghost-emissions. ...", "So are you in?"}, cid)
+				npcHandler.topic[cid] = 18				
+			else
+				npcHandler:say({"I fine-tuned another set of devices. You are the lucky candidate to first lay eyes on some revolutionary new concepts. ...", "Are you ready to help science once again?"}, cid)
+				npcHandler.topic[cid] = 12
+			end
+		elseif qStorage == 1 and tombsStorage >= 2 then
+			npcHandler:say('You are back, how did the measurements go? Did you recognise anything of interest?', cid)	
+			npcHandler.topic[cid] = 19
+		elseif qStorage == 2 then			  
+			npcHandler:say({"Alright, now that we have enough results, the analysing can start. While I do this, I will need you to test the magically enhanced cage Sinclair developed to contain spirits effectively. ...",
+							"Take the spirit cage from him and use it on the essence of a common ghost. Its essence will then be sucked into the cage and we can study him right here in the safety of the academy walls."
+						}, cid)
+			npcHandler.topic[cid] = 0
+		end				
+	elseif msgcontains(msg, 'mission') then
 		local cStorage = player:getStorageValue(Storage.SeaOfLightQuest.Questline)
 		if cStorage == -1 then
 			npcHandler:say('Alright, you look bright enough to fulfil my requests - at least you do not fall asleep while standing there. Ahem... I heard about a certain inventor who created a {magic device} to actually sail the {sea of light}. Will you help me find him?', cid)
@@ -91,6 +112,7 @@ local function creatureSayCallback(cid, type, msg)
 			npcHandler.topic[cid] = 7
 		end
 	elseif msgcontains(msg, 'yes') then
+		
 		if npcHandler.topic[cid] == 1 then
 			player:addExperience(100, true)
 			player:setStorageValue(Storage.SeaOfLightQuest.Questline, 1)
@@ -145,6 +167,39 @@ local function creatureSayCallback(cid, type, msg)
 				'...I need some time to get over this. What? Oh, yes you can take the remains if you like. Just get it out of my sight.'
 			}, cid)
 			addEvent(releasePlayer, 1000, cid)
+		elseif npcHandler.topic[cid] == 12 then
+			npcHandler:say('Of course you are. And here we go. I have to ask some questions first. One: You aint afraid of no ghost, right?', cid)
+			npcHandler.topic[cid] = 13
+		elseif npcHandler.topic[cid] == 13 then
+			npcHandler:say('Good. Two: You know that ghosts exist and/or have found and/or defeated one or more of them?', cid)
+			npcHandler.topic[cid] = 14
+		elseif npcHandler.topic[cid] == 14 then
+			npcHandler:say({"Alright. Let\'s see - yes. ...","Three: You can explain at least three of the following terms, infestations, collective apparitions, ectoplasmic segregations, ecto-magical field phenomena, neuro-speculative sub-conscious awareness of spirits, ghosts and/or ghasts."},cid)
+			npcHandler.topic[cid] = 15
+		elseif npcHandler.topic[cid] == 16 then
+			npcHandler:say({"I recently teamed up with a fellow scientist and friend Sinclair, who is also more of an explorer than me, to combine our discoveries in the field of complex phenomena not that easily to describe just by today\'s state of magic. ...","Of course I am talking about ghosts. I know, I know. Hard to believe in those times of highly advanced magic we live in. Yet there are some things, we fail to explain. ...","And that is exactly where we come in! Oh, and you of course. We will not only explain them - we will \'remove\' them. Just tell me whenever you are ready to help us with our research."},cid)
+			npcHandler.topic[cid] = 17
+		elseif npcHandler.topic[cid] == 18 then
+			npcHandler:say('Good. Take this wand - we call it a spirit meter - and go to the graveyard I have marked on your map and take a few measurements on the graves.', cid)
+			player:setStorageValue(Storage.spiritHuntersQuest.missionUm, 1)
+			player:addItem(12670, 1)
+			npcHandler.topic[cid] = 0
+		elseif npcHandler.topic[cid] == 19 then
+			npcHandler:say('Let me see the spirit meter. Hmmm... those are grave news you bring - uhm, you know what I mean. But this is awesome! Now I know for sure that the calibration is only some short bursts of magically enhanced energy away.', cid)
+			player:addExperience(500, true)
+			player:addItem(2152, 5)
+			addEvent(releasePlayer, 1000, cid)
+			player:setStorageValue(Storage.spiritHuntersQuest.missionUm, 2)
+			npcHandler.topic[cid] = 0
+		end
+	
+	elseif msgcontains(msg, 'collective apparitions') then
+		local qStorage = player:getStorageValue(Storage.spiritHuntersQuest.missionUm)
+		if qStorage == -1 then
+			if npcHandler.topic[cid] == 15 then
+				npcHandler:say('Ah well, let\'s forget about the scientific details - you will do just fine as long as you do exactly what I say. Ready for me to go on with your task?', cid)
+				npcHandler.topic[cid] = 16
+			end
 		end
 	elseif msgcontains(msg, 'no') then
 		if npcHandler.topic[cid] == 1 then
@@ -163,6 +218,7 @@ local function creatureSayCallback(cid, type, msg)
 			npcHandler:say('Hmpf. *mumbles*', cid)
 		end
 		npcHandler.topic[cid] = 0
+	
 	end
 	return true
 end

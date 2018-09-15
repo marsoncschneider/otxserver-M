@@ -17,6 +17,7 @@
 		<flag runonhealth="0" />
 	</flags>
 	<attacks>
+		
 		<attack name="energy" interval="2000" chance="15" length="8" spread="0" target="1" min="-100" max="-400">
 			<attribute key="areaEffect" value="yellowenergy" />
 		</attack>
@@ -51,4 +52,5 @@
 		<voice sentence="HAHAHAHA DO YOU WANT TO AMUSE YOUR MASTER?" />
 		<voice sentence="NOW YOU WILL SURRENDER!" />
 	</voices>
+	
 </monster>

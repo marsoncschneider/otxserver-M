@@ -1,12 +1,5 @@
 dofile('data/lib/libs.lua')
 
--- AutoLoot config
-AUTO_LOOT_MAX_ITEMS = 20
--- Reserved storage
-AUTOLOOT_STORAGE_START = 10003
-AUTOLOOT_STORAGE_END = AUTOLOOT_STORAGE_START + AUTO_LOOT_MAX_ITEMS
--- AutoLoot config end
-
 NOT_MOVEABLE_ACTION = 8000
 PARTY_PROTECTION = 1 -- Set to 0 to disable.
 ADVANCED_SECURE_MODE = 1 -- Set to 0 to disable.
@@ -14,7 +7,7 @@ ADVANCED_SECURE_MODE = 1 -- Set to 0 to disable.
 STORAGEVALUE_PROMOTION = 30018
 
 
-ropeSpots = {384, 418, 8278, 8592, 13189, 14435, 14436, 15635, 19518, 24621, 24622, 24623, 24624, 26019}
+ropeSpots = {384, 418, 8278, 8592, 13189, 14435, 14436, 15635, 19518, 26019, 24621, 24622, 24623, 24624}
 
 doors = {
 	[1209] = 1211, [1210] = 1211, [1212] = 1214, [1213] = 1214, [1219] = 1220, [1221] = 1222, [1231] = 1233, [1232] = 1233, [1234] = 1236,
@@ -76,6 +69,13 @@ levelDoors = {
 
 keys = {2086, 2087, 2088, 2089, 2090, 2091, 2092, 10032}
 
+--[ Impact Analyser ]--
+updateInterval = 2 --every 2 seconds
+-- Healing
+healingImpact = {} -- global table to insert data
+-- Damage
+damageImpact = {} -- global table to insert data
+ 
 function doCreatureSayWithRadius(cid, text, type, radiusx, radiusy, position)
 	if not position then
 		position = Creature(cid):getPosition()

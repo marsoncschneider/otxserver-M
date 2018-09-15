@@ -14,18 +14,17 @@
 		<parameter key="message_sendtrade" value="Of course, just browse through my wares. Or do you want to look only at {potions}, {wands} or {runes}?" />
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="
-		
 			ultimate mp,26029,350;
 			Supreme Health Potion,26031,500;
 			ultimate spirit potion,26030,350;
-great health potion,7591,190;
-great mana potion,7590,120;
-great spirit potion,8472,190;
-health potion,7618,45;
-mana potion,7620,50;
-strong health potion,7588,100;
-strong mana potion,7589,80;
-ultimate health potion,8473,310" />
+			great health potion,7591,190;
+			great mana potion,7590,120;
+			great spirit potion,8472,190;
+			health potion,7618,45;
+			mana potion,7620,50;
+			strong health potion,7588,100;
+			strong mana potion,7589,80;
+			ultimate health potion,8473,310" />
 
 		<parameter key="shop_sellable" value="
 		Cowbell,23575,210;
@@ -43,6 +42,9 @@ ultimate health potion,8473,310" />
 		Necromantic Rust,23567,390;
 		Poisoned Fang,23566,130;
 		Slime Heart,23565,160;
+		Seacrest Pearl, 24116, 400;
+		Seacrest Scale, 24169, 150;
+		Seacrest Hair, 24170, 260;
 		Slimy Leaf Tentacle,23568,320;		
 		vial,2006,5;" />
 	</parameters>

@@ -52,7 +52,7 @@ local function creatureSayCallback(cid, type, msg)
 		end
 		elseif msgcontains(msg, "task") then		
 		-- AQUI 
-		if player:getStorageValue(Storage.KillingInTheNameOf.BudrikMinos) <= 0 and player:getStorageValue(Storage.toOutfoxAFoxQuest) == 2 then
+		if player:getStorageValue(Storage.KillingInTheNameOf.BudrikMinos) <= 0 then
 			npcHandler:say({
 				"I am so angry I could spit grit! That damn Horned Fox and his attacks! Let's show those bull-heads that they have messed with the wrong people....",
 				"I want you to kill {5000 minotaurs} - no matter where - for me and all the dwarfs of Kazordoon! Are you willing to do that?"

@@ -22,7 +22,7 @@ local function creatureSayCallback(cid, type, msg)
 			player:setStorageValue(Storage.OutfitQuest.DruidBodyAddon, 1)
 			npcHandler.topic[cid] = 0
 		end
-	elseif msgcontains(msg, "paws") then
+	elseif msgcontains(msg, "paws") or msgcontains(msg, "bear paws") then
 		if player:getStorageValue(Storage.OutfitQuest.DruidBodyAddon) == 1 then
 			npcHandler:say("Have you brought 50 bear paws and 50 wolf paws?", cid)
 			npcHandler.topic[cid] = 1

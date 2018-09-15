@@ -1,6 +1,6 @@
 
 
-local posdotp = {x= 33104, y=31908, z=10} -- Position that the tp will be created (Eh the tp that leads to the room of the Deathstriker)
+local posdotp = {x= 33104, y=31908, z=10} -- Posicao que o tp vai ser criado (Eh o tp que leva pra sala do Deathstriker)
 
 
 function removerTp(tp)
@@ -12,7 +12,7 @@ function removerTp(tp)
 end
 
 function TirarCristal()
-    local cristal = getTileItemById(posdotp, 17999) -- Id of the blue crystal that disappears to give place to tp
+    local cristal = getTileItemById(posdotp, 17999) -- Id do cristal azul que some para dar lugar ao tp
     if cristal then
         doRemoveItem(cristal.uid, 1)
     end
@@ -20,7 +20,7 @@ function TirarCristal()
 end
      
 function onTimer5() --creates wall back
-doCreateItem(17999,1,posdotp)-- Stone pos
+Game.createItem(17999,1,posdotp)-- Stone pos
 end
 
 function onTimer6()

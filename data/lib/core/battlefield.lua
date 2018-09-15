@@ -2,35 +2,24 @@
 	Reward = {
 		exp = {true, 100000}, items = {true, 21399, 1}, premium_days = {false, 1}
 	},
-	TeamOne = {name = "Black Vikings", storage = 140120, pos = {x = 31393, y = 32554, z = 8}},
-	TeamTwo = {name = "Red Vikings", storage = 140121, pos = {x = 31437, y = 32554, z = 8}},
+	TeamOne = {name = "Black Warriors", storage = 140120, pos = {x = 32382, y = 31451, z = 2}},
+	TeamTwo = {name = "Red Warriors", storage = 140121, pos = {x = 32450, y = 31451, z = 2}},
 	storage_count = 180400,
-	tpPos = {x = 32470, y = 32471, z = 6}, 
+	tpPos = {x = 32310, y = 31858, z = 6}, 
 	limit_Time = 10 -- em minutos 
 }
-
-_Lib_Battle_Days = {
-    ["Monday"] = {   -- segunda
-		["22:30"] = {players = 30}
-	},	
+_Lib_Battle_Days = {	
 	["Tuesday"] = { -- terça
-		["22:30"] = {players = 30}
-	},
-	["Wednesday"] = { -- quarta 
-		["22:30"] = {players = 30}
+		["21:00"] = {players = 50}
 	},
 	["Thursday"] = { -- quinta
-		["22:30"] = {players = 30}
-	},
-	["Friday"] = { --sexta
-		["22:30"] = {players = 30}
+		["21:00"] = {players = 50}
 	},
 	["Saturday"] = { -- sabado
-		["22:30"] = {players = 30}
-	},
-		
+		["21:00"] = {players = 50}
+	},		
 	["Sunday"] = { -- domingo
-		["22:30"] = {players = 30}
+		["21:00"] = {players = 50}
 	}
 }
 
@@ -61,7 +50,7 @@ function getWinnersBattle(storage)
 			c = c + 1 
 		end
 	end
-	str = str .. "" .. c .. " players" .. (c > 1 and "s" or "") .. " of team " .. (Game.getStorageValue(_Lib_Battle_Info.TeamOne.storage) == 0 and _Lib_Battle_Info.TeamTwo.name or _Lib_Battle_Info.TeamOne.name) .. " win the event!"
+	str = str .. "" .. c .. " jogadores" .. (c > 1 and "s" or "") .. " do time " .. (Game.getStorageValue(_Lib_Battle_Info.TeamOne.storage) == 0 and _Lib_Battle_Info.TeamTwo.name or _Lib_Battle_Info.TeamOne.name) .. " ganharam o evento!"
 	resetBattle()
 	OpenWallBattle()
 	return broadcastMessage(str)
@@ -69,14 +58,14 @@ end
 
 function OpenWallBattle()
 	local B = {
-		{1049, {x = 31424, y = 32550, z = 6, stackpos = 1}}, -- {x = 31424, y = 32550, z = 6}
-		{1049, {x = 31424, y = 32551, z = 6, stackpos = 1}}, -- {x = 31424, y = 32551, z = 6}
-		{1049, {x = 31424, y = 32552, z = 6, stackpos = 1}},
-		{1049, {x = 31424, y = 32553, z = 6, stackpos = 1}},
-		{1049, {x = 31424, y = 32554, z = 6, stackpos = 1}},
-		{1049, {x = 31424, y = 32555, z = 6, stackpos = 1}},
-		{1049, {x = 31424, y = 32556, z = 6, stackpos = 1}},
-		{1049, {x = 31424, y = 32557, z = 6, stackpos = 1}}
+		{1498, {x = 32416, y = 31449, z = 3, stackpos = 1}}, -- {x = 32416, y = 32550, z = 6}
+		{1498, {x = 32416, y = 31450, z = 3, stackpos = 1}}, -- {x = 32416, y = 32551, z = 6}
+		{1498, {x = 32416, y = 31451, z = 3, stackpos = 1}},
+		{1498, {x = 32416, y = 31452, z = 3, stackpos = 1}},
+		{1498, {x = 32416, y = 31453, z = 3, stackpos = 1}},
+		{1498, {x = 32416, y = 31454, z = 3, stackpos = 1}},
+		{1498, {x = 32416, y = 32551, z = 4, stackpos = 1}},
+		{1498, {x = 32416, y = 32552, z = 4, stackpos = 1}}
 	}
 
 	for i = 1, #B do
@@ -95,7 +84,7 @@ end
 
 function CheckEvent(delay)
 	if delay > 0 and Game.getStorageValue(_Lib_Battle_Info.storage_count) > 0 then
-		broadcastMessage("[BattleField] Missing " .. Game.getStorageValue(_Lib_Battle_Info.storage_count) .. " players for the event to begin.")
+		broadcastMessage("[BattleField] Faltam " .. Game.getStorageValue(_Lib_Battle_Info.storage_count) .. " jogadores para o evento comecar.")
 	elseif delay == 0 and Game.getStorageValue(_Lib_Battle_Info.storage_count) > 0 then
 		for _, cid in pairs(Game.getPlayers()) do
 			local player = Player(cid)
@@ -106,7 +95,7 @@ function CheckEvent(delay)
 				player:removeCondition(CONDITION_OUTFIT)
 			end
 		end
-		broadcastMessage("[BattleField] The event was not started because it did not reach the number of players.")
+		broadcastMessage("[BattleField] O evento nao foi iniciado por nao atingir o numero de jogadores.")
 		Game.setStorageValue(_Lib_Battle_Info.storage_count, 0)
 		resetBattle()
 		removeBattleTp()

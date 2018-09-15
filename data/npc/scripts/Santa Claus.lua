@@ -8,54 +8,97 @@ function onCreatureDisappear(cid)   npcHandler:onCreatureDisappear(cid)   end
 function onCreatureSay(cid, type, msg)   npcHandler:onCreatureSay(cid, type, msg)  end
 function onThink()     npcHandler:onThink()     end
  
-local items = {
-          item1 = {6527, 6508}, -- item1 item que será pedido e que será dado na primeira troca
-          item2 = {6527, 6509}, -- item2 item que será pedido e que será dado na segunda troca
-		  item3 = {6527, 6507} -- item3 item que será pedido e que será dado na segunda troca
+local normalItems = {
+     {7439, 7440, 7443},
+     {2688, 6508},
+     {2688, 6509},
+     {2688, 6507},
+     {2688, 2114},
+     {2688, 2111},
+     {2167, 2213, 2214},
+     {11227},
+     {2156},
+     {2153}
 }
-local counts = {
-          count1 = {10, 1}, -- count1 quantidade que será pedido e que será dado na primeira troca
-          count2 = {10, 1}, -- count2 quantidade que será pedido e que será dado na segunda troca
-		  count3 = {10, 1} -- count3 quantidade que será pedido e que será dado na segunda troca
-		 
+
+local semiRareItems = {
+     {2173},
+     {9954},
+     {9971},
+     {5080}
+}
+
+local rareItems = {
+     {2110},
+     {5919},
+     {6567},
+     {11255},
+     {11256},
+     {6566},
+     {2112},
+}
+
+local veryRareItems = {
+     {2659},
+     {3954},
+     {2644},
+     {10521},
+     {5804}
 }
  
+local function getReward()
+     local rewardTable = {}
+     local random = math.random(100)
+     if (random <= 90) then
+          rewardTable = normalItems
+     elseif (random <= 70) then
+          rewardTable = semiRareItems
+     elseif (random <= 30) then
+          rewardTable = rareItems
+     elseif (random <= 10) then
+          rewardTable = veryRareItems
+     end
+
+     local rewardItem = rewardTable[math.random(#rewardTable)]
+     return rewardItem
+end
+
 function creatureSayCallback(cid, type, msg)
-          if(not npcHandler:isFocused(cid)) then
-                    return false
-          end
-          local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
+     if(not npcHandler:isFocused(cid)) then
+          return false
+     end
+     local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
 
-          if msgcontains(msg, 'blue christmas bundle') then
-                    if getPlayerItemCount(cid, items.item1[1]) >= counts.count1[1] then
-                              doPlayerRemoveItem(cid, items.item1[1], counts.count1[1])
-                              doPlayerAddItem(cid, items.item1[2], counts.count1[2])
-                              selfSay('You just swap '.. counts.count1[1] ..' '.. getItemName(items.item1[1]) ..' for '.. counts.count1[2] ..' '.. getItemName(items.item1[2]) ..'.', cid)
-                    else
-                              selfSay('You need '.. counts.count1[1] ..' '.. getItemName(items.item1[1]) ..'.', cid)
-                    end
-
-          elseif msgcontains(msg, 'green christmas bundle') then
-                    if getPlayerItemCount(cid, items.item2[1]) >= counts.count2[1] then
-                              doPlayerRemoveItem(cid, items.item2[1], counts.count2[1])
-                              doPlayerAddItem(cid, items.item2[2], counts.count2[2])
-                              selfSay('You just swap '.. counts.count2[1] ..' '.. getItemName(items.item2[1]) ..' for '.. counts.count2[2] ..' '.. getItemName(items.item2[2]) ..'.', cid)
-                    else
-                              selfSay('You need '.. counts.count2[1] ..' '.. getItemName(items.item2[1]) ..'.', cid)
-                    end
-					
-					elseif msgcontains(msg, 'red christmas bundle') then
-                    if getPlayerItemCount(cid, items.item3[1]) >= counts.count3[1] then
-                              doPlayerRemoveItem(cid, items.item3[1], counts.count3[1])
-                              doPlayerAddItem(cid, items.item3[2], counts.count3[2])
-                              selfSay('You just swap '.. counts.count3[1] ..' '.. getItemName(items.item3[1]) ..' for '.. counts.count3[2] ..' '.. getItemName(items.item3[2]) ..'.', cid)
-                    else
-                              selfSay('You need '.. counts.count3[1] ..' '.. getItemName(items.item3[1]) ..'.', cid)
-                    end
-					
+     if msgcontains(msg, 'present') then
+          local player = Player(cid)
+          if (player:getStorageValue(840293) == 1) then
+               npcHandler:say("You can't get other present.", cid)
+               return false
           end
-		  
-          return TRUE
+
+ --         if (player:getLevel() < 150) then
+ --              npcHandler:say("You need level 150 to get a present.", cid)
+ --              return false
+ --         end
+
+          local reward = getReward()
+          local cont = Container(Player(cid):addItem(6511):getUniqueId())
+          local count = 1
+
+          for i = 1, #reward do
+               if (reward[i] == 2111 or
+                   reward[i] == 2688) then
+                    count = 10
+               end
+               
+               cont:addItem(reward[i], count)
+          end
+
+          player:setStorageValue(840293, 1)
+          npcHandler:say("Merry Christmas!", cid)
+     end
+       
+     return true
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)

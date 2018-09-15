@@ -30,19 +30,19 @@ local config = {
 	},
 	summons = {
 		[8288] = {
-			[5] = {'Lich', 'Lich', 'Lich'},
-			[10] = {'Dark Torturer', 'Blightwalker'}
-		},
-		[8289] = {
-			[5] = {'Braindeath', 'Braindeath', 'Braindeath', 'Bonebeast'},
+			[5] = {'Spectre', 'Blightwalker', 'Braindeath', 'Demon'},
 			[10] = {'Betrayed Wraith', 'Betrayed Wraith'}
 		},
+		[8289] = {
+			[5] = {'Plaguesmith', 'Plaguesmith', 'Blightwalker'},
+			[10] = {'Dark Torturer', 'Blightwalker'}
+		},
 		[8290] = {
-			[5] = {'Banshee', 'Banshee', 'Banshee'},
+			[5] = {'Banshee', 'Plaguesmith', 'Hellhound'},
 			[10] = {'Grim Reaper'}
 		},
 		[8291] = {
-			[5] = {'Giant Spider', 'Giant Spider', 'Lich'},
+			[5] = {'Plaguesmith', 'Hellhound', 'Hellhound'},
 			[10] = {'Undead Dragon', 'Hand of Cursed Fate'}
 		}
 	},

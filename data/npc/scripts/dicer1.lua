@@ -117,9 +117,8 @@ function creatureSayCallback(cid, type, msg)
         if isInArray({"H", "HIGH", "high", "h"}, msg) then
                         ROLL = HIGH
                 elseif  isInArray({"L", "LOW", "l", "low"}, msg) then
-                        ROLL = LOW            
-						
-						elseif  isInArray({"play", "game"}, msg) then
+                        ROLL = LOW            						
+elseif  isInArray({"play", "game"}, msg) then
 doCreatureSay(npc, "Ola, vamos jogar? low ou high? Sendo Low=1,2,3 e High=4,5,6.", TALKTYPE_SAY, false, 0)  
 
                 else

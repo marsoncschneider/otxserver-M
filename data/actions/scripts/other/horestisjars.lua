@@ -10,17 +10,17 @@ local config = {
 
 
 function CriarWalls() --creates walls 
-doCreateItem(3514,1,Poswall1)-- posição da wall 
-doCreateItem(3514,1,Poswall2)-- posição da wall 
-doCreateItem(3514,1,Poswall3)-- posição da wall 
-doCreateItem(3514,1,Poswall4)-- posição da wall 
+Game.createItem(3514,1,Poswall1)-- posição da wall 
+Game.createItem(3514,1,Poswall2)-- posição da wall 
+Game.createItem(3514,1,Poswall3)-- posição da wall 
+Game.createItem(3514,1,Poswall4)-- posição da wall 
 
 end
 
 
 function onUse(cid, item, fromPosition, itemEx, toPosition)
 
-local exaustedSeconds = 30
+local exaustedSeconds = 1
 local player = Player(cid)
 local chances = math.random(10)
 
@@ -33,7 +33,7 @@ if item.actionid == 50006 then
 		else	
 			player:say(config["randomText"][math.random(#config["randomText"])], TALKTYPE_ORANGE_1)
 			player:getPosition():sendMagicEffect(CONST_ME_POFF)
-			setPlayerStorageValue(cid, 324329, os.time()+exaustedSeconds*60)
+			setPlayerStorageValue(cid, 324329, os.time()+exaustedSeconds*1800)
 		end
 	else
 			doPlayerSendCancel(cid, "You need wait 30 minutes to use again.")
@@ -50,7 +50,7 @@ elseif item.actionid == 50007 then
 			else
 				player:say(config["randomText"][math.random(#config["randomText"])], TALKTYPE_ORANGE_1)
 				player:getPosition():sendMagicEffect(CONST_ME_POFF)
-				setPlayerStorageValue(cid, 324330, os.time()+exaustedSeconds*60)
+				setPlayerStorageValue(cid, 324330, os.time()+exaustedSeconds*1800)
 				end
 			else
 				doPlayerSendCancel(cid, "You need wait 30 minutes to use again.")
@@ -70,7 +70,7 @@ elseif item.actionid == 50008 then
 			else	
 				player:say(config["randomText"][math.random(#config["randomText"])], TALKTYPE_ORANGE_1)
 				player:getPosition():sendMagicEffect(CONST_ME_POFF)
-				setPlayerStorageValue(cid, 324331, os.time()+exaustedSeconds*60)
+				setPlayerStorageValue(cid, 324331, os.time()+exaustedSeconds*1800)
 				end
 			else
 				doPlayerSendCancel(cid, "You need wait 30 minutes to use again.")
@@ -91,7 +91,7 @@ elseif item.actionid == 50009 then
 			else	
 				player:say(config["randomText"][math.random(#config["randomText"])], TALKTYPE_ORANGE_1)
 				player:getPosition():sendMagicEffect(CONST_ME_POFF)
-				setPlayerStorageValue(cid, 324332, os.time()+exaustedSeconds*60)
+				setPlayerStorageValue(cid, 324332, os.time()+exaustedSeconds*1800)
 				end
 			else
 				doPlayerSendCancel(cid, "You need wait 30 minutes to use again.")
@@ -115,10 +115,10 @@ elseif item.actionid == 50010 then
 			--addEvent(doSummonCreature, 45*1000, "Horestis", {x = 32942, y = 32765, z = 12}) 
 			
 			addEvent(CriarWalls, 61000+6*20*1800)
-			--addEvent(doCreateItem, 20 * 60 * 1000, 3514, {x = 32941, y = 32754, z = 12})			
-			--addEvent(doCreateItem, 20 * 60 * 1000, 3514, {x = 32942, y = 32754, z = 12})
-			--addEvent(doCreateItem, 20 * 60 * 1000, 3514, {x = 32943, y = 32754, z = 12})
-			--addEvent(doCreateItem, 20 * 60 * 1000, 3514, {x = 32944, y = 32754, z = 12}) 
+			--addEvent(Game.createItem, 20 * 60 * 1000, 3514, {x = 32941, y = 32754, z = 12})			
+			--addEvent(Game.createItem, 20 * 60 * 1000, 3514, {x = 32942, y = 32754, z = 12})
+			--addEvent(Game.createItem, 20 * 60 * 1000, 3514, {x = 32943, y = 32754, z = 12})
+			--addEvent(Game.createItem, 20 * 60 * 1000, 3514, {x = 32944, y = 32754, z = 12}) 
 		else
 			doPlayerSendCancel(cid, "You need to break the fourth jar.")
 			end	

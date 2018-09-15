@@ -9,22 +9,23 @@ function onThink()				npcHandler:onThink()					end
 
 local storeTable = {}
 local itemsTable = {
-	["Gingerbreadman"] = {itemId = 6501, count = 1},
-	["Christmas Cookie Tray"] = {itemId = 22644, count = 1},
-	["Gingerbread Recipe"] = {itemId = 6523, count = 10},
-	["Jewel Case"] = {itemId = 8261, count = 25},
-	["Santa Hat"] = {itemId = 6531, count = 50},
-	["Santa Backpack"] = {itemId = 11263, count = 75},
-	["Snowflake Tapestry"] = {itemId = 22649, count = 75},
-	["Santa Doll"] = {itemId = 6512, count = 100},
-	["Snowman Doll"] = {itemId = 11256, count = 150},
-	["Snow Globe"] = {itemId = 22645, count = 150},
-	["Frazzlemaw Santa"] = {itemId = 22642, count = 250},
-	["Leaf Golem Santa"] = {itemId = 22643, count = 250},
-	["Santa Music Box"] = {itemId = 22647, count = 250},
-	["Santa Teddy"] = {itemId = 11255, count = 500},
-	["Maxxen Santa"] = {itemId = 24321, count = 250},
-	["Present Bag"] = {itemId = 6497, count = 1}
+	["gingerbreadman"] = {itemId = 6501, count = 1},
+	["christmas cookie tray"] = {itemId = 22644, count = 1},
+	["gingerbread recipe"] = {itemId = 6523, count = 10},
+	["jewel case"] = {itemId = 8261, count = 25},
+	["santa hat"] = {itemId = 6531, count = 50},
+	["santa backpack"] = {itemId = 11263, count = 75},
+	["snowflake tapestry"] = {itemId = 22649, count = 75},
+	["santa doll"] = {itemId = 6512, count = 100},
+	["snowman doll"] = {itemId = 11256, count = 150},
+	["snow globe"] = {itemId = 22645, count = 150},
+	["frazzlemaw santa"] = {itemId = 22642, count = 250},
+	["leaf golem santa"] = {itemId = 22643, count = 250},
+	["santa music box"] = {itemId = 22647, count = 250},
+	["santa teddy"] = {itemId = 11255, count = 500},
+	["maxxen santa"] = {itemId = 24321, count = 250},
+	["present bag"] = {itemId = 6497, count = 1},
+	["ferumbras' teddy santa"] = {itemId = 25535, count = 250}
 }
 
 local function creatureSayCallback(cid, type, msg)
@@ -32,15 +33,41 @@ local function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	local player = Player(cid)
+
+	if (msgcontains(msg, "offers")) then
+		local text = "I have these offers: "
+		for i, v in pairs(itemsTable) do
+			text = text.. "{" ..i.. "}, "
+		end
+		npcHandler:say(text, cid)
+	end
+
 	if npcHandler.topic[cid] == 0 then
 		local table = itemsTable[msg]
 		if table then
-			npcHandler:say("So you want to exchange "..msg..", for ".. table.count .." christmas tokens?", cid)
-			storeTable[cid] = msg
-			npcHandler.topic[cid] = 1
+			if (table.itemId ~= 6497) then
+				npcHandler:say("So you want to exchange "..msg..", for ".. table.count .." christmas tokens?", cid)
+				storeTable[cid] = msg
+				npcHandler.topic[cid] = 1
+			else
+				npcHandler:say("So you want to exchange ".. msg .." to "..table.count.." christmas token(s)?", cid)
+				storeTable[cid] = 6527
+				npcHandler.topic[cid] = 1
+			end
 		end
 	elseif npcHandler.topic[cid] == 1 then
 		if msgcontains(msg, "yes") then
+			if (tonumber(storeTable[cid]) == 6527) then
+				if (player:removeItem(6497, 1)) then
+					npcHandler:say("Thank you, here is your 1 christmas token.", cid)
+					player:addItem(6527, 1)
+					npcHandler.topic[cid] = 0
+				else
+					npcHandler:say("You don't have a present bag.", cid)
+					npcHandler.topic[cid] = 0
+				end
+				return false
+			end
 			if player:removeItem(6527, itemsTable[storeTable[cid]].count) then
 				npcHandler:say("Thank you, here is your "..storeTable[cid]..".", cid)
 				player:addItem(itemsTable[storeTable[cid]].itemId, 1)

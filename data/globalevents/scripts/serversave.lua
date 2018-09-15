@@ -1,5 +1,5 @@
-local shutdownAtServerSave = false
-local cleanMapAtServerSave = true
+local shutdownAtServerSave = true
+local cleanMapAtServerSave = false
 
 local function serverSave()
 	if shutdownAtServerSave then
@@ -11,23 +11,22 @@ local function serverSave()
 			cleanMap()
 		end
 
-		Game.setGameState(GAME_STATE_NORMAL)
+		Game.setGameState(GAME_STATE_CLOSED)
 	end
 end
 
 local function secondServerSaveWarning()
-	broadcastMessage("Server is saving game in one minute. Please logout.", MESSAGE_STATUS_WARNING)
+	Game.broadcastMessage("Server is saving game in one minute. Please logout.", MESSAGE_EVENT_ADVANCE)
 	addEvent(serverSave, 60000)
-end
-
+end 
+ 
 local function firstServerSaveWarning()
-	broadcastMessage("Server is saving game in 3 minutes. Please logout.", MESSAGE_STATUS_WARNING)
+	Game.broadcastMessage("Server is saving game in 3 minutes. Please logout.", MESSAGE_EVENT_ADVANCE)
 	addEvent(secondServerSaveWarning, 120000)
 end
 
 function onTime(interval)
-	broadcastMessage("Server is saving game in 5 minutes. Please logout.", MESSAGE_STATUS_WARNING)
-	Game.setGameState(GAME_STATE_STARTUP)
+	Game.broadcastMessage("Server is saving game in 5 minutes. Please logout.", MESSAGE_EVENT_ADVANCE)
 	addEvent(firstServerSaveWarning, 120000)
 	return not shutdownAtServerSave
 end

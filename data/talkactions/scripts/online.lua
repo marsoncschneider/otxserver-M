@@ -22,7 +22,7 @@ function onSay(player, words, param)
 		--	else
 		--		msg = msg .. ","
 		--	end
-		--	player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, msg)
+		--	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, msg)
 		----	msg = ""
 		--	i = 0
 		--end
@@ -30,7 +30,7 @@ function onSay(player, words, param)
 
 	--if i > 0 then
 	--	msg = msg .. "."
-	--	player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, msg)
+	--	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, msg)
 	--end
 	return false
 end

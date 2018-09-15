@@ -43,6 +43,14 @@ local config = {
 		formerValue = 30,
 		newValue = 31
 	},
+	[3006] = {
+		items = {
+			{itemId = 4849} -- strange powder (Orc fortress)
+		},
+		storage = Storage.ExplorerSociety.QuestLine,
+		formerValue = 33,
+		newValue = 34
+	},	
 	[3007] = {
 		items = {
 			{itemId = 15389}
@@ -59,14 +67,6 @@ local config = {
 		formerValue = 36,
 		newValue = 37
 	},
-	[3010] = {
-		items = {
-			{itemId = 4853}
-		},
-		storage = Storage.ExplorerSociety.QuestLine,
-		formerValue = 42,
-		newValue = 43
-	},
 	[3012] = {
 		items = {
 			{itemId = 4852}
@@ -80,8 +80,8 @@ local config = {
 			{itemId = 4847}
 		},
 		storage = Storage.ExplorerSociety.QuestLine,
-		formerValue = 49,
-		newValue = 50
+		formerValue = 48,
+		newValue = 49
 	},
 	[3018] = {
 		items = {
@@ -152,9 +152,9 @@ local config = {
 		items = {
 			{itemId = 6124}
 		},
-		storage = Storage.ExplorerSociety.QuestLine,
-		formerValue = 63,
-		newValue = 64
+		storage = Storage.ExplorerSociety.CalassaQuest,
+		formerValue = 1,
+		newValue = 2
 	},
 	[3116] = {
 		items = {
@@ -300,7 +300,68 @@ local config = {
 		storage = Storage.hiddenCityOfBeregar.JusticeForAll,
 		formerValue = 3,
 		newValue = 4
-	}
+	},
+	[50126] = {
+		items = {
+			{itemId = 2489, count = 1}
+		},
+		storage = 857439
+	},
+	[65201] = {
+		items = {
+			{itemId = 2087, actionId = 3980}
+		},
+		storage = 857440
+	},
+	[65202] = {
+		items = {
+			{itemId = 2088, actionId = 3610}
+		},
+		storage = 857441
+	},
+	[65204] = {
+		items = {
+			{itemId = 2381, count = 1}
+		},
+		storage = 857442
+	},
+	[65205] = {
+		items = {
+			{itemId = 2462, count = 1}
+		},
+		storage = 857443
+	},
+	[65206] = {
+		items = {
+			{itemId = 2146, count = 4}
+		},
+		storage = 857444
+	},
+	[65207] = {
+		items = {
+			{itemId = 2642, count = 1}
+		},
+		storage = 857445
+	}, 
+	[65208] = {
+		items = {
+			{itemId = 2483, count = 1}
+		},
+		storage = 857446
+	}, 
+	[65209] = {
+		items = {
+			{itemId = 2170, count = 1}
+		},
+		storage = 857447
+	},
+	[65210] = {
+		items = {
+			{itemId = 2260, count = 3}
+		},
+		storage = 857448
+	}, 
+	-- 65203 reservado
 }
 
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)

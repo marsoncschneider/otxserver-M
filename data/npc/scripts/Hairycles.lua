@@ -190,12 +190,7 @@ local function creatureSayCallback(cid, type, msg)
 		else
 			npcHandler:say('You not have finished journey for wisdom yet, young human.', cid)
 		end
-	elseif msgcontains(msg, 'cookie') then
-		if player:getStorageValue(Storage.WhatAFoolishQuest.Questline) == 31
-			and player:getStorageValue(Storage.WhatAFoolishQuest.CookieDelivery.Hairycles) ~= 1 then
-			npcHandler:say('Oh you bring cookie for old Hairycles?', cid)
-			npcHandler.topic[cid] = 19
-		end
+
 	elseif msgcontains(msg, 'heal') then
 		if questProgress > 11 then
 			if player:getHealth() < 50 then
@@ -473,6 +468,15 @@ keywordHandler:addKeyword({'merlkin'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = 'We see many things and learning quick. Merlkin magic learn quick, quick. We just watch and learn. Sometimes we try and learn.'})
 keywordHandler:addKeyword({'jungle'}, StdModule.say, {npcHandler = npcHandler, text = 'Jungle is dangerous. Jungle also provides us food. Take care when in jungle and safe you be.'})
 
+local function onTradeRequest(cid)
+	if Player(cid):getStorageValue(Storage.TheApeCity.Questline) < 18 then
+		return false
+	end
+
+	return true
+end
+
+npcHandler:setCallback(CALLBACK_ONTRADEREQUEST, onTradeRequest)
 npcHandler:setCallback(CALLBACK_GREET, greetCallback)
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

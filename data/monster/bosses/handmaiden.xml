@@ -4,6 +4,7 @@
 	<look type="230" corpse="6312" />
 	<targetchange interval="5000" chance="8" />
 	<flags>
+		<flag boss="1" />
 		<flag summonable="0" />
 		<flag attackable="1" />
 		<flag hostile="1" />
@@ -48,6 +49,6 @@
 		<immunity invisible="1" />
 	</immunities>
 	<loot>
-		<item id="6539" chance="35000" /> <!-- handmaiden's protector -->
+		<item id="6539" chance="35000" /><!-- handmaiden's protector -->
 	</loot>
 </monster>
