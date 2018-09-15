@@ -106,9 +106,9 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 #ifdef _WIN32
 	SetConsoleTitle(STATUS_SERVER_NAME);
 #endif
-	std::cout << "The " << STATUS_SERVER_NAME << " Global - Versão: (" << STATUS_SERVER_VERSION << "." << MINOR_VERSION << ")" << std::endl;
-	std::cout << "Compilado com: " << BOOST_COMPILER << std::endl;
-	std::cout << "Compilado em " << __DATE__ << ' ' << __TIME__ << " para plataforma ";
+	std::cout << "The " << STATUS_SERVER_NAME << " Global - Version: (" << STATUS_SERVER_VERSION << "." << MINOR_VERSION << ")" << std::endl;
+	std::cout << "Compiled with: " << BOOST_COMPILER << std::endl;
+	std::cout << "Compiled on " << __DATE__ << ' ' << __TIME__ << " for platform ";
 
 #if defined(__amd64__) || defined(_M_X64)
 	std::cout << "x64" << std::endl;
@@ -121,8 +121,8 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 #endif
 	std::cout << std::endl;
 
-	std::cout << "Um servidor desenvolvido por " << STATUS_SERVER_DEVELOPERS << "." << std::endl;
-	std::cout << "Visite nosso forum para updates, suporte, e resources: " << GIT_REPO <<"." << std::endl;
+	std::cout << "A server developed by " << STATUS_SERVER_DEVELOPERS << "." << std::endl;
+	std::cout << "Visit our forum for updates, support, and resources: " << GIT_REPO <<"." << std::endl;
 	std::cout << std::endl;
 
 	// TODO: dirty for now; Use stdarg;
@@ -134,7 +134,7 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	}
 
 	// read global config
-	std::cout << ">> Carregando config: " << g_config.getConfigFileLua() << std::endl;
+	std::cout << ">> Loading config: " << g_config.getConfigFileLua() << std::endl;
 	if (!g_config.load()) {
 		startupErrorMessage("Unable to load Config File!");
 		return;
@@ -154,7 +154,7 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	const char* q("7630979195970404721891201847792002125535401292779123937207447574596692788513647179235335529307251350570728407373705564708871762033017096809910315212884101");
 	g_RSA.setKey(p, q);
 
-	std::cout << ">> Estabelecendo conexao com o banco de dados..." << std::flush;
+	std::cout << ">> Establishing database connection..." << std::flush;
 
 	if (!Database::getInstance().connect()) {
 		startupErrorMessage("Failed to connect to database.");
@@ -164,7 +164,7 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	std::cout << " MySQL " << Database::getClientVersion() << std::endl;
 
 	// run database manager
-	std::cout << ">> Rodando database manager" << std::endl;
+	std::cout << ">> Running database manager" << std::endl;
 
 	if (!DatabaseManager::isDatabaseSetup()) {
 		startupErrorMessage("The database you have specified in config lua file is empty, please import the schema.sql to your database.");
@@ -175,18 +175,18 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	DatabaseManager::updateDatabase();
 
 	if (g_config.getBoolean(ConfigManager::OPTIMIZE_DATABASE) && !DatabaseManager::optimizeTables()) {
-		std::cout << "> Nenhuma tabela foi Otimizada." << std::endl;
+		std::cout << "> No tables were optimized." << std::endl;
 	}
 
 	//load vocations
-	std::cout << ">> Carregando vocations" << std::endl;
+	std::cout << ">> Loading vocations" << std::endl;
 	if (!g_vocations.loadFromXml()) {
 		startupErrorMessage("Unable to load vocations!");
 		return;
 	}
 
 	// load item data
-	std::cout << ">> Carregando items" << std::endl;
+	std::cout << ">> Loading items" << std::endl;
 	if (Item::items.loadFromOtb("data/items/items.otb") != ERROR_NONE) {
 		startupErrorMessage("Unable to load items (OTB)!");
 		return;
@@ -197,19 +197,19 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 		return;
 	}
 
-	std::cout << ">> Carregando script systems" << std::endl;
+	std::cout << ">> Loading script systems" << std::endl;
 	if (!ScriptingManager::getInstance().loadScriptSystems()) {
 		startupErrorMessage("Failed to load script systems");
 		return;
 	}
 
-	std::cout << ">> Carregando monsters" << std::endl;
+	std::cout << ">> Loading monsters" << std::endl;
 	if (!g_monsters.loadFromXml()) {
 		startupErrorMessage("Unable to load monsters!");
 		return;
 	}
 
-	std::cout << ">> Carregando outfits" << std::endl;
+	std::cout << ">> Loading outfits" << std::endl;
 	if (!Outfits::getInstance().loadFromXml()) {
 		startupErrorMessage("Unable to load outfits!");
 		return;
@@ -233,13 +233,13 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	}
 	std::cout << asUpperCaseString(worldType) << std::endl;
 
-	std::cout << ">> Carregando map ;)" << std::endl;
+	std::cout << ">> Loading map" << std::endl;
 	if (!g_game.loadMainMap(g_config.getString(ConfigManager::MAP_NAME))) {
 		startupErrorMessage("Failed to load map");
 		return;
 	}
 
-	std::cout << ">> Iniciando estado do jogo" << std::endl;
+	std::cout << ">> Initializing gamestate" << std::endl;
 	g_game.setGameState(GAME_STATE_INIT);
 
 	// Game client protocols
@@ -276,7 +276,7 @@ void mainLoader(int argc, char* argv[], ServiceManager* services)
 	IOMarket::checkExpiredOffers();
 	IOMarket::getInstance().updateStatistics();
 
-	std::cout << ">> Todos os Modulos carregados, server Inicializando..." << std::endl;
+	std::cout << ">> Loaded all modules, server starting up..." << std::endl;
 
 #ifndef _WIN32
 	if (getuid() == 0 || geteuid() == 0) {

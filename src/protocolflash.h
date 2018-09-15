@@ -1,6 +1,6 @@
 /**
  * The Forgotten Server - a free and open-source MMORPG server emulator
- * Copyright (C) 2017  Mark Samman <mark.samman@gmail.com>
+ * Copyright (C) 2015  Mark Samman <mark.samman@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,36 +17,30 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef FS_MOUNTS_H_73716D11906A4C5C9F4A7B68D34C9BA6
-#define FS_MOUNTS_H_73716D11906A4C5C9F4A7B68D34C9BA6
+#ifndef FS_STATUS_H_8283D93348F923483E0483249BBD9234
+#define FS_STATUS_H_8283D93348F923483E0483249BBD9234
 
-struct Mount
-{
-	Mount(uint8_t id, uint16_t clientId, std::string name, int32_t speed, bool premium) :
-		name(std::move(name)), speed(speed), clientId(clientId), id(id), premium(premium) {}
+#include "networkmessage.h"
+#include "protocol.h"
 
-	std::string name;
-	int32_t speed;
-	uint16_t clientId;
-	uint8_t id;
-	bool premium;
-};
-
-class Mounts
+class ProtocolFlash final : public Protocol
 {
 	public:
-		bool reload();
-		bool loadFromXml();
-		Mount* getMountByID(uint8_t id);
-		Mount* getMountByName(const std::string& name);
-		Mount* getMountByClientID(uint16_t clientId);
-
-		const std::vector<Mount>& getMounts() const {
-			return mounts;
+		// static protocol information
+		enum { server_sends_first = true };
+		enum { protocol_identifier = 0x00 };
+		enum { use_checksum = false };
+		static const char* protocol_name() {
+			return "flash protocol";
 		}
 
-	private:
-		std::vector<Mount> mounts;
+		explicit ProtocolFlash(Connection_ptr connection) : Protocol(connection) {}
+
+		void onRecvFirstMessage(NetworkMessage& msg) final;
+		void onConnect() final;
+
+	protected:
+		static std::map<uint32_t, int64_t> ipConnectMap;
 };
 
 #endif

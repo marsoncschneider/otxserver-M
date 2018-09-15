@@ -160,9 +160,6 @@ class Spell : public BaseSpell
 			return learnable;
 		}
 
-		static ReturnValue CreateIllusion(Creature* creature, const Outfit_t& outfit, int32_t time);
-		static ReturnValue CreateIllusion(Creature* creature, const std::string& name, int32_t time);
-		static ReturnValue CreateIllusion(Creature* creature, uint32_t itemId, int32_t time);
 
 		const VocSpellMap& getVocMap() const {
 			return vocSpellMap;
@@ -282,7 +279,6 @@ class RuneSpell final : public Action, public Spell
 		explicit RuneSpell(LuaScriptInterface* interface) : Action(interface) {}
 
 		bool configureEvent(const pugi::xml_node& node) final;
-		bool loadFunction(const pugi::xml_attribute& attr) final;
 
 		ReturnValue canExecuteAction(const Player* player, const Position& toPos) final;
 		bool hasOwnErrorHandler() final {
@@ -312,7 +308,6 @@ class RuneSpell final : public Action, public Spell
 
 		bool internalCastSpell(Creature* creature, const LuaVariant& var, bool isHotkey);
 
-		RuneSpellFunction runeFunction;
 		uint16_t runeId = 0;
 		bool hasCharges = true;
 };
