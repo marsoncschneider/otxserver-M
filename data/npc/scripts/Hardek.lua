@@ -7,13 +7,13 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Buying and selling all sorts of weapons and armors!'} }
+local voices = { {text = 'Comprando e vendendo todos os tipos de armas e armaduras!!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am buying some weapons and armors."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Estou comprando armas e armaduras."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME|! Do you need my services?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye. Visit me whenever you want to sell something.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye. Visit me whenever you want to sell something.")
+npcHandler:setMessage(MESSAGE_GREET, "Olá |PLAYERNAME|! Você precisa dos meus serviços?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus. Venha aqui sempre que quiser vender alguma coisa.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Adeus. Venha aqui sempre que quiser vender alguma coisa.")
 
 npcHandler:addModule(FocusModule:new())

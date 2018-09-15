@@ -13,29 +13,29 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	if msgcontains(msg, "interesting") then
 		npcHandler:say({
-			"I'd really like to rebuild my reputation someday and maybe find a nice girl. If you come across scrolls of heroic deeds or addresses of lovely maidens... let me know! ...",
-			"Oh no, it doesn't matter what name is on the scrolls. I'm, uhm... flexible! And money - yes, I can pay. My, erm... uncle died recently and left me a pretty sum. Yes."
+			"Eu realmente gostaria de reconstruir minha reputação um dia e talvez encontrar uma gatinha. Caso você encontre alguns pergaminhos scrolls of heroic deeds ou addresses of lovely maidens não deixe de me avisar!",
+			"Oh não, isso não importa. O nome que estiver no pergaminho não faz diferença, eu sou bem flexível! E dinheiro, eu posso pagar. Meu erm ... tio morreu faz pouco tempo e me deixou uma bela herança."
 		}, cid)
 	end
 end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am... a traveler. Just leave me alone if you have nothing {interesting} to talk about."})
-keywordHandler:addKeyword({'want'}, StdModule.say, {npcHandler = npcHandler, text = "I am... a traveler. Just leave me alone if you have nothing {interesting} to talk about."})
-keywordHandler:addKeyword({'head'}, StdModule.say, {npcHandler = npcHandler, text = "Uhhh ohhhh one of the beers yesterday must have been bad."})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "My Name? I am To... ahm... hum... My name is {Hugo}."})
-keywordHandler:addKeyword({'hugo'}, StdModule.say, {npcHandler = npcHandler, text = "Yes, that's my name of course."})
-keywordHandler:addKeyword({'todd'}, StdModule.say, {npcHandler = npcHandler, text = "Uh .. I... I met a Todd on the road. He told me he was traveling to Venore, look there for your Todd."})
-keywordHandler:addKeyword({'thais'}, StdModule.say, {npcHandler = npcHandler, text = "I love that city."})
-keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, text = "I never was there. Now leave me alone."})
-keywordHandler:addKeyword({'resistance'}, StdModule.say, {npcHandler = npcHandler, text = "Resistance is futile... uhm... I wonder where I picked that saying up. Oh my head..."})
-keywordHandler:addKeyword({'money'}, StdModule.say, {npcHandler = npcHandler, text = "I don't know anything about money, missing or not."})
-keywordHandler:addKeyword({'eclesius'}, StdModule.say, {npcHandler = npcHandler, text = "He often comes here. But his constant confusion gives me a worse headache than Frodo's beer. I rather avoid him."})
-keywordHandler:addKeyword({'karl'}, StdModule.say, {npcHandler = npcHandler, text = "Uhm, never heard about him... and you can't prove otherwise."})
-keywordHandler:addKeyword({'william'}, StdModule.say, {npcHandler = npcHandler, text = "Thats a common name, perhaps I met a William, not sure about that."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "E eu... sou um viajante. Apenas me deixe sozinho se você não tem nada de interessante {interesting} para falar."})
+keywordHandler:addKeyword({'want'}, StdModule.say, {npcHandler = npcHandler, text = "E eu... sou um viajante. Apenas me deixe sozinho se você não tem nada de interessante {interesting} para falar."})
+keywordHandler:addKeyword({'head'}, StdModule.say, {npcHandler = npcHandler, text = "Uhhh ohhhh uma das cervejas do outro dia não caiu bem."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Meu nome? E eu To... ahm... hum... Meu nome é {Hugo}."})
+keywordHandler:addKeyword({'hugo'}, StdModule.say, {npcHandler = npcHandler, text = "Sim, esse é meu nome, concerteza."})
+keywordHandler:addKeyword({'todd'}, StdModule.say, {npcHandler = npcHandler, text = "Uh .. E... Eu conheco um Todd na estrada. Ele me disse que estava viajando para Venore, olha aqui seu Todd."})
+keywordHandler:addKeyword({'thais'}, StdModule.say, {npcHandler = npcHandler, text = "Eu amo essa cidade."})
+keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, text = "Eu nunca estive aqui. Agora me deixe sozinho."})
+keywordHandler:addKeyword({'resistance'}, StdModule.say, {npcHandler = npcHandler, text = "Resistência é inútil! Ah... nem sei de onde tirei essa frase. Mhmm... minha cabeça..."})
+keywordHandler:addKeyword({'money'}, StdModule.say, {npcHandler = npcHandler, text = "Não sei nada sobre nenhum dinheiro, que esteja faltando ou não."})
+keywordHandler:addKeyword({'eclesius'}, StdModule.say, {npcHandler = npcHandler, text = "Ele difícilmente vem aqui. Mas sua constante confusão me da uma dor de cabeça ainda maior do que a cerveja do Frodo. Eu prefiro evita-lo."})
+keywordHandler:addKeyword({'karl'}, StdModule.say, {npcHandler = npcHandler, text = "Uhm, nunca escutei sobre ele... e você não pode provar o contrário."})
+keywordHandler:addKeyword({'william'}, StdModule.say, {npcHandler = npcHandler, text = "Esse é um nome bem comum, talvez eu tenha conhecido um William, não tenho certeza disso."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Uhm oh hello |PLAYERNAME|... not so loud please... my {head}... What ... do you {want}?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Yes, goodbye |PLAYERNAME|, just leave me alone.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Silence at last.")
+npcHandler:setMessage(MESSAGE_GREET, "Uhm olá |PLAYERNAME|... não fale tão alto, nem faça barulhos por favor... minha cabeça {head}... O que ... você quer {want}?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Sim, adeus |PLAYERNAME|, apenas me deixe sozinho.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Pelo menos agora terei silêncio.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

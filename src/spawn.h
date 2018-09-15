@@ -92,9 +92,6 @@ class Spawns
 		bool isStarted() const {
 			return started;
 		}
-		std::forward_list<Spawn>& getSpawnList() {
-			return spawnList;
-		}
 
 	private:
 		std::forward_list<Npc*> npcList;

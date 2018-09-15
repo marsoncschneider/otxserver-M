@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Gems and jewellery! Best prices in town!'} }
+local voices = { {text = 'Gemas e joalheria! Os melhores preços da cidade!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local function creatureSayCallback(cid, type, msg)
@@ -19,13 +19,13 @@ local function creatureSayCallback(cid, type, msg)
 	if msgcontains(msg, "addon") or msgcontains(msg, "outfit") or msgcontains(msg, "hat") then
 		local addonProgress = player:getStorageValue(Storage.OutfitQuest.Citizen.AddonHat)
 		if addonProgress < 1 then
-			npcHandler:say("Pretty, isn't it? My friend Amber taught me how to make it, but I could help you with one if you like. What do you say?", cid)
+			npcHandler:say("Linda, não acha? Minha amiga Amber me ensinou como fazer, mas eu posso ajudar você com uma se você quiser. O que você diz?", cid)
 			npcHandler.topic[cid] = 1
 		elseif addonProgress == 1 then
-			npcHandler:say("Oh, you're back already? Did you bring a legion helmet, 100 chicken feathers and 50 honeycombs?", cid)
+			npcHandler:say("Oh, você já voltou? Trouxe o legion helmet, 100 chicken feathers e 50 honeycombs?", cid)
 			npcHandler.topic[cid] = 2
 		elseif addonProgress == 2 then
-			npcHandler:say('Pretty hat, isn\'t it?', cid)
+			npcHandler:say('Lindo, não acha?', cid)
 		end
 		return true
 	end
@@ -35,22 +35,22 @@ local function creatureSayCallback(cid, type, msg)
 			player:setStorageValue(Storage.OutfitQuest.Ref, math.max(0, player:getStorageValue(Storage.OutfitQuest.Ref)) + 1)
 			player:setStorageValue(Storage.OutfitQuest.Citizen.AddonHat, 1)
 			player:setStorageValue(Storage.OutfitQuest.Citizen.MissionHat, 1)
-			npcHandler:say('Okay, here we go, listen closely! I need a few things... a basic hat of course, maybe a legion helmet would do. Then about 100 chicken feathers... and 50 honeycombs as glue. That\'s it, come back to me once you gathered it!', cid)
+			npcHandler:say('Okay, aqui vamos nós, escute com cuidado! Eu preciso de algumas coisas... um basico capacete amaldiçoado, um legion helmet pode dar conta. Provavelmente umas 100 chicken feathers... e 50 honeycombs como cola. É isso! Volte aqui quando tiver tudo o que eu lhe pedi!', cid)
 		else
-			npcHandler:say('Aw, I guess you don\'t like feather hats. No big deal.', cid)
+			npcHandler:say('Aw, acho que você não gosta de chapéu de pena. Sem grandes negócios.', cid)
 		end
 		npcHandler.topic[cid] = 0
 
 	elseif npcHandler.topic[cid] == 2 then
 		if msgcontains(msg, 'yes') then
 			if player:getItemCount(2480) < 1 then
-				npcHandler:say('Sorry, but I can\'t see a legion helmet.', cid)
+				npcHandler:say('Hmmm, não estou vendo seu legion helmet.', cid)
 			elseif player:getItemCount(5890) < 100 then
-				npcHandler:say('Sorry, but you don\'t enough chicken feathers.', cid)
+				npcHandler:say('Desculpe, você não tem chicken feathers o suficiente.', cid)
 			elseif player:getItemCount(5902) < 50 then
-				npcHandler:say('Sorry, but you don\'t have enough honeycombs.', cid)
+				npcHandler:say('Desculpe, você não tem 50 honeycombs.', cid)
 			else
-				npcHandler:say('Great job! That must have taken a lot of work. Okay, you put it like this... then glue like this... here!', cid)
+				npcHandler:say('Bom trabalho! Isso deve ter dado muito trabalho. Okay, você coloca aqui assim... depois um pouco de cola assim... aqui!', cid)
 				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
 
 				player:removeItem(2480, 1)
@@ -65,7 +65,7 @@ local function creatureSayCallback(cid, type, msg)
 				player:setStorageValue(Storage.OutfitQuest.Citizen.AddonHat, 2)
 			end
 		else
-			npcHandler:say('Maybe another time.', cid)
+			npcHandler:say('Talvez uma outra hora.', cid)
 		end
 		npcHandler.topic[cid] = 0
 	end
@@ -73,12 +73,12 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = 'I am a jeweler. Maybe you want to have a look at my wonderful offers.'})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = 'I am Hanna.'})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu trabalho na joalheira. Talvez você queira dar uma olhada em minhas maravilhosas ofertas.'})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu sou Hanna.'})
 
-npcHandler:setMessage(MESSAGE_GREET, 'Oh, please come in, |PLAYERNAME|. What do you need? Have a look at my wonderful {offers} in gems and jewellery.')
-npcHandler:setMessage(MESSAGE_FAREWELL, 'Good bye.')
-npcHandler:setMessage(MESSAGE_WALKAWAY, 'Good bye.')
+npcHandler:setMessage(MESSAGE_GREET, 'Oh, por favor entre, |PLAYERNAME|. Do que você precisa? Dê uma olhada em minhas ofertas {offers} de gemas e joalheria.')
+npcHandler:setMessage(MESSAGE_FAREWELL, 'Adeus, até mais.')
+npcHandler:setMessage(MESSAGE_WALKAWAY, 'Só tem gente mal educada por aqui.')
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

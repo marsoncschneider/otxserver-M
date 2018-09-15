@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Psst! Over here!'} }
+local voices = { {text = 'Psiu! Aqui!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local function getTable(player)
@@ -109,14 +109,14 @@ local function creatureSayCallback(cid, type, msg)
 		local items = setNewTradeTable(getTable(player))
 		local function onBuy(cid, item, subType, amount, ignoreCap, inBackpacks)
 			if (ignoreCap == false and (player:getFreeCapacity() < ItemType(items[item].itemId):getWeight(amount) or inBackpacks and player:getFreeCapacity() < (ItemType(items[item].itemId):getWeight(amount) + ItemType(1988):getWeight()))) then
-				return player:sendTextMessage(MESSAGE_STATUS_SMALL, 'You don\'t have enough cap.')
+				return player:sendTextMessage(MESSAGE_STATUS_SMALL, 'Você não suporta todo esse peso.')
 			end
 			if items[item].buyPrice <= player:getMoney() + player:getBankBalance() then
 				if inBackpacks then
 					local container = Game.createItem(1988, 1)
 					local bp = player:addItemEx(container)
 					if(bp ~= 1) then
-						return player:sendTextMessage(MESSAGE_STATUS_SMALL, 'You don\'t have enough container.')
+						return player:sendTextMessage(MESSAGE_STATUS_SMALL, 'Você não tem espaço suficiente para isso em sua mochila.')
 					end
 					for i = 1, amount do
 						container:addItem(items[item].itemId, items[item])
@@ -125,12 +125,12 @@ local function creatureSayCallback(cid, type, msg)
 					return
 					player:addItem(items[item].itemId, amount, false, items[item]) and
 					player:removeMoneyNpc(amount * items[item].buyPrice) and
-					player:sendTextMessage(MESSAGE_INFO_DESCR, 'You bought '..amount..'x '..items[item].realName..' for '..items[item].buyPrice * amount..' gold coins.')
+					player:sendTextMessage(MESSAGE_INFO_DESCR, 'Você comprou '..amount..'x '..items[item].realName..' por '..items[item].buyPrice * amount..' moedas de ouro.')
 				end
-				player:sendTextMessage(MESSAGE_INFO_DESCR, 'You bought '..amount..'x '..items[item].realName..' for '..items[item].buyPrice * amount..' gold coins.')
+				player:sendTextMessage(MESSAGE_INFO_DESCR, 'Você comprou '..amount..'x '..items[item].realName..' por '..items[item].buyPrice * amount..' moedas de ouro.')
 				player:removeMoneyNpc(amount * items[item].buyPrice)
 			else
-				player:sendTextMessage(MESSAGE_STATUS_SMALL, 'You do not have enough money.')
+				player:sendTextMessage(MESSAGE_STATUS_SMALL, 'Você não tem dinheiro o suficiente.')
 			end
 			return true
 			end
@@ -141,19 +141,19 @@ local function creatureSayCallback(cid, type, msg)
 				player:removeItem(items[item].itemId, amount, -1, ignoreEquipped) and
 				player:addMoney(items[item].sellbuy * amount) and
 
-				player:sendTextMessage(MESSAGE_INFO_DESCR, 'You sold '..amount..'x '..items[item].realName..' for '..items[item].sellbuy * amount..' gold coins.')
+				player:sendTextMessage(MESSAGE_INFO_DESCR, 'Você me vendeu '..amount..'x '..items[item].realName..' por '..items[item].sellbuy * amount..' moedas de ouro.')
 			end
 			return true
 		end
 
 		openShopWindow(cid, getTable(player), onBuy, onSell)
-		npcHandler:say("Keep in mind you won't find better offers here. Just browse through my wares.", cid)
+		npcHandler:say("Mantenha em mente que você não encontrará ofertas melhores aqui. Apenas navegue entre meus produtos.", cid)
 	end
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, 'Hello.')
-npcHandler:setMessage(MESSAGE_FAREWELL, 'It was a pleasure to help you, |PLAYERNAME|.')
+npcHandler:setMessage(MESSAGE_GREET, 'Olá.')
+npcHandler:setMessage(MESSAGE_FAREWELL, 'Vai ser uma prazer ajudar você, |PLAYERNAME|.')
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

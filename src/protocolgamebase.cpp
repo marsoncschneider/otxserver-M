@@ -123,7 +123,7 @@ void ProtocolGameBase::AddCreature(NetworkMessage& msg, const Creature* creature
 		msg.add<uint32_t>(remove);
 		msg.add<uint32_t>(creature->getID());
 		msg.addByte(creatureType);
-		
+
 		if (player->getProtocolVersion() >= 1120) {
 			if (creatureType == CREATURETYPE_SUMMONPLAYER) {
 				const Creature* master = creature->getMaster();
@@ -176,7 +176,7 @@ void ProtocolGameBase::AddCreature(NetworkMessage& msg, const Creature* creature
 			}
 		}
 	}
-	
+
 	msg.addByte(creatureType); // Type (for summons)
 
 	if (player->getProtocolVersion() >= 1120) {
@@ -457,8 +457,7 @@ void ProtocolGameBase::GetTileDescription(const Tile* tile, NetworkMessage& msg)
 	if (ground) {
 		msg.addItem(ground);
 		count = 1;
-	}
-	else {
+	} else {
 		count = 0;
 	}
 
@@ -467,39 +466,57 @@ void ProtocolGameBase::GetTileDescription(const Tile* tile, NetworkMessage& msg)
 		for (auto it = items->getBeginTopItem(), end = items->getEndTopItem(); it != end; ++it) {
 			msg.addItem(*it);
 
-			count++;
-			if (count == 9 && tile->getPosition() == player->getPosition()) {
-				break;
-			}
-			else if (count == 10) {
+			if (++count == 10) {
 				return;
 			}
 		}
 	}
 
-	const CreatureVector* creatures = tile->getCreatures();
-	if (creatures) {
-		bool playerAdded = false;
-		for (const Creature* creature : boost::adaptors::reverse(*creatures)) {
-			if (!player->canSeeCreature(creature)) {
-				continue;
+	if (!loggedIn && tile->getPosition() == player->getPosition()) {
+		bool playerSpawned = false;
+		const CreatureVector *creatures = tile->getCreatures();
+		if (creatures) {
+			for (const Creature *creature : boost::adaptors::reverse(*creatures)) {
+				if (!player->canSeeCreature(creature)) {
+					continue;
+				}
+
+				if (creature == player) {
+					playerSpawned = true;
+				}
+
+				bool known;
+				uint32_t removedKnown;
+				checkCreatureAsKnown(creature->getID(), known, removedKnown);
+				AddCreature(msg, creature, known, removedKnown);
+
+				if (count == 8 && playerSpawned == false) { // player still not spawned and we need to send him too
+					checkCreatureAsKnown(player->getID(), known, removedKnown);
+					AddCreature(msg, player, known, removedKnown);
+					++count;
+				}
+
+				if (++count == 10) {
+					return;
+				}
 			}
+		}
+	} else {
+		const CreatureVector *creatures = tile->getCreatures();
+		if (creatures) {
+			for (const Creature *creature : boost::adaptors::reverse(*creatures)) {
+				if (!player->canSeeCreature(creature)) {
+					continue;
+				}
 
-			if (tile->getPosition() == player->getPosition() && count == 9 && !playerAdded) {
-				creature = player;
-			}
+				bool known;
+				uint32_t removedKnown;
+				checkCreatureAsKnown(creature->getID(), known, removedKnown);
+				AddCreature(msg, creature, known, removedKnown);
 
-			if (creature->getID() == player->getID()) {
-				playerAdded = true;
-			}
-
-			bool known;
-			uint32_t removedKnown;
-			checkCreatureAsKnown(creature->getID(), known, removedKnown);
-			AddCreature(msg, creature, known, removedKnown);
-
-			if (++count == 10) {
-				return;
+				if (++count == 10) {
+					return;
+				}
 			}
 		}
 	}

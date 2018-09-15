@@ -22,28 +22,26 @@ orangeSkullDuration = 7
 
 -- Connection Config
 -- NOTE: maxPlayers set to 0 means no limit
-ip = "127.0.0.1"
+ip = "localhost"
 bindOnlyGlobalAddress = false
 loginProtocolPort = 7171
 gameProtocolPort = 7172
 statusProtocolPort = 7171
 maxPlayers = 0
-motd = "Welcome to The OTXServer Global!"
-onePlayerOnlinePerAccount = true
+motd = "Bem-vindo ao HellBRA!"
+onePlayerOnlinePerAccount = false
 allowClones = false
-serverName = "OTXServer-Global"
+serverName = "HellBRA"
 statusTimeout = 5 * 1000
 replaceKickOnLogin = true
 maxPacketsPerSecond = 25
 
 -- Version Manual
-clientVersionMin = 1100
-clientVersionMax = 1157
-clientVersionStr = "11.57"
+clientVersionMin = 1145
+clientVersionMax = 1148
+clientVersionStr = "11.49"
 
 -- Depot Limit
-freeDepotLimit = 2000
-premiumDepotLimit = 10000
 depotBoxes = 17
 
 -- GameStore
@@ -65,7 +63,7 @@ deathLosePercent = -1
 -- Houses
 -- NOTE: set housePriceEachSQM to -1 to disable the ingame buy house functionality
 housePriceEachSQM = 1000
-houseRentPeriod = "daily"
+houseRentPeriod = "weekly"
 
 -- Item Usage
 timeBetweenActions = 200
@@ -94,23 +92,23 @@ passwordType = "sha1"
 -- Misc.
 allowChangeOutfit = true
 freePremium = true
-kickIdlePlayerAfterMinutes = 15
-idleWarningTime = 10 * 60 * 1000
-idleKickTime = 15 * 60 * 1000
+kickIdlePlayerAfterMinutes = 150
+idleWarningTime = 100 * 60 * 1000
+idleKickTime = 150 * 60 * 1000
 maxMessageBuffer = 4
-emoteSpells = false
+emoteSpells = true
 classicEquipmentSlots = false
 allowWalkthrough = true
 coinPacketSize = 1
-coinImagesURL = "http://localhost/images/store/"
+coinImagesURL = "http://localhost/store/"
 classicAttackSpeed = false
 
 -- Rates
 -- NOTE: rateExp is not used if you have enabled stages in data/XML/stages.xml
 rateExp = 1
-rateSkill = 50
-rateLoot = 3
-rateMagic = 25
+rateSkill = 12
+rateLoot = 5
+rateMagic = 4
 rateSpawn = 1
 
 -- Monster rates
@@ -136,7 +134,7 @@ defaultPriority = "high"
 startupDatabaseOptimization = true
 
 -- Status server information
-ownerName = "Malucooo"
-ownerEmail = "e_nunes@live.com"
-url = "http://www.facebook.com/erick.nunes.75"
+ownerName = "Hellbra.com"
+ownerEmail = "marson_sn@hotmail.com"
+url = ""
 location = "Brazil"

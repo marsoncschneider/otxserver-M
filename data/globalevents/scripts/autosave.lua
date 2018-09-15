@@ -1,4 +1,4 @@
-local cleanMapAtSave = true
+local cleanMapAtSave = false
 
 local function serverSave(interval)
 	if cleanMapAtSave then
@@ -6,7 +6,7 @@ local function serverSave(interval)
 	end
 
 	saveServer()
-	Game.broadcastMessage('Server save complete. Next save in ' .. math.floor(interval / 60000) .. ' minutes!', MESSAGE_STATUS_WARNING)
+	Game.broadcastMessage('Server save complete. Next save in ' .. math.floor(interval / 360000) .. ' hours!', MESSAGE_STATUS_WARNING)
 end
 
 function onThink(interval)

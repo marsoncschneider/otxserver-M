@@ -1,0 +1,605 @@
+----- 02/11/2017 15:10:30 - Lucasajudapf (187.120.2.206) -----
+Debug Assertion 1146 NWin32Exception.cpp 55
+Thu Nov 02 13:10:06 2017
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Ultimate Edition 64 Bit in BRA
+Processor: Intel Celeron 847 @ 1.1
+Video Card: Intel (R) HD GR
+Last Packet Types: 015 010 023 031 100 040 020 000 000 000
+Last Packet: 023 014 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Name: Lucasajudapf (OTXServer-Global)
+Player Action: 051 053 046 049 057 057 046 056 048 046 049 052 053 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 15) (MainWindow = 037E6808), reason:
+Control.cpp 609: exception occurred, reason:
+MainWindow.cpp 507: exception occurred, reason:
+MapWindow.cpp 1979: exception occurred (Width = 424) (Height = 359), reason:
+MapWindow.cpp 152: exception occurred (Width = 414) (Height = 303), reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (write attempt at E89D4C75)
+Comment: 
+----- 02/11/2017 16:52:02 - Auxiliardebug (187.120.2.206) -----
+Debug Assertion 1146 NWin32Exception.cpp 55
+Thu Nov 02 14:51:30 2017
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Ultimate Edition 64 Bit in BRA
+Processor: Intel Celeron 847 @ 1.1
+Video Card: Intel (R) HD GR
+Last Packet Types: 102 109 102 109 102 109 102 109 180 131
+Last Packet: 109 027 131 039 125 007 002 028 131 039 125 007 102 000 000 198
+Player Position: [33564,32039,7]
+Player Name: Auxiliardebug (OTXServer-Global)
+Player Action: 051 053 046 049 057 057 046 056 048 046 049 052 053 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+MainFrm.cpp 662: exception occurred (point.x = 723) (point.y = 506), reason:
+Control.cpp 791: exception occurred (x = 723) (y = 506), reason:
+DialogsGeneric.cpp 311: exception occurred (x = 488) (y = 388), reason:
+GUI.cpp 1938: exception occurred (x = 488) (y = 388), reason:
+GUI.cpp 1938: exception occurred (x = 470) (y = 356), reason:
+GUI.cpp 1938: exception occurred (x = 305) (y = 270), reason:
+DialogElements.cpp 1405: exception occurred (x = 41) (y = 6), reason:
+GUI.cpp 2517: exception occurred, reason:
+DialogsIngameShop.cpp 1326: exception occurred, reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (read attempt at 6E6F206E)
+Comment: 
+----- 18/11/2017 03:01:44 - Druid On Rush (170.150.94.38) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat Nov 18 01:01:31 2017
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 101 109 109 101 109 109 101 109
+Last Packet: 149 034 002 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33660,31979,7]
+Player Name: Druid On Rush (HellBRA)
+Player Action: 051 053 046 049 057 057 046 049 050 049 046 049 056 048 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0353BE18), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 18/11/2017 03:06:09 - Druid On Rush (170.150.94.38) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat Nov 18 01:05:55 2017
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 106 108 160 102 109 108 101 109
+Last Packet: 149 065 002 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33677,31957,7]
+Player Name: Druid On Rush (HellBRA)
+Player Action: 051 053 046 049 057 057 046 049 050 049 046 049 056 048 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0346D5C0), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 17/01/2018 02:27:04 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 Control.cpp 1583
+Wed Jan 17 00:26:51 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 131 109 180 160 160 109 107 102
+Last Packet: 109 044 131 199 124 015 002 043 131 199 124 015 131 047 131 212
+Player Position: [33582,31951,13]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 02A3E5E8), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 17/01/2018 20:24:58 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 Control.cpp 1583
+Wed Jan 17 18:24:48 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 101 109 101 109 101 109 160 160
+Last Packet: 149 228 019 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33662,31945,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 02A26638), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 19/01/2018 04:23:20 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 Control.cpp 1583
+Fri Jan 19 02:22:26 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 104 109 160 160 029 180 160 160
+Last Packet: 149 157 012 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33670,31964,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 02ACE5C0), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 19/01/2018 04:23:56 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 Control.cpp 1583
+Fri Jan 19 02:23:41 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 109 101 109 160 160 101 109 180
+Last Packet: 109 101 131 206 124 007 001 102 131 206 124 007 149 178 012 001
+Player Position: [33645,31953,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 02B17C28), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 19/01/2018 19:34:26 - Nikolai (168.194.16.198) -----
+Debug Assertion 1146 NWin32Exception.cpp 55
+Fri Jan 19 17:31:51 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Player.cpp 354: exception occurred, reason:
+Player.cpp 458: exception occurred, reason:
+Control.cpp 2280: exception occurred (MessageType: 0 MaW: 2B16CC8 MoW: 0), reason:
+Control.cpp 2275: exception occurred, reason:
+Control.cpp 545: exception occurred (Force?1:0 = 0), reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (read attempt at 004A9919)
+Comment: 
+----- 20/01/2018 00:35:36 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 NWin32Exception.cpp 55
+Fri Jan 19 22:35:20 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 109 109 109 109 109 109 109 109 180 160
+Last Packet: 109 091 126 215 125 007 001 090 126 215 125 007 000 000 000 000
+Player Position: [32344,32218,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Player.cpp 458: exception occurred, reason:
+Control.cpp 2280: exception occurred (MessageType: 0 MaW: 2B43B30 MoW: 0), reason:
+Control.cpp 2275: exception occurred, reason:
+Control.cpp 545: exception occurred (Force?1:0 = 0), reason:
+MainWindow.cpp 134: exception occurred (Surface = 1), reason:
+GUI.cpp 1850: exception occurred (Surface = 1), reason:
+MapWindow.cpp 981: exception occurred (Surface = 1), reason:
+MapWindow.cpp 558: exception occurred (Obj = 429), reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (read attempt at 005A80EB)
+Comment: 
+----- 20/01/2018 00:35:59 - Styler Gugu (168.194.16.198) -----
+Debug Assertion 1146 NWin32Exception.cpp 55
+Fri Jan 19 22:35:37 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8.1 in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 109 180 160 160 029 170 109 180 160 160
+Last Packet: 109 094 126 219 125 007 001 093 126 219 125 007 000 000 000 000
+Player Position: [32344,32218,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 051 053 046 050 050 055 046 049 048 048 046 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Player.cpp 458: exception occurred, reason:
+Control.cpp 2280: exception occurred (MessageType: 0 MaW: 2A4F538 MoW: 0), reason:
+Control.cpp 2275: exception occurred, reason:
+Control.cpp 545: exception occurred (Force?1:0 = 0), reason:
+MainWindow.cpp 134: exception occurred (Surface = 1), reason:
+GUI.cpp 1850: exception occurred (Surface = 1), reason:
+MapWindow.cpp 981: exception occurred (Surface = 1), reason:
+MapWindow.cpp 558: exception occurred (Obj = 429), reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (read attempt at 005A80EB)
+Comment: 
+----- 22/01/2018 22:58:55 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1100 Objects.cpp 640
+Mon Jan 22 20:57:45 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 100 015 010 023 031 100 040 020 000 000
+Last Packet: 023 023 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Network.cpp 873: exception occurred, reason:
+Control.cpp 1535: exception occurred (Type = 100) (MainWindow = 036BD518), reason:
+Communication.cpp 2524: exception occurred (PlayerX = 32346) (PlayerY = 32219), reason:
+Communication.cpp 2502: exception occurred (xmin = 0) (ymin = 0), reason:
+Communication.cpp 2481: exception occurred (Type = 25879) (OldType = 429), reason:
+Objects.cpp 643: exception occurred (Type = 25879) (Flag = 10), reason:
+Objects.cpp 640: assertion failed (Type = 25879) (ObjectProperties->high() = 25202), reason:
+In(Type,ObjectProperties->low(),ObjectProperties->high())
+Comment: 
+----- 22/01/2018 23:07:33 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1110 Objects.cpp 640
+Mon Jan 22 21:05:01 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 100 015 010 023 031 100 040 020 000 000
+Last Packet: 023 026 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Network.cpp 890: exception occurred, reason:
+Control.cpp 1541: exception occurred (Type = 100) (MainWindow = 0338ECC0), reason:
+Communication.cpp 2532: exception occurred (PlayerX = 32346) (PlayerY = 32219), reason:
+Communication.cpp 2510: exception occurred (xmin = 0) (ymin = 0), reason:
+Communication.cpp 2489: exception occurred (Type = 25879) (OldType = 429), reason:
+Objects.cpp 643: exception occurred (Type = 25879) (Flag = 10), reason:
+Objects.cpp 640: assertion failed (Type = 25879) (ObjectProperties->high() = 25233), reason:
+In(Type,ObjectProperties->low(),ObjectProperties->high())
+Comment: 
+----- 22/01/2018 23:09:02 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1110 Objects.cpp 640
+Mon Jan 22 21:07:27 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 100 015 010 023 031 100 040 020 000 000
+Last Packet: 023 028 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Network.cpp 890: exception occurred, reason:
+Control.cpp 1541: exception occurred (Type = 100) (MainWindow = 03DDF3C8), reason:
+Communication.cpp 2532: exception occurred (PlayerX = 32346) (PlayerY = 32219), reason:
+Communication.cpp 2510: exception occurred (xmin = 0) (ymin = 0), reason:
+Communication.cpp 2489: exception occurred (Type = 25879) (OldType = 429), reason:
+Objects.cpp 643: exception occurred (Type = 25879) (Flag = 10), reason:
+Objects.cpp 640: assertion failed (Type = 25879) (ObjectProperties->high() = 25233), reason:
+In(Type,ObjectProperties->low(),ObjectProperties->high())
+Comment: 
+----- 22/01/2018 23:16:56 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1110 Objects.cpp 640
+Mon Jan 22 21:14:18 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 100 015 010 023 031 100 040 020 000 000
+Last Packet: 023 031 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Network.cpp 890: exception occurred, reason:
+Control.cpp 1541: exception occurred (Type = 100) (MainWindow = 036F03F8), reason:
+Communication.cpp 2532: exception occurred (PlayerX = 32346) (PlayerY = 32219), reason:
+Communication.cpp 2510: exception occurred (xmin = 0) (ymin = 0), reason:
+Communication.cpp 2489: exception occurred (Type = 25879) (OldType = 429), reason:
+Objects.cpp 643: exception occurred (Type = 25879) (Flag = 10), reason:
+Objects.cpp 640: assertion failed (Type = 25879) (ObjectProperties->high() = 25233), reason:
+In(Type,ObjectProperties->low(),ObjectProperties->high())
+Comment: 
+----- 22/01/2018 23:30:08 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1110 NWin32Exception.cpp 55
+Mon Jan 22 21:28:52 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 183 180 160 160 160 180 180 180 180 172
+Last Packet: 023 038 000 000 016 050 000 003 015 021 013 128 003 169 252 003
+Player Position: [32347,32218,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Player.cpp 448: exception occurred, reason:
+Control.cpp 1761: exception occurred (MaW: 2C14770 MoW: 0 ), reason:
+Control.cpp 541: exception occurred (Force?1:0 = 0), reason:
+MainWindow.cpp 133: exception occurred (Surface = 1), reason:
+GUI.cpp 1848: exception occurred (Surface = 1), reason:
+MapWindow.cpp 985: exception occurred (Surface = 1), reason:
+MapWindow.cpp 906: exception occurred, reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (write attempt at 0000012F)
+Comment: 
+----- 22/01/2018 23:36:12 - Nikolai (168.194.16.156) -----
+Debug Assertion 1110 NWin32Exception.cpp 55
+Mon Jan 22 21:35:23 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 109 183 160 160 160 180 180 180 180 172
+Last Packet: 109 093 126 220 125 007 001 093 126 219 125 007 000 000 000 000
+Player Position: [32345,32220,7]
+Player Name: Styler Gugu (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Player.cpp 448: exception occurred, reason:
+Control.cpp 1761: exception occurred (MaW: 3415D88 MoW: 0 ), reason:
+Control.cpp 541: exception occurred (Force?1:0 = 0), reason:
+MainWindow.cpp 133: exception occurred (Surface = 1), reason:
+GUI.cpp 1848: exception occurred (Surface = 1), reason:
+MapWindow.cpp 985: exception occurred (Surface = 1), reason:
+MapWindow.cpp 906: exception occurred, reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (write attempt at 0000012F)
+Comment: 
+----- 22/01/2018 23:38:20 - Styler Gugu (168.194.16.156) -----
+Debug Assertion 1110 NWin32Exception.cpp 55
+Mon Jan 22 21:36:23 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows Vista Family in BRA
+Processor: Intel CORE I3-3
+Video Card: Intel (R) HD GR
+Last Packet Types: 109 030 109 029 160 160 130 109 109 160
+Last Packet: 109 110 126 242 125 007 001 111 126 242 125 007 000 000 000 000
+Player Position: [32367,32242,6]
+Player Name: Nikolai (HellBRA)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Player.cpp 448: exception occurred, reason:
+Control.cpp 2219: exception occurred (MessageType: 0 MaW: 323F450 MoW: 0), reason:
+Control.cpp 2214: exception occurred, reason:
+Control.cpp 541: exception occurred (Force?1:0 = 0), reason:
+MainWindow.cpp 133: exception occurred (Surface = 1), reason:
+GUI.cpp 1848: exception occurred (Surface = 1), reason:
+MapWindow.cpp 985: exception occurred (Surface = 1), reason:
+MapWindow.cpp 906: exception occurred, reason:
+NWin32Exception.cpp 55: win32 exception occurred, reason:
+access violation (write attempt at 0000012F)
+Comment: 
+----- 04/05/2018 14:43:53 - Ykxz (181.213.55.194) -----
+Debug Assertion 1100 NWin32Exception.cpp 98
+Fri May 04 11:31:02 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Ultimate Edition 64 Bit in BRA
+Processor: Intel CORE I3-2
+Video Card: Intel (R) HD GR
+Last Packet Types: 031 180 180 180 180 180 180 180 180 180
+Last Packet: 031 028 111 236 090 083 000 000 000 000 000 000 000 000 000 000
+Player Position: [32791,31251,6]
+Player Name: Kortex (Impera-Global)
+Player Action: 048 046 048 046 048 046 048 058 055 049 055 050
+Player.cpp 344: exception occurred, reason:
+Network.cpp 873: exception occurred, reason:
+NWin32Exception.cpp 98: win32 exception occurred, reason:
+invalid handle
+Comment: 
+----- 05/05/2018 15:05:17 - Marson Do Zazap (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 12:04:59 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 107 102 109 109 102 109 180 180
+Last Packet: 149 188 002 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33638,31947,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0352E458), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 05/05/2018 15:06:52 - Marson Do Zazap (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 12:06:36 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 102 109 107 109 109 131 180 131
+Last Packet: 149 189 002 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33636,31945,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 034A5B90), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 05/05/2018 15:57:55 - Marson Do Zazap (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 12:57:31 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 107 109 133 131 131 131 131 131
+Last Packet: 149 227 002 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33647,31946,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 034D56C8), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 06/05/2018 01:42:57 - Marson Do Zazap (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 22:42:36 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 102 109 131 131 131 131 131 131
+Last Packet: 149 168 010 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33654,31964,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0364DF58), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 06/05/2018 01:44:17 - Lock Down (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 22:43:58 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 109 109 109 162 162 162 160 160
+Last Packet: 149 170 010 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33654,31965,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0355E7D0), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 06/05/2018 01:49:58 - Lock Down (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sat May 05 22:49:37 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 101 109 109 109 103 109 109 109
+Last Packet: 149 214 010 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33628,31960,7]
+Player Name: Marson Do Zazap (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0358CE48), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 06/05/2018 23:09:02 - Lock Down (170.150.95.54) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 06 20:08:44 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 8 in BRA
+Processor: Intel Core i5 -4200U @ 
+Video Card: Intel (R) HD GR
+Last Packet Types: 001 149 107 103 109 109 109 131 180 101
+Last Packet: 149 132 003 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33648,31946,7]
+Player Name: Lock Down (HellBRA)
+Player Action: 051 053 046 049 057 054 046 049 048 057 046 050 049 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 03500C98), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 27/05/2018 01:31:11 - Psico (189.84.175.6) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 27 01:29:58 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Home Premium Edition 64 Bit in BRA
+Processor: Dual Core Intel Pentium E5400 @ 2
+Video Card: NVIDIA GeForce 8400 GS
+Last Packet Types: 001 149 181 107 162 100 108 102 109 029
+Last Packet: 149 218 003 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33628,31896,7]
+Player Name: Suave Zinho (HellBRA)
+Player Action: 051 053 046 049 057 056 046 052 053 046 050 052 055 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 038B6B68), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 27/05/2018 01:33:39 - Suave Zinho (189.84.175.6) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 27 01:33:12 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Home Premium Edition 64 Bit in BRA
+Processor: Dual Core Intel Pentium E5400 @ 2
+Video Card: NVIDIA GeForce 8400 GS
+Last Packet Types: 001 149 181 100 108 103 109 181 104 109
+Last Packet: 149 219 003 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33623,31896,7]
+Player Name: Suave Zinho (HellBRA)
+Player Action: 051 053 046 049 057 056 046 052 053 046 050 052 055 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 036C8AC0), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 27/05/2018 23:43:07 - Suave Zinho (189.84.175.6) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 27 23:42:44 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Home Premium Edition 64 Bit in BRA
+Processor: Dual Core Intel Pentium E5400 @ 2
+Video Card: NVIDIA GeForce 8400 GS
+Last Packet Types: 001 149 162 180 163 100 108 102 109 109
+Last Packet: 149 066 013 001 064 001 001 000 000 000 000 000 000 000 000 000
+Player Position: [33655,31952,10]
+Player Name: Suave Zinho (HellBRA)
+Player Action: 051 053 046 049 057 056 046 052 053 046 050 052 055 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0370EA38), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 27/05/2018 23:43:36 - Suave Zinho (189.84.175.6) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 27 23:43:06 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Home Premium Edition 64 Bit in BRA
+Processor: Dual Core Intel Pentium E5400 @ 2
+Video Card: NVIDIA GeForce 8400 GS
+Last Packet Types: 001 149 131 131 131 106 109 109 109 109
+Last Packet: 106 118 131 215 124 009 002 097 000 000 000 000 000 071 013 001
+Player Position: [33655,31954,10]
+Player Name: Suave Zinho (HellBRA)
+Player Action: 051 053 046 049 057 056 046 052 053 046 050 052 055 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0381EA38), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 27/05/2018 23:45:48 - Suave Zinho (189.84.175.6) -----
+Debug Assertion 1146 Control.cpp 1583
+Sun May 27 23:45:27 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Home Premium Edition 64 Bit in BRA
+Processor: Dual Core Intel Pentium E5400 @ 2
+Video Card: NVIDIA GeForce 8400 GS
+Last Packet Types: 001 149 109 109 106 106 143 104 109 107
+Last Packet: 109 108 131 226 124 010 001 109 131 226 124 010 149 088 013 001
+Player Position: [33651,31972,9]
+Player Name: Suave Zinho (HellBRA)
+Player Action: 051 053 046 049 057 056 046 052 053 046 050 052 055 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 1) (MainWindow = 0370EA38), reason:
+Control.cpp 1583: unknown packet type during game (Type = 1)
+Comment: 
+----- 18/07/2018 03:45:46 - Mickey Mouse (191.33.29.105) -----
+Debug Assertion 1146 Communication.cpp 2500
+Wed Jul 18 00:45:14 2018
+Graphic Engine: DirectX9 (2)
+Operating System: Windows 7 Ultimate Edition 64 Bit in BRA
+Processor: Intel CORE I3 5
+Video Card: Intel (R) HD GR
+Last Packet Types: 100 031 100 040 020 000 000 000 000 000
+Last Packet: 100 071 125 156 124 006 000 000 195 058 255 000 255 000 000 197
+Player Name: Mickey Mouse (HellBRA)
+Player Action: 051 053 046 049 057 056 046 051 054 046 050 052 057 058 055 049 055 050
+Player.cpp 354: exception occurred, reason:
+Network.cpp 951: exception occurred, reason:
+Control.cpp 1588: exception occurred (Type = 100) (MainWindow = 03C23508), reason:
+Communication.cpp 2565: exception occurred (PlayerX = 32071) (PlayerY = 31900), reason:
+Communication.cpp 2543: exception occurred (xmin = 0) (ymin = 0), reason:
+Communication.cpp 2522: exception occurred (Type = 0) (OldType = 98), reason:
+Communication.cpp 2500: client recieved field with type 0 (8,6,1)
+Comment: 

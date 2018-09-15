@@ -206,7 +206,8 @@ function changeStateToActive(player, indexColumn)
 	local timeLeft = player:getStaminaBonus(indexColumn)
 	local Bonus = loadBonus(player, indexColumn)
 	if (not Bonus) then
-		return changeStateToSelection(player, indexColumn)
+		changeStateToSelection(player, indexColumn)
+		return
 	end
 
 	local mType = MonsterType(Bonus.Name)
@@ -472,7 +473,7 @@ function Player.getBonusReroll(self)
 end
 
 function Player.getRerollPrice(self)
-	return (self:getLevel()/2) * 100
+	return (self:getLevel()/2) * 500
 end
 
 function Player.preyRerollList(self, column)

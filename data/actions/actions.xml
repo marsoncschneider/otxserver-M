@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-
+	
+	<action fromaid="2003" toaid="2011" script="other/dawnportdoors.lua" />
+	<action fromaid="2012" toaid="2015" script="other/brindes.lua" />
+	<action actionid="2017" script="other/brindesbox.lua" />
+	<!-- World Coin's -->
+	<action itemid="16101" script="other/premiumscroll.lua" />
+	<action itemid="24774" script="other/premiumscroll.lua" />
 	<!-- Store -->
 	<action itemid="26378" script="other/goldconverter.lua" />
 	<action itemid="26347" script="other/fishtank.lua"/>
@@ -8,7 +14,6 @@
 	<action fromid="26100" toid="26101" script="other/transform.lua"/>
 	<action fromid="26107" toid="26108" script="other/transform.lua"/>
 	<action fromid="26141" toid="26142" script="other/transform.lua"/>
-    <action fromid="26402" toid="26406" script="other/transform.lua"/>
 	<action itemid="26353" script="other/transform.lua"/><!-- dog house-->
 	<action itemid="26087" script="other/carpets.lua"/> <!-- yalaha carpet-->
 	<action itemid="26109" script="other/carpets.lua"/> <!-- yalaha carpet-->
@@ -38,19 +43,19 @@
 	<action itemid="27095" script="other/carpets.lua"/> <!-- fur carpet -->
 	<action itemid="27088" script="other/carpets.lua"/> <!-- diamond carpet -->
 	<action itemid="27096" script="other/carpets.lua"/> <!-- diamond carpet -->
-    <action itemid="27089" script="other/carpets.lua"/> <!-- patterned carpet -->
+        <action itemid="27089" script="other/carpets.lua"/> <!-- patterned carpet -->
 	<action itemid="27097" script="other/carpets.lua"/> <!-- patterned carpet -->
 	<action itemid="27090" script="other/carpets.lua"/> <!-- night sky carpet -->
 	<action itemid="27098" script="other/carpets.lua"/> <!-- night sky carpet -->
-    <action itemid="27091" script="other/carpets.lua"/> <!-- star carpet -->
+        <action itemid="27091" script="other/carpets.lua"/> <!-- star carpet -->
 	<action itemid="27099" script="other/carpets.lua"/> <!-- star carpet -->
 	<action itemid="29349" script="other/carpets.lua"/> <!-- verdant carpet -->
 	<action itemid="29350" script="other/carpets.lua"/> <!-- verdant carpet -->
-    <action itemid="29351" script="other/carpets.lua"/> <!-- shaggy carpet -->
+        <action itemid="29351" script="other/carpets.lua"/> <!-- shaggy carpet -->
 	<action itemid="29352" script="other/carpets.lua"/> <!-- shaggy carpet -->
 	<action itemid="29353" script="other/carpets.lua"/> <!-- mystic carpet -->
 	<action itemid="29354" script="other/carpets.lua"/> <!-- mystic carpet -->
-    <action itemid="29355" script="other/carpets.lua"/> <!-- stone tile -->
+        <action itemid="29355" script="other/carpets.lua"/> <!-- stone tile -->
 	<action itemid="29356" script="other/carpets.lua"/> <!-- stone tile -->
 	<action itemid="29357" script="other/carpets.lua"/> <!-- stone tile -->
 	<action itemid="29358" script="other/carpets.lua"/> <!-- stone tile -->
@@ -69,7 +74,9 @@
 	
 	<!-- Imbuement System -->
 	<action fromid="27728" toid="27729" script="imbuement.lua" />
+	<action fromid="27771" toid="27772" script="imbuement.lua" />
 	<action fromid="27850" toid="27851" script="imbuement.lua" />
+	<action fromid="27842" toid="27843" script="imbuement.lua" />
 	
     <!-- Ferumbras Ascedant Quest -->
     <action itemid="24763" script="FerumbrasAscedantQuest/RiftRunner.lua"/>
@@ -97,17 +104,11 @@
 	<action fromid="26364" toid="26365" script="houses/pet.lua" />
 	<action fromid="26098" toid="26099" script="houses/pet.lua" />
 	
-	<!-- Spike Tasks Quest -->
-	<action itemid="21553" script="quests/spike tasks/spirit shovel.lua"/>
-	<action itemid="21554" script="quests/spike tasks/tuning fork.lua"/>
-	<action itemid="21555" script="quests/spike tasks/ghost detector.lua"/>
-	<action itemid="21556" script="quests/spike tasks/thermometer.lua"/>
-	<action itemid="21557" script="quests/spike tasks/lodestone.lua"/>
-	<action itemid="21559" script="quests/spike tasks/nests.lua"/>
-	<action itemid="21564" script="quests/spike tasks/fertilizer.lua"/>
-	<action itemid="21566" script="quests/spike tasks/lodestone.lua"/>
-	<action itemid="21568" script="quests/spike tasks/lodestone.lua"/>
-
+	<!-- Spike Task -->
+	<action itemid="21557" script="quests/spike task/lodestone.lua" />
+	<action itemid="21564" script="quests/spike task/fertilise.lua" />
+	<action itemid="21559" script="quests/spike task/nests.lua" />
+	<action itemid="21556" script="quests/spike task/temperature.lua" />
 	<!-- Others House -->
 	<action fromid="26094" toid="26097" script="houses/statue.lua" />
 	
@@ -263,8 +264,10 @@
 	<action uniqueid="25612" script="gray island/obujos.lua" />-->
 	
 	<!-- Roshamuul -->
-       <action fromid="22604" toid="22606" script="prison/keys.lua"/>
-       <action itemid="22607" script="prison/golden.lua"/>
+        <action itemid="22604" script="prison/silver.lua"/>
+        <action itemid="22605" script="prison/copper.lua"/>
+        <action itemid="22606" script="prison/bronze.lua"/>
+        <action itemid="22607" script="prison/golden.lua"/>
 			
 			
 	<action itemid="22598" script="other/unrealized dream.lua"/>		
@@ -317,7 +320,7 @@
 	<action actionid="5556" script="other/ghostship.lua" />
 
 	<!-- Farmine -->
-	<action fromaid="9118" toaid="9123" script="farmine/elevatorLever.lua" />
+	<action fromaid="9118" toaid="9121" script="farmine/elevatorLever.lua" />
 	<action fromaid="12141" toaid="12142" script="farmine/templeofequilibrium_vines.lua" />
 
 	<!-- Weapons enchanting (Gems) -->
@@ -340,9 +343,7 @@
 	<action itemid="13498" script="other/taming.lua" />
 	<action itemid="13508" script="other/taming.lua" />
 	<action itemid="21452" script="other/taming.lua" />
-	<action itemid="13537" script="other/taming2.lua" />
-	<action fromid="13535" toid="13536" script="other/taming.lua" />
-	<action fromid="13538" toid="13539" script="other/taming.lua" />
+	<action fromid="13535" toid="13539" script="other/taming.lua" />
 	<action fromid="13938" toid="13939" script="other/taming.lua" />
 	<action itemid="13941" script="other/cup of molten gold.lua" />
 	<action fromid="15545" toid="15546" script="other/taming.lua" />
@@ -586,23 +587,14 @@
 	<action itemid="5938" script="quests/druid outfit/waterskin.lua" />
 
 	<!-- Explorer Society Quest -->
+	<action uniqueid="3152" script="flor.lua" />
 	<action itemid="4869" script="quests/explorer society/botanist.lua" />
 	<action itemid="4865" script="quests/explorer society/butterfly.lua" />
 	<action uniqueid="3017" script="quests/explorer society/dragon.lua" />
 	<action itemid="4856" script="quests/explorer society/icicle.lua" />
-	<action itemid="7242" script="quests/explorer society/resonance.lua" />
-	<action itemid="4851" script="quests/explorer society/stone.lua" />
-	<action itemid="4853" script="quests/explorer society/tracingpaper.lua" />
-	<action actionid="1098" script="quests/explorer society/dwacatradoor.lua" />
-	<action actionid="1097" script="quests/explorer society/chorurndoor.lua" />
-	<action actionid="1092" script="quests/explorer society/bonelordsdoor.lua" />
-	<action actionid="1096" script="quests/explorer society/orcpowderdoor.lua" />
-	<action actionid="1094" script="quests/explorer society/edrondoor.lua" />
-	<action actionid="1095" script="quests/explorer society/hellgatedoor.lua" />
-	<action actionid="1091" script="quests/explorer society/bansheedoor.lua" />
-	<action actionid="1093" script="quests/explorer society/calassadoor.lua" />
-	<action actionid="32700" script="quests/explorer society/carvingTPdoor.lua" />
-	
+	<action itemid="7281" script="quests/explorer society/resonance.lua" />
+	<action itemid="7242" script="quests/explorer society/stone.lua" />
+
 	<!-- Green Djinn Quest -->
 	<action actionid="5390" script="quests/green djinn/tear.lua" />
 
@@ -681,9 +673,6 @@
 	<action itemid="8762" script="quests/the thieves guild/fishnappingKey.lua" />
 	<action actionid="12505" script="quests/the thieves guild/fishnappingDoor.lua" />
 
-	<!-- The Travelling Trader Quest -->
-	<action actionid="1108" script="quests/the travelling trader/outlawcampdoor.lua" />
-	
 	<!-- Secret Service Quest -->
 	<action itemid="7700" script="quests/secret service/amazonDisguiseKit.lua" />
 	<action itemid="7697" script="quests/secret service/ring.lua" />
@@ -939,7 +928,6 @@
 	<action itemid="16112" script="other/spellbook.lua" />
 	<action itemid="18401" script="other/spellbook.lua" />
 	<action fromid="22422" toid="22424" script="other/spellbook.lua" />
-	<action itemid="29003" script="other/spellbook.lua" />
 
 	<!-- Construction Kits / Beds -->
 	<action fromid="3901" toid="3938" script="other/constructionkits.lua" />
@@ -1096,7 +1084,6 @@
 	<action fromid="10264" toid="10267" script="other/windows.lua" />
 	<action fromid="10488" toid="10491" script="other/windows.lua" />
 	<action fromid="11258" toid="11262" script="other/blessingCharms.lua" />
-	<action fromid="28036" toid="28037" script="other/blessingCharms.lua" />
 	<action itemid="7737" script="other/costumebags.lua" />
 	<action itemid="7739" script="other/costumebags.lua" />
 	<action itemid="9076" script="other/costumebags.lua" />

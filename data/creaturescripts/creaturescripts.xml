@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <creaturescripts>
-    
+	<!-- marson -->
+	<!--<event type="healthchange" name="Hchange" script="hchange.lua" />-->
+	<event type="death" name="Skull" script="others/skull.lua" />
+	<event type="think" name="autotarget" script="autotarget.lua"/>
+	
+	
+    <event type="login" name="bonus" script="bonus.lua"/>
+	<event type="logout" name="bonus" script="bonus.lua"/>
+	<event type="kill" name="AutoLoot" script="autoloot.lua" />
     <!-- New Summons (Pets) -->	
-    <event type="login" name="petlogin" script="pet.lua" />
+    <event type="login" name="petlogin" script="pet.lua"/>
     <event type="think" name="petthink" script="pet.lua" />
-	<event type="death" name="petdeath" script="pet.lua" />
 	
     <!-- Anti-Entrosa -->
     <event type="login" name="WarPrivateLogin" script="warPrivate_creaturescript.lua"/>
     <event type="logout" name="WarPrivateLogout" script="warPrivate_creaturescript.lua"/>
     <event type="death" name="WarPrivateDeath" script="warPrivate_creaturescript.lua"/>
 	<event type="modalwindow" name="ModalWindowHelper" script="modalwindowhelper.lua" />  
+	<event type="logout" name="CityWarLogout" script="citywar.lua" />
+    <event type="preparedeath" name="CityWarDeath" script="citywar.lua" />
+    <event type="textedit" name="CityWarInvite" script="citywar.lua" />
 
     <!-- Oramond Quest -->
     <event type="death" name="tp" script="quests/oramond/revanger.lua"/>
@@ -108,12 +118,9 @@
 	
 	<event type="kill" name="KillingInTheNameOfKillss" script="necro.lua" />
 	<event type="kill" name="KillingInTheNameOfKillsss" script="minos.lua" />
-
-	<!-- Spike Tasks Quest -->
-	<event type="kill" name="UpperSpikeKill" script="quests/spike tasks/upperspikekill.lua"/>
-	<event type="kill" name="MiddleSpikeKill" script="quests/spike tasks/middlespikekill.lua"/>
-	<event type="kill" name="LowerSpikeKill" script="quests/spike tasks/lowerspikekill.lua"/>
-
+	<!-- spike task -->
+	<event type="kill"  name="SpikeTaskQuestCrystal" script="quests/spike task/crystalkill.lua"/>
+	<event type="kill"  name="SpikeTaskQuestDrillworm" script="quests/spike task/drillwormkill.lua"/>
 	<!-- The Masters Voice Quest -->
 	<event type="kill" name="MastersVoiceServants" script="quests/their master's voice/ServantsKill.lua" />
 
@@ -144,6 +151,9 @@
 	<event type="login" name="OfflineTraining" script="others/offlinetraining.lua" />
 	<event type="logout" name="PlayerLogout" script="others/logout.lua" />
 	<event type="death" name="PlayerDeath" script="others/playerdeath.lua" />
+	<event type="preparedeath" name="modalDeath" script="modaldeath.lua" />
+    <event type="modalwindow" name="deathMW" script="modaldeath.lua" />
+    <event type="login" name="loginDeath" script="modaldeath.lua" />
 	<event type="death" name="DropLoot" script="others/droploot.lua" />
 	<event type="advance" name="AdvanceSave" script="others/advance_save.lua" />
 	<event type="death" name="WhiteDeerDeath" script="others/whitedeer.lua" />

@@ -5,10 +5,10 @@ function onAdvance(cid, skill, oldlevel, newlevel)
 						    setPlayerStorageValue(cid, 99963, 1)
 						    doPlayerSendTextMessage(cid, 19, "You have received 2000 gold in your bank for advancing to Level 8.")
 
-		    elseif getPlayerLevel(cid) >= 40 and getPlayerStorageValue(cid, 99964) ~= 1 then
-						    doPlayerSetBalance(cid, getPlayerBalance(cid) + 10000)
+		    elseif getPlayerLevel(cid) >= 20 and getPlayerStorageValue(cid, 99964) ~= 1 then
+						    doPlayerSetBalance(cid, getPlayerBalance(cid) + 20000)
 						    setPlayerStorageValue(cid, 99964, 1)
-						    doPlayerSendTextMessage(cid, 19, "You have received 10000 gold in your bank for advancing to Level 40.")
+						    doPlayerSendTextMessage(cid, 19, "You have received 20000 gold in your bank for advancing to Level 20.")
 
 		   elseif getPlayerLevel(cid) >= 50 and getPlayerStorageValue(cid, 99965) ~= 1 then
 						    doPlayerSetBalance(cid, getPlayerBalance(cid) + 30000)

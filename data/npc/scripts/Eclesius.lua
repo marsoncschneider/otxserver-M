@@ -8,16 +8,16 @@ function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)
 function onThink()		npcHandler:onThink()		end
 
 local voices = {
-	{ text = "I'm looking for a new assistant!" },
-	{ text = "Err, what was it again that I wanted...?" },
-	{ text = "Do come in! Mind the step of the magical door, though." },
-	{ text = "I'm so sorry... I promise it won't happen again. Problem is, I can't remember where I made the error..." },
-	{ text = "Actually, I STILL prefer inexperienced assistants. They're easier to keep an eye on and don't tend to backstab you." },
-	{ text = "So much to do, so much to do... uh... where should I start?" }
+	{ text = "Estou procurando por um novo assistente!!" },
+	{ text = "Err, o que? O que foi feito novamente? Era o que eu queria...?" },
+	{ text = "Entre! Mas tenha cuidado com a porta mágica." },
+	{ text = "Me desculpe... Eu prometo que isso não irá acontecer novamente. O problema é que, eu realmente não me lembro onde errei..." },
+	{ text = "Atualmnete, EU CONTINUO a ter uma preferência por assistentes inexperientes. São mais fáceis de controlar, além de não tentarem te apunhalar pelas costas." },
+	{ text = "Muito trabalho a fazer, muito trabalho... uh... por onde eu deveria começar?" }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))
 
-npcHandler:setMessage(MESSAGE_GREET, "Who are you? What do you want? You seem too experienced to become my assistant. Please leave.")
+npcHandler:setMessage(MESSAGE_GREET, "Quem é você? O que você quer? Você parece experiente para se tornar meu assistente. Por favor vá embora.")
 
 npcHandler:addModule(FocusModule:new())

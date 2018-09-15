@@ -2,32 +2,7 @@
 <monsters>
 	<!-- Trainers -->
     <monster name="Training Monk" file="Customs/Training Monk.xml" />
-	
-	<!-- Cults of Tibia bosses -->
-    <monster name="Ancient Spawn of Morgathla" file="Cults of tibia/Bosses/Ancient Spawn of Morgathla.xml" />
-    <monster name="Black Vixen" file="Cults of tibia/Bosses/Black Vixen.xml" />
-    <monster name="Bloodback" file="Cults of tibia/Bosses/Bloodback.xml" />
-    <monster name="Darkfang" file="Cults of tibia/Bosses/Darkfang.xml" />
-    <monster name="Last Planegazer" file="Cults of tibia/Bosses/Last Planegazer.xml" />
-    <monster name="Reflection Of Mawhawk" file="Cults of tibia/Bosses/Reflection Of Mawhawk.xml" />
-    <monster name="Reflection Of Obujos" file="Cults of tibia/Bosses/Reflection Of Obujos.xml" />
-    <monster name="Shadowpelt" file="Cults of tibia/Bosses/Shadowpelt.xml" />
-    <monster name="Sharpclaw" file="Cults of tibia/Bosses/Sharpclaw.xml" />
-    <monster name="The Baron from Below" file="Cults of tibia/Bosses/The Baron from Below.xml" />
-    <monster name="The Count Of The Core" file="Cults of tibia/Bosses/The Count Of The Core.xml" />
-    <monster name="The Duke Of The Depths" file="Cults of tibia/Bosses/The Duke Of The Depths.xml" />
-	
-	<!-- Cults of Tibia -->
-	<monster name="Agressive Lava" file="Cults of tibia/Agressive Lava.xml" />
-    <monster name="Cave Devourer" file="Cults of tibia/Cave Devourer.xml" />
-    <monster name="Chasm Spawn" file="Cults of tibia/Chasm Spawn.xml" />
-    <monster name="Deepworm" file="Cults of tibia/Deepworm.xml" />
-    <monster name="Diremaw" file="Cults of tibia/Diremaw.xml" />
-    <monster name="Fox" file="Cults of tibia/Fox.xml" />
-    <monster name="Mole" file="Cults of tibia/Mole.xml" />
-    <monster name="Stonerefiner" file="Cults of tibia/Stonerefiner.xml" />
-    <monster name="Tunnel Tyrant" file="Cults of tibia/Tunnel Tyrant.xml" />
-    <monster name="Werefox" file="Cults of tibia/Werefox.xml" />
+	<monster name="Training Sheep" file="Customs/Training Sheep.xml" />
 
 	<!-- Nostalgia -->
 	<monster name="BearOld" file="Nostalgia/old_bear.xml" />
@@ -93,7 +68,6 @@
 	<monster name="The Enraged Thorn Knight" file="Hallsofhope/bosses/The Enraged Thorn Knight.xml" />
    
     <!-- Halls of Hope -->
-	<monster name="The Time Guardian" file="Hallsofhope/bosses/The Time Guardian.xml" />
 	<monster name="A Shielded Astral Glyph" file="Hallsofhope/A Shielded Astral Glyph.xml" />
 	<monster name="An Observer Eye (Imune)" file="Hallsofhope/An Observer Eye (Imune).xml" />
 	<monster name="Angry Plant" file="Hallsofhope/Angry Plant.xml" />
@@ -142,10 +116,12 @@
 	<monster name="Unbound Demon" file="Hallsofhope/Unbeatable Dragon.xml" />
 
 	<!-- Otherworld -->
+	<monster name="Instable Breach Brood" file="Otherworld/Instable Breach BroodSummon.xml" />
 	<monster name="Instable Breach Brood" file="Otherworld/Instable Breach Brood.xml" />
 	<monster name="Breach Brood" file="Otherworld/Breach Brood.xml" />
 	<monster name="Instable Sparkion" file="Otherworld/Instable Sparkion.xml" />
 	<monster name="Dread Intruder" file="Otherworld/Dread Intruder.xml" />
+	<monster name="Dread IntruderSummon" file="Otherworld/Dread IntruderSummon.xml" />	   
 	<monster name="Reality Reaver" file="Otherworld/Reality Reaver.xml" />
 	<monster name="Spark of Destruction" file="Otherworld/Spark of Destruction.xml" />
 	<monster name="Charger" file="Otherworld/Charger.xml" />
@@ -231,7 +207,6 @@
 	<monster name="Weakened Glooth Horror" file="Oramond/weakened glooth horror.xml"/>
 
 	<!-- Amazons -->
-	<monster name="Dryad" file="Amazons/dryad.xml" />
 	<monster name="Amazon" file="Amazons/amazon.xml" />
 	<monster name="Valkyrie" file="Amazons/valkyrie.xml" />
 
@@ -540,7 +515,6 @@
 	<monster name="Bibby Bloodbath" file="Bosses/bibby bloodbath.xml" />
 	<monster name="Doctor Perhaps" file="Bosses/doctor perhaps.xml" />
 	<monster name="Mooh'Tah Master" file="Bosses/mooh'tah master.xml" />
-	<monster name="The Welter" file="Bosses/the_welter.xml" />
 
 	<!-- Canines -->
 	<monster name="Crystal Wolf" file="Canines/crystal_wolf.xml" />
@@ -556,7 +530,6 @@
 	<monster name="Winter wolf" file="Canines/winter_wolf.xml" />
 	<monster name="Wolf" file="Canines/wolf.xml" />
 	<monster name="Gnarlhound" file="Canines/gnarlhound.xml" />
-	<monster name="Gloom Wolf" file="Canines/gloom_wolf.xml" />
 
 	<!-- Chakoyas -->
 	<monster name="Chakoya Toolshaper" file="Chakoyas/chakoya_toolshaper.xml" />
@@ -1106,11 +1079,11 @@
 	<monster name="Mushroom Sniffer" file="Ungulates/mushroom_sniffer.xml" />
 	<monster name="Pig" file="Ungulates/pig.xml" />
 	<monster name="Sheep" file="Ungulates/sheep.xml" />
+	<monster name="Mad Sheep" file="Ungulates/madsheep.xml" />
 	<monster name="Stampor" file="Ungulates/stampor.xml" />
 	<monster name="Terrified Elephant" file="Ungulates/terrified_elephant.xml" />
 	<monster name="Vampire Pig" file="Ungulates/vampire_pig.xml" />
 	<monster name="White Deer" file="Ungulates/white_deer.xml" />
-	<monster name="Wild Horse" file="Ungulates/wild_horse.xml" />
 
 	<!-- Voodoo_Cultists -->
 	<monster name="Acolyte of the Cult" file="Voodoo_Cultists/acolyte_of_the_cult.xml" />

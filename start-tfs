@@ -1,0 +1,5 @@
+cd /home/Otxserver-New
+while true
+do
+./tfs > ./home/Otxserver-New/log.txt;
+done

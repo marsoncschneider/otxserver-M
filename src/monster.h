@@ -147,6 +147,7 @@ class Monster final : public Creature
 		void onThink(uint32_t interval) final;
 
 		bool challengeCreature(Creature* creature) final;
+		bool convinceCreature(Creature* creature) final;
 
 		void setNormalCreatureLight() final;
 		bool getCombatValues(int32_t& min, int32_t& max) final;
@@ -245,6 +246,7 @@ class Monster final : public Creature
 
 		void onAddCondition(ConditionType_t type) final;
 		void onEndCondition(ConditionType_t type) final;
+		void onCreatureConvinced(const Creature* convincer, const Creature* creature) final;
 
 		bool canUseAttack(const Position& pos, const Creature* target) const;
 		bool canUseSpell(const Position& pos, const Position& targetPos,

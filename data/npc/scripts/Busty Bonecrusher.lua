@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Behave yourself as long as you are in Carlin, commoner!'} }
+local voices = { {text = 'Comporte-se enquanto estiver em Carlin, plebeus!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local condition = Condition(CONDITION_FIRE)
@@ -19,7 +19,7 @@ local function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	if isInArray({"fuck", "idiot", "asshole", "ass", "fag", "stupid", "tyrant", "shit", "lunatic"}, msg) then
-		npcHandler:say("Take this!", cid)
+		npcHandler:say("Pegue isso!", cid)
 		local player = Player(cid)
 		player:getPosition():sendMagicEffect(CONST_ME_EXPLOSIONAREA)
 		player:addCondition(condition)
@@ -29,8 +29,8 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE THE QUEEN!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE QUEEN!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE QUEEN!")
+npcHandler:setMessage(MESSAGE_GREET, "VIDA LONGA A RAINHA!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "VIDA LONGA A RAINHA!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA A RAINHA!")
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

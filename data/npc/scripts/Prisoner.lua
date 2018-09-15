@@ -9,12 +9,12 @@ function onThink()		npcHandler:onThink()		end
 
 local voices = {
 	{ text = "Ahhhh!" },
-	{ text = "Have mercy!" },
-	{ text = "I admit! I admit!" },
-	{ text = "I repent!" },
-	{ text = "Noooooo!" },
-	{ text = "Please! I beg you to stop!" },
-	{ text = "Take it away! Please!" }
+	{ text = "Tenha misericórdia!" },
+	{ text = "Eu confesso! Eu confesso!" },
+	{ text = "Estou arrependido!" },
+	{ text = "Nãooooo!" },
+	{ text = "Por favor! Eu te imploro! Pare, por favor!" },
+	{ text = "Tirem-no daqui! Por favor, tirem ele daqui!!" }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))

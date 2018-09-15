@@ -5,7 +5,6 @@
 	<targetchange interval="2000" chance="25"/>
 	<strategy attack="100" defense="0"/>
 	<flags>
-		<flag boss="1" />
 	    <flag rewardboss="1" />
 		<flag summonable="0"/>
 		<flag attackable="1"/>
@@ -80,7 +79,8 @@
 		<item id="2470" chance="2500"/><!-- golden legs -->
 		<item id="7899" chance="2500"/><!-- magma coat --> 
 	    <item id="7417" chance="2500" unique="1"/><!-- Runed Sword -->
-		<item id="22609" chance="25000"/><!-- dream warden claw -->
+	
+		<!--<item id="22609" chance="25000"/><!-- dream warden claw -->
 		<item id="22610" chance="7000" unique="1"/><!-- dream warden mask -->
 		<item id="18413" countmax="5" chance="100000"/><!-- blue crystal shard -->
 		<item id="7418" chance="1000"/><!-- Nightmare Blade -->

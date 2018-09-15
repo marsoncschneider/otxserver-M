@@ -21,7 +21,7 @@ function TirarCristal()
 end
      
 function onTimer5() --creates wall back
-Game.createItem(17999,1,posdotp)-- Stone pos
+doCreateItem(17999,1,posdotp)-- Stone pos
 end
 
 function onTimer6()

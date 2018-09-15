@@ -9,16 +9,8 @@ BlessingsDialog = {
 	},
 }
 
-local Client = {
-	OpenWindow = 0xCF
-}
-
-local Server = {
-	BlessingsInfo = 0x9B
-}
-
 function onRecvbyte(player, msg, byte)
-	if (byte == Client.OpenWindow) then
+	if (byte == 207) then
 		if (player:getClient().os ~= CLIENTOS_NEW_WINDOWS and player:getClient().os ~= CLIENTOS_FLASH) then
 			player:sendCancelMessage("Only work with Flash Client & 11.0")
 			return false
@@ -30,7 +22,7 @@ end
 
 function sendBlessingsDialog(player)
 	local msg = NetworkMessage()
-	msg:addByte(Server.BlessingsInfo)
+	msg:addByte(155)
 	msg:addByte(8) -- total blessings
 	local c, bless = 1, 2
 	while (c < 9) do
@@ -56,7 +48,11 @@ function sendBlessingsDialog(player)
 	if (haveSkull) then
 		msg:addByte(1) -- is red/black skull
 		local playerAmulet = player:getSlotItem(CONST_SLOT_AMULET)
-		msg:addByte((playerAmulet and playerAmulet:getId() == 2173) and 1 or 0)
+		if (playerAmulet and playerAmulet:getId() == 2173) then
+			msg:addByte(1)
+		else
+			msg:addByte(0)
+		end
 	else
 		msg:addByte(0)
 		msg:addByte(0)
@@ -66,7 +62,7 @@ function sendBlessingsDialog(player)
 	local historyAmount = 1
 	msg:addByte(historyAmount) -- History log count
 	for i = 1, historyAmount do
-		msg:addU32(os.time()) -- timestamp
+		msg:addU32(1500060480) -- timestamp
 		msg:addByte(0) -- Color message (1 - Red | 0 = White loss)
 		msg:addString("Blessing Purchased") -- History message
 	end

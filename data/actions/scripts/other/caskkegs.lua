@@ -18,12 +18,14 @@ local targetIdList = {
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	if target:getId() >= 28535 and target:getId() <= 28590 then
 	local house = player:getTile():getHouse()
+	if target:getActionId() ~= 8000 then
 	if house and house:canEditAccessList(SUBOWNER_LIST, player) and house:canEditAccessList(doorId, player) or target:getId() >= 28579 then 
 	elseif target:getId() >= 28535 and target:getId() < 28579 then
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'Sorry, casks only can be useds inside house.')
 		return false
 	else
 		return false
+	end
 	end
 
 	if target then
@@ -37,10 +39,16 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
  		if targetId then
  			if item:getId() == targetId.itemId then
 				item:transform(targetId.transform)
+				if charges ~= 2000 then
 				charges = charges - item:getCount()
+				end
 				target:transform(target:getId(), charges)
+				if charges ~= 2000 then
 				player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format('Remaining %s charges.', charges)) 
-		
+				else
+				player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format('Free potions - Infinite Charges \n Hail to the King of Thais. \n By GOD', charges)) 
+				end
+			
 				if charges == 0 then
 					target:remove()
 				end

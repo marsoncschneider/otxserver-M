@@ -5,6 +5,5 @@
 	<parameters>
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="helmet of the deep,5461,5000;" />
-		<parameter key="shop_sellable" value="helmet of the deep,5461,5000;" />
 	</parameters>
 </npc>

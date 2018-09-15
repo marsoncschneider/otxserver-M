@@ -78,6 +78,7 @@ class Party
 		bool canUseSharedExperience(const Player* player) const;
 		void updateSharedExperience();
 
+		void updateSharedExperienceBonus();
 
 		void updatePlayerTicks(Player* player, uint32_t points);
 		void clearPlayerPoints(Player* player);
@@ -92,6 +93,7 @@ class Party
 
 		Player* leader;
 
+		double sharedExpBonus;
 
 		bool sharedExpActive = false;
 		bool sharedExpEnabled = false;

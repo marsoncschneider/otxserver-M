@@ -7,8 +7,8 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'food'}, StdModule.say, {npcHandler = npcHandler, text = "I offer quite a lot of food. Ask me for a {trade} if you're hungry"})
+keywordHandler:addKeyword({'food'}, StdModule.say, {npcHandler = npcHandler, text = "Eu ofereço muita comida. Peça-me um {trade} se você estiver com fome"})
 
-npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME|! What do you need? If it's {food}, you've come to the right place.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Yep, take a good look.")
+npcHandler:setMessage(MESSAGE_GREET, "Hello |PLAYERNAME|! O que você precisa? Se for comida {food}, você veio ao lugar certo.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Sim, dê uma boa olhada.")
 npcHandler:addModule(FocusModule:new())

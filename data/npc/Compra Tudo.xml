@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<npc name="Edward" script="compratudo.lua" walkinterval="0" floorchange="0">
+<npc name="Compra Tudo" script="compratudo.lua" walkinterval="0" floorchange="0">
 	<health now="100" max="100" />
-	<look type="104" />
+	<look type="328" />
 	<parameters>
 		<parameter key="module_shop" value="1" />
 		<parameter key="shop_buyable" value="
 			stone skin amulet,2197,5000,5;
 			rusty,9930,50;
+			Assassin Star,7368,100;
 			brown,2789,6" />
 		<parameter key="shop_sellable" value="		
+		
+		twin hooks,11309,500;
 		yellow gem,2154,1000;
 		violet gem,2153,10000;
 		red gem, 2156,1000;

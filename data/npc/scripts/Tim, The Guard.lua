@@ -13,21 +13,21 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	local player = Player(cid)
 	if msgcontains(msg, "trouble") and player:getStorageValue(Storage.TheInquisition.TimGuard) < 1 and player:getStorageValue(Storage.TheInquisition.Mission01) ~= -1 then
-		npcHandler:say("Ah, well. Just this morning my new toothbrush fell into the toilet.", cid)
+		npcHandler:say("Ah, bem. Dê manhã minha nova escova de dentes caiu na privada, que pena.", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "authorities") then
 		if npcHandler.topic[cid] == 1 then
-			npcHandler:say("What do you mean? Of course they will immediately send someone with extra long and thin arms to retrieve it! ", cid)
+			npcHandler:say("O que quis dizer com isso? É claro que eles vão imediatamente enviar alguem com braços extra longos e fininhos para recuperá-los! ", cid)
 			npcHandler.topic[cid] = 2
 		end
 	elseif msgcontains(msg, "avoided") then
 		if npcHandler.topic[cid] == 2 then
-			npcHandler:say("Your humour might let end you up beaten in some dark alley, you know? No, I don't think someone could have prevented that accident! ", cid)
+			npcHandler:say("Seu humor pode acabar com sua vida, em um beco escuro. Eu não acho que alguém conseguiria impedir aquele acidente! ", cid)
 			npcHandler.topic[cid] = 3
 		end
 	elseif msgcontains(msg, "gods would allow") then
 		if npcHandler.topic[cid] == 3 then
-			npcHandler:say("It's not a drama!! I think there is just no god who's responsible for toothbrush safety, that's all ... ", cid)
+			npcHandler:say("Isso não é drama!! Eu acho que aqui não tem nenhum Deus responsável por segurança de escovas de dente, isso é tudo ... ", cid)
 			npcHandler.topic[cid] = 0
 			if player:getStorageValue(Storage.TheInquisition.TimGuard) < 1 then
 				player:setStorageValue(Storage.TheInquisition.TimGuard, 1)
@@ -39,11 +39,11 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "It's my duty to protect the city."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "É meu dever proteger a cidade."})
 
-npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE THE KING!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE KING!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE KING!")
+npcHandler:setMessage(MESSAGE_GREET, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA AO REI!")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

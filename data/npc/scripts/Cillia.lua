@@ -14,18 +14,18 @@ local function creatureSayCallback(cid, type, msg)
 
 	if msgcontains(msg, 'yes') then
 		local player = Player(cid)
-		if not player:removeMoneyNpc(50) then
-			npcHandler:say('The exhibition is not for free. You have to pay 50 Gold to get in. Next please!', cid)
+		if not player:removeMoney(50) then
+			npcHandler:say('A exibição não é de graça. Você terá de pagar 50 moedas de ouro para entrar. Próximo por favor!', cid)
 			return true
 		end
 
-		npcHandler:say('And here we go!', cid)
+		npcHandler:say('E aqui vamos nós!', cid)
 		player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
 		local exhibitionPosition = Position(32390, 32195, 8)
 		player:teleportTo(exhibitionPosition)
 		exhibitionPosition:sendMagicEffect(CONST_ME_TELEPORT)
 	else
-		npcHandler:say('Then not.', cid)
+		npcHandler:say('Então não.', cid)
 	end
 	npcHandler:releaseFocus(cid)
 	npcHandler:resetNpc(cid)

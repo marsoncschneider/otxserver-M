@@ -46,11 +46,11 @@ exhaust:setParameter(CONDITION_PARAM_TICKS, (configManager.getNumber(configKeys.
 -- 1000 - 100 due to exact condition timing. -100 doesn't hurt us, and players don't have reminding ~50ms exhaustion.
 
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
-	local potion = config[item.itemid]
-	if not potion then
+	local potion, actionId = config[item.itemid], item:getActionId()
+	if not potion or actionId == 8000 then
 		return true
 	end
-
+	
 	if target.itemid ~= 1 or target.type ~= THING_TYPE_PLAYER then
 		return false
 	end

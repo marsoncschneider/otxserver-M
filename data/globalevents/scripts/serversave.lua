@@ -1,18 +1,14 @@
-local shutdownAtServerSave = true
-local cleanMapAtServerSave = false
+local shutdownAtServerSave = false
+local cleanMapAtServerSave = true
 
 local function serverSave()
-	if shutdownAtServerSave then
-		Game.setGameState(GAME_STATE_SHUTDOWN)
-	else
-		Game.setGameState(GAME_STATE_CLOSED)
-
-		if cleanMapAtServerSave then
-			cleanMap()
-		end
-
-		Game.setGameState(GAME_STATE_CLOSED)
+	--Game.setGameState(GAME_STATE_CLOSED)
+	--Game.setGameState(GAME_STATE_INIT)   --## GAME_STATE_STARTUP GAME_STATE_INIT GAME_STATE_NORMAL GAME_STATE_CLOSED GAME_STATE_SHUTDOWN GAME_STATE_CLOSING GAME_STATE_MAINTAIN)##
+	if cleanMapAtServerSave then
+		cleanMap()
 	end
+	saveServer()
+	--Game.setGameState(GAME_STATE_NORMAL)
 end
 
 local function secondServerSaveWarning()

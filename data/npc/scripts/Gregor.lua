@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Gather around me, young knights! I\'m going to teach you some spells!'} }
+local voices = { {text = 'Cheguem mais pertos, jovens knights! Vou ensinar algumas magias!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local function creatureSayCallback(cid, type, msg)
@@ -19,71 +19,71 @@ local function creatureSayCallback(cid, type, msg)
 	local addonProgress = player:getStorageValue(Storage.OutfitQuest.Knight.AddonHelmet)
 	if msgcontains(msg, 'task') then
 		if not player:isPremium() then
-			npcHandler:say('Sorry, but our tasks are only for premium warriors.', cid)
+			npcHandler:say('Desculpe, mas nossas tarefas são apenas para premium knights.', cid)
 			return true
 		end
 
 		if addonProgress < 1 then
-			npcHandler:say('You mean you would like to prove that you deserve to wear such a helmet?', cid)
+			npcHandler:say('Você disse que quer provar que realmeente merece usar essee tipo de capacete (helmet)?', cid)
 			npcHandler.topic[cid] = 1
 		elseif addonProgress == 1 then
-			npcHandler:say('Your current task is to bring me 100 perfect behemoth fangs, |PLAYERNAME|.', cid)
+			npcHandler:say('Sua tarefa atual é me trazer 100 perfect behemoth fangs, |PLAYERNAME|.', cid)
 		elseif addonProgress == 2 then
-			npcHandler:say('Your current task is to retrieve the helmet of Ramsay the Reckless from Banuta, |PLAYERNAME|.', cid)
+			npcHandler:say('Sua tarefa atual é me trazer o helmet of Ramsay the Reckless de Banuta, |PLAYERNAME|.', cid)
 		elseif addonProgress == 3 then
-			npcHandler:say('Your current task is to obtain a flask of warrior\'s sweat, |PLAYERNAME|.', cid)
+			npcHandler:say('Sua tarefa atual é conseguir um flask of warrior\'s sweat, |PLAYERNAME|.', cid)
 		elseif addonProgress == 4 then
-			npcHandler:say('Your current task is to bring me royal steel, |PLAYERNAME|.', cid)
+			npcHandler:say('Sua tarefa atual é me trazer um royal steel, |PLAYERNAME|.', cid)
 		elseif addonProgress == 5 then
-			npcHandler:say('Please talk to Sam and tell him I sent you. I\'m sure he will be glad to refine your helmet, |PLAYERNAME|.', cid)
+			npcHandler:say('Por favor, fale com Sam e diga a eele quee eu mandei você. Estou certo de que ele vai ficar feliz em refinar seu helmet (capacete), |PLAYERNAME|.', cid)
 		else
-			npcHandler:say('You\'ve already completed the task and can consider yourself a mighty warrior, |PLAYERNAME|.', cid)
+			npcHandler:say('Você já completou essa tarefa e agora vou considerá-lo um verdadeiro guerreiro, |PLAYERNAME|.', cid)
 		end
 
 	elseif msgcontains(msg, 'behemoth fang') then
 		if addonProgress == 1 then
-			npcHandler:say('Have you really managed to fulfil the task and brought me 100 perfect behemoth fangs?', cid)
+			npcHandler:say('Você realmente conseguiu cumprir essa tarefa? Me trouxe as 100 perfect behemoth fangs?', cid)
 			npcHandler.topic[cid] = 3
 		else
-			npcHandler:say('You\'re not serious asking that, are you? They come from behemoths, of course. Unless there are behemoth rabbits. Duh.', cid)
+			npcHandler:say('Você não está falando sério né? Está? Elas vem dos behemoths é claro. A não ser que sejam coelhosmoths. Dãã.', cid)
 		end
 
 	elseif msgcontains(msg, 'ramsay') then
 		if addonProgress == 2 then
-			npcHandler:say('Did you recover the helmet of Ramsay the Reckless?', cid)
+			npcHandler:say('Você recebeu o capacete de Ramsay the Reckless?', cid)
 			npcHandler.topic[cid] = 4
 		else
-			npcHandler:say('These pesky apes steal everything they can get their dirty hands on.', cid)
+			npcHandler:say('Esses macacos idiotas roubam tudo o que conseguem colocar as mãos.', cid)
 		end
 
 	elseif msgcontains(msg, 'sweat') then
 		if addonProgress == 3 then
-			npcHandler:say('Were you able to get hold of a flask with pure warrior\'s sweat?', cid)
+			npcHandler:say('Você foi capaz de conseguir o flask with pure warrior\'s sweat?', cid)
 			npcHandler.topic[cid] = 5
 		else
-			npcHandler:say('Warrior\'s sweat can be magically extracted from headgear worn by a true warrior, but only in small amounts. Djinns are said to be good at magical extractions.', cid)
+			npcHandler:say('Warrior\'s sweat pode ser mágicamente extraído dos lenços usados por um verdadeiro guerreiro, mas somente em pequenas quantidades. Djinns são citados como bons extraidores mágicos, se é que essa palavra existe.', cid)
 		end
 
 	elseif msgcontains(msg, 'royal steel') then
 		if addonProgress == 4 then
-			npcHandler:say('Ah, have you brought the royal steel?', cid)
+			npcHandler:say('Ah, você trouxe o royal steel?', cid)
 			npcHandler.topic[cid] = 6
 		else
-			npcHandler:say('Royal steel can only be refined by very skilled smiths.', cid)
+			npcHandler:say('Royal steel só pode ser refinado por ferreiros muito bem treinados.', cid)
 		end
 
 	elseif npcHandler.topic[cid] == 1 then
 		if msgcontains(msg, 'yes') then
 			npcHandler:say({
-				'Well then, listen closely. First, you will have to prove that you are a fierce and restless warrior by bringing me 100 perfect behemoth fangs. ...',
-				'Secondly, please retrieve a helmet for us which has been lost a long time ago. The famous Ramsay the Reckless wore it when exploring an ape settlement. ...',
-				'Third, we need a new flask of warrior\'s sweat. We\'ve run out of it recently, but we need a small amount for the show battles in our arena. ...',
-				'Lastly, I will have our smith refine your helmet if you bring me royal steel, an especially noble metal. ...',
-				'Did you understand everything I told you and are willing to handle this task?'
+				'Bom, então escute com atenção. Primeiramente, você terá que provar que é um guerreiro feroz, animal, trazendo-me 100 perfect behemoth fangs. ...',
+				'Em segundo lugar. Recupere um capacete que perdemos há muito tempo. O Famoso Ramsay the Reckless o usava enquanto explorava um local cheio de macacos. ...',
+				'Terceiro, nós precisamos de um novo flask of warrior\'s sweat. Nós ficamos sem recentemente, mas precisanos de uma peequena quantia para apresentar as batalhas em nossa arena. ...',
+				'Por ultimo, eu vou encontrar o ferreiro que irá refinar seu capacete (helmet) se você me trouxer uma royal steel, um metal muito nobre. ...',
+				'Você entendeu tudo o que eu disse a você? Vai aceitar a tarefa?'
 			}, cid)
 			npcHandler.topic[cid] = 2
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('Bah. Then you will have to wait for the day these helmets are sold in shops, but that will not happen before hell freezes over.', cid)
+			npcHandler:say('Bah. Então você terá de esperar o dia em que esses capacetes (helmets) forem vendidos em lojas, mas isso não irá acontecer até que o inferno congele.', cid)
 			npcHandler.topic[cid] = 0
 		end
 
@@ -92,71 +92,71 @@ local function creatureSayCallback(cid, type, msg)
 			player:setStorageValue(Storage.OutfitQuest.Ref, math.max(0, player:getStorageValue(Storage.OutfitQuest.Ref)) + 1)
 			player:setStorageValue(Storage.OutfitQuest.Knight.AddonHelmet, 1)
 			player:setStorageValue(Storage.OutfitQuest.Knight.MissionHelmet, 1)
-			npcHandler:say('Alright then. Come back to me once you have collected 100 perfect behemoth fangs.', cid)
+			npcHandler:say('Tudo bem então. Volte para mim quando você tiver coletado as 100 perfect behemoth fangs.', cid)
 			npcHandler.topic[cid] = 0
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('Would you like me to repeat the task requirements then?', cid)
+			npcHandler:say('Gostaria que eu repetisse os requesitos para a tarefa?', cid)
 			npcHandler.topic[cid] = 1
 		end
 
 	elseif npcHandler.topic[cid] == 3 then
 		if msgcontains(msg, 'yes') then
 			if not player:removeItem(5893, 100) then
-				npcHandler:say('Lying is not exactly honourable, |PLAYERNAME|. Shame on you.', cid)
+				npcHandler:say('Mentir é contra a honra, |PLAYERNAME|. Tenho vergonha de você.', cid)
 				return true
 			end
 
 			player:setStorageValue(Storage.OutfitQuest.Knight.AddonHelmet, 2)
 			player:setStorageValue(Storage.OutfitQuest.Knight.MissionHelmet, 2)
 			player:setStorageValue(Storage.OutfitQuest.Knight.RamsaysHelmetDoor, 1)
-			npcHandler:say('I\'m deeply impressed, brave Knight |PLAYERNAME|. I expected nothing less from you. Now, please retrieve Ramsay\'s helmet.', cid)
+			npcHandler:say('Estou profundamente impressionado, bravo Knight |PLAYERNAME|. Eu não esperava nada a menos de você. Agora, por favor traga o Ramsay\'s helmet.', cid)
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('There is no need to rush anyway.', cid)
+			npcHandler:say('Não precisa ter pressa.', cid)
 		end
 		npcHandler.topic[cid] = 0
 
 	elseif npcHandler.topic[cid] == 4 then
 		if msgcontains(msg, 'yes') then
 			if not player:removeItem(5924, 1) then
-				npcHandler:say('Lying is not exactly honourable, |PLAYERNAME|. Shame on you.', cid)
+				npcHandler:say('Mentir é contra a honra, |PLAYERNAME|. Tenho vergonha de você.', cid)
 				return true
 			end
 
 			player:setStorageValue(Storage.OutfitQuest.Knight.AddonHelmet, 3)
 			player:setStorageValue(Storage.OutfitQuest.Knight.MissionHelmet, 3)
-			npcHandler:say('Good work, brave Knight |PLAYERNAME|! Even though it is damaged, it has a lot of sentimental value. Now, please bring me warrior\'s sweat.', cid)
+			npcHandler:say('Bom trabalho, bravo Knight |PLAYERNAME|! Embora isso esteja danificado, tem um monte de significados sentimentais. Agora, por favor me traga o warrior\'s sweat.', cid)
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('There is no need to rush anyway.', cid)
+			npcHandler:say('Não é necessário correr.', cid)
 		end
 		npcHandler.topic[cid] = 0
 
 	elseif npcHandler.topic[cid] == 5 then
 		if msgcontains(msg, 'yes') then
 			if not player:removeItem(5885, 1) then
-				npcHandler:say('Lying is not exactly honourable, |PLAYERNAME|. Shame on you.', cid)
+				npcHandler:say('Mentir é contra a honra, |PLAYERNAME|. Tenho vergonha de você.', cid)
 				return true
 			end
 
 			player:setStorageValue(Storage.OutfitQuest.Knight.AddonHelmet, 4)
 			player:setStorageValue(Storage.OutfitQuest.Knight.MissionHelmet, 4)
-			npcHandler:say('Now that is a pleasant surprise, brave Knight |PLAYERNAME|! There is only one task left now: Obtain royal steel to have your helmet refined.', cid)
+			npcHandler:say('Isso é uma agradável surpresa, bravo Knight |PLAYERNAME|! Tem somente uma tarefa restando agora: Consiga um royal steel para ter seu capacete (helmet) refinado.', cid)
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('There is no need to rush anyway.', cid)
+			npcHandler:say('Não é necessário tanta pressa.', cid)
 		end
 		npcHandler.topic[cid] = 0
 
 	elseif npcHandler.topic[cid] == 6 then
 		if msgcontains(msg, 'yes') then
 			if not player:removeItem(5887, 1) then
-				npcHandler:say('Lying is not exactly honourable, |PLAYERNAME|. Shame on you.', cid)
+				npcHandler:say('Mentir é contra a honra, |PLAYERNAME|. Tenho vergonha de você.', cid)
 				return true
 			end
 
 			player:setStorageValue(Storage.OutfitQuest.Knight.AddonHelmet, 5)
 			player:setStorageValue(Storage.OutfitQuest.Knight.MissionHelmet, 5)
-			npcHandler:say('You truly deserve to wear an adorned helmet, brave Knight |PLAYERNAME|. Please talk to Sam and tell him I sent you. I\'m sure he will be glad to refine your helmet.', cid)
+			npcHandler:say('Você realmente merece usar esse capacete adornado, bravo Knight |PLAYERNAME|. Por favor fale com Sam e diga que eu enviei você. Estou certo de que ele vai ficar muito feliz em modificar seu capacete (helmet).', cid)
 		elseif msgcontains(msg, 'no') then
-			npcHandler:say('There is no need to rush anyway.', cid)
+			npcHandler:say('Não há necessidade de sair correndo.', cid)
 		end
 		npcHandler.topic[cid] = 0
 	end
@@ -169,37 +169,37 @@ keywordHandler:addSpellKeyword({'cure', 'poison'}, {npcHandler = npcHandler, spe
 keywordHandler:addSpellKeyword({'wound', 'cleansing'}, {npcHandler = npcHandler, spellName = 'Wound Cleansing', price = 0, level = 8, vocation = 4})
 keywordHandler:addSpellKeyword({'great', 'light'}, {npcHandler = npcHandler, spellName = 'Great Light', price = 500, level = 13, vocation = 4})
 
-keywordHandler:addKeyword({'healing', 'spells'}, StdModule.say, {npcHandler = npcHandler, text = "In this category I have '{Wound Cleansing}' and '{Cure Poison}'."})
-keywordHandler:addKeyword({'support', 'spells'}, StdModule.say, {npcHandler = npcHandler, text = "In this category I have '{Light}', '{Find Person}' and '{Great Light}'."})
-keywordHandler:addKeyword({'spells'}, StdModule.say, {npcHandler = npcHandler, text = 'I can teach you {healing spells} and {support spells}. What kind of spell do you wish to learn? You can also tell me for which level you would like to learn a spell, if you prefer that.'})
+keywordHandler:addKeyword({'healing', 'spells'}, StdModule.say, {npcHandler = npcHandler, text = "Nessa categoria eu tenho Limpar Feridas '{Wound Cleansing}' e Curar Veneno '{Cure Poison}'."})
+keywordHandler:addKeyword({'support', 'spells'}, StdModule.say, {npcHandler = npcHandler, text = "Nessa categoria eu tenho Luz '{Light}', Encontrar Pessoa'{Find Person}' e Grande Luz '{Great Light}'."})
+keywordHandler:addKeyword({'spells'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu posso te ensinar magias de cura {healing spells} e magias de suporte {support spells}. Que tipo de magia você gostaria de aprender? Você também pode me dizer o level desejado das magias, se preferir assim.'})
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am the first knight. I trained some of the greatest heroes of Tibia."})
-keywordHandler:addKeyword({'heroes'}, StdModule.say, {npcHandler = npcHandler, text = "Of course, you heard of them. Knights are the best fighters in Tibia."})
-keywordHandler:addKeyword({'king'}, StdModule.say, {npcHandler = npcHandler, text = "Hail to our King!"})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "You are joking, eh? Of course, you know me. I am Gregor, the first knight."})
-keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "A great name, isn't it?"})
-keywordHandler:addKeyword({'tibia'}, StdModule.say, {npcHandler = npcHandler, text = "Beautiful Tibia. And with our help everyone is save."})
-keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "It is time to join the Knights!"})
-keywordHandler:addKeyword({'knights'}, StdModule.say, {npcHandler = npcHandler, text = "Knights are the warriors of Tibia. Without us, no one would be safe. Every brave and strong man or woman can join us."})
-keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "Some day someone will make something happen to him..."})
-keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "A bow might be a fine weapon for someone not strong enough to wield a REAL weapon."})
-keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "I and my students often share a cask of beer or wine at Frodo's hut."})
-keywordHandler:addKeyword({'gorn'}, StdModule.say, {npcHandler = npcHandler, text = "Always concerned with his profit. What a loss! He was adventuring with baxter in the old days."})
-keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "He was an adventurer once."})
-keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "Before she became a priest she won the Miss Tibia contest three times in a row."})
-keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "Peaceful farmers."})
-keywordHandler:addKeyword({'ferumbras'}, StdModule.say, {npcHandler = npcHandler, text = "A fine game to hunt. But be careful, he cheats!"})
-keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "Bah, go away with these sorcerer tricks. Only cowards use tricks."})
-keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "What an idiot."})
-keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "I will never understand this peaceful monks and priests."})
-keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "He has the muscles, but lacks the guts."})
-keywordHandler:addKeyword({'tibianus'}, StdModule.say, {npcHandler = npcHandler, text = "Hail to our King!"})
-keywordHandler:addKeyword({'outfit'}, StdModule.say, {npcHandler = npcHandler, text = "Only the bravest warriors may wear adorned helmets. They are traditionally awarded after having completed a difficult task for our guild."})
-keywordHandler:addKeyword({'helmet'}, StdModule.say, {npcHandler = npcHandler, text = "Only the bravest warriors may wear adorned helmets. They are traditionally awarded after having completed a difficult task for our guild."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou o primeiro Knight. Treinei muitos heróis das historias e contos do Tibia."})
+keywordHandler:addKeyword({'heroes'}, StdModule.say, {npcHandler = npcHandler, text = "É claro, você escutou sobre eles. Knights são os melhores lutadores em todo o Tibia."})
+keywordHandler:addKeyword({'king'}, StdModule.say, {npcHandler = npcHandler, text = "Viva ao Rei!"})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Você está brincando, né? É claro que você sabe quem eu sou. Eu sou Gregor, o primeiro Knight."})
+keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "Um ótimo nome, não acha?"})
+keywordHandler:addKeyword({'tibia'}, StdModule.say, {npcHandler = npcHandler, text = "Lindo Tibia. E com nossa junta, esse lindo mundo está a salvo."})
+keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "É hora de você se juntar aos Knights!"})
+keywordHandler:addKeyword({'knights'}, StdModule.say, {npcHandler = npcHandler, text = "Knights são os guerreiros do Tibia. Sem a gente, ninguém está seguro. Todo bravo homem ou mulher pode juntar-se a nós."})
+keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "Algum dia alguém vai fazer algo de bom acontecer com ele..."})
+keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "Um arco pode ser um bom equipamento para alguém não tão forte para usar um equipamento de verdade."})
+keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "Eu e meus estudantes vamos frequentemente a Taverna do Frodo para beber."})
+keywordHandler:addKeyword({'gorn'}, StdModule.say, {npcHandler = npcHandler, text = "Está sempre preocupado com seu lucro. Que perca de tempo! Ele se aventurou com baxter nos velhos tempos."})
+keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "Já foi aventureiro um dia."})
+keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "Antes de se tornar um padre, ela ganhou o Miss Tibia três vezes seguidas."})
+keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "Fazeendeiros de paz."})
+keywordHandler:addKeyword({'ferumbras'}, StdModule.say, {npcHandler = npcHandler, text = "Um bom jogo dee caças. Mas tenha cuidado, ele usa hack!"})
+keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "Bah, vá embora com esses truques de magiago away with these sorcerer tricks. Only cowards use tricks."})
+keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "Um idiota."})
+keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "Nunca vou entender esses monges pacíficos e padres."})
+keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "Tem músculos, mas não bolas."})
+keywordHandler:addKeyword({'tibianus'}, StdModule.say, {npcHandler = npcHandler, text = "Viva ao Rei!"})
+keywordHandler:addKeyword({'outfit'}, StdModule.say, {npcHandler = npcHandler, text = "Somente os mais bravos guerreiros podem vestir meus capacetes reforjados. Tradicionalmente eles são recompensados depois de completar uma difícil tarefa para nossa guild."})
+keywordHandler:addKeyword({'helmet'}, StdModule.say, {npcHandler = npcHandler, text = "Somente os mais bravos guerreiros podem vestir meus capacetes reforjados. Tradicionalmente eles são recompensados depois de completar uma difícil tarefa para nossa guild."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Greetings, |PLAYERNAME|. What do you want?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Be careful on your journeys.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Be careful on your journeys.")
+npcHandler:setMessage(MESSAGE_GREET, "Saudações, |PLAYERNAME|. O que você quer?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Seja cuidadoso em suas jornadas.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Seja cuidadoso em suas jornadas.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

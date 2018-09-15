@@ -7,14 +7,14 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am the archsorcerer of Carlin. I keep the secrets of our order."})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "My name is Lea."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou o arquiteto de Carlin. Eu mantenho os segredos de nossa ordem."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Meu nome é Lea."})
 --keywordHandler:addKeyword({'spell'}, StdModule.say, {npcHandler = npcHandler, text = "Sorry, I only sell spells to sorcerers."})
-keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "Time is a force we sorcerers will master one day."})
-keywordHandler:addKeyword({'sorcerer'}, StdModule.say, {npcHandler = npcHandler, text = "Any sorcerer dedicates his whole life to the study of the arcane arts."})
-keywordHandler:addKeyword({'power'}, StdModule.say, {npcHandler = npcHandler, text = "We sorcerers wield arcane powers beyond comprehension of men."})
-keywordHandler:addKeyword({'arcane'}, StdModule.say, {npcHandler = npcHandler, text = "We sorcerers wield arcane powers beyond comprehension of men."})
+keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "O tempo é uma força que os feiticeiros dominarão um dia."})
+keywordHandler:addKeyword({'sorcerer'}, StdModule.say, {npcHandler = npcHandler, text = "Qualquer feiticeiro dedica toda a sua vida ao estudo das artes arcanas."})
+keywordHandler:addKeyword({'power'}, StdModule.say, {npcHandler = npcHandler, text = "Nós feiticeiros exercemos poderes arcanos além da compreensão dos homens."})
+keywordHandler:addKeyword({'arcane'}, StdModule.say, {npcHandler = npcHandler, text = "Nós feiticeiros exercemos poderes arcanos além da compreensão dos homens."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Greetings, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Take care on your journeys.")
+npcHandler:setMessage(MESSAGE_GREET, "Saudações, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Cuidado em suas jornadas.")
 npcHandler:addModule(FocusModule:new())

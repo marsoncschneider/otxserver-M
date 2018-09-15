@@ -428,21 +428,49 @@ void Weapon::onUsedWeapon(Player* player, Item* item, Tile* destTile) const
 	}
 
 	if (breakChance != 0 && uniform_random(1, 100) <= breakChance) {
+		int iSecret;
+		iSecret = rand() % 10 + 0;
+		if (iSecret>=7){
 		Weapon::decrementItemCount(item);
 		return;
+				}
+		else
+	{	// se for menor que 7 nao decrementa
+		//g_game.internalMoveItem(item->getParent(), destTile, INDEX_WHEREEVER, item, 1, nullptr, FLAG_NOLIMIT);
+		return;
+	}
 	}
 
 	switch (action) {
 		case WEAPONACTION_REMOVECOUNT:
-			if(g_config.getBoolean(ConfigManager::REMOVE_WEAPON_AMMO)) {
+		if(g_config.getBoolean(ConfigManager::REMOVE_WEAPON_AMMO)) {
+				int iSecret;
+				iSecret = rand() % 10 + 0;
+				if (iSecret>=7){
+				// se for maior que 7 decrementa
 				Weapon::decrementItemCount(item);
+				}
+				else
+				{
+				//g_game.internalMoveItem(item->getParent(), destTile, INDEX_WHEREEVER, item, 1, nullptr, FLAG_NOLIMIT);
+				}
 			}
 			break;
 
 		case WEAPONACTION_REMOVECHARGE: {
 			uint16_t charges = item->getCharges();
 			if (charges != 0 && g_config.getBoolean(ConfigManager::REMOVE_WEAPON_CHARGES)) {
+				int iSecret;
+			iSecret = rand() % 10 + 0;
+			if (iSecret>7){ // se for maior que 7 remover cargas
+				//g_game.transformItem(item, item->getID(), charges - 1);
+				//g_game.internalAddItem(destTile, item, 1); essa tp tudo
 				g_game.transformItem(item, item->getID(), charges - 1);
+			}
+			else
+			{
+				//g_game.internalMoveItem(item->getParent(), destTile, INDEX_WHEREEVER, item, 1, nullptr, FLAG_NOLIMIT);
+			}
 			}
 			break;
 		}

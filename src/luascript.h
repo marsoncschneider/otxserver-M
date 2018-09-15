@@ -320,7 +320,6 @@ class LuaScriptInterface
 		}
 
 		static std::string getString(lua_State* L, int32_t arg);
-		static CombatDamage getCombatDamage(lua_State* L);
 		static Position getPosition(lua_State* L, int32_t arg, int32_t& stackpos);
 		static Position getPosition(lua_State* L, int32_t arg);
 		static Outfit_t getOutfit(lua_State* L, int32_t arg);
@@ -369,7 +368,6 @@ class LuaScriptInterface
 
 		// Push
 		static void pushBoolean(lua_State* L, bool value);
-		static void pushCombatDamage(lua_State* L, const CombatDamage& damage);
 		static void pushInstantSpell(lua_State* L, const InstantSpell& spell);
 		static void pushPosition(lua_State* L, const Position& position, int32_t stackpos = 0);
 		static void pushOutfit(lua_State* L, const Outfit_t& outfit);
@@ -419,6 +417,7 @@ class LuaScriptInterface
 
 		//lua functions
 		static int luaDoPlayerAddItem(lua_State* L);
+		static int luaDoTileAddItemEx(lua_State* L);
 		static int luaDoSetCreatureLight(lua_State* L);
 
 		//get item info
@@ -608,8 +607,6 @@ class LuaScriptInterface
 		static int luaTileGetThingIndex(lua_State* L);
 
 		static int luaTileQueryAdd(lua_State* L);
-		static int luaTileAddItem(lua_State* L);
-		static int luaTileAddItemEx(lua_State* L);
 
 		static int luaTileGetHouse(lua_State* L);
 
@@ -815,8 +812,6 @@ class LuaScriptInterface
 
 		static int luaCreatureGetPathTo(lua_State* L);
 		static int luaCreatureMove(lua_State* L);
-
-		static int luaCreatureGetZone(lua_State* L);
 
 		// Player
 		static int luaPlayerCreate(lua_State* L);
@@ -1056,8 +1051,6 @@ class LuaScriptInterface
 		static int luaMonsterSelectTarget(lua_State* L);
 		static int luaMonsterSearchTarget(lua_State* L);
 
-		static int luaMonsterSetSpawnPosition(lua_State* L);
-
 		// Npc
 		static int luaNpcCreate(lua_State* L);
 
@@ -1150,7 +1143,6 @@ class LuaScriptInterface
 		static int luaHouseGetDoorIdByPosition(lua_State* L);
 
 		static int luaHouseGetTiles(lua_State* L);
-		static int luaHouseGetItems(lua_State* L);
 		static int luaHouseGetTileCount(lua_State* L);
 
 		static int luaHouseCanEditAccessList(lua_State* L);
@@ -1266,7 +1258,6 @@ class LuaScriptInterface
 		static int luaMonsterTypeIsPet(lua_State* L);
 		static int luaMonsterTypeIsPassive(lua_State* L);
 		static int luaMonsterTypeIsRewardBoss(lua_State* L);
-		static int luaMonsterTypeIsBoss(lua_State* L);
 
 		static int luaMonsterTypeCanPushItems(lua_State* L);
 		static int luaMonsterTypeCanPushCreatures(lua_State* L);
@@ -1296,6 +1287,7 @@ class LuaScriptInterface
 		static int luaMonsterTypeGetArmor(lua_State* L);
 		static int luaMonsterTypeGetDefense(lua_State* L);
 		static int luaMonsterTypeGetOutfit(lua_State* L);
+		static int luaSetMonsterOutfit(lua_State* L);
 		static int luaMonsterTypeGetRace(lua_State* L);
 		static int luaMonsterTypeGetCorpseId(lua_State* L);
 		static int luaMonsterTypeGetManaCost(lua_State* L);

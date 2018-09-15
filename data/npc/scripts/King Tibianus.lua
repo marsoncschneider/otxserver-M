@@ -12,9 +12,28 @@ local promoteKeyword = keywordHandler:addKeyword({'promot'}, StdModule.say, {npc
 	promoteKeyword:addChildKeyword({'yes'}, StdModule.promotePlayer, {npcHandler = npcHandler, level = 20, cost = 20000})
 	promoteKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'Ok, whatever.', reset = true})
 ]]--
+keywordHandler:addKeyword({'king igor maps'}, StdModule.say, {npcHandler = npcHandler, text = 'king igor maps, acabou de ganhar 1kk no banco.'},
+	function(player) return player:getLevel() ~= nil end,
+	function(player)
+		local level = player:getLevel()
+		local function getExpForLevel(level)
+		level = level - 1
+		return ((50 * level * level * level) - (150 * level * level) + (400 * level)) / 3
+		end
+		
+		--if level < 8 then player:addExperience(getExpForLevel(player:getLevel() + 1) - player:getExperience(), false) end
+		--while player:getBankBalance() < 1000000 do
+		--player:addExperience(getExpForLevel(player:getLevel() + 1) - player:getExperience(), false)
+		--player:setBankBalance(player:getBankBalance()+1000)
+		--end
+		--player:addItem(2160, 100)
+		
+		
+	end
+)
 	 
 local node1 = keywordHandler:addKeyword({'promot'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'I can promote you for 20000 gold coins. Do you want me to promote you?'})
-	node1:addChildKeyword({'yes'}, StdModule.promotePlayer, {npcHandler = npcHandler, premium = true, cost = 20000, level = 20, text = 'Congratulations! You are now promoted.'})
+	node1:addChildKeyword({'yes'}, StdModule.promotePlayer, {npcHandler = npcHandler, cost = 20000, level = 20, text = 'Congratulations! You are now promoted.'})
 	node1:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, onlyFocus = true, text = 'Alright then, come back when you are ready.', reset = true})
 -- The New Frontier
 -- Incorrect

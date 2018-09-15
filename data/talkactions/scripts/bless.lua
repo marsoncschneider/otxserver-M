@@ -1,32 +1,32 @@
-function getCost(level)
-	if level <= 30 then
-		return 2000*5
-	elseif level >= 120 then
-		return 10000*5
-	else
-		return ((level - 20) * 200 * 5) 
+function onSay(player, words, param)
+	local Price = 2600
+	local x = 0
+		
+	if player:getLevel() > 30 then
+	Price = Price + (260*(player:getLevel()-30))
 	end
-end
-
-function onSay(cid, words, param)
-	local p = Player(cid)
-	local cost = getCost(getPlayerLevel(cid))
-	if(not(isPlayerPzLocked(cid))) then
-		if(p:hasBlessing(1) and p:hasBlessing(2) and p:hasBlessing(3) and p:hasBlessing(4) and p:hasBlessing(5) and p:hasBlessing(6)) then
-			p:sendCancelMessage("You have already been blessed by the gods.")
+	
+	for i = 1, 8 do
+		if not player:hasBlessing(i) then
+			x = x + 1	
+		end
+	end
+	
+	if x == 0 then
+		return	doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Você já foi abençoado pelos deuses.") and doSendMagicEffect(getCreaturePosition(player), 3)
+	else
+		if player:removeMoney(Price*(x)) then
+			for i = 1, 8 do
+				if not player:hasBlessing(i) then
+					player:addBlessing(i, 1)
+				end
+			end
+			return doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Você foi abençoado pelos deuses por "..  Price*(x) .." gps.") and doSendMagicEffect(getCreaturePosition(player), 3)
+		else
+			player:sendCancelMessage("Você não tem ".. Price*(x) .." gold para comprar Bless.")
+			doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Você não tem ".. Price*(x) .." gold para comprar Bless.")
 			return false
 		end
-		if(p:removeMoneyNpc(cost)) then
-			for b = 1,6 do
-				p:addBlessing(b)
-			end
-			p:getPosition():sendMagicEffect(50)
-			p:sendTextMessage(19, "You have been blessed by the gods!")
-		else
-			p:sendCancelMessage("You need "..cost.." gold coins to buy all blessings.")
-		end
-	else
-		p:sendCancelMessage("You can't buy bless, when you are in a battle.")
+		return false
 	end
-return false
 end

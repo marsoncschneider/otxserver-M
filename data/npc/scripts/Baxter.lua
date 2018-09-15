@@ -8,15 +8,15 @@ function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)
 function onThink()		npcHandler:onThink()		end
 
 local voices = {
-	{ text = 'People of Thais, bring honour to your king by fighting in the orc war!' },
-	{ text = 'The orcs are preparing for war!!!' }
+	{ text = 'Pessoas de Thais, tragam honra para nosso Rei lutando na guerra dos orcs!' },
+	{ text = 'Os orcs estão se preparando para a guerra!!!' }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))
 
-npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE KING TIBIANUS!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE KING!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE KING!")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Do you bring freshly killed rats for a bounty of 1 gold each? By the way, I also buy orc teeth and other stuff you ripped from their bloody corp... I mean... well, you know what I mean.")
+npcHandler:setMessage(MESSAGE_GREET, "VIDA LONGA AO REI TIBIANUS!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Você trouxe ratos recém-mortos? Pago 1 gold para cada um. Por sinal, eu compro orc teeth e outros produtos de monstros tirados de seus corpos... Digo... bom, você sabe o que eu quis dizer.")
 
 npcHandler:addModule(FocusModule:new())

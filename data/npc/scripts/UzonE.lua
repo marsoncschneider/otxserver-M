@@ -21,7 +21,7 @@ local function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	if isInArray({"back", "leave", "passage", "transport"}, msg) then
-		npcHandler:say('Can we finally leave this cursed place?', cid)
+		npcHandler:say('Do you really want to leave this unholy place?', cid)
 		npcHandler.topic[cid] = 1
 	elseif(msgcontains(msg, "yes")) then
 		if(npcHandler.topic[cid] == 1) then

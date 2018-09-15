@@ -14,80 +14,80 @@ local function creatureSayCallback(cid, type, msg)
 	local player = Player(cid)
 	if msgcontains(msg, "addon") or msgcontains(msg, "outfit") then
 		if player:getStorageValue(Storage.OutfitQuest.HunterHatAddon) < 1 then
-			npcHandler:say("Oh, my winged tiara? Those are traditionally awarded after having completed a difficult {task} for our guild, only to female aspirants though. Male warriors will receive a hooded cloak.", cid)
+			npcHandler:say("Oh, minha tiara alada? Essas são tradicionalmente concedidas após completar uma difícil tarefa {task} para nossa guild, apenas para aspirantes femininas. Homens guerreiros vão receber uma hooded cloak.", cid)
 			npcHandler.topic[cid] = 1
 		end
 	elseif msgcontains(msg, "task") then
 		if npcHandler.topic[cid] == 1 then
-			npcHandler:say("So you are saying that you would like to prove that you deserve to wear such a hooded cloak?", cid)
+			npcHandler:say("Então você está dizendo que gostaria de provar que merece vestir a hooded cloak?", cid)
 			npcHandler.topic[cid] = 2
 		end
 	elseif msgcontains(msg, "crossbow") then
 		if player:getStorageValue(Storage.OutfitQuest.HunterHatAddon) == 1 then
-			npcHandler:say("I'm so excited! Have you really found my crossbow?", cid)
+			npcHandler:say("Estou tão excitada! Você realmente encontrou meu crossbow?", cid)
 			npcHandler.topic[cid] = 4
 		end
 	elseif msgcontains(msg, "leather") then
 		if player:getStorageValue(Storage.OutfitQuest.HunterHatAddon) == 2 then
-			npcHandler:say("Did you bring me 100 pieces of lizard leather and 100 pieces of red dragon leather?", cid)
+			npcHandler:say("Você me trouxe 100 peças de lizard leather e 100 peças de red dragon leather?", cid)
 			npcHandler.topic[cid] = 5
 		end
 	elseif msgcontains(msg, "chicken wing") then
 		if player:getStorageValue(Storage.OutfitQuest.HunterHatAddon) == 3 then
-			npcHandler:say("Were you able to get hold of 5 enchanted chicken wings?", cid)
+			npcHandler:say("Você foi capaz de encontar as 5 enchanted chicken wings?", cid)
 			npcHandler.topic[cid] = 6
 		end
 	elseif msgcontains(msg, "steel") then
 		if player:getStorageValue(Storage.OutfitQuest.HunterHatAddon) == 4 then
-			npcHandler:say("Ah, have you brought one piece of royal steel, draconian steel and hell steel each?", cid)
+			npcHandler:say("Ah, você me trouxe uma peça de royal steel, draconian steel e hell steel?", cid)
 			npcHandler.topic[cid] = 7
 		end
 	elseif msgcontains(msg, "yes") then
 		if npcHandler.topic[cid] == 2 then
 			npcHandler:say({
-				"Alright, I will give you a chance. Pay close attention to what I'm going to tell you now. ...",
-				"Recently, one of our members moved to Liberty Bay out of nowhere, talking about some strange cult. That is not the problem, but he took my favourite crossbow with him. ...",
-				"Please find my crossbow. It has my name engraved on it and is very special to me. ...",
-				"Secondly, we need a lot of leather for new quivers. 100 pieces of lizard leather and 100 pieces of red dragon leather should suffice. ...",
-				"Third, since we are giving out tiaras, we are always in need of enchanted chicken wings. Please bring me 5, that would help us tremendously. ...",
-				"Lastly, for our arrow heads we need a lot of steel. Best would be one piece of royal steel, one piece of draconian steel and one piece of hell steel. ...",
-				"Did you understand everything I told you and are willing to handle this task?"
+				"Tudo bem, eu vou dar uma chance à você. Preste muita atenção no que vou dizer a você agora. ...",
+				"Recentemente, um dos nossos membros se mudou para Liberty Bay do nada, tagalerando sobre algum tipo de culto estranho. Mas esse não é o ponto, o problema é que ele levou meu crossbow favorito consigo. ...",
+				"Por favor encontre meu crossbow. Ele tem uma gravação feita com o meu nome, além de ser muito especial pra mim. ...",
+				"Em segundo lugar, nós precisamos de bastante leather para os novos quivers. 100 peças de lizard leather e 100 peças de red dragon leather serão o suficiente. ...",
+				"Terceiro, já que esamos oferecendo tiaras, nós estamos sempre precisando de enchanted chicken wings. Por favor, traga-me 5, isso deve ser o suficiente e irá realmente nos ajudar. ...",
+				"Por ultimo, para as pontas de nossas flechas, precisamos de muito ferro. O melhor seria uma piece of royal steel, uma piece of draconian steel e uma piece of hell steel. ...",
+				"Você entendeu tudo o que eu disse? Está disposto a completar essa tarefa?"
 			}, cid)
 			npcHandler.topic[cid] = 3
 		elseif npcHandler.topic[cid] == 3 then
-			npcHandler:say("That's the spirit! I hope you will find my crossbow, |PLAYERNAME|!", cid)
+			npcHandler:say("Esse é o espirito! Espero que você encontre meu crossbow, |PLAYERNAME|!", cid)
 			player:setStorageValue(Storage.OutfitQuest.HunterHatAddon, 1)
 			player:setStorageValue(Storage.OutfitQuest.DefaultStart, 1) --this for default start of Outfit and Addon Quests
 			npcHandler.topic[cid] = 0
 		elseif npcHandler.topic[cid] == 4 then
 			if player:removeItem(5947, 1) then
-				npcHandler:say("Yeah! I could kiss you right here and there! Besides, you're a handsome one. <giggles> Please bring me 100 pieces of lizard leather and 100 pieces of red dragon leather now!", cid)
+				npcHandler:say("Sim! Eu posso beijar você bem aqui e até ali! A propósito, você é muito bonito. <risos> Por favor traga para mim 100 peças de lizard leather e 100 peças de red dragon leather agora!", cid)
 				player:setStorageValue(Storage.OutfitQuest.HunterHatAddon, 2)
 				npcHandler.topic[cid] = 0
 			else
-				npcHandler:say("You don't have it...", cid)
+				npcHandler:say("Você não tem as peças...", cid)
 			end
 		elseif npcHandler.topic[cid] == 5 then
 			if player:getItemCount(5876) >= 100 and player:getItemCount(5948) >= 100  then
-				npcHandler:say("Good work, |PLAYERNAME|! That is enough leather for a lot of sturdy quivers. Now, please bring me 5 enchanted chicken wings.", cid)
+				npcHandler:say("Bem trabalho, |PLAYERNAME|! Esse couro será o suficiente para muitos sturdy quivers. Agora, por favor traga-me 5 enchanted chicken wings.", cid)
 				player:removeItem(5876, 100)
 				player:removeItem(5948, 100)
 				player:setStorageValue(Storage.OutfitQuest.HunterHatAddon, 3)
 				npcHandler.topic[cid] = 0
 			else
-				npcHandler:say("You don't have it...", cid)
+				npcHandler:say("Você não tem as peças...", cid)
 			end
 		elseif npcHandler.topic[cid] == 6 then
 			if player:removeItem(5891, 5) then
-				npcHandler:say("Great! Now we can create a few more Tiaras. If only they weren't that expensive... Well anyway, please obtain one piece of royal steel, draconian steel and hell steel each.", cid)
+				npcHandler:say("Perfeito! Agora nós podemos criar bem mais Tiaras. Se elas apenas não fossem tão caras... Bom, de qualquer modo, por favor obtenha uma piece of royal steel, draconian steel e hell steel.", cid)
 				player:setStorageValue(Storage.OutfitQuest.HunterHatAddon, 4)
 				npcHandler.topic[cid] = 0
 			else
-				npcHandler:say("You don't have it...", cid)
+				npcHandler:say("Você não tem as peças...", cid)
 			end
 		elseif npcHandler.topic[cid] == 7 then
 			if player:getItemCount(5887) >= 1 and player:getItemCount(5888) >= 1 and player:getItemCount(5889) >= 1  then
-				npcHandler:say("Wow, I'm impressed, |PLAYERNAME|. Your really are a valuable member of our paladin guild. I shall grant you your reward now. Wear it proudly!", cid)
+				npcHandler:say("Nossa, estou impressionada, |PLAYERNAME|. Você realmente é um membro de valor para a nossa paladin guild. Eu devo te conceder uma recompensa agora, vista-a com orgulho!", cid)
 				player:removeItem(5887, 1)
 				player:removeItem(5888, 1)
 				player:removeItem(5889, 1)
@@ -97,7 +97,7 @@ local function creatureSayCallback(cid, type, msg)
 				player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE)
 				npcHandler.topic[cid] = 0
 			else
-				npcHandler:say("You don't have it...", cid)
+				npcHandler:say("Você não tem as peças...", cid)
 			end
 		end
 	elseif msgcontains(msg, "no") then
@@ -110,7 +110,7 @@ local function creatureSayCallback(cid, type, msg)
 end
 
 -- Sniper Gloves
-keywordHandler:addKeyword({'sniper gloves'}, StdModule.say, {npcHandler = npcHandler, text = 'We are always looking for sniper gloves. They are supposed to raise accuracy. If you find a pair, bring them here. Maybe I can offer you a nice trade.'}, function(player) return player:getItemCount(5875) == 0 end)
+keywordHandler:addKeyword({'sniper gloves'}, StdModule.say, {npcHandler = npcHandler, text = 'Estamos sempre procurando por sniper gloves. Elas são supostamente para aumentar a precisão. Caso encontre um par, traga-o aqui. Talvez eu posso oferecer a você uma boa troca.'}, function(player) return player:getItemCount(5875) == 0 end)
 
 local function addGloveKeyword(text, condition, action)
 	local gloveKeyword = keywordHandler:addKeyword({'sniper gloves'}, StdModule.say, {npcHandler = npcHandler, text = text[1]}, condition)
@@ -121,62 +121,62 @@ end
 
 -- Free Account
 addGloveKeyword({
-		'You found sniper gloves?! Incredible! I would love to grant you the sniper gloves accessory, but I can only do that for premium warriors. However, I would pay you 2000 gold pieces for them. How about it?',
-		'Maybe another time.',
-		'Alright! Here is your money, thank you very much.'
+		'Você encontrou a sniper gloves?! Incrível! Eu gostaria muito de garantir a sniper gloves como acessório a você, mas só posso fazer isso para guerreiros premium. Contudo, posso pagar 2000 gold pieces por elas. O que você acha?',
+		'Talvez uma outra hora.',
+		'Certo! Aqui está o seu dinheiro, muito obrigada.'
 	}, function(player) return not player:isPremium() end, function(player) player:removeItem(5875, 1) player:addMoney(2000) end
 )
 
 -- Premium account with addon
 addGloveKeyword({
-		'Did you find sniper gloves AGAIN?! Incredible! I cannot grant you other accessories, but would you like to sell them to me for 2000 gold pieces?',
-		'Maybe another time.',
-		'Alright! Here is your money, thank you very much.'
+		'Você encoutrou outra sniper gloves?! INCRÍVEL! Eu não posso te dar outro acessório, mas você não quer me vender por 2000 gold pieces?',
+		'Talvez uma outra hora.',
+		'Certo! Aqui está o seu dinheiro, muito obrigada.'
 	}, function(player) return player:getStorageValue(Storage.OutfitQuest.Hunter.AddonGlove) == 1 end, function(player) player:removeItem(5875, 1) player:addMoney(2000) end
 )
 
 -- If you don't have the addon
 addGloveKeyword({
-		'You found sniper gloves?! Incredible! Listen, if you give them to me, I will grant you the right to wear the sniper gloves accessory. How about it?',
-		'No problem, maybe another time.',
-		'Great! I hereby grant you the right to wear the sniper gloves as an accessory. Congratulations!'
+		'Você encontrou uma sniper gloves?! Incrível! Escute, se você me der, posso te garantir o direito de usá-las como um acessório. O que você acha?',
+		'Sem problema, talvez uma outra hora.',
+		'Perfeito! Assim eu te concedo o direito de usar a sniper gloves como um acessório. Parabéns!'
 	}, function(player) return player:getStorageValue(Storage.OutfitQuest.Hunter.AddonGlove) == -1 end, function(player) player:removeItem(5875, 1) player:setStorageValue(Storage.OutfitQuest.Hunter.AddonGlove, 1) player:addOutfitAddon(129, 2) player:addOutfitAddon(137, 1) player:getPosition():sendMagicEffect(CONST_ME_MAGIC_BLUE) end
 )
 
 -- Basic
-keywordHandler:addKeyword({'help'}, StdModule.say, {npcHandler = npcHandler, text = "I am the leader of the Paladins. I help our members."})
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am the leader of the Paladins. I help our members."})
-keywordHandler:addKeyword({'paladins'}, StdModule.say, {npcHandler = npcHandler, text = "Paladins are great warriors and magicians. Besides that we are excellent missile fighters. Many people in Tibia want to join us."})
-keywordHandler:addKeyword({'warriors'}, StdModule.say, {npcHandler = npcHandler, text = "Of course, we aren't as strong as knights, but no druid or sorcerer will ever defeat a paladin with a sword."})
-keywordHandler:addKeyword({'magicians'}, StdModule.say, {npcHandler = npcHandler, text = "There are many magic spells and runes paladins can use."})
-keywordHandler:addKeyword({'missile'}, StdModule.say, {npcHandler = npcHandler, text = "Paladins are the best missile fighters in Tibia!"})
-keywordHandler:addKeyword({'news'}, StdModule.say, {npcHandler = npcHandler, text = "I am a paladin, not a storyteller."})
-keywordHandler:addKeyword({'members'}, StdModule.say, {npcHandler = npcHandler, text = "Every paladin profits from his vocation. It has many advantages to be a paladin."})
-keywordHandler:addKeyword({'advantages'}, StdModule.say, {npcHandler = npcHandler, text = "We will help you to improve your skills. Besides I offer spells for paladins."})
-keywordHandler:addKeyword({'general'}, StdModule.say, {npcHandler = npcHandler, text = "Harkath Bloodblade is the royal general."})
-keywordHandler:addKeyword({'army'}, StdModule.say, {npcHandler = npcHandler, text = "Some paladins serve in the kings army."})
-keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "He has some potential."})
-keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "How spineless do you have to be to become a jester?"})
-keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "The McRonalds are simple farmers."})
-keywordHandler:addKeyword({'eclesius'}, StdModule.say, {npcHandler = npcHandler, text = "He must have been skilled before he became the way he is now. Such a pity."})
-keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "Yes?"})
-keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "The alcohol he sells shrouds the mind and the eye."})
-keywordHandler:addKeyword({'galuna'}, StdModule.say, {npcHandler = npcHandler, text = "One of the most important members of our guild. She makes all the bows and arrows we need."})
-keywordHandler:addKeyword({'gorn'}, StdModule.say, {npcHandler = npcHandler, text = "He sells a lot of useful equipment."})
-keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "He and his guildfellows lack the grace of a true warrior."})
-keywordHandler:addKeyword({'harkath bloodblade'}, StdModule.say, {npcHandler = npcHandler, text = "A fine warrior and a skilled general."})
-keywordHandler:addKeyword({'king tibianus'}, StdModule.say, {npcHandler = npcHandler, text = "King Tibianus is a wise ruler."})
-keywordHandler:addKeyword({'lugri'}, StdModule.say, {npcHandler = npcHandler, text = "A follower of evil that will get what he deserves one day."})
-keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "Mhm, a little too nice for my taste. Still, it's amazing how she endures all those men stalking her, especially this creepy Oswald."})
-keywordHandler:addKeyword({'marvik'}, StdModule.say, {npcHandler = npcHandler, text = "A skilled healer, that's for sure."})
-keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "Just another arrogant sorcerer."})
-keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "If there wouldn't be higher powers to protect him..."})
-keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "A humble monk and a wise man."})
-keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "Strong man. But a little shy."})
+keywordHandler:addKeyword({'help'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou a líder dos Paladins. Ajudo os nossos membros."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou a líder dos Paladins. Ajudo os nossos membros."})
+keywordHandler:addKeyword({'paladins'}, StdModule.say, {npcHandler = npcHandler, text = "Paladins são grandes guerreiros mágicos. Além disso, somos excelentes atiradores. Muitas pessoas no Tibia querem juntar-se a nós."})
+keywordHandler:addKeyword({'warriors'}, StdModule.say, {npcHandler = npcHandler, text = "É claro que não somos fortes como os guerreiros knights, mas nenhum druid ou sorcerer vai vencer um paladin com uma espada."})
+keywordHandler:addKeyword({'magicians'}, StdModule.say, {npcHandler = npcHandler, text = "Existem muitas magias e runas que os paladins podem usar."})
+keywordHandler:addKeyword({'missile'}, StdModule.say, {npcHandler = npcHandler, text = "Paladins são os melhores atiradores em todo o Tibia!"})
+keywordHandler:addKeyword({'news'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou uma Paladin, não uma contadora de histórias."})
+keywordHandler:addKeyword({'members'}, StdModule.say, {npcHandler = npcHandler, text = "Todo paladin profita de sua vocação. Existem muitas vantagens em ser um paladin."})
+keywordHandler:addKeyword({'advantages'}, StdModule.say, {npcHandler = npcHandler, text = "Nós todos vamos te ajudar a melhorar suas habilidades. Além disso, eu vendo magias para paladins."})
+keywordHandler:addKeyword({'general'}, StdModule.say, {npcHandler = npcHandler, text = "Harkath Bloodblade é o royal general."})
+keywordHandler:addKeyword({'army'}, StdModule.say, {npcHandler = npcHandler, text = "Alguns paladins servem no exército do Rei."})
+keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "Ele tem algum potencial."})
+keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "O quão mole você tem que ser para se tornar um bobo da corte?"})
+keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "Os McRonalds são simples fazendeiros."})
+keywordHandler:addKeyword({'eclesius'}, StdModule.say, {npcHandler = npcHandler, text = "Ele devia ser bem habilidoso antes de ficar como está agora. Realmente uma pena."})
+keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "Sim?"})
+keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "O Álcool que ele vende te deixa tonto tanto na mente quanto no olho."})
+keywordHandler:addKeyword({'galuna'}, StdModule.say, {npcHandler = npcHandler, text = "Uma das mais importantes membras de nossa guild. Ela faz todos os arcos e flechas que precisamos."})
+keywordHandler:addKeyword({'gorn'}, StdModule.say, {npcHandler = npcHandler, text = "Ele vende muitos equipamentos úteis."})
+keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "Ele e seus seguidores não tem a graça de um verdadeiro guerreiro."})
+keywordHandler:addKeyword({'harkath bloodblade'}, StdModule.say, {npcHandler = npcHandler, text = "Um verdadeiro guerreiro e habilidoso general."})
+keywordHandler:addKeyword({'king tibianus'}, StdModule.say, {npcHandler = npcHandler, text = "O Rei Tibianus é um governante muito sábio."})
+keywordHandler:addKeyword({'lugri'}, StdModule.say, {npcHandler = npcHandler, text = "Um seguidor do mal que vai ter o que merece, um dia."})
+keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "Mhm, um pouco boazinha demais para o meu gosto. Ainda assim, é incrível o jeito com que ela lida com todos aqueles homens perseguindo ela, especialmente o assustador Oswald."})
+keywordHandler:addKeyword({'marvik'}, StdModule.say, {npcHandler = npcHandler, text = "Um curandeiro bem treinado, disso tenho certeza."})
+keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "Apenas mais um mago arrogante."})
+keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "Se não houvessem poderes superiores protegendo ele..."})
+keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "Um monge humilde, além de um sábio homem."})
+keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "Homem forte. Mas um pouco vergonhoso."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Welcome to the paladins' guild, |PLAYERNAME|! How can I help you?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Bye, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Bye, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_GREET, "Bem vindo a guild dos paladins, |PLAYERNAME|! Como posso ajudá-lo?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Mal educado, diga adeus da proxima vez, |PLAYERNAME|!.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

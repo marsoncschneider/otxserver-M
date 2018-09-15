@@ -43,14 +43,6 @@ local config = {
 		formerValue = 30,
 		newValue = 31
 	},
-	[3006] = {
-		items = {
-			{itemId = 4849} -- strange powder (Orc fortress)
-		},
-		storage = Storage.ExplorerSociety.QuestLine,
-		formerValue = 33,
-		newValue = 34
-	},	
 	[3007] = {
 		items = {
 			{itemId = 15389}
@@ -67,6 +59,14 @@ local config = {
 		formerValue = 36,
 		newValue = 37
 	},
+	[3010] = {
+		items = {
+			{itemId = 4853}
+		},
+		storage = Storage.ExplorerSociety.QuestLine,
+		formerValue = 42,
+		newValue = 43
+	},
 	[3012] = {
 		items = {
 			{itemId = 4852}
@@ -80,8 +80,8 @@ local config = {
 			{itemId = 4847}
 		},
 		storage = Storage.ExplorerSociety.QuestLine,
-		formerValue = 48,
-		newValue = 49
+		formerValue = 49,
+		newValue = 50
 	},
 	[3018] = {
 		items = {
@@ -152,9 +152,9 @@ local config = {
 		items = {
 			{itemId = 6124}
 		},
-		storage = Storage.ExplorerSociety.CalassaQuest,
-		formerValue = 1,
-		newValue = 2
+		storage = Storage.ExplorerSociety.QuestLine,
+		formerValue = 63,
+		newValue = 64
 	},
 	[3116] = {
 		items = {

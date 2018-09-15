@@ -185,11 +185,6 @@ Item* Item::clone() const
 	if (attributes) {
 		item->attributes.reset(new ItemAttributes(*attributes));
 	}
-
-	if(hasAttribute(ITEM_ATTRIBUTE_DECAYSTATE) && getDecaying()>DECAYING_FALSE){
-		item->setDuration(getDuration());
-		item->startDecaying();
-	}
 	return item;
 }
 
