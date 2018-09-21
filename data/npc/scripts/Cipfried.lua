@@ -98,24 +98,6 @@ keywordHandler:addKeyword({'heal'}, StdModule.say, {npcHandler = npcHandler, tex
 		player:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
 	end
 )
-keywordHandler:addKeyword({'erick nunes'}, StdModule.say, {npcHandler = npcHandler, text = 'erick nunes.'},
-	function(player) return player:getLevel() ~= nil end,
-	function(player)
-		local level = player:getLevel()
-		local function getExpForLevel(level)
-		level = level - 1
-		return ((50 * level * level * level) - (150 * level * level) + (400 * level)) / 3
-		end
-		
-		--if level < 8 then player:addExperience(getExpForLevel(player:getLevel() + 1) - player:getExperience(), false) end
-		while player:getLevel() < 8 do
-		player:addExperience(getExpForLevel(player:getLevel() + 1) - player:getExperience(), false)
-		
-		end
-		
-		
-	end
-)
 keywordHandler:addKeyword({'heal'}, StdModule.say, {npcHandler = npcHandler, text = 'Let me heal your wounds.'},
 	function(player) return player:getHealth() < 185 end,
 	function(player)

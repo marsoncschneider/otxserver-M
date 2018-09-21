@@ -63,7 +63,6 @@
 		<item name="leaf legs" chance="719" />
 		<item name="rainbow quartz" countmax="3" chance="719" />
 		<item name="dark mushroom" chance="719" />
-		<item name="fairy wings" chance="719" />
 		<item name="panpipes" chance="719" />
 		<item name="prismatic quartz" chance="719" />
 		<item name="leaf star" countmax="8" chance="10000" />
@@ -72,6 +71,6 @@
 		<item name="goat grass" chance="5155" />
 		<item name="great health potion" chance="591" />
 		<item name="dandelion seeds" chance="5800" />
-		<item name="fresh fruits" chance="3400" />
+		<item id="28996" chance="3400" /> <!-- fresh fruit -->
 	</loot>
 </monster>

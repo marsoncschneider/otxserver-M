@@ -28,7 +28,12 @@
 	
 	<!-- Raids Rookgaard -->
 	<raid name="Rats" file="rookgaard/rats.xml" interval2="500" margin="70" />
-	<raid name="Tarantulas" file="rookgaard/tarantula.xml" interval2="500" margin="70" />
+<!--<raid name="Tarantulas" file="rookgaard/tarantula.xml" interval2="500" margin="70" /> -->
+	<raid name="Rottie The Rotworm katana" file="rookgaard/rottie1.xml" interval2="500" margin="70" />
+	<raid name="Rottie The Rotworm spidercave" file="rookgaard/rottie2.xml" interval2="300" margin="70" />
+	<raid name="Munster" file="rookgaard/munster.xml" interval2="500" margin="40" />
+	<raid name="Apprentice Sheng" file="rookgaard/sheng.xml" interval2="500" margin="70" />
+	<raid name="Teleskor" file="rookgaard/teleskor.xml" interval2="500" margin="50" />		
 	
 	<!-- Raids Ankrahmun -->
 	<raid name="Terramite" file="ankrahmun/Terramite.xml" interval2="500" margin="70" />	
@@ -93,9 +98,11 @@
 	<raid name="Morgaroth" file="libertybay/morgaroth.xml" interval2="1440" margin="90" />
 	<raid name="Undead Cavebear" file="libertybay/undead_cavebear.xml" interval2="230" margin="20"/>
 	<raid name="Tortoise" file="libertybay/tortoises.xml" interval2="500" margin="80" />
-	<raid name="Titanica" file="libertybay/titanica.xml" interval2="240" margin="20"/>	
 	<raid name="Tigers" file="libertybay/tigers.xml" interval2="500" margin="100" />
 	<raid name="Quaras" file="libertybay/quaras.xml" interval2="500" margin="50" />
+	<raid name="Crustacea Gigantica treasure" file="libertybay/crustacea_gigantica1.xml" interval2="240" margin="20"/>	<!-- under Treasure Island -->
+	<raid name="Crustacea Gigantica calassa1" file="libertybay/crustacea_gigantica2.xml" interval2="240" margin="20"/>	<!-- Calassa South -->	
+	<raid name="Crustacea Gigantica calassa2" file="libertybay/crustacea_gigantica3.xml" interval2="300" margin="20"/>	<!-- Calassa North -->		
 	
 	<!-- Raids Furygate -->	
 	<raid name="Furyosa" file="furygate/furyosa.xml" interval2="440" margin="60"/>
@@ -111,6 +118,8 @@
 	
 	<!-- Raids Oramond -->
 	<raid name="Professor" file="oramond/professor_maxxen.xml" interval2="450" margin="72" /> 
+	<raid name="Crustacea Gigantica seacrest1" file="oramond/crustacea_gigantica4.xml" interval2="240" margin="60"/>	<!-- Seacrest Grounds South -->	
+	<raid name="Crustacea Gigantica seacrest2" file="oramond/crustacea_gigantica5.xml" interval2="300" margin="60"/>	<!-- Seacrest Grounds North -->	
 	
 	<!-- Raids Chayenne -->
 	<!-- <raid name="Chayenne" file="chayenne/chayenne.xml" interval2="1440" margin="170" /> -->

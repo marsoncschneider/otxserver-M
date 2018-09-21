@@ -16,14 +16,14 @@ function creatureSayCallback(cid, type, msg)
 			local player = Player(cid)
           if msgcontains(msg, 'temple') or msgcontains(msg, 'father') then
 		  if player:getStorageValue(50734) <= 0 then 
-                              selfSay('Excelente! Agora você pode passar pelo teletrânsporte.', cid)
+                              selfSay('Excellente! Now you can pass in the teleport.', cid)
 							 player:setStorageValue(50734, 1)
                     end
 
           				
 					
           end
-		  selfSay('Você já tem acesso a esse teletrânsporte.', cid)
+		  selfSay('You already have access to teleport.', cid)
           return TRUE
 end
 

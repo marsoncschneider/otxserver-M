@@ -8,10 +8,10 @@ function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)
 function onThink()		npcHandler:onThink()		end
 
 local voices = {
-	{ text = 'Bem-vindo ao escritório dos correios' },
-	{ text = 'Ei, envie uma carta para o seu amigo de vez em quando. Mantenha contato, você sabe.' },
-	{ text = 'Se precisar de ajuda com cartas ou encomendas, pergunte-me. Posso explicar tudo.' },
-	{ text = 'Não, não, não, não há erro de pacote, estou lhe dizendo!' }
+	{ text = 'Welcome to the post office!' },
+	{ text = 'Hey, send a letter to your friend now and then. Keep in touch, you know.' },
+	{ text = 'If you need help with letters or parcels, just ask me. I can explain everything.' },
+	{ text = 'No, no, no, there IS no parcel bug, I\'m telling you!' }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))
@@ -23,13 +23,13 @@ local function creatureSayCallback(cid, type, msg)
 	local player = Player(cid)
 	if msgcontains(msg, "measurements") then
 		if player:getStorageValue(Storage.postman.Mission07) >= 1 then
-			npcHandler:say("Tenho um problema mais urgente para comparecer a isso. Esses falcões estão caçando meus pombos de porteiro. Traga-me 12 flechas e vou ver se eu tenho o tempo para esse absurdo. Você tem 12 arrow com você? ", cid)
+			npcHandler:say("I have more urgent problem to attend then that. Those hawks are hunting my carrier pigeons. Bring me 12 arrows and I'll see if I have the time for this nonsense. Do you have 12 arrows with you? ", cid)
 			npcHandler.topic[cid] = 1
 		end
 	elseif msgcontains(msg, "yes") then
 		if npcHandler.topic[cid] == 1 then
 			if player:removeItem(2544, 12) then
-				npcHandler:say("Ótimo! Agora vou ensinar-lhes uma lição ... Para essas medidas ... <lhe diz suas medidas> ", cid)
+				npcHandler:say("Great! Now I'll teach them a lesson ... For those measurements ... <tells you her measurements> ", cid)
 				player:setStorageValue(Storage.postman.Mission07, player:getStorageValue(Storage.postman.Mission07) + 1)
 				npcHandler.topic[cid] = 0
 			end
@@ -39,8 +39,8 @@ local function creatureSayCallback(cid, type, msg)
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setMessage(MESSAGE_GREET, "Olá. Como posso ajudá-lo |PLAYERNAME|? Peça-me um comércio {trade} se quiser comprar algo. Também posso explicar o sistema de correios {mail}.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Foi um prazer ajudá-lo, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Foi um prazer ajudá-lo, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Aqui. Não se esqueça de que você também precisa comprar um rótulo {label} se quiser enviar um pacote. Sempre escreva o nome do {receptor} na primeira linha.")
+npcHandler:setMessage(MESSAGE_GREET, "Hello. How may I help you |PLAYERNAME|? Ask me for a trade if you want to buy something. I can also explain the {mail} system.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "It was a pleasure to help you, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "It was a pleasure to help you, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Here. Don't forget that you need to buy a label too if you want to send a parcel. Always write the name of the {receiver} in the first line.")
 npcHandler:addModule(FocusModule:new())

@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spells>
 	<!-- under construction summons -->
-	<instant group="support" spellid="194" name="Summon Creature EK" words="utevo gran res eq" lvl="200" mana="1000"  cooldown="1800000" groupcooldown="2000" needlearn="0" script="support/pet.lua">
-		<vocation name="Knight"/>
+	<instant group="support" spellid="194" name="Summon Creature EK" words="utevo gran res eq" lvl="200" mana="1000"  cooldown="1800000" groupcooldown="4000" needlearn="0" script="support/pet.lua">
 		<vocation name="Elite Knight"/>
 	</instant>
-	<instant group="support" spellid="195" name="Summon Creature RP" words="utevo gran res sac" lvl="200" mana="2000"  cooldown="1800000" groupcooldown="2000" needlearn="0" script="support/pet.lua">
-		<vocation name="Paladin"/>
+	<instant group="support" spellid="195" name="Summon Creature RP" words="utevo gran res sac" lvl="200" mana="2000"  cooldown="1800000" groupcooldown="4000" needlearn="0" script="support/pet.lua">
 		<vocation name="Royal Paladin"/>
 	</instant>
-	<instant group="support" spellid="196" name="Summon Creature MS" words="utevo gran res ven" lvl="200" mana="3000"  cooldown="1800000" groupcooldown="2000" needlearn="0" script="support/pet.lua">
-		<vocation name="Sorcerer"/>
+	<instant group="support" spellid="196" name="Summon Creature MS" words="utevo gran res ven" lvl="200" mana="3000"  cooldown="1800000" groupcooldown="4000" needlearn="0" script="support/pet.lua">
 		<vocation name="Master Sorcerer"/>
 	</instant>
-	<instant group="support" spellid="197" name="Summon Creature ED" words="utevo gran res dru" lvl="200" mana="3000"  cooldown="1800000" groupcooldown="2000" needlearn="0" script="support/pet.lua">
-		<vocation name="Druid"/>
+	<instant group="support" spellid="197" name="Summon Creature ED" words="utevo gran res dru" lvl="200" mana="3000"  cooldown="1800000" groupcooldown="4000" needlearn="0" script="support/pet.lua">
 		<vocation name="Elder Druid"/>
 	</instant>
 	<!-- under construction -->
@@ -165,7 +161,7 @@
 		<vocation name="Knight" />
 		<vocation name="Elite Knight" />
 	</instant>
-	<instant group="support" spellid="20" name="Find Person" words="exiva" lvl="8" mana="20" aggressive="0" playernameparam="0" params="1" cooldown="2000" groupcooldown="2000" needlearn="0" script="support/find person.lua">
+	<instant group="support" spellid="20" name="Find Person" words="exiva" lvl="8" mana="20" aggressive="0" playernameparam="1" params="1" cooldown="2000" groupcooldown="2000" needlearn="0" script="support/find person.lua">
 		<vocation name="Sorcerer" />
 		<vocation name="Druid" />
 		<vocation name="Paladin" />
@@ -499,32 +495,32 @@
 	<rune group="attack" spellid="8" name="Heavy Magic Missile" id="2311" allowfaruse="1" charges="10" lvl="25" exhaustion="2000" groupcooldown="2000" maglv="3" needtarget="1" blocktype="solid" script="attack/heavy magic missile.lua" />
 	<rune group="attack" spellid="18" name="Explosion" id="2313" allowfaruse="1" charges="6" lvl="31" maglv="6" exhaustion="2000" groupcooldown="2000" blocktype="solid" script="attack/explosion.lua" />
 	<rune group="attack" spellid="21" name="Sudden Death" id="2268" allowfaruse="1" charges="3" lvl="45" maglv="15" exhaustion="2000" groupcooldown="2000" needtarget="1" blocktype="solid" script="attack/sudden death.lua" />
-	<rune group="attack" spellid="114" name="Icicle" id="2271" allowfaruse="1" charges="5" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" needtarget="1" blocktype="solid" script="attack/icicle.lua" />
-	<rune group="attack" spellid="115" name="Avalanche" id="2274" allowfaruse="1" charges="4" lvl="30" maglv="4" exhaustion="2000" groupcooldown="2000" blocktype="solid" script="attack/avalanche.lua" />
-	<rune group="attack" spellid="116" name="Stone Shower" id="2288" allowfaruse="1" charges="4" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" blocktype="solid" script="attack/stone shower.lua" />
-	<rune group="attack" spellid="117" name="Thunderstorm" id="2315" allowfaruse="1" charges="4" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" blocktype="solid" script="attack/thunderstorm.lua" />
-	<rune group="attack" spellid="77" name="Stalagmite" id="2292" allowfaruse="1" charges="10" lvl="24" maglv="3" exhaustion="2000" groupcooldown="2000" needtarget="1" blocktype="solid" script="attack/stalagmite.lua" />
+	<rune group="attack" spellid="114" name="Icicle" id="2271" allowfaruse="1" charges="5" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" needtarget="1" script="attack/icicle.lua" />
+	<rune group="attack" spellid="115" name="Avalanche" id="2274" allowfaruse="1" charges="4" lvl="30" maglv="4" exhaustion="2000" groupcooldown="2000" script="attack/avalanche.lua" />
+	<rune group="attack" spellid="116" name="Stone Shower" id="2288" allowfaruse="1" charges="4" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" script="attack/stone shower.lua" />
+	<rune group="attack" spellid="117" name="Thunderstorm" id="2315" allowfaruse="1" charges="4" lvl="28" maglv="4" exhaustion="2000" groupcooldown="2000" script="attack/thunderstorm.lua" />
+	<rune group="attack" spellid="77" name="Stalagmite" id="2292" allowfaruse="1" charges="10" lvl="24" maglv="3" exhaustion="2000" groupcooldown="2000" needtarget="1" script="attack/stalagmite.lua" />
 	<rune group="attack" spellid="130" name="Holy Missile" id="2295" allowfaruse="1" charges="5" lvl="27" maglv="4" exhaustion="2000" groupcooldown="2000" needtarget="1" blocktype="solid" script="attack/holy missile.lua">
 		<vocation name="Paladin" />
 		<vocation name="Royal Paladin" showInDescription="0" />
 	</rune>
 	<rune group="attack" spellid="86" name="Magic Wall" id="2293" allowfaruse="1" charges="3" lvl="32" maglv="9" exhaustion="2000" groupcooldown="2000" blocktype="all" script="support/magic wall rune.lua" />
-	<rune group="attack" spellid="116" name="Light Stone Shower" id="23722" allowfaruse="1" charges="4" lvl="1" maglv="0" cooldown="2000" groupcooldown="2000" blocktype="solid" script="attack/light stone shower.lua" />
+	<rune group="attack" spellid="116" name="Light Stone Shower" id="23722" allowfaruse="1" charges="4" lvl="1" maglv="0" cooldown="2000" groupcooldown="2000" script="attack/light stone shower.lua" />
 	<rune group="attack" spellid="7" name="Lightest Missile" id="23723" allowfaruse="1" charges="10" lvl="1" cooldown="2000" groupcooldown="2000" maglv="0" needtarget="1" blocktype="solid" script="attack/lightest magic missile.lua" />
 
 	<!-- Healing Runes -->
-	<rune group="healing" spellid="31" name="Antidote Rune" id="2266" allowfaruse="1" charges="1" lvl="15" maglv="0" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" script="healing/antidote rune.lua" />
-	<rune group="healing" spellid="4" name="Intense Healing Rune" id="2265" allowfaruse="1" charges="1" lvl="15" maglv="1" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" script="healing/intense healing rune.lua" />
-	<rune group="healing" spellid="5" name="Ultimate Healing Rune" id="2273" allowfaruse="1" charges="1" lvl="24" maglv="4" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" script="healing/ultimate healing rune.lua" />
+	<rune group="healing" spellid="31" name="Antidote Rune" id="2266" allowfaruse="1" charges="1" lvl="15" maglv="0" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" blocktype="solid" script="healing/antidote rune.lua" />
+	<rune group="healing" spellid="4" name="Intense Healing Rune" id="2265" allowfaruse="1" charges="1" lvl="15" maglv="1" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" blocktype="solid" script="healing/intense healing rune.lua" />
+	<rune group="healing" spellid="5" name="Ultimate Healing Rune" id="2273" allowfaruse="1" charges="1" lvl="24" maglv="4" exhaustion="2000" groupcooldown="2000" aggressive="0" needtarget="1" blocktype="solid" script="healing/ultimate healing rune.lua" />
 
 	<!-- Summon Runes -->
-	<rune group="support" spellid="12" name="Convince Creature" id="2290" allowfaruse="1" charges="1" lvl="16" maglv="5" exhaustion="2000" groupcooldown="2000" needtarget="1" blocktype="solid" function="convince" />
+	<rune group="support" spellid="12" name="Convince Creature Rune" id="2290" allowfaruse="1" charges="1" level="16" magiclevel="5" cooldown="2000" groupcooldown="2000" needtarget="1" blocktype="solid" script="support/convince_creature.lua" />
 	<rune group="support" spellid="83" name="Animate Dead" id="2316" allowfaruse="1" charges="1" lvl="27" maglv="4" exhaustion="2000" groupcooldown="2000" blocktype="solid" script="support/animate dead rune.lua" />
 
 	<!-- Support Runes -->
 	<rune group="support" spellid="78" name="Desintegrate" id="2310" allowfaruse="0" charges="3" lvl="21" maglv="4" exhaustion="2000" groupcooldown="2000" range="1" script="support/desintegrate rune.lua" />
 	<rune group="support" spellid="30" name="Destroy Field" id="2261" allowfaruse="1" charges="3" lvl="17" maglv="3" exhaustion="2000" groupcooldown="2000" aggressive="0" range="5" script="support/destroy field rune.lua" />
-	<rune group="support" spellid="14" name="Chameleon" id="2291" allowfaruse="1" charges="1" lvl="27" maglv="4" exhaustion="2000" groupcooldown="2000" aggressive="0" selftarget="1" blocktype="solid" function="chameleon" />
+	<rune group="support" spellid="14" name="Chameleon Rune" id="2291" allowfaruse="1" charges="1" level="27" magiclevel="4" cooldown="2000" groupcooldown="2000" aggressive="0" selftarget="1" blocktype="solid" script="support/chameleon.lua" />
 	<rune group="support" spellid="94" name="Wild Growth" id="2269" allowfaruse="1" charges="2" lvl="27" maglv="8" exhaustion="2000" groupcooldown="2000" blocktype="all" script="support/wild growth rune.lua">
 		<vocation name="Druid" />
 		<vocation name="Elder Druid" showInDescription="0" />
@@ -761,7 +757,6 @@
 	<!-- Monster Spells -->
 	<instant name="renegade knight" words="##400" aggressive="0" blockwalls="1" needtarget="0" needlearn="1" script="monster/renegade knight.lua" />
 	<instant name="vile grandmaster" words="##401" aggressive="0" blockwalls="1" needtarget="0" needlearn="1" script="monster/vile grandmaster.lua" />
-	<instant name="sheep trainer summon" words="##376" aggressive="0" blockwalls="1" needtarget="0" needlearn="1" script="monster/sheep trainer summon.lua" />
 	<instant name="salamander trainer summon" words="##374" aggressive="0" blockwalls="1" needtarget="0" needlearn="1" script="monster/salamander trainer summon.lua" />
 	<instant name="woodling paralyze" words="###375" direction="1" aggressive="1" blockwalls="1" needtarget="0" needlearn="1" script="monster/woodling paralyze.lua" />
 	<instant name="the imperor summon" words="###220" aggressive="0" blockwalls="1" needtarget="0" needlearn="1" script="monster/the imperor summon.lua" />

@@ -39,19 +39,22 @@
 		<voice sentence="Are you one of these evil nightmare creatures? Leave this realm alone!" />
 	</voices>
 	<loot>
-		<item name="boots of haste" chance="100" />
-		<item name="dream blossom staff" chance="50" />
-		<item name="hibiscus dress" chance="300" />
-		<item name="sacread tree amulet" chance="200" />
-		<item name="butterfly ring" chance="200" />
-		<item name="emerald bagle" chance="200" />
-		<item name="gold coin" countmax="105" chance="30000" />
-		<item name="colourful snail shell" chance="1086" />
-		<item name="dandelion seeds" chance="492" />
-		<item name="great mana potion" chance="719" />
-		<item name="strong mana potion" chance="10000" />
-		<item name="small enchanted amethyst" chance="5155" />
-		<item name="small topaz" chance="591" />
-		<item name="wild flowers" chance="5800" />
+		<item id="2745" chance="400"/> <!-- blue rose -->
+		<item id="2195" chance="150"/> <!-- boots of haste -->
+		<item id="29002" chance="1200"/> <!-- butterfly ring -->
+		<item id="29000" chance="12000"/> <!-- colourful snail shell -->
+		<item id="28999" chance="12000"/> <!-- dandelion seeds -->
+		<item id="29004" chance="600"/> <!-- dream blossom staff -->
+		<item id="2127" chance="1800"/> <!-- emerald bangle -->
+		<item id="9927" chance="500"/> <!-- flower wreath -->
+		<item id="28996" countmax="2" chance="15000"/> <!-- fresh fruit -->
+		<item id="2148" countmax="110" chance="65000"/> <!-- gold coin -->
+		<item id="7590" chance="3000"/> <!-- great mana potion -->
+		<item id="8873" chance="650"/> <!-- hibiscus dress -->
+		<item id="10219" chance="1000"/> <!-- sacred tree amulet -->
+		<item id="7762" countmax="2" chance="2000"/> <!-- small enchanted amethyst -->
+		<item id="9970" countmax="2" chance="2500"/> <!-- small topaz -->
+		<item id="7589" chance="1000"/> <!-- strong mana potion -->
+		<item id="28995" chance="20000"/> <!-- wild flowers -->
 	</loot>
 </monster>

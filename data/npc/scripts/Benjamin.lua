@@ -8,9 +8,9 @@ function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)
 function onThink()		npcHandler:onThink()		end
 
 local voices = {
-	{ text = 'Bem-vindo ao escritório dos correios' },
-	{ text = 'Se precisar de ajuda com cartas ou encomendas, pergunte-me. Posso explicar tudo.' },
-	{ text = 'Ei, envie uma carta para o seu amigo de vez em quando. Mantenha contato, você sabe.' }
+	{ text = 'Welcome to the post office!' },
+	{ text = 'If you need help with letters or parcels, just ask me. I can explain everything.' },
+	{ text = 'Hey, send a letter to your friend now and then. Keep in touch, you know.' }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))
@@ -22,7 +22,7 @@ local function creatureSayCallback(cid, type, msg)
 	if msgcontains(msg, "measurements") then
 		local player = Player(cid)
 		if player:getStorageValue(Storage.postman.Mission07) >= 1 then
-			npcHandler:say("Oh, eles não mudam tanto desde os velhos tempos como ... <conta uma história chata e confusa sobre um bolo, um pacote, ele e dois esquilos, pelo menos ele lhe diz suas medidas no final>", cid)
+			npcHandler:say("Oh they don't change that much since in the old days as... <tells a boring and confusing story about a cake, a parcel, himself and two squirrels, at least he tells you his measurements in the end> ", cid)
 			player:setStorageValue(Storage.postman.Mission07, player:getStorageValue(Storage.postman.Mission07) + 1)
 			npcHandler.topic[cid] = 0
 		end
@@ -30,8 +30,8 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, "Olá. Como posso ajudá-lo |PLAYERNAME|? Peça-me um {trade} se quiser comprar algo. Também posso explicar o sistema de {mail}.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Foi um prazer ajudá-lo, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_GREET, "Hello. How may I help you |PLAYERNAME|? Ask me for a {trade} if you want to buy something. I can also explain the {mail} system.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "It was a pleasure to help you, |PLAYERNAME|.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

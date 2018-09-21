@@ -26,9 +26,9 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, "LONGA VIDA À RAINHA!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "LONGA VIDA À RAINHA!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA À RAINHA!")
+npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE THE QUEEN!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE QUEEN!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE QUEEN!")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

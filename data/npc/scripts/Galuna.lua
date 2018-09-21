@@ -7,11 +7,11 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Arcos, bestas e munição! Oferta especial somente hoje!.'} }
+local voices = { {text = 'Bows, crossbows and ammunition on special sale today.'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
-npcHandler:setMessage(MESSAGE_GREET, "Oh, por favor entre, |PLAYERNAME|. Do que você precisa? Armas de distância? Eu vendo muitas.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Até mais.")
+npcHandler:setMessage(MESSAGE_GREET, "Oh, please come in, |PLAYERNAME|. What do you need? Distance weapons? I sell lots of them.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye.")
 
 npcHandler:addModule(FocusModule:new())

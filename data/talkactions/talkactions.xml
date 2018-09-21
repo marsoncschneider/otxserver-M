@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
-	<talkaction words="!ver" separator=" " script="ver.lua" />
-	<talkaction words="!timer" separator=" " script="timer.lua" />
-	<talkaction words="!resetgui" separator=" " script="reset.lua" />
-	<talkaction words="!healer" separator=" " script="autoheal.lua" />
-	<talkaction words="!autoeat" separator=" " script="autoeater.lua" />
-	<talkaction words="!autoattack" script="autokill.lua"/>
-	<talkaction words="!promote" script="promotion.lua" />
-	<talkaction words="!serverinfo" script="serverinfo.lua" />
-	<talkaction words="!buyprem" script="buyprem.lua" />
-	<talkaction words="!bless" separator=" " script="bless.lua" />
-	<talkaction words="!aol" separator=" " script="aol.lua" />	
-	<talkaction words="!boosts" script="boosts.lua" /> 
-	<talkaction words="!autoloot" separator=" " script="autoloot.lua"/>
 	<!-- Gods -->
 	<talkaction words="/addskill" separator=" " script="add_skill.lua" />
 	<talkaction words="/r" separator=" " script="removething.lua" />
@@ -38,7 +25,7 @@
 	<talkaction words="/reportadm" separator=" " script="reportadm.lua"/>
 	<talkaction words="/addgm" separator=" " script="add_gm.lua" />
 	<talkaction words="/attr" separator=" " script="attributes.lua" />
-	<talkaction words="!spells" separator=" " script="spells.lua" />
+	<talkaction words="/emptyhouses" script="emptyhouses.lua" />
 
 	<!-- Gamemasters -->
 	<talkaction words="/ban" separator=" " script="ban.lua" />
@@ -72,9 +59,11 @@
 	<talkaction words="!sellhouse" separator=" " script="sellhouse.lua" />
 	<talkaction words="!uptime" script="uptime.lua" />
 	<talkaction words="!online" script="online.lua" />
-	<talkaction words="!online2" script="online2.lua" />
 	<talkaction words="!serverinfo" script="serverinfo.lua" />
 	<talkaction words="!report" separator=" " script="adminreport.lua"/>
+	
+	<!-- Anti-Entrosa -->
+	<talkaction words="/war" separator=" " script="warPrivate_talkactions.lua" />
 
 	<!-- Cast System -->
 	<talkaction words="!cast" separator=" " script="start_cast.lua" />

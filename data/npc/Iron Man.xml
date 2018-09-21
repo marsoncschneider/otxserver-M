@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Iron Man" script="Iron Man.lua" walkinterval="0" floorchange="0">
-	<health now="70" max="100" />
-	<look type="134" head="114" body="132" legs="113" feet="114" addons="3" mount="373" />
-	
-</npc>

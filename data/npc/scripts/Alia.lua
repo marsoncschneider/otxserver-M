@@ -10,28 +10,28 @@ function onThink()				npcHandler:onThink()					end
 -- Twist of Fate
 local blessKeyword = keywordHandler:addKeyword({'twist of fate'}, StdModule.say, {npcHandler = npcHandler,
 	text = {
-		'Esta é uma bênção especial que posso lhe dar uma vez que você obteve pelo menos uma das outras bênçãos e que funciona um pouco diferente. ...',
-		'Só funciona quando você é morto por outros aventureiros, o que significa que pelo menos a metade do dano causado pela morte foi causada por outros, não por monstros ou pelo meio ambiente. ...',
-		'A {torção do destino} não reduziria a pena de morte como as outras bênçãos, mas, em vez disso, evita que você perca suas outras bênçãos, bem como o amuleto da perda, se você usar uma. Custa o mesmo que as outras bençãos. ...',
-		'Gostaria de receber essa proteção para um sacrifício de | PVPBLESSCOST | ouro, criança?'
+		'This is a special blessing I can bestow upon you once you have obtained at least one of the other blessings and which functions a bit differently. ...',
+		'It only works when you\'re killed by other adventurers, which means that at least half of the damage leading to your death was caused by others, not by monsters or the environment. ...',
+		'The {twist of fate} will not reduce the death penalty like the other blessings, but instead prevent you from losing your other blessings as well as the amulet of loss, should you wear one. It costs the same as the other blessings. ...',
+		'Would you like to receive that protection for a sacrifice of |PVPBLESSCOST| gold, child?'
 	}})
-	blessKeyword:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, text = 'Então receba a proteção do giro do destino, peregrino.', cost = '|PVPBLESSCOST|', bless = 6})
-	blessKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'Bem, Você é livre para recusar minha oferta.', reset = true})
+	blessKeyword:addChildKeyword({'yes'}, StdModule.bless, {npcHandler = npcHandler, text = 'So receive the protection of the twist of fate, pilgrim.', cost = '|PVPBLESSCOST|', bless = 1})
+	blessKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'Fine. You are free to decline my offer.', reset = true})
 
 -- Adventurer Stone
-keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Mantenha a pedra do seu aventureiro bem.'}, function(player) return player:getItemById(18559, true) end)
+keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Keep your adventurer\'s stone well.'}, function(player) return player:getItemById(18559, true) end)
 
-local stoneKeyword = keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Ah, você quer substituir a pedra do seu aventureiro gratuitamente?'}, function(player) return player:getStorageValue(Storage.AdventurersGuild.FreeStone.Alia) ~= 1 end)
-	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Aqui está. Cuide-se.', reset = true}, nil, function(player) player:addItem(18559, 1) player:setStorageValue(Storage.AdventurersGuild.FreeStone.Alia, 1) end)
-	stoneKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'Sem problemas.', reset = true})
+local stoneKeyword = keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Ah, you want to replace your adventurer\'s stone for free?'}, function(player) return player:getStorageValue(Storage.AdventurersGuild.FreeStone.Alia) ~= 1 end)
+	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Here you are. Take care.', reset = true}, nil, function(player) player:addItem(18559, 1) player:setStorageValue(Storage.AdventurersGuild.FreeStone.Alia, 1) end)
+	stoneKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'No problem.', reset = true})
 
-local stoneKeyword = keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Ah, você quer substituir a pedra do seu aventureiro por 30 ouro?'})
-	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Aqui está. Cuide-se.', reset = true},
-		function(player) return player:getMoney() >= 30 end,
-		function(player) if player:removeMoney(30) then player:addItem(18559, 1) end end
+local stoneKeyword = keywordHandler:addKeyword({'adventurer stone'}, StdModule.say, {npcHandler = npcHandler, text = 'Ah, you want to replace your adventurer\'s stone for 30 gold?'})
+	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Here you are. Take care.', reset = true},
+		function(player) return player:getMoney() + player:getBankBalance() >= 30 end,
+		function(player) if player:removeMoneyNpc(30) then player:addItem(18559, 1) end end
 	)
-	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Desculpe, você não tem dinheiro suficiente.', reset = true})
-	stoneKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'Sem problemas.', reset = true})
+	stoneKeyword:addChildKeyword({'yes'}, StdModule.say, {npcHandler = npcHandler, text = 'Sorry, you don\'t have enough money.', reset = true})
+	stoneKeyword:addChildKeyword({''}, StdModule.say, {npcHandler = npcHandler, text = 'No problem.', reset = true})
 
 -- Healing
 local function addHealKeyword(text, condition, effect)

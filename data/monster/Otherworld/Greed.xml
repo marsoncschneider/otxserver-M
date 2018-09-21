@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Greed" nameDescription="a greed" race="energy" experience="10" speed="210" manacost="0">
+<monster name="Greed" nameDescription="Greed" race="energy" experience="0" speed="210" manacost="0">
 	<health now="1100" max="1100" />
-	<look type="290" corpse="8966" />
+	<look type="290" corpse="0" />
 	<targetchange interval="4000" chance="15" />
 	<flags>
 		<flag summonable="0" />
@@ -31,23 +31,18 @@
 			<attribute key="areaEffect" value="yellowspark" />
 		</attack>
 	</attacks>
-	<defenses armor="20" defense="20">
-		<defense name="healing" interval="2000" chance="5" min="190" max="250">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-	</defenses>
-	<elements>
-		<element physicalPercent="70" />
-		<element holyPercent="25" />
-		<element deathPercent="1" />
-		<element earthPercent="-5" />
-	</elements>
+	<defenses armor="20" defense="20"/>
 	<immunities>
-		<immunity ice="1" />
+		<immunity physical="1" />
 		<immunity energy="1" />
 		<immunity fire="1" />
-		<immunity invisible="1" />
+		<immunity poison="1" />
+		<immunity ice="1" />
+		<immunity holy="1" />
+		<immunity death="1" />
+		<immunity lifedrain="1" />
 		<immunity paralyze="1" />
+		<immunity drown="1" />
+		<immunity invisible="1" />
 	</immunities>
-	
 </monster>

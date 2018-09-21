@@ -1,32 +1,14 @@
 -- Internal Use
 STONE_SKIN_AMULET = 2197
-ITEM_STORE_INBOX = 26052
 GOLD_POUNCH = 26377
+ITEM_STORE_INBOX = 26052
+ITEM_PARCEL = 2595
 
 -- No move items with actionID 8000
 NOT_MOVEABLE_ACTION = 8000
 
 -- Players cannot throw items on teleports if set to true
 local blockTeleportTrashing = true
-
-local townsrange = {
-	{fromPos = Position(32953, 32072, 7), toPos = Position(32963, 32081, 7), townId = 1},
-	{fromPos = Position(32364, 32231, 7), toPos = Position(32374, 32243, 7), townId = 2},
-	{fromPos = Position(32642, 31921, 11), toPos = Position(32656, 31929, 11), townId = 3},
-	{fromPos = Position(32356, 31775, 7), toPos = Position(32364, 31787, 7), townId = 4},
-	{fromPos = Position(32718, 31628, 7), toPos = Position(32736, 31639, 7), townId = 5},
-	{fromPos = Position(32313, 32818, 7), toPos = Position(32322, 32830, 7), townId = 7},
-	{fromPos = Position(32590, 32740, 7), toPos = Position(32600, 32750, 7), townId = 8},
-	{fromPos = Position(33188, 32844, 8), toPos = Position(33201, 32857, 8), townId = 9},
-	{fromPos = Position(33210, 32450, 1), toPos = Position(33217, 32457, 1), townId = 10},
-	{fromPos = Position(33208, 31803, 8), toPos = Position(33225, 31819, 8), townId = 11},
-	{fromPos = Position(32207, 31127, 7), toPos = Position(32218, 31138, 7), townId = 12},
-	{fromPos = Position(32785, 31274, 7), toPos = Position(32789, 31279, 7), townId = 13},
-	{fromPos = Position(33018, 31514, 11), toPos = Position(33032, 31531, 11), townId = 14},
-	{fromPos = Position(33442, 31312, 9), toPos = Position(33454, 31326, 9), townId = 28},
-	{fromPos = Position(33510, 32360, 6), toPos = Position(33516, 32366, 6), townId = 29},
-	{fromPos = Position(33586, 31895, 6), toPos = Position(33603, 31903, 6), townId = 33}
-}
 
 local titles = {
 	{storageID = 14960, title = " Scout"},
@@ -68,6 +50,10 @@ local function getMinutes(seconds)
 	return math.floor(seconds/60)
 end
 
+local function getSeconds(seconds)
+	return seconds%60
+end
+
 local function getTime(seconds)
 	local hours, minutes = getHours(seconds), getMinutes(seconds)
 	if (minutes > 59) then
@@ -81,13 +67,30 @@ local function getTime(seconds)
 	return hours..":"..minutes.. "h"
 end
 
+local function getTimeinWords(secs)
+	local hours, minutes, seconds = getHours(secs), getMinutes(secs), getSeconds(secs)
+	if (minutes > 59) then
+		minutes = minutes-hours*60
+	end
+
+	local timeStr = ''
+
+	if hours > 0 then
+		timeStr = timeStr .. ' hours '
+	end
+
+	timeStr = timeStr .. minutes .. ' minutes and '.. seconds .. 'seconds.'
+
+	return timeStr
+end
+
 function Player:onLook(thing, position, distance)
-	local description = 'You see '
+	local description = "You see "
 	if thing:isItem() then
 		if thing.actionid == 5640 then
-			description = description .. 'a honeyflower patch.'
+			description = description .. "a honeyflower patch."
 		elseif thing.actionid == 5641 then
-			description = description .. 'a banana palm.'
+			description = description .. "a banana palm."
 		elseif thing.itemid >= ITEM_HEALTH_CASK_START and thing.itemid <= ITEM_HEALTH_CASK_END 
 		or thing.itemid >= ITEM_MANA_CASK_START and thing.itemid <= ITEM_MANA_CASK_END 
 		or thing.itemid >= ITEM_SPIRIT_CASK_START and thing.itemid <= ITEM_SPIRIT_CASK_END 
@@ -95,7 +98,7 @@ function Player:onLook(thing, position, distance)
 			description = description .. thing:getDescription(distance)
 			local charges = thing:getCharges()
 			if charges then
-			description = string.format('%s\nIt has %d refillings left.', description, charges)
+			description = string.format("%s\nIt has %d refillings left.", description, charges)
 			end
 		else
 			description = description .. thing:getDescription(distance)
@@ -119,9 +122,9 @@ function Player:onLook(thing, position, distance)
 					end
 				else
 					if (i ~= itemType:getImbuingSlots()) then
-						imbuingSlots = imbuingSlots.. "Free Slot, "
+						imbuingSlots = imbuingSlots.. "Empty Slot, "
 					else
-						imbuingSlots = imbuingSlots.. "Free Slot)."
+						imbuingSlots = imbuingSlots.. "Empty Slot)."
 					end
 				end
 			end
@@ -129,53 +132,60 @@ function Player:onLook(thing, position, distance)
 		end
 	else
 		description = description .. thing:getDescription(distance)
+		if thing:isMonster() then
+			local master = thing:getMaster()
+			if master and table.contains({'thundergiant','grovebeast','emberwing','skullfrost'}, thing:getName():lower()) then
+				description = description..' (Master: ' .. master:getName() .. '). It will disappear in ' .. getTimeinWords(master:getStorageValue(Storage.PetSummon) - os.time())
+			end
+		end
 	end
 
 	if self:getGroup():getAccess() then
 		if thing:isItem() then
-			description = string.format('%s\nItem ID: %d', description, thing.itemid)
+			description = string.format("%s\nItem ID: %d", description, thing:getId())
 
-			local actionId = thing.actionid
+			local actionId = thing:getActionId()
 			if actionId ~= 0 then
-				description = string.format('%s, Action ID: %d', description, actionId)
+				description = string.format("%s, Action ID: %d", description, actionId)
 			end
 
 			local uniqueId = thing:getAttribute(ITEM_ATTRIBUTE_UNIQUEID)
 			if uniqueId > 0 and uniqueId < 65536 then
-				description = string.format('%s, Unique ID: %d', description, uniqueId)
+				description = string.format("%s, Unique ID: %d", description, uniqueId)
 			end
 
-			description = description .. '.'
 			local itemType = thing:getType()
 
 			local transformEquipId = itemType:getTransformEquipId()
 			local transformDeEquipId = itemType:getTransformDeEquipId()
 			if transformEquipId ~= 0 then
-				description = string.format('%s\nTransforms to: %d (onEquip)', description, transformEquipId)
+				description = string.format("%s\nTransforms to: %d (onEquip)", description, transformEquipId)
 			elseif transformDeEquipId ~= 0 then
-				description = string.format('%s\nTransforms to: %d (onDeEquip)', description, transformDeEquipId)
+				description = string.format("%s\nTransforms to: %d (onDeEquip)", description, transformDeEquipId)
 			end
 
 			local decayId = itemType:getDecayId()
 			if decayId ~= -1 then
-				description = string.format('%s\nDecays to: %d', description, decayId)
+				description = string.format("%s\nDecays to: %d", description, decayId)
 			end
 		elseif thing:isCreature() then
-			local str = '%s\nHealth: %d / %d'
-			if thing:getMaxMana() > 0 then
-				str = string.format('%s, Mana: %d / %d', str, thing:getMana(), thing:getMaxMana())
+			local str = "%s\nHealth: %d / %d"
+			if thing:isPlayer() and thing:getMaxMana() > 0 then
+				str = string.format("%s, Mana: %d / %d", str, thing:getMana(), thing:getMaxMana())
 			end
-			description = string.format(str, description, thing:getHealth(), thing:getMaxHealth()) .. '.'
+			description = string.format(str, description, thing:getHealth(), thing:getMaxHealth()) .. "."
 		end
 
 		local position = thing:getPosition()
 		description = string.format(
-			'%s\nPosition: %d, %d, %d',
+			"%s\nPosition: %d, %d, %d",
 			description, position.x, position.y, position.z
 		)
 
-		if thing:isCreature() and thing:isPlayer() then
-			description = string.format('%s\nIP: %s.', description, Game.convertIpToString(thing:getIp()))
+		if thing:isCreature() then
+			if thing:isPlayer() then
+				description = string.format("%s\nIP: %s.", description, Game.convertIpToString(thing:getIp()))
+			end
 		end
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
@@ -183,9 +193,15 @@ end
 
 function Player:onLookInBattleList(creature, distance)
 	local description = "You see " .. creature:getDescription(distance)
+	if creature:isMonster() then
+		local master = creature:getMaster()
+		if master and table.contains({'thundergiant','grovebeast','emberwing','skullfrost'}, creature:getName():lower()) then
+			description = description..' (Master: ' .. master:getName() .. '). It will disappear in ' .. getTimeinWords(master:getStorageValue(Storage.PetSummon) - os.time())
+		end
+	end
 	if self:getGroup():getAccess() then
 		local str = "%s\nHealth: %d / %d"
-		if creature:getMaxMana() > 0 then
+		if creature:isPlayer() and creature:getMaxMana() > 0 then
 			str = string.format("%s, Mana: %d / %d", str, creature:getMana(), creature:getMaxMana())
 		end
 		description = string.format(str, description, creature:getHealth(), creature:getMaxHealth()) .. "."
@@ -225,7 +241,7 @@ local function antiPush(self, item, count, fromPosition, toPosition, fromCylinde
 		return true
 	end
 
-	local tile = Position(toPosition):getTile()
+	local tile = Tile(toPosition)
 	if not tile then
 		self:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
 		return false
@@ -261,131 +277,12 @@ local function antiPush(self, item, count, fromPosition, toPosition, fromCylinde
 end
 
 function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, toCylinder)
-	 --if item:getId() and toPosition.y then
-           local playerPos9, isInTemple9, temple9, townId9 = self:getPosition(), false
-		   for i = 1, #townsrange do
-			temple9 = townsrange[i]
-			if isInRange(toPosition, temple9.fromPos, temple9.toPos) then
-			self:sendCancelMessage("Por favor mantenha o templo limpo.")
-			return false
-			
-			end
-			
-			
-			end
-			--[[ for i = 1, #townsrange do
-		local temple = config[i]
-		if isInRange(fromPosition, temple.fromPosition, temple.toPosition) then
-			if Tile(toPosition):hasFlag(TILESTATE_PROTECTIONZONE) then
-				isInTemple, townId = true, temple.townId
-				self:sendCancelMessage("move on temple")
-			end
-		end
-		   end]]
-			
-			if item:getId() == 1775 and getTilePzInfo(getCreaturePosition(self)) then
-			--item:remove()
-			end
-				if (os.time() - self:getStorageValue(61923)) >= 1 then
-                self:setStorageValue(61923, os.time())
-				--self:setStorageValue(61923, os.time())
-            else
-				--self:setStorageValue(61923, -1)
-                self:sendCancelMessage("Push com bot")
-				--self:remove()
-                return false
-            end
-       -- end
-	 if item:getId() == 2197 and toPosition.y == CONST_SLOT_NECKLACE then
-            if (os.time() - self:getStorageValue(61922)) >= 1 then
-                self:setStorageValue(61922, os.time())
-            else
-                self:sendCancelMessage("You can't push stone skin amulet so fast!")
-                return false
-            end
-        end
+	-- No move if item count > 20 items
 	local tile = Tile(toPosition)
-    if tile and tile:getItemCount() > 20 then
-        self:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
-        return false
-    end
-	--- LIONS ROCK START 
-	if self:getStorageValue(lionrock.storages.playerCanDoTasks) - os.time() < 0 then
-		local p, i = lionrock.positions, lionrock.items
-		local checkPr = false
-		if item:getId() == lionrock.items.ruby and toPosition.x == p.ruby.x and toPosition.y == p.ruby.y  and toPosition.z == p.ruby.z then
-			-- Ruby
-			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the ruby on the small socket. A red flame begins to burn.")
-				checkPr = true
-			if lionrock.taskactive.ruby ~= true then
-				lionrock.taskactive.ruby = true
-			end
-
-			local tile = Tile(p.ruby)
-			if tile:getItemCountById(i.redflame) < 1 then
-				Game.createItem(i.redflame, 1, p.ruby)
-			end
-		end
-
-		if item:getId() == lionrock.items.sapphire and toPosition.x == p.sapphire.x and toPosition.y == p.sapphire.y  and toPosition.z == p.sapphire.z then
-			-- Sapphire
-			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the sapphire on the small socket. A blue flame begins to burn.")
-				checkPr = true
-			if lionrock.taskactive.sapphire ~= true then
-				lionrock.taskactive.sapphire = true
-			end
-
-			local tile = Tile(p.sapphire)
-			if tile:getItemCountById(i.blueflame) < 1 then
-				Game.createItem(i.blueflame, 1, p.sapphire)
-			end
-		end
-
-		if item:getId() == lionrock.items.amethyst and toPosition.x == p.amethyst.x and toPosition.y == p.amethyst.y  and toPosition.z == p.amethyst.z then
-			-- Amethyst
-			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the topaz on the small socket. A yellow flame begins to burn.")
-				checkPr = true
-			if lionrock.taskactive.amethyst ~= true then
-				lionrock.taskactive.amethyst = true
-			end
-
-			local tile = Tile(p.amethyst)
-			if tile:getItemCountById(i.yellowflame) < 1 then
-				Game.createItem(i.yellowflame, 1, p.amethyst)
-			end
-		end
-
-		if item:getId() == lionrock.items.topaz and toPosition.x == p.topaz.x and toPosition.y == p.topaz.y  and toPosition.z == p.topaz.z then
-			-- Topaz
-			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the amethyst on the small socket. A violet flame begins to burn.")
-				checkPr = true
-			if lionrock.taskactive.topaz ~= true then
-				lionrock.taskactive.topaz = true
-			end
-
-			local tile = Tile(p.topaz)
-			if tile:getItemCountById(i.violetflame) < 1 then
-				Game.createItem(i.violetflame, 1, p.topaz)
-			end
-		end
-
-		if checkPr == true then
-			-- Adding the Fountain which gives present
-			if lionrock.taskactive.ruby == true and lionrock.taskactive.sapphire == true and lionrock.taskactive.amethyst == true and lionrock.taskactive.topaz == true then
-				local fountain = Game.createItem(i.rewardfountain, 1, { x=33073, y=32300, z=9})
-				fountain:setActionId(41357)
-				local stone = Tile({ x=33073, y=32300, z=9}):getItemById(3608)
-				if stone ~= nil then
-					stone:remove()
-				end
-				self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Something happens at the centre of the room ...");
-			end
-
-			-- Removing Item
-			item:remove(1)
-		end
+	if tile and tile:getItemCount() > 20 then
+		self:sendCancelMessage(RETURNVALUE_NOTPOSSIBLE)
+		return false
 	end
-	---- LIONS ROCK END
 
 	-- SSA exhaust
 	local exhaust = { }
@@ -525,6 +422,84 @@ function Player:onMoveItem(item, count, fromPosition, toPosition, fromCylinder, 
 		self:getPosition():sendMagicEffect(CONST_ME_POFF)
 		return false
 	end
+	
+	--- LIONS ROCK START 
+	if self:getStorageValue(lionrock.storages.playerCanDoTasks) - os.time() < 0 then
+		local p, i = lionrock.positions, lionrock.items
+		local checkPr = false
+		if item:getId() == lionrock.items.ruby and toPosition.x == p.ruby.x and toPosition.y == p.ruby.y  and toPosition.z == p.ruby.z then
+			-- Ruby
+			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the ruby on the small socket. A red flame begins to burn.")
+				checkPr = true
+			if lionrock.taskactive.ruby ~= true then
+				lionrock.taskactive.ruby = true
+			end
+
+			local tile = Tile(p.ruby)
+			if tile:getItemCountById(i.redflame) < 1 then
+				Game.createItem(i.redflame, 1, p.ruby)
+			end
+		end
+
+		if item:getId() == lionrock.items.sapphire and toPosition.x == p.sapphire.x and toPosition.y == p.sapphire.y  and toPosition.z == p.sapphire.z then
+			-- Sapphire
+			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the sapphire on the small socket. A blue flame begins to burn.")
+				checkPr = true
+			if lionrock.taskactive.sapphire ~= true then
+				lionrock.taskactive.sapphire = true
+			end
+
+			local tile = Tile(p.sapphire)
+			if tile:getItemCountById(i.blueflame) < 1 then
+				Game.createItem(i.blueflame, 1, p.sapphire)
+			end
+		end
+
+		if item:getId() == lionrock.items.amethyst and toPosition.x == p.amethyst.x and toPosition.y == p.amethyst.y  and toPosition.z == p.amethyst.z then
+			-- Amethyst
+			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the topaz on the small socket. A yellow flame begins to burn.")
+				checkPr = true
+			if lionrock.taskactive.amethyst ~= true then
+				lionrock.taskactive.amethyst = true
+			end
+
+			local tile = Tile(p.amethyst)
+			if tile:getItemCountById(i.yellowflame) < 1 then
+				Game.createItem(i.yellowflame, 1, p.amethyst)
+			end
+		end
+
+		if item:getId() == lionrock.items.topaz and toPosition.x == p.topaz.x and toPosition.y == p.topaz.y  and toPosition.z == p.topaz.z then
+			-- Topaz
+			self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You place the amethyst on the small socket. A violet flame begins to burn.")
+				checkPr = true
+			if lionrock.taskactive.topaz ~= true then
+				lionrock.taskactive.topaz = true
+			end
+
+			local tile = Tile(p.topaz)
+			if tile:getItemCountById(i.violetflame) < 1 then
+				Game.createItem(i.violetflame, 1, p.topaz)
+			end
+		end
+
+		if checkPr == true then
+			-- Adding the Fountain which gives present
+			if lionrock.taskactive.ruby == true and lionrock.taskactive.sapphire == true and lionrock.taskactive.amethyst == true and lionrock.taskactive.topaz == true then
+				local fountain = Game.createItem(i.rewardfountain, 1, { x=33073, y=32300, z=9})
+				fountain:setActionId(41357)
+				local stone = Tile({ x=33073, y=32300, z=9}):getItemById(3608)
+				if stone ~= nil then
+					stone:remove()
+				end
+				self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Something happens at the centre of the room ...");
+			end
+
+			-- Removing Item
+			item:remove(1)
+		end
+	end
+	---- LIONS ROCK END
 
 	if not antiPush(self, item, count, fromPosition, toPosition, fromCylinder, toCylinder) then
 		return false
@@ -537,11 +512,19 @@ function Player:onMoveCreature(creature, fromPosition, toPosition)
 	return true
 end
 
--- Temporal disable
---[[function Player:onReportRuleViolation(targetName, reportType, reportReason, comment, translation)
+local function hasPendingReport(name, targetName, reportType)
+	local f = io.open(string.format("data/reports/players/%s-%s-%d.txt", name, targetName, reportType), "r")
+	if f then
+		io.close(f)
+		return true
+	else
+		return false
+	end
+end
+
+function Player:onReportRuleViolation(targetName, reportType, reportReason, comment, translation)
 	local name = self:getName()
-	local pendingReport = function () local f = io.open(string.format("data/reports/players/%s-%s-%d.txt", name, targetName, reportType), "r") ; if f then io.close(f) return true else return false end end
-	if pendingReport() then
+	if hasPendingReport(name, targetName, reportType) then
 		self:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Your report is being processed.")
 		return
 	end
@@ -554,8 +537,8 @@ end
 
 	io.output(file)
 	io.write("------------------------------\n")
-	io.write("Complainter: " .. name .. "\n")
-	io.write("Reported: " .. targetName .. "\n")
+	io.write("Reported by: " .. name .. "\n")
+	io.write("Target: " .. targetName .. "\n")
 	io.write("Type: " .. reportType .. "\n")
 	io.write("Reason: " .. reportReason .. "\n")
 	io.write("Comment: " .. comment .. "\n")
@@ -566,7 +549,7 @@ end
 	io.close(file)
 	self:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format("Thank you for reporting %s. Your report will be processed by %s team as soon as possible.", targetName, configManager.getString(configKeys.SERVER_NAME)))
 	return
-end]]
+end
 
 function Player:onReportBug(message, position, category)
 	local name = self:getName()
@@ -758,7 +741,7 @@ function Player:onUseWeapon(normalDamage, elementType, elementDamage)
 		if nextEquip and nextEquip:getType():getImbuingSlots() > 0 then
 			for i = 1, nextEquip:getType():getImbuingSlots() do
 				local slotEnchant = nextEquip:getSpecialAttribute(i)
-				if (slotEnchant) then
+				if (slotEnchant and type(slotEnchant) == 'string') then
 					local percentDamage, enchantPercent = 0, nextEquip:getImbuementPercent(slotEnchant)
 					local typeEnchant = nextEquip:getImbuementType(i) or ""
 					if (typeEnchant ~= "" and typeEnchant ~= "skillShield" and not typeEnchant:find("absorb") and typeEnchant ~= "speed") then
@@ -855,11 +838,6 @@ function Player:onCombatSpell(normalDamage, elementDamage, elementType, changeDa
 end
 
 function Player:onMove()
-	if getTilePzInfo(getCreaturePosition(self)) then
-			self:setTarget(nil)
-			self:setFollowCreature(nil)
-		return true
-		end
 	local haveImbuingBoots = self:getSlotItem(CONST_SLOT_FEET) and self:getSlotItem(CONST_SLOT_FEET):getType():getImbuingSlots() or 0
 	if haveImbuingBoots > 0 then
 		local bootsItem = self:getSlotItem(CONST_SLOT_FEET)
@@ -948,12 +926,7 @@ function Player:onGainExperience(source, exp, rawExp)
 	if not source or source:isPlayer() then
 		return exp
 	end
-	-- experience boost
-	local xboost = math.max(self:getStorageValue(61921) - os.time(), 0)
-	if xboost == 0 then
-	else
-	exp = exp * 1.30
-	end
+
 	-- Soul regeneration
 	local vocation = self:getVocation()
 	if self:getSoul() < vocation:getMaxSoul() and exp >= self:getLevel() then
@@ -1017,21 +990,21 @@ function Player:onGainExperience(source, exp, rawExp)
 	-- Exp Boost Modifier
 	useStaminaXp(self)
 
-	-- Exp stats
+		-- Exp stats
 	local staminaMinutes = self:getStamina()
 	local Boost = self:getExpBoostStamina()
 	if staminaMinutes > 2400 and self:isPremium() and Boost > 0 then
-		self:setBaseXpGain(200) -- 200 = 1.0x, 200 = 2.0x, ... premium account		
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*2) -- 200 = 1.0x, 200 = 2.0x, ... premium account
 	elseif staminaMinutes > 2400 and self:isPremium() and Boost <= 0 then
-		self:setBaseXpGain(150) -- 150 = 1.0x, 150 = 1.5x, ... premium account	
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*1.5) -- 150 = 1.0x, 150 = 1.5x, ... premium account		
 	elseif staminaMinutes <= 2400 and staminaMinutes > 840 and self:isPremium() and Boost > 0 then
-		self:setBaseXpGain(150) -- 150 = 1.5x		premium account
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*1.5) -- 150 = 1.5x		premium account
 	elseif staminaMinutes > 840 and Boost > 0 then
-		self:setBaseXpGain(150) -- 150 = 1.5x		free account
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*1.5) -- 150 = 1.5x		free account
 	elseif staminaMinutes <= 840 and Boost > 0 then
-		self:setBaseXpGain(100) -- 50 = 0.5x	all players	
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*1) -- 50 = 0.5x	all players
 	elseif staminaMinutes <= 840 then
-		self:setBaseXpGain(50) -- 50 = 0.5x	all players	
+		self:setBaseXpGain(Game.getExperienceStage(self:getLevel())*0.5) -- 50 = 0.5x	all players
 	end
 
 	-- Stamina modifier
@@ -1054,53 +1027,12 @@ function Player:onLoseExperience(exp)
 end
 
 function Player:onGainSkillTries(skill, tries)
-	local timer = 0
-	local ganho = 1 -- manter 1 aqui
-	local vocation = self:getVocation():getBase():getId()
-	local melee, x, magic, z = {}, {}, {}, {}
-	
-	if vocation == 1 then -- sorcerer
-		magic, z = {0, 20, 40, 60, 80}, {16, 12, 10, 9, 8}
-		melee, x = {10, 15, 20, 30, 40}, {60, 50, 40, 35, 30}
-	elseif vocation == 2 then -- druid
-		magic, z = {0, 20, 40, 60, 80}, {16, 12, 10, 9, 8}
-		melee, x = {10, 15, 20, 30, 40}, {60, 50, 40, 35, 30}
-	elseif vocation == 3 then -- paladin
-		magic, z = {0, 6, 10, 16, 20}, {16, 12, 10, 9, 8}
-		melee, x = {10, 40, 60, 80, 100}, {60, 55, 50, 45, 30}
-	elseif vocation == 4 then -- knight
-		magic, z = {0, 3, 5, 8, 10}, {16, 12, 10, 9, 8}
-		melee, x = {10, 40, 60, 80, 100}, {60, 55, 50, 45, 30}
-	else --rookgaard or others
-		magic, z = {0, 20, 40, 60, 80}, {8, 8, 8, 8, 8}
-		melee, x = {10, 40, 60, 80, 100}, {30, 30, 30, 30, 30}
-	end
-		
 	if APPLY_SKILL_MULTIPLIER == false then
 		return tries
 	end
-	
+
 	if skill == SKILL_MAGLEVEL then
-		local playerml = getPlayerMagLevel(self)
-		for i = 1, #magic do
-			if playerml >= magic[i] then
-				timer = timer + 1
-			end
-		end
-		if timer >= 1 then
-			ganho = z[timer]
-		end
-		return (tries * ganho)
+		return tries * configManager.getNumber(configKeys.RATE_MAGIC)
 	end
-	
-	local playerme = self:getSkillLevel(skill)
-	for i = 1, #melee do
-		if playerme >= melee[i] then
-			timer = timer + 1
-		end
-	end
-	if timer >= 1 then
-		ganho = x[timer]
-	end
-	return (tries * ganho)
+	return tries * configManager.getNumber(configKeys.RATE_SKILL)
 end

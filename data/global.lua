@@ -1,20 +1,8 @@
 dofile('data/lib/libs.lua')
--- AutoLoot config
-
-AUTO_LOOT_MAX_ITEMS = 20
-
-
--- Reserved storage
-
-AUTOLOOT_STORAGE_START = 10003
-
-AUTOLOOT_STORAGE_END = AUTOLOOT_STORAGE_START + AUTO_LOOT_MAX_ITEMS
-
--- AutoLoot config end
 
 NOT_MOVEABLE_ACTION = 8000
 PARTY_PROTECTION = 1 -- Set to 0 to disable.
-ADVANCED_SECURE_MODE = 0 -- Set to 0 to disable.
+ADVANCED_SECURE_MODE = 1 -- Set to 0 to disable.
 
 STORAGEVALUE_PROMOTION = 30018
 

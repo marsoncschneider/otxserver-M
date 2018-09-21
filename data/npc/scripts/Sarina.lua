@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Equipamentos gerais e todo tipo de bens. Visite minha loja!'} }
+local voices = { {text = 'General equipment and all sorts of goods. Visit my store!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local function creatureSayCallback(cid, type, msg)
@@ -15,16 +15,17 @@ local function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	if msgcontains(msg, "football") then
-		npcHandler:say("Você quer comprar uma bola de futebol por 111 de ouro?", cid)
+		npcHandler:say("Do you want to buy a football for 111 gold?", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "yes") then
 		if npcHandler.topic[cid] == 1 then
 			local player = Player(cid)
-			if player:removeMoney(111) then
-				npcHandler:say("Aqui está.", cid)
+			if player:getMoney() + player:getBankBalance() >= 111 then
+				npcHandler:say("Here it is.", cid)
 				player:addItem(2109, 1)
+				player:removeMoneyNpc(111)
 			else
-				npcHandler:say("Você não tem dinheiro suficiente.", cid)
+				npcHandler:say("You don't have enough money.", cid)
 			end
 			npcHandler.topic[cid] = 0
 		end
@@ -32,9 +33,9 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, "Oh, por favor, entre, |PLAYERNAME|. O que posso fazer para você? Se você precisa de equipamentos para sua aventura, peça-me um comércio {trade}.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Adeus, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Claro, basta navegar pelos meus produtos. Bolas de futebol {football} tem que ser comprado separadamente.")
+npcHandler:setMessage(MESSAGE_GREET, "Oh, please come in, |PLAYERNAME|. What can I do for you? If you need adventure equipment, ask me for a {trade}.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Of course, just browse through my wares. {Footballs} have to be purchased separately.")
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

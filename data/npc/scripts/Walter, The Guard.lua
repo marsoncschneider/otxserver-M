@@ -14,21 +14,21 @@ local function creatureSayCallback(cid, type, msg)
 
 	local player = Player(cid)
 	if(msgcontains(msg, "trouble") and player:getStorageValue(Storage.TheInquisition.WalterGuard) < 1 and player:getStorageValue(Storage.TheInquisition.Mission01) ~= -1) then
-		npcHandler:say("Acho que temos um trombadinha na cidade.", cid)
+		npcHandler:say("I think there is a pickpocket in town.", cid)
 		npcHandler.topic[cid] = 1
 	elseif(msgcontains(msg, "authorities")) then
 		if(npcHandler.topic[cid] == 1) then
-			npcHandler:say("Bom, cedo ou tarde vamos ter que dar cabo desse deliquente. Disso tenho certeza.", cid)
+			npcHandler:say("Well, sooner or later we will get hold of that delinquent. That's for sure.", cid)
 			npcHandler.topic[cid] = 2
 		end
 	elseif(msgcontains(msg, "avoided")) then
 		if(npcHandler.topic[cid] == 2) then
-			npcHandler:say("Pela aparência não podemos dizer que a pessoa é ou não um trombadinha. Você simplesmente não pode fechar os portões da cidade para todos.", cid)
+			npcHandler:say("You can't tell by a person's appearance who is a pickpocket and who isn't. You simply can't close the city gates for everyone.", cid)
 			npcHandler.topic[cid] = 3
 		end
-	elseif(msgcontains(msg, "gods allow")) then
+	elseif(msgcontains(msg, "gods would allow")) then
 		if(npcHandler.topic[cid] == 3) then
-			npcHandler:say("Se os Deuses tivessem criado o mundo como um paraiso, ninguém seria ladrão.", cid)
+			npcHandler:say("If the gods had created the world a paradise, no one had to steal at all.", cid)
 			npcHandler.topic[cid] = 0
 			if(player:getStorageValue(Storage.TheInquisition.WalterGuard) < 1) then
 				player:setStorageValue(Storage.TheInquisition.WalterGuard, 1)

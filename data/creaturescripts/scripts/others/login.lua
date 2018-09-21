@@ -58,7 +58,10 @@ local events = {
 	'SpikeTaskQuestDrillworm',
 	'petlogin',
 	'Idle',
-	'petthink'
+	'petthink',
+	'UpperSpikeKill',
+	'MiddleSpikeKill',
+	'LowerSpikeKill'
 }
  
 local function onMovementRemoveProtection(cid, oldPosition, time)
@@ -77,32 +80,28 @@ local function onMovementRemoveProtection(cid, oldPosition, time)
 end
 
 local function tpDawnport(cid)
-    if not Player(cid) then
-		return
+   local player = Player(cid)
+	if not player then
+		return true
 	end
-	
-	local player = Player(cid)
-	--player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'DEBUG: TELEPORTADO.')
     player:teleportTo(Position(32071, 31900, 6))
     return true
 end
  
 function onLogin(player)
-	local loginStr = 'Bem-vindo ao ' .. configManager.getString(configKeys.SERVER_NAME) .. '! Dica: Use o !autoloot, !autoheal, !autoeat, !autoattack'
-	--if player:getTown():getName() == "Dawnport" then
+	local loginStr = 'Welcome to ' .. configManager.getString(configKeys.SERVER_NAME) .. '!'
 	if player:getLastLoginSaved() <= 0 then
-		loginStr = loginStr .. ' Por favor escolha sua roupa.'		
+		loginStr = loginStr .. ' Please choose your outfit.'		
 		player:setBankBalance(0)
-		
+
 		if player:getSex() == 1 then
 			player:setOutfit({lookType = 128, lookHead = 78, lookBody = 106, lookLegs = 58, lookFeet = 76})		
 		else
 			player:setOutfit({lookType = 136, lookHead = 78, lookBody = 106, lookLegs = 58, lookFeet = 76})	
 		end
-		-- quando cidade for dawnport nascer no andar de baixo
+
 		if player:getTown():getName() == "Dawnport" then
 			addEvent(tpDawnport, 2 * 1000, player.uid)
-			--player:teleportTo(Position(32071, 31900, 6))
 		end
 		player:sendTutorial(1)
 	else
@@ -110,12 +109,12 @@ function onLogin(player)
 			player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
 		end
 
-		loginStr = string.format('Sua última visita foi %s.', os.date('%a %b %d %X %Y', player:getLastLoginSaved()))
+		loginStr = string.format('Your last visit was on %s.', os.date('%a %b %d %X %Y', player:getLastLoginSaved()))
 	end
  
     player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
-    
-	local playerId = player:getId()
+   
+    local playerId = player:getId()
     
     player:loadSpecialStorage()
 
@@ -155,17 +154,17 @@ function onLogin(player)
 
     if (player:getAccountType() == ACCOUNT_TYPE_TUTOR) then
         local msg = [[:: Regras Tutor ::
-            1*>3 Advertências você perde o cargo.
-            2*>Sem conversas paralelas com jogadores no Help, se o player começar a ofender, você simplesmente o mute.
-            3*>Seja educado com os player no Help e principalmente no Privado, tenta ajudar o máximo possível.
-            4*>Sempre logue no seu horário, caso não tiver uma justificativa você será removido da staff.
-            5*>Help é somente permitido realizar dúvidas relacionadas ao tibia.
-            6*>Não é Permitido divulgar time pra upar ou para ajudar em quest.
-            7*>Não é permitido venda de itens no Help.
-            8*>Caso o player encontre um bug, peça para ir ao site mandar um ticket e explicar em detalhes.
-            9*>Mantenha sempre o Chat dos Tutores aberto. (obrigatório).
-            10*>Você terminou de cumprir seu horário, viu que não tem nenhum tutor Online, você comunica com algum CM in-game ou ts e fica no help até alguém logar, se der.
-            11*>Mantenha sempre um ótimo português no Help, queremos tutores que dêem suporte, não que fiquem falando um ritual satânico.
+            1*>3 AdvertÃªncias vocÃª perde o cargo.
+            2*>Sem conversas paralelas com jogadores no Help, se o player comeÃ§ar a ofender, vocÃª simplesmente o mute.
+            3*>Seja educado com os player no Help e principalmente no Privado, tenta ajudar o mÃ¡ximo possÃ­vel.
+            4*>Sempre logue no seu horÃ¡rio, caso nÃ£o tiver uma justificativa vocÃª serÃ¡ removido da staff.
+            5*>Help Ã© somente permitido realizar dÃºvidas relacionadas ao tibia.
+            6*>NÃ£o Ã© Permitido divulgar time pra upar ou para ajudar em quest.
+            7*>NÃ£o Ã© permitido venda de itens no Help.
+            8*>Caso o player encontre um bug, peÃ§a para ir ao site mandar um ticket e explicar em detalhes.
+            9*>Mantenha sempre o Chat dos Tutores aberto. (obrigatÃ³rio).
+            10*>VocÃª terminou de cumprir seu horÃ¡rio, viu que nÃ£o tem nenhum tutor Online, vocÃª comunica com algum CM in-game ou ts e fica no help atÃ© alguÃ©m logar, se der.
+            11*>Mantenha sempre um Ã³timo portuguÃªs no Help, queremos tutores que dÃªem suporte, nÃ£o que fiquem falando um ritual satÃ¢nico.
             12*>Se ver um tutor fazendo algo que infrinja as regras, tire uma print e envie aos superiores."
             -- Comandos --
             Mutar Player: /mute nick,90. (90 segundos)
@@ -177,9 +176,7 @@ function onLogin(player)
  	-- OPEN CHANNERLS (ABRIR CHANNELS)
 	if table.contains({"Rookgaard", "Dawnport"}, player:getTown():getName())then
 		--player:openChannel(7) -- help channel
-		if player:getLevel() >= 50 then
 		player:openChannel(3) -- world chat
-		end
 		player:openChannel(6) -- advertsing rook main
 	else
 		--player:openChannel(7) -- help channel
@@ -208,61 +205,48 @@ function onLogin(player)
     end
 
     if Game.getStorageValue(9710) == 1 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Venore Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Venore Today.')
     elseif Game.getStorageValue(9711) == 2 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Ab\'dendriel Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Abdendriel Today.')
     elseif Game.getStorageValue(9712) == 3 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Thais Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Thais Today.')
     elseif Game.getStorageValue(9713) == 4 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Carlin Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Carlin Today.')
     elseif Game.getStorageValue(9714) == 5 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Edron Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Edron Today.')
     elseif Game.getStorageValue(9716) == 6 then
-        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate está em Kazordoon Hoje.')
+        player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_BLUE, 'Fury Gate is on Kazordoon Today.')
     end
 
-	--player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_ORANGE, 'Bem-vindo ao HellBRA, ajude-nos reportando erros!')
-	--player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_ORANGE, '[!Autoloot add, item] [!Autoloot remove, item] [!Autoloot show] [!Autoloot clear]')
-	--player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_ORANGE, '[TIBIA COINS] For purchases above 20 BRL receive Double Coins.')
+	player:sendTextMessage(messageType or MESSAGE_STATUS_CONSOLE_ORANGE, '[BUGS?] Reporte em http://www.github.com/malucooo/otxserver-new/issues')
    
     -- Events
     for i = 1, #events do
         player:registerEvent(events[i])
-		
     end
-	player:registerEvent("AutoLoot")
-		player:registerEvent("Skull")
-		player:registerEvent("Hchange")
-		registerCreatureEvent(player, "autotarget")
-	if player:getStorageValue(250123) == 1 then		
-		player:sendTextMessage(messageType, '!Autoattack: Menor Distancia primeiro.')
-	elseif player:getStorageValue(250123) == 2 then
-		player:sendTextMessage(messageType, '!Autoattack: Mais Forte primeiro.')
-	else
-		player:sendTextMessage(messageType, '!Autoattack: Desativado. Utilize o sistema para facilitar sua hunt.')
-	end
-    
-	if player:getStorageValue(Storage.combatProtectionStorage) <= os.time() then
-        player:setStorageValue(Storage.combatProtectionStorage, os.time() + 10)
+ 
+ 
+ 	if player:getStorageValue(Storage.combatProtectionStorage) < 1 then
+        player:setStorageValue(Storage.combatProtectionStorage, 1)
         onMovementRemoveProtection(playerId, player:getPosition(), 10)
-    end
+	end
 
 	-- Exp stats
 	local staminaMinutes = player:getStamina()
 	local Boost = player:getExpBoostStamina()
 	if staminaMinutes > 2400 and player:isPremium() and Boost > 0 then
-		player:setBaseXpGain(200) -- 200 = 1.0x, 200 = 2.0x, ... premium account		
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*2) -- 200 = 1.0x, 200 = 2.0x, ... premium account
 	elseif staminaMinutes > 2400 and player:isPremium() and Boost <= 0 then
-		player:setBaseXpGain(150) -- 150 = 1.0x, 150 = 1.5x, ... premium account	
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*1.5) -- 150 = 1.0x, 150 = 1.5x, ... premium account
 	elseif staminaMinutes <= 2400 and staminaMinutes > 840 and player:isPremium() and Boost > 0 then
-		player:setBaseXpGain(150) -- 150 = 1.5x		premium account
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*1.5) -- 150 = 1.5x		premium account
 	elseif staminaMinutes > 840 and Boost > 0 then
-		player:setBaseXpGain(150) -- 150 = 1.5x		free account
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*1.5) -- 150 = 1.5x		free account
 	elseif staminaMinutes <= 840 and Boost > 0 then
-		player:setBaseXpGain(100) -- 50 = 0.5x	all players	
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*1) -- 50 = 0.5x	all players
 	elseif staminaMinutes <= 840 then
-		player:setBaseXpGain(50) -- 50 = 0.5x	all players	
+		player:setBaseXpGain(Game.getExperienceStage(player:getLevel())*0.5) -- 50 = 0.5x	all players
 	end
-	
+
     return true
 end

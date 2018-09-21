@@ -49,8 +49,7 @@
 		<item name="ruby necklace" chance="1500" />
 		<item name="white pearl" countmax="3" chance="10000" />
 		<item name="black pearl" countmax="3" chance="12000" />
-		<item name="gold coin" countmax="100" chance="50000" />
-		<item name="gold coin" countmax="98" chance="49000" />
+		<item name="gold coin" countmax="198" chance="100000" />
 		<item name="platinum coin" countmax="7" chance="100000" />
 		<item name="red gem" chance="15000" />
 		<item name="stone skin amulet" chance="2780" />
@@ -67,8 +66,7 @@
 		<item name="titan axe" chance="1000" />
 		<item name="great mana potion" countmax="2" chance="14200" />
 		<item name="great health potion" countmax="2" chance="8800" />
-		<item id="9809" chance="3500" /><!-- rusty armor -->
-		<item id="9810" chance="3500" /><!-- rusty armor -->
+		<item id="9810" chance="3500" /><!-- rusty armor (rare) -->
 		<item name="unholy bone" chance="33010" />
 	</loot>
 </monster>

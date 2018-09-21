@@ -7,8 +7,8 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'hi'}, StdModule.say, {npcHandler = npcHandler, onlyUnfocus = true, text = "MANTENHA EM MENTE COMERCIANTE! Para abordar a rainha cumprimente-a com seu título!"})
-keywordHandler:addKeyword({'hello'}, StdModule.say, {npcHandler = npcHandler, onlyUnfocus = true, text = "MANTENHA EM MENTE! Para abordar a rainha cumprimente-a com seu título"})
+keywordHandler:addKeyword({'hi'}, StdModule.say, {npcHandler = npcHandler, onlyUnfocus = true, text = "MIND YOUR MANNERS COMMONER! To address the queen greet with her title!"})
+keywordHandler:addKeyword({'hello'}, StdModule.say, {npcHandler = npcHandler, onlyUnfocus = true, text = "MIND YOUR MANNERS COMMONER! To address the queen greet with her title!"})
 
 local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
@@ -25,15 +25,15 @@ local function creatureSayCallback(cid, type, msg)
 		end
 		player:getPosition():sendMagicEffect(CONST_ME_EXPLOSIONAREA)
 		player:addHealth(1 - player:getHealth())
-		npcHandler:say('TOME ISSO!', cid)
+		npcHandler:say('Take this!', cid)
 		Npc():getPosition():sendMagicEffect(CONST_ME_YELLOW_RINGS)
 	end
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, 'SAÚDE À RAINHA!')
-npcHandler:setMessage(MESSAGE_WALKAWAY, 'VIDA LONGA A RAINHA!')
-npcHandler:setMessage(MESSAGE_FAREWELL, 'LONGA VIDA À RAINHA! Ok, agora você já pode ir embora!')
+npcHandler:setMessage(MESSAGE_GREET, 'HAIL TO THE QUEEN!')
+npcHandler:setMessage(MESSAGE_WALKAWAY, 'LONG LIVE THE QUEEN!')
+npcHandler:setMessage(MESSAGE_FAREWELL, 'LONG LIVE THE QUEEN! You may leave now!')
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 
 local focusModule = FocusModule:new()

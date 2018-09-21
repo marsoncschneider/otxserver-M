@@ -14,7 +14,6 @@ local fluidMessage = {
 	[4] = 'Urgh!',
 	[5] = 'Mmmh.',
 	[7] = 'Aaaah...',
-	[9] = 'Eitaaaaaaaa...',
 	[10] = 'Aaaah...',
 	[11] = 'Urgh!',
 	[13] = 'Urgh!',
@@ -63,12 +62,7 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			elseif item.type == 7 then
 				player:addMana(math.random(50, 150))
 				fromPosition:sendMagicEffect(CONST_ME_MAGIC_BLUE)
-			elseif item.type == 9 then
-				player:addMana(math.random(500, 1000))
-				player:addHealth(math.random(500, 1000))
-				player:addCondition(poison)
-				player:addCondition(drunk)
-				fromPosition:sendMagicEffect(CONST_ME_MAGIC_BLUE)
+
 			elseif item.type == 10 then
 				player:addHealth(60)
 				fromPosition:sendMagicEffect(CONST_ME_MAGIC_BLUE)

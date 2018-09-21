@@ -120,23 +120,9 @@ local function changeVocation(player, fromVocation, toVocation)
             lookFeet = 115,
         }
     }
-	local tutoriais = {1,2,3,4,5,6,4,3}
-	--[[if toVocation = 1 then -- sorc
-	player:sendTutorial(5)
-	elseif toVocation = 2 then --druid
-	player:sendTutorial(6)
-	elseif toVocation = 3 then -- pala
-	player:sendTutorial(4)
-	elseif toVocation = 4 then -- ek
-	player:sendTutorial(3)
-	end
-	]]
 	
-	for i = 1, 4 do
-	if toVocation == i then
-	player:sendTutorial(tutoriais[i+4])
-	end
-	end
+	local tutorials = {5, 6, 4, 3}
+	player:sendTutorial(tutorials[toVocation])
 	
     for toVocation = 1, 4 do
         for slot, info in pairs(vocationsItems[toVocation]) do
@@ -211,41 +197,33 @@ local function changeVocation(player, fromVocation, toVocation)
 		)
 		end
 		end
-		
-		--
 		-- done
 		local position = player:getPosition()
 		position:getNextPosition(player:getDirection())
-		--player:teleportTo(position)
+		player:teleportTo(position)
 		player:setVocation(toVocation)
 		--recalculate cap hp and mana
-		--
 		player:setMaxHealth(130 + (player:getVocation():getHealthGain() * player:getLevel()))
 		player:addHealth(player:getMaxHealth())
 		player:setMaxMana(0 + (player:getVocation():getManaGain() * player:getLevel()))
 		player:addMana(player:getMaxMana())
 		player:setCapacity(40000 + (player:getVocation():getCapacityGain() * player:getLevel()))
-		
 		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, string.format('Congratulations! Now you are %s.', player:getVocation():getName()))
 		
 		if fromVocation ~= 0 then
-		local resultId = db.storeQuery("SELECT `id` FROM `players` WHERE `name` = " .. db.escapeString(player:getName():lower()))
-		local accountId = result.getDataInt(resultId, "id")
-		--player:remove()
-		
-		db.query("UPDATE `players` SET `maglevel` = '0', `manaspent` = '0', `skill_fist` = '10', `skill_fist_tries` = '0', `skill_club` = '10', `skill_club_tries` = '0', `skill_sword` = '10', `skill_sword_tries` = '0', `skill_axe` = '10', `skill_axe_tries` = '0', `skill_dist` = '10', `skill_dist_tries` = '0', `skill_shielding` = '10', `skill_shielding_tries` = '0', `skill_fishing` = '10', `skill_fishing_tries` = '0' WHERE `players`.`id` = " .. accountId)
+			local resultId = db.storeQuery("SELECT `id` FROM `players` WHERE `name` = " .. db.escapeString(player:getName():lower()))
+			local accountId = result.getDataInt(resultId, "id")
+			player:remove()
+			db.query("UPDATE `players` SET `maglevel` = '0', `manaspent` = '0', `skill_fist` = '10', `skill_fist_tries` = '0', `skill_club` = '10', `skill_club_tries` = '0', `skill_sword` = '10', `skill_sword_tries` = '0', `skill_axe` = '10', `skill_axe_tries` = '0', `skill_dist` = '10', `skill_dist_tries` = '0', `skill_shielding` = '10', `skill_shielding_tries` = '0', `skill_fishing` = '10', `skill_fishing_tries` = '0' WHERE `players`.`id` = " .. accountId)
 		end
 end
 
 local centerPosition = Position(32065, 31891, 5)
 
 function onStepIn(creature, item, position, fromPosition)
-    
-	if creature:isPlayer() then
+    if creature:isPlayer() then
         local player = Player(creature)
-		
         local toVocation = Tile(position):getGround():getActionId() - 20000
-		
         local fromVocation = player:getVocation():getId()
         if fromVocation ~= toVocation and (centerPosition:getDistance(fromPosition) < centerPosition:getDistance(position)) then
             getFirstItems(player)

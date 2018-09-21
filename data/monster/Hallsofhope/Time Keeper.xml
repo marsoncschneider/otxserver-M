@@ -41,7 +41,7 @@
 		<item id="2152" countmax="2" chance="50320" /><!-- platinun coin -->
 		<item id="2789" countmax="2" chance="50320" /><!-- Brown Mushrooms -->
 		<item id="2666" countmax="2" chance="50320" /><!-- Meats -->
-		<item id="26841" countmax="2" chance="50320" /><!-- Cave Turnips -->
+		<item id="27051" countmax="2" chance="20000" /><!-- cave turnip -->
 		<item id="5022" countmax="2" chance="50320" /><!-- Orichalcum Pearl -->
 		<item id="2230" chance="1130" /><!-- bone -->
 		<item id="2449" chance="4900" /><!-- bone club -->

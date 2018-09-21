@@ -14,7 +14,6 @@ error_reporting(E_ALL ^ E_STRICT ^ E_NOTICE);
 
 // true = show sent queries and SQL queries status/status code/error message
 define('DEBUG_DATABASE', false);
-
 define('INITIALIZED', true);
 
 if (!defined('ONLY_PAGE'))
@@ -30,8 +29,8 @@ include_once('./system/load.init.php');
 include_once('./system/load.database.php');
 if (DEBUG_DATABASE)
     Website::getDBHandle()->setPrintQueries(true);
-// DATABASE END
 
+// DATABASE END
 /*error example:
 {
     "errorCode":3,
@@ -54,20 +53,18 @@ function sendError($msg){
 }
 
 # getting infos
-$request = file_get_contents('php://input');
-$result = json_decode($request, true);
+	$request = file_get_contents('php://input');
+	$result = json_decode($request, true);
 
 # account infos
-$accountName = $result["accountname"];
-$password = $result["password"];
-
+	$accountName = $result["accountname"];
+	$password = $result["password"];
 # game port
-$port = 7172;
+	$port = 7172;
 
 # check if player wanna see cast list
 if (strtolower($accountName) == "cast")
 	$isCasting = true;
-
 if ($isCasting) {
 	$casts = $SQL->query("SELECT `player_id` FROM `live_casts`")->fetchAll();
 	if (count($casts[0]) == 0)
@@ -81,16 +78,16 @@ if ($isCasting) {
 			$characters[] = $char;
 		}			
 	}
-	
 	$port = 7173;
 	$lastLogin = 0;
+	$premiumAccount = true;
+	$timePremium = 0;
 } else {
 	$account = new Account();
 	$account->find($accountName);
 	
 	if (!$account->isLoaded())
 		sendError("Failed to get account. Try again!");
-
 	if ($account->getPassword() != Website::encryptPassword($password))
 		sendError("The password for this account is wrong. Try again!");
 	
@@ -100,8 +97,9 @@ if ($isCasting) {
 	}
 	
 	$lastLogin = $account->getLastLogin();
+	$premiumAccount = ($account->isPremium()) ? true : false;
+	$timePremium = time() + ($account->getPremDays() * 86400);
 }
-
 $session = array(
 	"fpstracking" => false,
 	"isreturner" => true,
@@ -109,11 +107,10 @@ $session = array(
 	"showrewardnews" => false,
 	"sessionkey" => $accountName . "\n" . $password,
 	"lastlogintime" => $lastLogin,
-    "ispremium" => true,
-    "premiumuntil" => 0,
+    "ispremium" => $premiumAccount,
+    "premiumuntil" => $timePremium,
     "status" => "active"	
 );
-
 $world = array(
 	"id" => 0,
 	"name" => $config['server']['serverName'],
@@ -124,11 +121,23 @@ $world = array(
     "anticheatprotection" => false
 );
 
-$worlds = array($world);
+//Survey by: Cjaker
+$survey = array(
+    "id" => rand(0, 999999),
+    "invitationtext" => "Querido tibiano, obrigado por usar OTX, a base mais atualizada do Tibia Global.\n'Mensagem dita por Cjaker'.",
+    "invitationtoken" => "1751f1beddf001e1d36dee78ace974",
+    "endtimestamp" => 1510614000
+);
 
+// https://limesurvey.cipsoft.com/index.php/survey/index/sid/527875/lang-en?token=1751f1beddf001e1d36dee78ace974
+// token=invitationtoken
+// o endtimestamp acima é o tempo convertido em unix timestamp, onde o mesmo é o prazo que irá acabar o survey!
+
+$worlds = array($world);
 $data["session"] = $session;
 $playerData["worlds"] = $worlds;
 $playerData["characters"] = $characters;
 $data["playdata"] = $playerData;
+$data["survey"] = $survey;
 
 echo json_encode($data);

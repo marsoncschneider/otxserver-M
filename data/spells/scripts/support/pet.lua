@@ -22,15 +22,15 @@ function onCastSpell(cid, var)
     	return false
     end
 
-    vocationId = player:getVocation():getId()
-    summonName = nil
-    if vocationId == 1 or vocationId == 5 then
+    local vocationId = player:getVocation():getId()
+    local summonName = nil
+    if vocationId == 5 then
         summonName = "thundergiant"
-    elseif vocationId == 2 or vocationId == 6 then
+    elseif vocationId == 6 then
         summonName = "grovebeast"
-    elseif vocationId == 3 or vocationId == 7 then
+    elseif vocationId == 7 then
         summonName = "emberwing"
-    elseif vocationId == 4 or vocationId == 8 then
+    elseif vocationId == 8 then
         summonName = "skullfrost"
     end
     
@@ -42,11 +42,13 @@ function onCastSpell(cid, var)
     end
 
     player:addSummon(mySummon)
-	
-	local basespeed = player:getBaseSpeed()
-	doChangeSpeed(mySummon, basespeed)
-	
+    mySummon:registerEvent('petdeath')
+
+    local deltaSpeed = math.max(player:getBaseSpeed() - mySummon:getBaseSpeed(), 0)
+    mySummon:changeSpeed(deltaSpeed)
+
+    player:setStorageValue(Storage.PetSummon, os.time() + 15*60) -- 15 minutes from now
     player:say("My Power your Power", TALKTYPE_MONSTER_SAY)
-    addEvent(removePet, 15*60*1000, mySummon:getId())
+    addEvent(removePet, 15*60*1000, mySummon:getId()) --I think this isn't necessary
     return combat:execute(player, var)
 end

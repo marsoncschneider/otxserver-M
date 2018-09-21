@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = "Ok, então, navegue por todos os meus produtos."})
+keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = "Okay, then just browse through all of my wares."})
 
 local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
@@ -19,31 +19,31 @@ local function creatureSayCallback(cid, type, msg)
 	if msgcontains(msg, 'first rod') or msgcontains(msg, 'first wand') then
 		if player:isMage() then
 			if player:getStorageValue(Storage.firstMageWeapon) == -1 then
-				npcHandler:say('Então você me pede uma {' .. ItemType(itemId):getName() .. '} para começar sua aventura?', cid)
+				npcHandler:say('So you ask me for a {' .. ItemType(itemId):getName() .. '} to begin your adventure?', cid)
 				npcHandler.topic[cid] = 1
 			else
-				npcHandler:say('O que? Eu já lhe dei uma {' .. ItemType(itemId):getName() .. '}!', cid)
+				npcHandler:say('What? I have already gave you one {' .. ItemType(itemId):getName() .. '}!', cid)
 			end
 		else
-			npcHandler:say('Desculpe, você não é um druida nem um feiticeiro.', cid)
+			npcHandler:say('Sorry, you aren\'t a druid either a sorcerer.', cid)
 		end
 	elseif msgcontains(msg, 'yes') then
 		if npcHandler.topic[cid] == 1 then
 			player:addItem(itemId, 1)
-			npcHandler:say('Aqui você é um jovem adepto, cuide-se.', cid)
+			npcHandler:say('Here you are young adept, take care yourself.', cid)
 			player:setStorageValue(Storage.firstMageWeapon, 1)
 		end
 		npcHandler.topic[cid] = 0
 	elseif msgcontains(msg, 'no') and npcHandler.topic[cid] == 1 then
-		npcHandler:say('Ok então.', cid)
+		npcHandler:say('Ok then.', cid)
 		npcHandler.topic[cid] = 0
 	end
 	return true
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setMessage(MESSAGE_GREET, "Bem vindo |PLAYERNAME|! Do que você precisa?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Adeus, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Claro, basta navegar pelos meus produtos. Ou você quer olhar apenas para {potions}, {wands} ou {runes}?")
+npcHandler:setMessage(MESSAGE_GREET, "Welcome |PLAYERNAME|! Whats your need?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Of course, just browse through my wares. Or do you want to look only at {potions}, {wands} or {runes}?")
 npcHandler:addModule(FocusModule:new())

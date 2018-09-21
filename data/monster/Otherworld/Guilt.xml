@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monster name="Guilt" nameDescription="a guilt" race="undead" experience="100" speed="0" manacost="0">
 	<health now="28000" max="28000" />
-	<look type="583" corpse="22478" />
+	<look type="583" corpse="0" />
 	<targetchange interval="4000" chance="50" />
 	<flags>
 		<flag summonable="0" />
@@ -33,17 +33,17 @@
 			<attribute key="areaEffect" value="redshimmer" />
 		</defense>
 	</defenses>
-	<elements>
-		<element physicalPercent="40" />
-		<element deathPercent="10" />
-		<element firePercent="35" />
-		<element energyPercent="10" />
-		<element icePercent="30" />
-		<element earthPercent="10" />
-		<element holyPercent="-5" />
-	</elements>
 	<immunities>
+		<immunity physical="1" />
+		<immunity energy="1" />
+		<immunity fire="1" />
+		<immunity poison="1" />
+		<immunity ice="1" />
+		<immunity holy="1" />
+		<immunity death="1" />
+		<immunity lifedrain="1" />
 		<immunity paralyze="1" />
+		<immunity drown="1" />
 		<immunity invisible="1" />
 	</immunities>
 	<voices interval="2000" chance="7">

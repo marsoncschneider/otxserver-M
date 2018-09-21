@@ -3,33 +3,6 @@
 -- Sort it in Values -
 
 Storage = {
-	Exhausted = {
-		shovel = 32901,
-		leverhealth = 32902,
-		levermana = 32903,
-		leverrats = 32904,
-		leverbarata = 32905,
-		dawnportdoors = 32906,
-		oressa = 32907
-	},
-	Custom = {
-		Dawnport = 54,
-		Autoloot = 10003,
-		boost1 = 61920,
-		boost2 = 61921,
-		exaustedm1 = 61922,
-		exaustedm2 = 61923,
-		timer3 = 250120,
-		timer4 = 250121,
-		modogod = 250122,
-		autotarget = 250123,
-		autohealerhp = 250124,
-		autohealermana = 250125,
-		expboostabuser = 250126,
-		autoeater = 250127,
-		resets = 250128,
-		bonuson = 250129
-	},
 	SweetyCyclops = {
 		AmuletTimer = 48,
 		AmuletStatus = 49
@@ -38,11 +11,14 @@ Storage = {
 		QuestLine = 90,
 		bansheeDoor = 91,
 		bonelordsDoor = 92,
-		calassaDoor = 93,
+		CalassaQuest = 93,
 		edronDoor = 94,
 		elvenDoor = 95,
 		orcDoor = 96,
-		urnDoor = 97
+		urnDoor = 97,
+		SpectralStone = 98,		-- = 1 - mission taken from Angus, = 2 - mission taken from Mortimer
+		skullofratha = 99,
+		giantsmithhammer = 100
 	},
 	TravellingTrader = {
 		Mission01 = 101,
@@ -701,6 +677,17 @@ Storage = {
 		DragahsSpellbook = 12709,
 		TheCounterspell = 12710
 	},
+	SearoutesAroundYalahar = {
+		TownsCounter = 12800,
+		AbDendriel = 12801,
+		Darashia = 12802,
+		Venore = 12803,
+		Ankrahmun = 12804,
+		PortHope = 12805,
+		Thais = 12806,
+		LibertyBay = 12807,
+		Carlin = 12808,
+	},	
 	KillingInTheNameOf = {
 		LugriNecromancers = 50000,
 		LugriNecromancerCount = 65050,
@@ -1003,7 +990,9 @@ Storage = {
 	Factions = 50716,
 	MaryzaCookbook = 50721,
 	combatProtectionStorage = 50722,
-	blockMovementStorage = 100000
+	blockMovementStorage = 100000,
+	PetSummon = 60045
+
 }
 
 GlobalStorage = {

@@ -1,9 +1,9 @@
- -- Please don't edit those information!
+-- Please don't edit those information!
 GameStore = {
 	ModuleName = "GameStore",
-	Developer = "notepad++",
+	Developer = "Cjaker",
 	Version = "0.3",
-	LastUpdated = "03-10-2017 00:00PM"
+	LastUpdated = "24-09-2016 07:15PM"
 }
 
 --== Enums ==--
@@ -24,11 +24,7 @@ GameStore.OfferTypes = {
 	OFFER_TYPE_TEMPLE = 13,
 	OFFER_TYPE_BLESSINGS = 14,
 	OFFER_TYPE_PREMIUM = 15,
-	OFFER_TYPE_BOOST = 16,
-	OFFER_TYPE_XBOOST = 17,
-	OFFER_TYPE_POUNCH = 18,
-	OFFER_TYPE_FRAG = 19,
-	OFFER_TYPE_REVIVE = 20
+	OFFER_TYPE_POUNCH = 16
 }
 
 GameStore.ClientOfferTypes = {
@@ -83,6 +79,14 @@ GameStore.RecivedPackets = {
 	C_BuyStoreOffer = 0xFC, -- 252
 	C_OpenTransactionHistory = 0xFD, -- 253
 	C_RequestTransactionHistory = 0xFE, -- 254
+}
+
+GameStore.ExpBoostValues = {
+	[1] = 30,
+	[2] = 45,
+	[3] = 90,
+	[4] = 180,
+	[5] = 360
 }
 
 GameStore.DefaultValues = {
@@ -164,9 +168,7 @@ function parseTransferCoins(playerId, msg)
 	if accountId == player:getAccountId() then
 		return addPlayerEvent(sendStoreError, 350, playerId, GameStore.StoreErrors.STORE_ERROR_TRANSFER, "You cannot transfer coin to a character in the same account.")
 	end
-	if not player:canRemoveCoins(amount) then
-    return addPlayerEvent(sendStoreError, 250, player, GameStore.StoreErrors.STORE_ERROR_NETWORK, "We couldn't remove coins from your account, try again later.")
-    end
+
 	db.query("UPDATE `accounts` SET `coins` = `coins` + " .. amount .. " WHERE `id` = " .. accountId)
 	player:removeCoinsBalance(amount)
 	addPlayerEvent(sendStorePurchaseSuccessful, 550, playerId, "You have transfered " .. amount .. " coins to " .. reciver .. " successfully")
@@ -241,28 +243,29 @@ function parseBuyStoreOffer(playerId, msg)
 		-- If no thing id,
 		if offer.type ~= GameStore.OfferTypes.OFFER_TYPE_NAMECHANGE and 
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_EXPBOOST and 
-			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_BOOST and 
-			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_XBOOST and 
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_PREYBONUS and 
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_PREYSLOT and
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_TEMPLE and
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_SEXCHANGE and
 			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_POUNCH and
-			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_FRAG and
-			offer.type ~= GameStore.OfferTypes.OFFER_TYPE_REVIVE and
 			not offer.thingId then
 			return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "The offer is either fake or corrupt.")
 		end
 
+		local newPrice = nil
+		if offer.type == GameStore.OfferTypes.OFFER_TYPE_EXPBOOST then
+			newPrice = GameStore.ExpBoostValues[player:getStorageValue(51052)]
+		end
+
 		-- We remove coins before doing everything, if it fails, we add coins back!
-		if not player:canRemoveCoins(offer.price) then
+		if not player:canRemoveCoins(newPrice or offer.price) then
 			return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "We couldn't remove coins from your account, try again later.")
 		end
 
 		-- count is used in type(item), so we need to show (i.e 10x crystal coins)
 		local offerCountStr = offer.count and (offer.count .. "x ") or ""
 		-- The message which we will send to player!
-		local message = "You have purchased " .. offerCountStr .. offer.name .. " for " .. offer.price .. " coins."
+		local message = "You have purchased " .. offerCountStr .. offer.name .. " for " .. (newPrice or offer.price) .. " coins."
 
 		-- If offer is item.
 		if offer.type == GameStore.OfferTypes.OFFER_TYPE_ITEM or offer.type == GameStore.OfferTypes.OFFER_TYPE_POUNCH then
@@ -278,9 +281,8 @@ function parseBuyStoreOffer(playerId, msg)
 			else
 				return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "Please make sure you have free slots in your store inbox.")
 			end
-		
 		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_BLESSINGS then
-		if offer.thingId == 9 then
+			 if offer.thingId == 9 then
 		for i = 1, 8 do
 			if not player:hasBlessing(i) then
 				player:addBlessing(i, 1)
@@ -288,54 +290,6 @@ function parseBuyStoreOffer(playerId, msg)
 		end
 		else
 		player:addBlessing(offer.thingId, 1)
-		end
-		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_REVIVE then
-		if offer.thingId == 1 then
-		player:setStorageValue(250122, -1)
-		player:setGroup(Group(1))
-        player:setHiddenHealth(false)
-           
-        player:addMana(math.ceil(player:getMaxMana()) - player:getMana(), false)
-        player:addHealth(math.ceil(player:getMaxHealth()) - player:getHealth())
-        player:removeCondition(CONDITION_OUTFIT)
-		
-        player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Você ressuscitou, " .. player:getName() .. ", pelo valor de 12 coins.")
-		if player:getSpeed() ~= player:getBaseSpeed() then
-		local basespeed = player:getBaseSpeed() - player:getSpeed()
-		player:changeSpeed(basespeed)
-		end
-		end
-		
-		if offer.thingId == 2 then
-		--if player:getSpeed() ~= player:getBaseSpeed() then
-		--return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "HASTE is not allowed, remove BOH and spells.")
-		--end
-		local resTime = 10 * 60 -- 10 minutes
-		player:setStorageValue(250122, 1)
-		player:toggleDeath2(resTime)
-		end
-		
-		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_FRAG then
-		if offer.thingId == 1 then
-		if isInArray({SKULL_RED, SKULL_BLACK, SKULL_WHITE}, player:getSkull()) then
-		player:setSkull(SKULL_NONE)
-		player:setSkullTime(0)
-		player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
-		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Your skull has been removed!")
-		db.query("UPDATE `player_deaths` SET `unjustified` = 0 WHERE `unjustified` = 1 AND `killed_by` = " .. db.escapeString(player:getName()))
-		
-	else
-		player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "You can only remove red, black or white skulls!")
-		player:getPosition():sendMagicEffect(CONST_ME_POFF)
-	end
-		
-		--[[for i = 1, 8 do
-			if not player:hasBlessing(i) then
-				player:addBlessing(i, 1)
-			end
-		end]]
-		--[[else
-		player:addBlessing(offer.thingId, 1)]]
 		end
 		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_PREMIUM then
 			player:addPremiumDays(offer.thingId)
@@ -349,11 +303,8 @@ function parseBuyStoreOffer(playerId, msg)
 			elseif player:getFreeCapacity() < ItemType(offer.thingId):getWeight(offer.count) then
 				return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "Please make sure you have free capacity to hold this item.")
 			end
-			
 			local inbox = player:getSlotItem(CONST_SLOT_STORE_INBOX)
 			if inbox and inbox:getEmptySlots() > 0 then
-				
-
 				if(isKegItem(offer.thingId)) then
 					if(offer.count >= 500) then
 						local parcel = Item(inbox:addItem(2596, 1):getUniqueId())
@@ -492,23 +443,14 @@ function parseBuyStoreOffer(playerId, msg)
 			local currentExpBoostTime = player:getExpBoostStamina()
 
 			player:setStoreXpBoost(50)
-			player:setStaminaXpBoost(currentExpBoostTime + 3600)
-		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_XBOOST then
-			local curboost = math.max(player:getStorageValue(61921) - os.time(), 0)
-			if curboost == 0 then
-			else
-			return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "You already have boost time.")
+			player:setExpBoostStamina(currentExpBoostTime + 3600)
+
+			if (player:getStorageValue(51052) == -1 or player:getStorageValue(51052) == 6) then
+				player:setStorageValue(51052, 1)
 			end
-			days = (os.time() + curboost + 86400*(offer.thingId/12))
-			player:setStorageValue(61921, days)
-		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_BOOST then
-			local curboost = math.max(player:getStorageValue(61920) - os.time(), 0)
-			if curboost == 0 then
-			else
-			return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "You already have boost time.")
-			end
-			days = (os.time() + curboost + 86400*offer.thingId)
-			player:setStorageValue(61920, days)
+
+			player:setStorageValue(51052, player:getStorageValue(51052) + 1)
+			player:setStorageValue(51053, os.time()) -- last bought
 		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_PREYSLOT then
 			local unlockedColumns = player:getPreySlots()
 			if (unlockedColumns == 2) then
@@ -525,6 +467,8 @@ function parseBuyStoreOffer(playerId, msg)
 			end
 
 			player:teleportTo(player:getTown():getTemplePosition())
+			player:getPosition():sendMagicEffect(CONST_ME_TELEPORT)
+			player:sendTextMessage(MESSAGE_EVENT_ADVANCE, 'You have been teleported to your hometown.')
 		elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_PROMOTION then
 			if not GameStore.addPromotionToPlayer(playerId, offer.thingId) then
 				return false
@@ -535,9 +479,9 @@ function parseBuyStoreOffer(playerId, msg)
 			return addPlayerEvent(sendStoreError, 250, playerId, GameStore.StoreErrors.STORE_ERROR_NETWORK, "This offer is fake, please contact admin.")
 		end
 		-- Removing coins
-		player:removeCoinsBalance(offer.price)
+		player:removeCoinsBalance(newPrice or offer.price)
 		-- We add this purchase to history!
-		GameStore.insertHistory(player:getAccountId(), GameStore.HistoryTypes.HISTORY_TYPE_NONE, offerCountStr .. offer.name, offer.price * -1)
+		GameStore.insertHistory(player:getAccountId(), GameStore.HistoryTypes.HISTORY_TYPE_NONE, offerCountStr .. offer.name, (newPrice or offer.price) * -1)
 		-- Send to client that purchase is successful!
 		return addPlayerEvent(sendStorePurchaseSuccessful, 650, playerId, message)
 	end
@@ -654,7 +598,17 @@ function sendShowStoreOffers(playerId, category)
 				end
 			end
 
-			msg:addU32(newPrice or offer.price or 0xFFFF)
+			xpBoostPrice = nil
+			if offer.type == GameStore.OfferTypes.OFFER_TYPE_EXPBOOST then
+				xpBoostPrice = GameStore.ExpBoostValues[player:getStorageValue(51052)]
+			end
+
+			if xpBoostPrice then
+				msg:addU32(xpBoostPrice)
+			else
+				msg:addU32(newPrice or offer.price or 0xFFFF)
+			end
+
 			if (offer.state) then
 				if (offer.state == GameStore.States.STATE_SALE) then
 					local daySub = offer.validUntil-os.date("*t").day
@@ -684,71 +638,34 @@ function sendShowStoreOffers(playerId, category)
 				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_PREYBONUS and
 				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_TEMPLE and 
 				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_SEXCHANGE and 
-				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_POUNCH and
-				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_FRAG and
+				offer.type ~= GameStore.OfferTypes.OFFER_TYPE_POUNCH and 
 				not offer.thingId then
 				disabled = 1
 			end
-			
+
 			if disabled == 1 and offer.disabledReason then -- dynamic disable
 				disabledReason = offer.disabledReason
 			end
 
 			if disabled ~= 1 then
-			
-			
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_BLESSINGS then
-			if player:hasBlessing(offer.thingId) and offer.thingId < 9 then
-			disabled = 1
-			disabledReason = "voce ja tem essa bless."
-			else
-			if player:hasBlessing(1) and player:hasBlessing(2) and player:hasBlessing(3) and player:hasBlessing(4) and player:hasBlessing(5) and player:hasBlessing(6) and player:hasBlessing(7) and player:hasBlessing(8) then
-			disabled = 1
-			disabledReason = "You already have ALL BLESSINGS."
+				if offer.type == GameStore.OfferTypes.OFFER_TYPE_POUNCH then
+				local pounch = player:getItemById(26377, true)
+					if pounch then
+					disabled = 1
+					disabledReason = "You already have Gold Pounch."
+					end
 			end
-			
-			end
-			
-			end
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_POUNCH then
-			local pounch0 = player:getItemById(26377, true)
-			if pounch0 then
-				disabled = 1
-				disabledReason = "You already have."
-			end
-			end
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_FRAG then
-			--local skull = player:getSkull()
-			if isInArray({SKULL_RED, SKULL_BLACK, SKULL_WHITE}, player:getSkull()) then
-			else
-				disabled = 1
-				disabledReason = "You not with SKULL."
-			end
-			end
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_PREYSLOT then
-			local unlockedColumns = player:getPreySlots()
-			if (unlockedColumns == 2) then
-				disabled = 1
-				disabledReason = "You already have Unlocked slot."
-			end
-			end
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_BOOST then
-			local curboost = math.max(player:getStorageValue(61920) - os.time(), 0)
-			if curboost == 0 then
-			else
-							disabled = 1
-							disabledReason = "You already have Boost."
-			end
-			end	
-			if offer.type == GameStore.OfferTypes.OFFER_TYPE_XBOOST then
-			local curboost2 = math.max(player:getStorageValue(61921) - os.time(), 0)
-			local curboost3 = math.max(player:getStorageValue(250126) - os.time(), 0)
-			if curboost2 == 0 or curboost3 == 0 then
-			else
-							disabled = 1
-							disabledReason = "You already have Boost."
-			end
-			end	
+				if offer.type == GameStore.OfferTypes.OFFER_TYPE_BLESSINGS then
+					if player:hasBlessing(offer.thingId) and offer.thingId < 9 then
+					disabled = 1
+					disabledReason = "You already have this Bless."
+				else
+					if player:hasBlessing(1) and player:hasBlessing(2) and player:hasBlessing(3) and player:hasBlessing(4) and player:hasBlessing(5) and player:hasBlessing(6) and player:hasBlessing(7) and player:hasBlessing(8) then
+					disabled = 1
+					disabledReason = "You already have all Blessings."
+					end
+					end
+				end
 				if offer.type == GameStore.OfferTypes.OFFER_TYPE_OUTFIT or offer.type == GameStore.OfferTypes.OFFER_TYPE_OUTFIT_ADDON then
 					local outfitLookType
 					if player:getSex() == PLAYERSEX_MALE then
@@ -761,7 +678,7 @@ function sendShowStoreOffers(playerId, category)
 						if offer.type == GameStore.OfferTypes.OFFER_TYPE_OUTFIT and player:hasOutfit(outfitLookType) then
 							disabled = 1
 							disabledReason = "You already have this outfit."
-							elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_OUTFIT_ADDON then
+						elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_OUTFIT_ADDON then
 							if player:hasOutfit(outfitLookType) then
 								if player:hasOutfit(outfitLookType, offer.addon) then
 									disabled = 1
@@ -786,6 +703,17 @@ function sendShowStoreOffers(playerId, category)
 					if GameStore.canAddPromotionToPlayer(playerId, offer.thingId).ability == false then
 						disabled = 1
 						disabledReason = "You can't get this promotion"
+					end
+				elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_PREYSLOT then
+					local unlockedColumns = player:getPreySlots()
+					if (unlockedColumns == 2) then
+						disabled = 1
+						disabledReason = "You already have 3 slots released."
+					end
+					elseif offer.type == GameStore.OfferTypes.OFFER_TYPE_EXPBOOST then
+					if (player:getStorageValue(51052) == 6 and (os.time() - player:getStorageValue(51053)) < 86400)  then
+						disabled = 1
+						disabledReason = "You can't buy XP Boost for today."
 					end
 				end
 			end

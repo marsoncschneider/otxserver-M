@@ -13,11 +13,11 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	local player = Player(cid)
 	if msgcontains(msg, "trouble") and player:getStorageValue(Storage.TheInquisition.GrofGuard) < 1 and player:getStorageValue(Storage.TheInquisition.Mission01) ~= -1 then
-		npcHandler:say("Acredito que vai chover em breve e deixei roupa fora para secar.", cid)
+		npcHandler:say("I think it'll rain soon and I left some laundry out for drying.", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "authorities") then
 		if npcHandler.topic[cid] == 1 then
-			npcHandler:say("É, tenho certeza de que eles não enviaram guardas para a lavanderia para cuidar disso, seu idiota.", cid)
+			npcHandler:say("Yes I'm pretty sure they have failed to send the laundry police to take care of it, you fool.", cid)
 			npcHandler.topic[cid] = 0
 			if player:getStorageValue(Storage.TheInquisition.GrofGuard) < 1 then
 				player:setStorageValue(Storage.TheInquisition.GrofGuard, 1)
@@ -29,11 +29,11 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "É meu dever proteger a cidade."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "It's my duty to protect the city."})
 
-npcHandler:setMessage(MESSAGE_GREET, "VIDA LONGA AO REI!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "VIDA LONGA AO REI!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE THE KING!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE KING!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE KING!")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

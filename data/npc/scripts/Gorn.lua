@@ -7,7 +7,7 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Mercadorias e artigos de papelaria para venda! Só aqui!'} }
+local voices = { {text = 'General goods and paperware for sale!'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
 local function creatureSayCallback(cid, type, msg)
@@ -15,17 +15,17 @@ local function creatureSayCallback(cid, type, msg)
 		return false
 	end
 	if msgcontains(msg, "football") then
-		npcHandler:say("Quer comprar uma bola de futebol por 111 gold?", cid)
+		npcHandler:say("Do you want to buy a football for 111 gold?", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "yes") then
 		if npcHandler.topic[cid] == 1 then
 			local player = Player(cid)
-			if player:getMoney() >= 111 then
-				npcHandler:say("Aqui está.", cid)
+			if player:getMoney() + player:getBankBalance() >= 111 then
+				npcHandler:say("Here it is.", cid)
 				player:addItem(2109, 1)
-				player:removeMoney(111)
+				player:removeMoneyNpc(111)
 			else
-				npcHandler:say("Você não tem dinheiro o suficiente.", cid)
+				npcHandler:say("You don't have enough money.", cid)
 			end
 			npcHandler.topic[cid] = 0
 		end
@@ -34,33 +34,33 @@ local function creatureSayCallback(cid, type, msg)
 end
 
 -- Basic
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Estou vendendo equipamentos de todos os tipos. Você precisa de algo?"})
-keywordHandler:addKeyword({'king'}, StdModule.say, {npcHandler = npcHandler, text = "O Rei ajuda muito na economia do Tibia."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I am selling equipment of all kinds. Do you need anything?"})
+keywordHandler:addKeyword({'king'}, StdModule.say, {npcHandler = npcHandler, text = "The king supports Tibia's economy a lot."})
 keywordHandler:addAliasKeyword({'tibianus'})
-keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = "Magia? Pergunte a um sorcerer ou um druid sobre isso."})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou Gorn. Meus produtos são conhecidos em todo o Tibia."})
-keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "Agora são exatamente |TIME|. Talvez você queria comprar um relógio?"})
-keywordHandler:addKeyword({'druids'}, StdModule.say, {npcHandler = npcHandler, text = "Os druids são muito gente boa, agradáveis. Você pode encontrá-los no leste da cidade."})
-keywordHandler:addKeyword({'knights'}, StdModule.say, {npcHandler = npcHandler, text = "Até o mais forte knight precisa de meu equipamento para suas aventuras em Tibia."})
-keywordHandler:addKeyword({'sorcerers'}, StdModule.say, {npcHandler = npcHandler, text = "Você pode encontrá-lo na guild dos sorcerers."})
-keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "Ela é a líder da guild dos paladins."})
-keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "Old Baxter era barulhento. Quando éramos jovens, tivemos algumas aventuras e mulheres."})
-keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "Bah! Sai pra lá com esse palhaço chato."})
-keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "Frodo é um bom amigo, muito alegre."})
-keywordHandler:addKeyword({'ferumbras'}, StdModule.say, {npcHandler = npcHandler, text = "Nos desentendemos uma ou duas vezes nos velhos tempos."})
-keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "Até o mais forte knight precisa de meu equipamento para suas aventuras em Tibia."})
-keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "Essa é uma gatinha."})
-keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "Eu quase não conheço os McRonalds."})
-keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "Você vai encontrá-lo na guild dos sorceres."})
-keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "Esse Oswald não gosta de trabalhar, mas tem muito tempo pra espalhar rumores."})
-keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "Ele aconselha os novatos a comprarem minhas mercadorias. Eu amo esse cara!"})
-keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "Forte como o Léo Stronda, concerteza ganharia em uma queda de braço contra um minotauro, eu aposto."})
-keywordHandler:addKeyword({'xodet'}, StdModule.say, {npcHandler = npcHandler, text = "Ele é o dono da loja de magia aqui. Mas eu logo aviso: Os preços são exorbitantes."})
+keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = "Magic? Ask a sorcerer or druid about that."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "I am Gorn. My goods are known all over Tibia."})
+keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "It is exactly |TIME|. Maybe you want to buy a watch?"})
+keywordHandler:addKeyword({'druids'}, StdModule.say, {npcHandler = npcHandler, text = "This druids are nice people, you will find them in the east of the town."})
+keywordHandler:addKeyword({'knights'}, StdModule.say, {npcHandler = npcHandler, text = "Even the strong knights need my equipment on their travels though Tibia."})
+keywordHandler:addKeyword({'sorcerers'}, StdModule.say, {npcHandler = npcHandler, text = "You can find him in the sorcerer guild."})
+keywordHandler:addKeyword({'elane'}, StdModule.say, {npcHandler = npcHandler, text = "She's the leader of the paladin guild."})
+keywordHandler:addKeyword({'baxter'}, StdModule.say, {npcHandler = npcHandler, text = "Old Baxter was a rowdy, once. In our youth we shared some adventures and women."})
+keywordHandler:addKeyword({'bozo'}, StdModule.say, {npcHandler = npcHandler, text = "Bah! Go away with this bozoguy."})
+keywordHandler:addKeyword({'frodo'}, StdModule.say, {npcHandler = npcHandler, text = "Frodo is a jolly fellow."})
+keywordHandler:addKeyword({'ferumbras'}, StdModule.say, {npcHandler = npcHandler, text = "We had a clash or two in the old days."})
+keywordHandler:addKeyword({'gregor'}, StdModule.say, {npcHandler = npcHandler, text = "Even the strong knights need my equipment on their travels though Tibia."})
+keywordHandler:addKeyword({'lynda'}, StdModule.say, {npcHandler = npcHandler, text = "That's a pretty one."})
+keywordHandler:addKeyword({'mcronald'}, StdModule.say, {npcHandler = npcHandler, text = "I hardly know the McRonalds."})
+keywordHandler:addKeyword({'muriel'}, StdModule.say, {npcHandler = npcHandler, text = "You can find him in the sorcerer guild."})
+keywordHandler:addKeyword({'oswald'}, StdModule.say, {npcHandler = npcHandler, text = "This Oswald has not enough to work and too much time to spread rumours."})
+keywordHandler:addKeyword({'quentin'}, StdModule.say, {npcHandler = npcHandler, text = "He advices newcomers to buy at my store. I love that guy!"})
+keywordHandler:addKeyword({'sam'}, StdModule.say, {npcHandler = npcHandler, text = "Strong as an ox, could armwrestle a minotaur, I bet."})
+keywordHandler:addKeyword({'xodet'}, StdModule.say, {npcHandler = npcHandler, text = "He owns the magic shop here. But be aware: The prices are enormous."})
 
 
-npcHandler:setMessage(MESSAGE_GREET, "Oh, por favor entre, |PLAYERNAME|. Do que você precisa")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus, volte sempre.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Ei! Mal educado.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "É claro, fique a vontade para olhar todas minhas mercadorias. Bolas de Futebol {Footballs} tem que ser compradas separadamente.")
+npcHandler:setMessage(MESSAGE_GREET, "Oh, please come in, |PLAYERNAME|. What do you need?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Of course, just browse through my wares. {Footballs} have to be purchased separately.")
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

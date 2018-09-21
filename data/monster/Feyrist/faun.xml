@@ -62,6 +62,6 @@
 		<item name="goat grass" chance="5155" />
 		<item name="great health potion" chance="591" />
 		<item name="dandelion seeds" chance="5800" />
-		<item name="fresh fruits" chance="3400" />
+		<item id="28996" chance="3400" /> <!-- fresh fruit -->
 	</loot>
 </monster>

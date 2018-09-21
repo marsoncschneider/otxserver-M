@@ -13,11 +13,11 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	local player = Player(cid)
 	if msgcontains(msg, "trouble") and player:getStorageValue(Storage.TheInquisition.KulagGuard) < 1 and player:getStorageValue(Storage.TheInquisition.Mission01) ~= -1 then
-		npcHandler:say("Vocês aventureiros se tornam mais e mais perigosos do que uma peste.", cid)
+		npcHandler:say("You adventurers become more and more of a pest.", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "authorities") then
 		if npcHandler.topic[cid] == 1 then
-			npcHandler:say("Eles deviam se jogar em uma jaula ao invés de ficaram dando a vocês essas tarefas e recompensas que um homem honesto apenas sonharia em ter.", cid)
+			npcHandler:say("They should throw you all into jail instead of giving you all those quests and rewards an honest watchman can only dream about.", cid)
 			if player:getStorageValue(Storage.TheInquisition.KulagGuard) < 1 then
 				player:setStorageValue(Storage.TheInquisition.KulagGuard, 1)
 				player:setStorageValue(Storage.TheInquisition.Mission01, player:getStorageValue(Storage.TheInquisition.Mission01) + 1) -- The Inquisition Questlog- "Mission 1: Interrogation"
@@ -29,11 +29,11 @@ local function creatureSayCallback(cid, type, msg)
 	return true
 end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "É meu dever proteger a cidade."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "It's my duty to protect the city."})
 
-npcHandler:setMessage(MESSAGE_GREET, "VIDA LONGA AO REI!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "VIDA LONGA AO REI!")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "VIDA LONGA AO REI!")
+npcHandler:setMessage(MESSAGE_GREET, "LONG LIVE THE KING!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "LONG LIVE THE KING!")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "LONG LIVE THE KING!")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

@@ -468,6 +468,15 @@ keywordHandler:addKeyword({'merlkin'}, StdModule.say, {npcHandler = npcHandler, 
 keywordHandler:addKeyword({'magic'}, StdModule.say, {npcHandler = npcHandler, text = 'We see many things and learning quick. Merlkin magic learn quick, quick. We just watch and learn. Sometimes we try and learn.'})
 keywordHandler:addKeyword({'jungle'}, StdModule.say, {npcHandler = npcHandler, text = 'Jungle is dangerous. Jungle also provides us food. Take care when in jungle and safe you be.'})
 
+local function onTradeRequest(cid)
+	if Player(cid):getStorageValue(Storage.TheApeCity.Questline) < 18 then
+		return false
+	end
+
+	return true
+end
+
+npcHandler:setCallback(CALLBACK_ONTRADEREQUEST, onTradeRequest)
 npcHandler:setCallback(CALLBACK_GREET, greetCallback)
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

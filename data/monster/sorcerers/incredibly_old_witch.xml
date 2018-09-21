@@ -45,35 +45,20 @@
 			<attribute key="areaEffect" value="blueshimmer" />
 		</attack>
 	</attacks>
-	<defenses>
-		<defense name="outfit" interval="4000" chance="5" monster="rat" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="chicken" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="green frog" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="bug" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="pig" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="kongra" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="dog" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="skunk" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-		<defense name="outfit" interval="4000" chance="5" monster="donkey" duration="2000">
-			<attribute key="areaEffect" value="blueshimmer" />
-		</defense>
-	</defenses>
+		<immunities>
+		<immunity physical="1"/>
+		<immunity energy="1"/>
+		<immunity fire="1"/>
+		<immunity poison="1"/>
+		<immunity ice="1"/>
+		<immunity holy="1"/>
+		<immunity death="1"/>
+		<immunity lifedrain="1"/>
+		<immunity manadrain="1"/>
+		<immunity paralyze="1"/>
+		<immunity drunk="1"/>
+		<immunity invisible="1"/>
+	</immunities>
 	<voices interval="5000" chance="10">
 		<voice sentence="Feel the wrath of the witch!" />
 		<voice sentence="Oh how you will regret to have distubed me!" />

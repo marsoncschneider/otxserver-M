@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monster name="Dragon Warden" nameDescription="a Dragon Warden" race="blood" experience="1600" speed="150" manacost="290">
-	<health now="2" max="2" />
-	<look type="947" head="5" body="5" legs="5" feet="5" corpse="27857" />
+	<health now="2500" max="2500" />
+	<look type="947" head="5" body="5" legs="5" feet="5" corpse="27733" />
 	<targetchange interval="5000" chance="0" />
 	<flags>
 		<flag summonable="0" />
@@ -17,7 +17,7 @@
 		<flag runonhealth="15" />
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" skill="10" attack="10" />
+		<attack name="melee" interval="2000" skill="10" attack="100" />
 		<attack name="physical" interval="2000"  range="7" min="0" max="-500"/>
 
 	</attacks>
@@ -42,7 +42,7 @@
 		<item id="6574" chance="11000" /><!--  Bar of Chocolate		-->
 		<item id="27052" chance="11000" /><!--   Birthday Cake		-->
 		<item id="27058" chance="11000" /><!--   Chocolatey Dragon Scale Legs	-->
-		<item id="27604" chance="11000" /><!--    Bottle of Tibian Wine		-->
+		<item id="27616" chance="11000" /><!--    Bottle of Tibian Wine		-->
 		<item id="27605" chance="11000" /><!--    see Costume Bag (Retro)		-->
 		<item id="6576" chance="11000" /><!--    Fireworks Rocket-->
 		<item id="6280" chance="11000" /><!--     Party Cake-->

@@ -16,64 +16,64 @@ local function creatureSayCallback(cid, type, msg)
 
 	if msgcontains(msg, 'brooch') then
 		if player:getStorageValue(Storage.WhiteRavenMonasteryQuest.Passage) == 1 then
-			npcHandler:say('Você recuperou meu broche! Eu sempre vou estar em dívida, meu amigo!', cid)
+			npcHandler:say('You have recovered my brooch! I shall forever be in your debt, my friend!', cid)
 			return true
 		end
 
-		npcHandler:say('O que? Você quer que eu examine um broche?', cid)
+		npcHandler:say('What? You want me to examine a brooch?', cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, 'yes') then
 		if npcHandler.topic[cid] == 1 then
 			if player:getItemCount(2318) == 0 then
-				npcHandler:say('Do que você está falando? Sou muito pobre para me interessar em jóias.', cid)
+				npcHandler:say('What are you talking about? I am too poor to be interested in jewelry.', cid)
 				npcHandler.topic[cid] = 0
 				return true
 			end
 
-			npcHandler:say('Pode ser? Eu reconheço os braços da minha família! Você já encontrou um tesouro! Eu sou pobre e tudo o que posso oferecer é minha amizade, mas ... por favor ... me dê esse broche.', cid)
+			npcHandler:say('Can it be? I recognise my family\'s arms! You have found a treasure indeed! I am poor and all I can offer you is my friendship, but ... please ... give that brooch to me?', cid)
 			npcHandler.topic[cid] = 2
 		elseif npcHandler.topic[cid] == 2 then
 			npcHandler.topic[cid] = 0
 			if not player:removeItem(2318, 1) then
-				npcHandler:say('Eu deveria ter pensado melhor antes de pedir um ato de bondade neste mundo cruel e egoísta!', cid)
+				npcHandler:say('I should have known better than to ask for an act of kindness in this cruel, selfish, world!', cid)
 				return true
 			end
 
-			npcHandler:say('Obrigado! Eu considero você meu amigo de agora em diante! Apenas me avise se você precisar {need} de algo!', cid)
+			npcHandler:say('Thank you! I shall consider you my friend from now on! Just let me know if you {need} something!', cid)
 			player:setStorageValue(Storage.WhiteRavenMonasteryQuest.Passage, 1)
 			player:setStorageValue(Storage.WhiteRavenMonasteryQuest.QuestLog, 1) -- Quest log
 		end
 	elseif msgcontains(msg, 'no') then
 		if npcHandler.topic[cid] == 1 then
-			npcHandler:say('Então pare de ser um tolo. Eu sou pobre e tenho que trabalhar o dia inteiro!', cid)
+			npcHandler:say('Then stop being a fool. I am poor and I have to work the whole day through!', cid)
 		elseif npcHandler.topic[cid] == 2 then
-			npcHandler:say('Eu deveria ter pensado melhor antes de pedir um ato de bondade neste mundo cruel e egoísta!', cid)
+			npcHandler:say('I should have known better than to ask for an act of kindness in this cruel, selfish, world!', cid)
 		end
 		npcHandler.topic[cid] = 0
 	end
 	return true
 end
 
-keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu apenas viajei para a ilha dos reis uma ou duas vezes. Não me atrevo a irritar os monges trazendo viajantes lá sem sua permissão.'}, function(player) return player:getStorageValue(Storage.WhiteRavenMonasteryQuest.Passage) ~= 1 end)
+keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, text = 'I have only sailed to the isle of the kings once or twice. I dare not anger the monks by bringing travellers there without their permission.'}, function(player) return player:getStorageValue(Storage.WhiteRavenMonasteryQuest.Passage) ~= 1 end)
 
-local travelNode = keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, text = 'Você procura uma passagem para a ilha dos reis para 10 moedas de ouro?'})
-	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, text = 'Tenha uma boa viagem!', cost = 10, destination = Position(32190, 31957, 6) })
-	travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, reset = true, text = 'Bem, eu estarei aqui se você mudar de idéia.'})
+local travelNode = keywordHandler:addKeyword({'passage'}, StdModule.say, {npcHandler = npcHandler, text = 'Do you seek a passage to the isle of the kings for 10 gold coins?'})
+	travelNode:addChildKeyword({'yes'}, StdModule.travel, {npcHandler = npcHandler, premium = false, text = 'Have a nice trip!', cost = 10, destination = Position(32190, 31957, 6) })
+	travelNode:addChildKeyword({'no'}, StdModule.say, {npcHandler = npcHandler, reset = true, text = 'Well, I\'ll be here if you change your mind.'})
 
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Meu nome é Dalbrect Windtrouser, da família orgulhosa de Windtrouser."})
-keywordHandler:addKeyword({'hut'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou apenas um humilde pescador agora que nada resta do meu nobre legado {legacy}."})
-keywordHandler:addKeyword({'legacy'}, StdModule.say, {npcHandler = npcHandler, text = "Uma vez que minha família já foi nobre e rica, mas o destino {fate} se virou contra nós e nos lançou na pobreza."})
-keywordHandler:addKeyword({'poverty'}, StdModule.say, {npcHandler = npcHandler, text = "Quando Carlin tentou colonizar a região agora conhecida como os ghostlands, meus ancestrais colocaram sua fortuna nesse projeto {project}."})
-keywordHandler:addKeyword({'fate'}, StdModule.say, {npcHandler = npcHandler, text = "Quando Carlin tentou colonizar a região agora conhecida como os ghostlands, meus ancestrais colocaram sua fortuna nesso projeto {project}."})
-keywordHandler:addKeyword({'ghostlands'}, StdModule.say, {npcHandler = npcHandler, text = "Nossa fortuna familiar estava perdida quando a colonização dessas terras malditas falhou. Agora, nada é da nossa fama ou da nossa fortuna. Se eu tivesse apenas uma lembrança desses tempos melhores. <sigh>"})
-keywordHandler:addKeyword({'project'}, StdModule.say, {npcHandler = npcHandler, text = "Nossa fortuna familiar estava perdida quando a colonização dessas terras malditas falhou. Agora, nada é da nossa fama ou da nossa fortuna. Se eu tivesse apenas algo como uma lembrança daqueles tempos melhores. <sigh>"})
-keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, text = "Pensar que minha família costumava pertencer à nobreza local! E agora as mulheres arrogantes estão no comando!"})
-keywordHandler:addKeyword({'need'}, StdModule.say, {npcHandler = npcHandler, text = "Há pouco que posso lhe oferecer, mas uma viagem com meu barco. Você está procurando uma passagem {passage} para a Ilha dos Reis {Isle of the Kings} talvez?"})
-keywordHandler:addKeyword({'ship'}, StdModule.say, {npcHandler = npcHandler, text = "Meu navio é meu único orgulho e alegria."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "My name is Dalbrect Windtrouser, of the once proud Windtrouser family."})
+keywordHandler:addKeyword({'hut'}, StdModule.say, {npcHandler = npcHandler, text = "I am merely a humble fisher now that nothing is left of my noble {legacy}."})
+keywordHandler:addKeyword({'legacy'}, StdModule.say, {npcHandler = npcHandler, text = "Once my family was once noble and wealthy, but {fate} turned against us and threw us into poverty."})
+keywordHandler:addKeyword({'poverty'}, StdModule.say, {npcHandler = npcHandler, text = "When Carlin tried to colonize the region now known as the ghostlands, my ancestors put their fortune in that {project}."})
+keywordHandler:addKeyword({'fate'}, StdModule.say, {npcHandler = npcHandler, text = "When Carlin tried to colonize the region now known as the ghostlands, my ancestors put their fortune in that {project}."})
+keywordHandler:addKeyword({'ghostlands'}, StdModule.say, {npcHandler = npcHandler, text = "Our family fortune was lost when the colonization of those cursed lands failed. Now nothing is left of our fame or our fortune. If I only had something as a reminder of those better times. <sigh>"})
+keywordHandler:addKeyword({'project'}, StdModule.say, {npcHandler = npcHandler, text = "Our family fortune was lost when the colonization of those cursed lands failed. Now nothing is left of our fame or our fortune. If I only had something as a reminder of those better times. <sigh>"})
+keywordHandler:addKeyword({'carlin'}, StdModule.say, {npcHandler = npcHandler, text = "To think my family used to belong to the local nobility! And now those arrogant women are in charge!"})
+keywordHandler:addKeyword({'need'}, StdModule.say, {npcHandler = npcHandler, text = "There is little I can offer you but a trip with my boat. Are you looking for a {passage} to the isle of kings perhaps?"})
+keywordHandler:addKeyword({'ship'}, StdModule.say, {npcHandler = npcHandler, text = "My ship is my only pride and joy."})
 
-npcHandler:setMessage(MESSAGE_GREET, "Seja saudado, viajante|PLAYERNAME|. Bem vindo à minha cabana {hut}.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus. Você é bem vindo.")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Adeus.")
+npcHandler:setMessage(MESSAGE_GREET, "Be greeted, traveller |PLAYERNAME|. Welcome to my {hut}.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye. You are welcome.")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

@@ -7,10 +7,10 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'furniture'}, StdModule.say, {npcHandler = npcHandler, text = "Bem, como você pode ver, eu vendo móveis. Peça-me um {trade} se você estiver interessado em ver meus produtos."})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Meu nome é Nydala. Eu administra esta loja."})
-keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "Agora é |TIME|. Você precisa de um relógio para a sua casa?"})
+keywordHandler:addKeyword({'furniture'}, StdModule.say, {npcHandler = npcHandler, text = "Well, as you can see, I sell furniture. Ask me for a {trade} if you're interested to see my wares."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "My name is Nydala. I run this store."})
+keywordHandler:addKeyword({'time'}, StdModule.say, {npcHandler = npcHandler, text = "It is |TIME|. Do you need a clock for your house?"})
 
-npcHandler:setMessage(MESSAGE_GREET, "Bem-vindo à Carlin Furniture Store, |PLAYERNAME|.")
-npcHandler:setMessage(MESSAGE_SENDTRADE, "Dê uma olhada. A maioria dos móveis vem em kits acessíveis. Basta usá-los em sua casa para montar o mobiliário. Você quer ver apenas um certo tipo {type} de mobiliário?")
+npcHandler:setMessage(MESSAGE_GREET, "Welcome to Carlin Furniture Store, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_SENDTRADE, "Have a look. Most furniture comes in handy kits. Just use them in your house to assemble the furniture. Do you want to see only a certain {type} of furniture?")
 npcHandler:addModule(FocusModule:new())

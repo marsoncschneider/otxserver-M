@@ -8,10 +8,10 @@ function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)
 function onThink()		npcHandler:onThink()		end
 
 local voices = {
-	{ text = 'Escolta grátis até o depot para novatos!' },
-	{ text = 'Olá, essa é a sua primeira visita a Thais? Eu posso te mostrar as redondezas.' },
-	{ text = 'Precisa de ajuda para encontrar seu caminho através de Thais? Eu posso ajudar.' },
-	{ text = 'Fale comigo se você precisar de alguma orientação.' }
+	{ text = 'Free escort to the depot for newcomers!' },
+	{ text = 'Hello, is this your first visit to Thais? I can show you around a little.' },
+	{ text = 'Need some help finding your way through Thais? Let me assist you.' },
+	{ text = 'Talk to me if you need directions.' }
 }
 
 npcHandler:addModule(VoiceModule:new(voices))
@@ -28,10 +28,10 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	local player = Player(cid)
 	if isInArray({"map", "marks"}, msg) then
-		npcHandler:say("Você gostaria que eu marcasse os locais em seu mapa? Por exemplo, o depósito, o banco e algumas lojas?", cid)
+		npcHandler:say("Would you like me to mark locations like - for example - the depot, bank and shops on your map?", cid)
 		npcHandler.topic[cid] = 1
 	elseif msgcontains(msg, "yes") and npcHandler.topic[cid] == 1 then
-		npcHandler:say("Prontinho, aqui está.", cid)
+		npcHandler:say("Here you go.", cid)
 		local mark
 		for i = 1, #configMarks do
 			mark = configMarks[i]
@@ -39,24 +39,24 @@ local function creatureSayCallback(cid, type, msg)
 		end
 		npcHandler.topic[cid] = 0
 	elseif msgcontains(msg, "no") and npcHandler.topic[cid] >= 1 then
-		npcHandler:say("Bom, não há nada de errado em preferir explorar a cidade por si só. Deixe-me ajudar caso precise de alguma coisa!", cid)
+		npcHandler:say("Well, nothing wrong about exploring the town on your own. Let me know if you need something!", cid)
 		npcHandler.topic[cid] = 0
 	end
 	return true
 end
 
-keywordHandler:addKeyword({'information'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu posso dizer a você tudo sobre a cidade {town}, seu templo {temple}, o {bank}, suas lojas {shops}, treinadores de magias {spell trainers} e o depósito {depot}, além do estado do mundo {world status}.'})
-keywordHandler:addKeyword({'temple'}, StdModule.say, {npcHandler = npcHandler, text = 'O templo fica no centro de Thais. Ande até o leste do porto e passe pelo depósito {depot} até chegar à infame encruzilhada, depois vá seguindo pelo sul.'})
-keywordHandler:addKeyword({'bank'}, StdModule.say, {npcHandler = npcHandler, text = 'Nós temos dois bancários, Suzy e Naji. Naji está no próprio depósito. Já Suzi, para encontrá-la você precisa sair do depósito {depot} pelo sul, seguir pelo oeste e depois pelo sudoeste. Não se esqueça de que posso marcar {mark} locais importantes em seu mapa.'})
-keywordHandler:addKeyword({'shops'}, StdModule.say, {npcHandler = npcHandler, text = 'Você pode comprar armas {weapons}, armaduras {armor}, ferramentas {tools}, gemas {gems}, equipamento mágico {magical}, mobília {furniture} e comida {food} aqui.'})
-keywordHandler:addKeyword({'depot'}, StdModule.say, {npcHandler = npcHandler, text = 'O depósito é o lugar onde você pode guardar seus pertences com mais segurança. Além disso, lá você está protegido contra ataques. Eu escolto {escort} novatos aqui.'})
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu sou um guia, trabalho muito por pouco dinheiro. Eu posso marcar locais importantes em seu mapa e dar algumas informações sobre a cidade, além do estado do mundo.'})
-keywordHandler:addKeyword({'thais'}, StdModule.say, {npcHandler = npcHandler, text = 'Thais é uma das mais velhas colonizações no Tibia. Você vai escutar suas histórias como sussurros quando estiver andando pelas ruas. Tenha cuidado com os criminosos, mas fora isso, é uma boa cidade..'})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = 'Eu sou Luke, sem brincadeiras, por favor, eu sempre escuto todas elas <triste>'})
+keywordHandler:addKeyword({'information'}, StdModule.say, {npcHandler = npcHandler, text = 'I can tell you all about the {town}, its {temple}, the {bank}, {shops}, {spell trainers} and the {depot}, as well as about the {world status}.'})
+keywordHandler:addKeyword({'temple'}, StdModule.say, {npcHandler = npcHandler, text = 'The temple is in the centre of Thais. Walk east from the harbour and pass by the {depot} until you reach the infamous crossroads, then turn south.'})
+keywordHandler:addKeyword({'bank'}, StdModule.say, {npcHandler = npcHandler, text = 'We have two bankers, Suzy and Naji. Naji is right in the depot. For Suzi, exit the {depot} to the west and walk south-west. Don\'t forget that I can {mark} important locations on your map.'})
+keywordHandler:addKeyword({'shops'}, StdModule.say, {npcHandler = npcHandler, text = 'You can buy {weapons}, {armor}, {tools}, {gems}, {magical} equipment, {furniture} and {food} here.'})
+keywordHandler:addKeyword({'depot'}, StdModule.say, {npcHandler = npcHandler, text = 'The depot is a place where you can safely store your belongings. You are also protected against attacks there. I {escort} newcomers there.'})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = 'I\'m a guide, overworked and underpaid. I can mark important locations on your map and give you some information about the town and the world status.'})
+keywordHandler:addKeyword({'thais'}, StdModule.say, {npcHandler = npcHandler, text = 'Thais is the oldest settlement in Tibia. You can hear its history whisper when walking through the streets. Beware of criminals, but else it\'s a fine city.'})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = 'I\'m Luke. No jokes, please, I heard them all!'})
 
-npcHandler:setMessage(MESSAGE_GREET, "Olá, |PLAYERNAME|, seja bem-vindo a Thais! Você gostaria de alguma informação {information} e um mapa {map}?")
-npcHandler:setMessage(MESSAGE_WALKAWAY, "Adeus.")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Adeus! Aproveite sua estadia em Thais, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_GREET, "Hello there, |PLAYERNAME| and welcome to Thais! Would you like some {information} and a {map} guide?")
+npcHandler:setMessage(MESSAGE_WALKAWAY, "Good bye.")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Good bye and enjoy your stay in Thais, |PLAYERNAME|.")
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

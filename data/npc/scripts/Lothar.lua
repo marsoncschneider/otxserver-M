@@ -7,44 +7,44 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()		npcHandler:onThink()		end
 
-local voices = { {text = 'Eu gosto da paz e da solidão daqui. Você é bem-vindo para ser meu convidado enquanto você se comportar de uma maneira tranquila e tolerável.'} }
+local voices = { {text = 'I enjoy the peace and solitude out here. You\'re welcome to be my guest as long as you behave in a quiet and tolerable manner.'} }
 npcHandler:addModule(VoiceModule:new(voices))
 
-keywordHandler:addKeyword({'here'}, StdModule.say, {npcHandler = npcHandler, text = "Alguns me chamam de whisperer {animal}. Outros dizem que estou apenas louco. Refiro-me a mim mesmo como um detentor simples {stable}."})
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Alguns me chamam de whisperer {animal}. Outros dizem que estou apenas louco. Refiro-me a mim mesmo como um detentor simples {stable}."})
-keywordHandler:addKeyword({'animal'}, StdModule.say, {npcHandler = npcHandler, text = "Eu amo todos os animais, pequenos ou grandes. Eu também acredito que cada um, mesmo o ser mais selvagem e feroz, pode ser falado, compreendido e {tamed}."})
-keywordHandler:addKeyword({'stable'}, StdModule.say, {npcHandler = npcHandler, text = "É meu sonho abrigar muitos animais domesticados diferentes. Talvez um dia esse sonho se torne realidade."})
-keywordHandler:addKeyword({'tamed'}, StdModule.say, {npcHandler = npcHandler, text = "Bem, geralmente você pode domesticar os animais com a ajuda de alguns itens simples. Se você encontrou um {item}, mostre-o e eu poderia ajudá-lo com instruções sobre o processo de domesticação."})
-keywordHandler:addKeyword({'item'}, StdModule.say, {npcHandler = npcHandler, text = "Bem? Qual item você encontrou e exige conselhos para?"})
-keywordHandler:addKeyword({'bag of apple slices'}, StdModule.say, {npcHandler = npcHandler, text = "Esse é um dos alimentos favoritos dos burros, tanto quanto eu sei. É uma pena que eu realmente não tenha visto nenhum burro. Poderia exigir um truque mágico para realmente conhecer um."})
-keywordHandler:addKeyword({'bamboo leaves'}, StdModule.say, {npcHandler = npcHandler, text = "As pandas adoram comer folhas de bambu, mas os pandas Tiquandan na verdade não são tão habilidosos na escalada, então eles têm dificuldade em conseguir alguns para si. Você pode domar um com eles."})
-keywordHandler:addKeyword({'carrot on a stick'}, StdModule.say, {npcHandler = npcHandler, text = "Ouvi dizer que os pássaros do terror realmente adoram as cenouras. Eu tentaria agitar isso na frente de um desses."})
-keywordHandler:addKeyword({'decorative ribbon'}, StdModule.say, {npcHandler = npcHandler, text = "Ah, que fita bonita. Lembra-me dos indescritíveis - são bastante elegantes e vão. Eles provavelmente receberiam um elemento decorativo. Algumas vezes são vistos durante as erupções do vulcão."})
-keywordHandler:addKeyword({'diapason'}, StdModule.say, {npcHandler = npcHandler, text = "Que minúsculo manequim elvish. Você sabia que um diapason funciona com vibrações para criar som? Na verdade, acho que isso poderia funcionar com uma criatura feita de cristais."})
-keywordHandler:addKeyword({'fist on a stick'}, StdModule.say, {npcHandler = npcHandler, text = "Estou contra a violência contra qualquer criatura. Ouvi dizer que os bárbaros no deserto o usam para dromedários desobedientes."})
-keywordHandler:addKeyword({'four-leaf clover'}, StdModule.say, {npcHandler = npcHandler, text = "Oh, que plantazinha agradável! Você sabia que deveria trazer sorte? Então, é o erro da senhora. Ambos podem realmente ir bem juntos."})
-keywordHandler:addKeyword({'foxtail'}, StdModule.say, {npcHandler = npcHandler, text = "Eu ouvi dizer que havia uma vez uma gangue de cavaleiros de manta ray que gostaram de adornar suas mantas com um foxtail. Não me pergunte por que, talvez eles gostem de como ele flutua no vento quando corre muito rápido?"})
-keywordHandler:addKeyword({'golem wrench'}, StdModule.say, {npcHandler = npcHandler, text = "Que dispositivo estranho! Isso parece uma ferramenta para alguém que cria golems e modifica criaturas vivas. Você provavelmente poderia domesticar uma criatura modificada com isso, mas eu duvido que eles vivam na natureza."})
-keywordHandler:addKeyword({'giant shrimp'}, StdModule.say, {npcHandler = npcHandler, text = "Ah, esse é um dos alimentos favoritos de um crustacea gigantica. Eu acho que você pode apenas distraí-lo com a comida e rapidamente pular nas costas."})
-keywordHandler:addKeyword({'glow wine'}, StdModule.say, {npcHandler = npcHandler, text = "Você já encontrou um rastreador de magma? Eles só comem e bebem coisas muito gostosas. Você provavelmente poderia tentar fazer uma bebida com um pouco de vinho brilhante - e montá-la rapidamente enquanto estiver bêbada."})
-keywordHandler:addKeyword({'golden can of oil'}, StdModule.say, {npcHandler = npcHandler, text = "Hm. Que interessante achado. Isso definitivamente não é usado para qualquer tipo de animal. Talvez um veículo? Eu posso imaginar que poderia ser usado para uma bicicleta de algum tipo."})
-keywordHandler:addKeyword({'harness'}, StdModule.say, {npcHandler = npcHandler, text = "Parece que pode ser um draptor. Se você puder se aproximar o suficiente para um para pegá-lo, simplesmente tentaria colocá-lo enquanto sussurrava palavras calmantes."})
-keywordHandler:addKeyword({'hunting horn'}, StdModule.say, {npcHandler = npcHandler, text = "O som de um chifre de caça é muitas vezes intimidante para as criaturas da floresta, mas eu ouvi que os javalis realmente gostam disso."})
-keywordHandler:addKeyword({'iron loadstone'}, StdModule.say, {npcHandler = npcHandler, text = "Ironblights consistem principalmente em pedra e ferro. Com um forte ímã, você basicamente pode forçá-lo a caminhar na direção em que você está querendo."})
-keywordHandler:addKeyword({'leather whip'}, StdModule.say, {npcHandler = npcHandler, text = "Tente pegar uma pantera da meia-noite usando essa. Não toque na pantera, tenha em mente você. Apenas deixe o chicote quebrar no ar - eu acho que vai funcionar."})
-keywordHandler:addKeyword({'leech'}, StdModule.say, {npcHandler = npcHandler, text = "Tanto quanto eu sei, sanguessugas podem ser encontradas em áreas terrestres e pantanosas. As sanguessugas geralmente ajudam grandes animais, como búfalos de água, a eliminar os parasitas."})
-keywordHandler:addKeyword({'maxilla maximus'}, StdModule.say, {npcHandler = npcHandler, text = "Você deve mostrar esse maxilar gigante para uma criatura que se parece com a pessoa que você obteve. Ele irá respeitar você quando vê os dentes assustadores."})
-keywordHandler:addKeyword({'music box'}, StdModule.say, {npcHandler = npcHandler, text = "Onde você conseguiu isso? O que é um deleite raro. Isso deve ter sido elaborado por alguém que realmente ama música e animais. Não posso dizer nada sobre isso."})
-keywordHandler:addKeyword({'nail case'}, StdModule.say, {npcHandler = npcHandler, text = "Oh, um caso de unha ..., eu odeio esconder as unhas. Mas eu ouvi gravediggers confiar quando eles recebem o tratamento certo."})
-keywordHandler:addKeyword({'nightmare horn'}, StdModule.say, {npcHandler = npcHandler, text = "Quão impressionante, um chifre de pesadelo. Você já encontrou uma cabeça de choque? Tente hipnotizá-los com o seu chifre."})
-keywordHandler:addKeyword({'reins'}, StdModule.say, {npcHandler = npcHandler, text = "Você provavelmente poderia montar uma ovelha negra com estes. Fale com ele suavemente e cuidadosamente coloque as rédeas."})
-keywordHandler:addKeyword({'scorpion sceptre'}, StdModule.say, {npcHandler = npcHandler, text = "Uau, isso é uma raridade. Você já conheceu um desses escorpiões de arenito? Eles são bastante impressionantes. Você precisa de um tal cetro para mostrar a um que você é seu novo mestre."})
-keywordHandler:addKeyword({'slingshot'}, StdModule.say, {npcHandler = npcHandler, text = "Essa pode ser a única maneira de domar um urso. Tem um ponto sensível bem entre as orelhas que o acalmará, mas você não é forte o suficiente para uma acupressão simples. Usar o estilingue é susceptível de ajudá-lo com isso."})
-keywordHandler:addKeyword({'slug drug'}, StdModule.say, {npcHandler = npcHandler, text = "Como o nome indica - isso pode ser usado para fazer uma lesma muito mais rápido do que normalmente é! Uma vez que você tenha domesticado, ele irá corrê-lo onde quer que você vá."})
-keywordHandler:addKeyword({'sugar oat'}, StdModule.say, {npcHandler = npcHandler, text = "Crie a aveia de açúcar simplesmente misturando um monte de cana com um monte de trigo. Todos os cavalos adoram aveia com açúcar! Às vezes, quando os cavalos da estação do cavalo em Thais estão soltos, os cavalos selvagens se misturam com o rebanho. Talvez eles possam ser domesticados?"})
-keywordHandler:addKeyword({'sweet smelling bait'}, StdModule.say, {npcHandler = npcHandler, text = "A parte interessante sobre essa isca não é a coisa doce - são as moscas atraídas pelo cheiro doce. As aranhas adoram comer moscas, especialmente as zaoanas."})
-keywordHandler:addKeyword({'tin key'}, StdModule.say, {npcHandler = npcHandler, text = "Hm! Agora, isso é interessante. De onde você conseguiu isso? Eu poderia imaginar que isso soasse em uma fábrica, mas definitivamente não é um animal normal."})
-keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "Está na porta."})
+keywordHandler:addKeyword({'here'}, StdModule.say, {npcHandler = npcHandler, text = "Some call me {animal} whisperer. Others say I'm just crazy. I refer to myself as a simple {stable} keeper."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Some call me {animal} whisperer. Others say I'm just crazy. I refer to myself as a simple {stable} keeper."})
+keywordHandler:addKeyword({'animal'}, StdModule.say, {npcHandler = npcHandler, text = "I love all animals, whether small or big. I also believe each one, even the wildest and most ferocious being, can be talked to, understood and {tamed}."})
+keywordHandler:addKeyword({'stable'}, StdModule.say, {npcHandler = npcHandler, text = "It's my dream to shelter many different tamed animals. Maybe one day that dream will come true."})
+keywordHandler:addKeyword({'tamed'}, StdModule.say, {npcHandler = npcHandler, text = "Well, usually you can tame animals with the help of a few simple items. If you've found such an {item}, show it to me and I might be able to help you with instructions on the taming process."})
+keywordHandler:addKeyword({'item'}, StdModule.say, {npcHandler = npcHandler, text = "Well? Which item have you found and require advice for?"})
+keywordHandler:addKeyword({'bag of apple slices'}, StdModule.say, {npcHandler = npcHandler, text = "That's among the favourite foods of donkeys, as far as I know. It's a shame I haven't really seen any donkey around. It could require a magic trick to actually get to meet one."})
+keywordHandler:addKeyword({'bamboo leaves'}, StdModule.say, {npcHandler = npcHandler, text = "Pandas love to eat bamboo leaves, but the Tiquandan pandas are actually not that skilled at climbing, so they have a hard time getting some for themselves. You might be able to tame one with them."})
+keywordHandler:addKeyword({'carrot on a stick'}, StdModule.say, {npcHandler = npcHandler, text = "I heard that terror birds really love carrots. I'd try waving it in front of one of those."})
+keywordHandler:addKeyword({'decorative ribbon'}, StdModule.say, {npcHandler = npcHandler, text = "Ah, what a pretty ribbon. Reminds me of the elusive dragonlings - they're quite elegant and vain. They would probably welcome a decorative element. They're sometimes spotted during volcano eruptions."})
+keywordHandler:addKeyword({'diapason'}, StdModule.say, {npcHandler = npcHandler, text = "What a neat little elvish gadget. Did you know a diapason works with vibrations to create sound? I actually think this could work on a creature made of crystals."})
+keywordHandler:addKeyword({'fist on a stick'}, StdModule.say, {npcHandler = npcHandler, text = "I'm against violence towards any creature. I've heard those barbarians in the desert use it for disobedient dromedaries."})
+keywordHandler:addKeyword({'four-leaf clover'}, StdModule.say, {npcHandler = npcHandler, text = "Oh, what a nice little plant! Did you know it's supposed to bring luck? So is the lady bug. Both of them might actually go well together."})
+keywordHandler:addKeyword({'foxtail'}, StdModule.say, {npcHandler = npcHandler, text = "I've heard that there once was a gang of manta ray riders who liked to adorn their mantas with a foxtail. Don't ask me why, maybe they like how it floats in the wind when running really fast?"})
+keywordHandler:addKeyword({'golem wrench'}, StdModule.say, {npcHandler = npcHandler, text = "What a strange device! This looks like a tool for someone who creates golems and modifies living creatures. You could probably tame a modded creature with it, but I doubt they live in the wild."})
+keywordHandler:addKeyword({'giant shrimp'}, StdModule.say, {npcHandler = npcHandler, text = "Oh, that's one of the favourite foods of a crustacea gigantica. I think you can just distract it with the food and quickly jump on its back."})
+keywordHandler:addKeyword({'glow wine'}, StdModule.say, {npcHandler = npcHandler, text = "Have you ever encountered a magma crawler? They only eat and drink really hot things. You could probably try and make one drink some glow wine - and quickly mount it as long as it's drunk."})
+keywordHandler:addKeyword({'golden can of oil'}, StdModule.say, {npcHandler = npcHandler, text = "Hm. What an interesting find. This is definitely not used for any sort of animal. Maybe a vehicle? I can imagine it could be used for a bike of some sorts."})
+keywordHandler:addKeyword({'harness'}, StdModule.say, {npcHandler = npcHandler, text = "That looks like it might fit a draptor. If you can ever get close enough to one to catch it, I'd simply try putting it on while whispering calming words."})
+keywordHandler:addKeyword({'hunting horn'}, StdModule.say, {npcHandler = npcHandler, text = "The sound of a hunting horn is often intimidating to forest creatures, but I heard that wild boars actually like it."})
+keywordHandler:addKeyword({'iron loadstone'}, StdModule.say, {npcHandler = npcHandler, text = "Ironblights consist mainly of stone and iron. With a strong magnet like that you can basically force it to walk in the direction you're wanting it to."})
+keywordHandler:addKeyword({'leather whip'}, StdModule.say, {npcHandler = npcHandler, text = "Try catching a midnight panther using that one. Don't hit the panther, mind you. Just let the whip crack in the air - I think that will work."})
+keywordHandler:addKeyword({'leech'}, StdModule.say, {npcHandler = npcHandler, text = "As far as I know, leeches can be found in terrestrial, swampy areas. Leeches often help large animals such as water buffaloes to get rid of parasites."})
+keywordHandler:addKeyword({'maxilla maximus'}, StdModule.say, {npcHandler = npcHandler, text = "You should show that giant jaw to a creature looking like the one you got it from. It will respect you when it sees those scary teeth."})
+keywordHandler:addKeyword({'music box'}, StdModule.say, {npcHandler = npcHandler, text = "Where did you get that? What a rare treat. This must have been crafted by someone who truly loves both music and animals. I can't tell you anything else about it."})
+keywordHandler:addKeyword({'nail case'}, StdModule.say, {npcHandler = npcHandler, text = "Oh, a nail case..., I hate paring nails. But I heard gravediggers become trusting when they get the right treatment."})
+keywordHandler:addKeyword({'nightmare horn'}, StdModule.say, {npcHandler = npcHandler, text = "How impressive, a nightmare horn. Have you ever encountered a shock head? Try hypnotizing them with your horn."})
+keywordHandler:addKeyword({'reins'}, StdModule.say, {npcHandler = npcHandler, text = "You could probably ride a black sheep with these. Talk to it gently and carefully put on the reins."})
+keywordHandler:addKeyword({'scorpion sceptre'}, StdModule.say, {npcHandler = npcHandler, text = "Wow, that's a rarity. Have you ever met one of those large sandstone scorpions? They're quite impressive. You need such a sceptre to show to one that you're its new master."})
+keywordHandler:addKeyword({'slingshot'}, StdModule.say, {npcHandler = npcHandler, text = "That might be the only way to tame a bear. It has a sensitive spot right between the ears which will calm it down, but you're not strong enough for simple acupressure. Using the slingshot is likely to help you with that."})
+keywordHandler:addKeyword({'slug drug'}, StdModule.say, {npcHandler = npcHandler, text = "As the name indicates - this can be used to make a slug much faster than it normally is! Once you've tamed it, it will race you wherever you want to go."})
+keywordHandler:addKeyword({'sugar oat'}, StdModule.say, {npcHandler = npcHandler, text = "Create sugar oat by just mixing a bunch of sugar cane with a bunch of wheat. All horses love sugar oat! Sometimes when the horses from the horse station in Thais are on the loose, wild horses mix with the herd. Maybe they can be tamed?"})
+keywordHandler:addKeyword({'sweet smelling bait'}, StdModule.say, {npcHandler = npcHandler, text = "The interesting part about that bait isn't the sweet stuff - it's the flies attracted to the sweet smell. Spiders love to eat flies, especially the Zaoan ones."})
+keywordHandler:addKeyword({'tin key'}, StdModule.say, {npcHandler = npcHandler, text = "Hm! Now that's an interesting one. Where did you get that from? I could imagine it winds something up in a factory, but it's definitely not a normal animal."})
+keywordHandler:addKeyword({'name'}, StdModule.say, {npcHandler = npcHandler, text = "It's on the door."})
 
 local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
@@ -52,30 +52,30 @@ local function creatureSayCallback(cid, type, msg)
 	end
 	if msgcontains(msg, "control unit") then
 		npcHandler:say({
-			'Isso é interessante, nada como eu já me vi. O que você descreve é um dispositivo do qual eu ouvi dizer que ele concede literalmente o controle completo sobre algum tipo de ... coisa artificial? ...',
-			'Bem, se você virar um pouco de sorte e encontrar tal coisa - use-o em um suporte adequado, provavelmente será mecânico, conduzido por ... algo.'
+			'That\'s an interesting one, nothing like I have ever seen myself. What you describe is a device of which I heard that it grants literally \'complete\' control over some sort of... artificial thing? ...',
+			'Well, if you ever happen to come about a stroke of luck and find such a thing - use it on an appropriate mount, it will probably be mechanical, driven by... something.'
 		}, cid)
 	elseif msgcontains(msg, "golden fir cone") then
 		npcHandler:say({
-			'Você sabia que você também pode criar isso sozinho? Troque um lingote de ouro com os ciclopes suados em Ab\'Dendriel para uma xícara de ouro fundido. Se você usa isso em uma árvore de abeto, você tem uma pequena chance de obter um cone dourado de abeto. ...',
-			'Esses são necessários para impressionar os cervos brancos que vagam por Ab\'Dendriel às vezes, mas espero até que você possa enriquecer um para se certificar de que ele tem a força necessária para levá-lo.'
+			'Did you know that you can also create those by yourself? Trade a gold ingot with the sweaty cyclops in Ab\'Dendriel for a cup of molten gold. If you use that on a fir tree, you have a small chance to get a golden fir cone. ...',
+			'Those are needed to impress the white deers that roam around Ab\'Dendriel sometimes, but I\'d wait until you are able to enrage one to make sure it has the necessary strength to carry you.'
 		}, cid)
 	elseif msgcontains(msg, "melting horn") then
 		npcHandler:say({
-			'Dizem que criaturas ferozes já prosperaram em ilhas exuberantes no extremo norte do mar. Eles morreram ontem atrás, quando chegaram tempos de grande frio e formaram os resíduos gelados de Svargrond como os conhecemos hoje. ...',
-			'Viajantes do norte contaram histórias dessas criaturas, observando-as dentro do gelo nas cavernas mais profundas, ainda vigilantes como se congeladas no tempo. Ursagrodon\' eles os chamaram. ...',
-			'Com tinder e um tipo de máquina de prova de prova, você pode criar um dispositivo para derreter o gelo ao redor de seus restos e ver por si mesmo o que é isso.'
+			'It is said that ferocious creatures once thrived on lush islands in the far northern sea. They died aeons ago when times of great cold came and formed the icy wastes of Svargrond as we know them today. ...',
+			'Travellers from the north have told stories of these creatures, watching them from within the ice in the deepest caves, still vigilant as if frozen in time. \'Ursagrodon\' they called them. ...',
+			'With tinder and some kind of fireproof vessel, you could create a device to melt the ice surrounding their remains and see for yourself what this is all about.'
 		}, cid)
 	elseif isInArray({"arkarra", "stampor"}, msg) then
 		npcHandler:say({
-			'O stampor nas costas? Ela é minha amiga, mas ela veio até mim por sua própria vontade. Devo admitir que nunca consegui domar qualquer outro stampor....',
-			'Ouvi dizer que existe algum tipo de magia voodoo que permita que você invoque um stampor, mas não sou um especialista voodoo, então eu não saberia.'
+			'The stampor in the back? She\'s my friend, but she came to me out of her own free will. I must admit I\'ve never managed to tame any other stampor. ...',
+			'I heard that there\'s some sort of voodoo magic which would allow you to summon a stampor, but I\'m not a voodoo expert, so I wouldn\'t know.'
 		}, cid)
 	end
 	return true
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setMessage(MESSAGE_GREET, "Bem-vindo à minha cabana humilde,|PLAYERNAME|. O que te traz aqui {here}?")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Cuide-se.")
+npcHandler:setMessage(MESSAGE_GREET, "Welcome to my humble hut, |PLAYERNAME|. What brings you {here}?")
+npcHandler:setMessage(MESSAGE_FAREWELL, "Take care of yourself.")
 npcHandler:addModule(FocusModule:new())

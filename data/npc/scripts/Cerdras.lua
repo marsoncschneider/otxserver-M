@@ -7,33 +7,33 @@ function onCreatureDisappear(cid)		npcHandler:onCreatureDisappear(cid)			end
 function onCreatureSay(cid, type, msg)		npcHandler:onCreatureSay(cid, type, msg)		end
 function onThink()				npcHandler:onThink()					end
 
-keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "Eu sou apenas um humilde druida como tantos outros aqui. Talvez eu não seja o mais talentoso dos curandeiros, mas eu sou talentoso com uma aliança especial aos elementos."})
-keywordHandler:addKeyword({'nature'}, StdModule.say, {npcHandler = npcHandler, text = "Para mim, a natureza é a harmonia dos elementos. Essa harmonia pode ser perturbada por certos eventos, mas a natureza sempre encontra seu caminho de volta à harmonia no final."})
+keywordHandler:addKeyword({'job'}, StdModule.say, {npcHandler = npcHandler, text = "I'm merely a humble druid like so many others here. I may not be the most talented of healers, but I am gifted with a special atunement to the elements."})
+keywordHandler:addKeyword({'nature'}, StdModule.say, {npcHandler = npcHandler, text = "For me, nature is the harmony of the elements. This harmony can be disturbed by certain events, but nature always finds its way back to harmony in the end."})
 
 local function creatureSayCallback(cid, type, msg)
 	if not npcHandler:isFocused(cid) then
 		return false
 	elseif msgcontains(msg, "elements") then
 		npcHandler:say({
-			'Como posso explicar minha conexão com os elementos para que você possa entendê-lo? Hmmm, é como uma melodia fraca, uma música, que está sempre lá. ...',
-			'Ouvi essa melodia mudando no tempo com as mudanças nos elementos. Com tantos anos de escuta, aprendi a interpretar essas mudanças e, portanto, a uma compreensão mais profunda dos elementos. ...',
-			'Foi um passo natural para eu me tornar responsável pela pesquisa de lendas elementais. Procuro aprender o máximo que posso e compartilho com meus colegas druidas. ...',
-			'Infelizmente, muito do meu entendimento é instintivo, e nossa linguagem simplesmente não contém as palavras certas para eu expressar as coisas que eu sinto adequadamente.'
+			'How can I explain my connection to the elements so that you can understand it? Hmmm, it is like a faint melody, a song, that is always there. ...',
+			'I hear that melody shifting in time with the shifts in the elements. With so many years of listening, I have learned to interpret these shifts and so come to a deeper understanding of the elements. ...',
+			'It was a natural step for me to become responsible for researching elemental lore. I try to learn as much as I can and share it with my fellow druids. ...',
+			'Unfortunately, much of my understanding is instinctive, and our language just doesn\'t contain the right words for me to express the things I feel adequately.'
 		}, cid)
 	elseif msgcontains(msg, "song") then
 		npcHandler:say({
-			'É difícil de explicar. Claro, não é uma música real como você entenderia isso. Eu não entendo isso com meus ouvidos, mas sim eu sinto isso no fundo de mim. ...',
-			'Ligar uma música ou melodia é o melhor que posso fazer para descrevê-la para aqueles que não compartilham esse tipo de percepção. ...',
-			'Isso também me ajuda a expressar e entender algo para o qual nosso idioma não possui uma expressão apropriada. ...',
-			'Você sabe, somos tão dependentes de palavras que não podemos pensar nos conceitos quando não temos palavras para eles. ...',
-			'Às vezes penso que as palavras se tornaram um obstáculo tão grande quanto uma ajuda. ...',
-			'Talvez fôssemos melhor se apenas estivéssemos esquecidas e tratássemos puramente de sentimentos. Então, talvez todos nós possamos ouvir a maravilhosa melodia da natureza.'
+			'It is hard to explain. Of course, it\'s not a real song as you would understand it. I don\'t hear it with my ears, but rather, I feel it deep inside of me. ...',
+			'Calling it a song or melody is the best I can do to describe it to those who don\'t share this kind of perception. ...',
+			'It also helps me to express and understand something for which our language has no appropriate expression. ...',
+			'You know, we are so dependent on words that we can\'t think about concepts when we don\'t have words for them. ...',
+			'I sometimes think words have become just as much of a hindrance as a help. ...',
+			'Perhaps we would fare better if only we forgot words and dealt purely in feelings. Then perhaps all of us could hear the wonderful melody of nature.'
 		}, cid)
 	end
 	return true
 end
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setMessage(MESSAGE_GREET, "Saudações meu amigo!")
-npcHandler:setMessage(MESSAGE_FAREWELL, "Que Crunor abençoe e guie você, |PLAYERNAME|.")
+npcHandler:setMessage(MESSAGE_GREET, "Greetings my friend!")
+npcHandler:setMessage(MESSAGE_FAREWELL, "May Crunor bless and guide you, |PLAYERNAME|.")
 npcHandler:addModule(FocusModule:new())

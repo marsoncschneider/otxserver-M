@@ -13,21 +13,21 @@ local function creatureSayCallback(cid, type, msg)
 	end
 
 	if msgcontains(msg, 'transport') then
-		npcHandler:say('Nós podemos levar você para Venore com um de nossos treinadores por 125 gold. Você está interessado?', cid)
+		npcHandler:say('We can bring you to Venore with one of our coaches for 125 gold. Are you interested?', cid)
 		npcHandler.topic[cid] = 1
 	elseif isInArray({'rent', 'horses'}, msg) then
-		npcHandler:say('Você quer alugar o cavalo por um dia por 500 gold?', cid)
+		npcHandler:say('Do you want to rent a horse for one day at a price of 500 gold?', cid)
 		npcHandler.topic[cid] = 2
 	elseif msgcontains(msg, 'yes') then
 		local player = Player(cid)
 		if npcHandler.topic[cid] == 1 then
 			if player:isPzLocked() then
-				npcHandler:say('Primeiro, livre-se dessas manchas de sangue.', cid)
+				npcHandler:say('First get rid of those blood stains!', cid)
 				return true
 			end
 
-			if not player:removeMoney(125) then
-				npcHandler:say('Você não tem dinheiro o suficiente.', cid)
+			if not player:removeMoneyNpc(125) then
+				npcHandler:say('You don\'t have enough money.', cid)
 				return true
 			end
 
@@ -35,15 +35,15 @@ local function creatureSayCallback(cid, type, msg)
 			local destination = Position(32850, 32124, 7)
 			player:teleportTo(destination)
 			destination:sendMagicEffect(CONST_ME_TELEPORT)
-			npcHandler:say('Tenha uma boa viagem!', cid)
+			npcHandler:say('Have a nice trip!', cid)
 		elseif npcHandler.topic[cid] == 2 then
 			if player:getStorageValue(Storage.RentedHorseTimer) >= os.time() then
-				npcHandler:say('Você já tem um cavalo.', cid)
+				npcHandler:say('You already have a horse.', cid)
 				return true
 			end
 
-			if not player:removeMoney(500) then
-				npcHandler:say('Você não tem dinheiro suficiente para comprar um cavalo!', cid)
+			if not player:removeMoneyNpc(500) then
+				npcHandler:say('You do not have enough money to rent a horse!', cid)
 				return true
 			end
 
@@ -51,17 +51,17 @@ local function creatureSayCallback(cid, type, msg)
 			player:addMount(mountId[math.random(#mountId)])
 			player:setStorageValue(Storage.RentedHorseTimer, os.time() + 86400)
 			player:addAchievement('Natural Born Cowboy')
-			npcHandler:say('Eu vou te dar um dos nossos melhores. Tenha cuidado! Procure por ramificações baixas.', cid)
+			npcHandler:say('I\'ll give you one of our experienced ones. Take care! Look out for low hanging branches.', cid)
 		end
 		npcHandler.topic[cid] = 0
 	elseif msgcontains(msg, 'no') and npcHandler.topic[cid] > 0 then
-		npcHandler:say('Então não.', cid)
+		npcHandler:say('Then not.', cid)
 		npcHandler.topic[cid] = 0
 	end
 	return true
 end
 
-npcHandler:setMessage(MESSAGE_GREET, 'Saudações, |PLAYERNAME| Eu acho que você está aqui pelos cavalos {horses}.')
+npcHandler:setMessage(MESSAGE_GREET, 'Salutations, |PLAYERNAME| I guess you are here for the {horses}.')
 
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
 npcHandler:addModule(FocusModule:new())

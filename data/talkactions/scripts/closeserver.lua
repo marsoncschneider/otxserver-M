@@ -6,9 +6,7 @@ function onSay(player, words, param)
 	if player:getAccountType() < ACCOUNT_TYPE_GOD then
 		return false
 	end
-	if param == "kill" then
-	os.execute("sudo killall tfs -9")
-	end
+
 	if param == "shutdown" then
 		Game.setGameState(GAME_STATE_SHUTDOWN)
 	else
