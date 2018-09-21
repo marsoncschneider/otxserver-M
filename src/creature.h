@@ -358,9 +358,6 @@ class Creature : virtual public Thing
 		virtual bool challengeCreature(Creature*) {
 			return false;
 		}
-		virtual bool convinceCreature(Creature*) {
-			return false;
-		}
 
 		void onDeath();
 		virtual uint64_t getGainedExperience(Creature* attacker) const;
@@ -413,7 +410,6 @@ class Creature : virtual public Thing
 
 		virtual void onCreatureSay(Creature*, SpeakClasses, const std::string&) {}
 
-		virtual void onCreatureConvinced(const Creature*, const Creature*) {}
 		virtual void onPlacedCreature() {}
 
 		virtual bool getCombatValues(int32_t&, int32_t&) {
@@ -428,6 +424,9 @@ class Creature : virtual public Thing
 		}
 		void setSkillLoss(bool skillLoss) {
 			this->skillLoss = skillLoss;
+		}
+		void setUseDefense(bool useDefense) {
+			canUseDefense = useDefense;
 		}
 
 		//creature script events
@@ -546,6 +545,7 @@ class Creature : virtual public Thing
 		bool hasFollowPath = false;
 		bool forceUpdateFollowPath = false;
 		bool hiddenHealth = false;
+		bool canUseDefense = true;
 		bool moveLocked = false;
 
 		//creature script events

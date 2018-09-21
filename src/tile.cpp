@@ -1602,25 +1602,18 @@ bool Tile::isMoveableBlocking() const
 	return !ground || hasFlag(TILESTATE_BLOCKSOLID);
 }
 
-Item* Tile::getUseItem() const
+Item* Tile::getUseItem(int32_t index) const
 {
 	const TileItemVector* items = getItemList();
 	if (!items || items->size() == 0) {
 		return ground;
 	}
 
-	for (Item* item : boost::adaptors::reverse(*items)) {
-		//if the behavior is wrong remove && !Item::items[item->getID()].isContainer()
-		if (Item::items[item->getID()].forceUse && !Item::items[item->getID()].isContainer()) {
-			return item;
-		}
+	if (Thing* thing = getThing(index)) {
+		return thing->getItem();
 	}
 
-	Item* item = items->getTopDownItem();
-	if (!item) {
-		item = items->getTopTopItem();
-	}
-	return item;
+	return nullptr;
 }
 
 HouseTile::HouseTile(int32_t x, int32_t y, int32_t z, House* house) :

@@ -1323,6 +1323,11 @@ class Player final : public Creature, public Cylinder
 		}
 
 		void doCriticalDamage(CombatDamage& damage) const;
+		bool isMarketExhausted() const; //Custom: Anti bug do market
+		//Custom: Anti bug do market
+		void updateMarketExhausted(){
+			lastMarketInteraction = OTSYS_TIME();
+		}
 	protected:
 		std::forward_list<Condition*> getMuteConditions() const;
 
@@ -1413,6 +1418,7 @@ class Player final : public Creature, public Cylinder
 		int64_t skullTicks = 0;
 		int64_t lastWalkthroughAttempt = 0;
 		int64_t lastToggleMount = 0;
+		int64_t lastMarketInteraction = 0;  //Custom: Anti bug do market
 		int64_t lastPing;
 		int64_t lastPong;
 		int64_t nextAction = 0;
